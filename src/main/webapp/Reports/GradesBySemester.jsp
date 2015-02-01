@@ -78,7 +78,6 @@
                                             <td><%=dept%></td>
                                         </tr>
                                         <tr>
-
                                             <td>Credit(s) Completed</td>
                                             <td>:</td>
                                             <td><%=creditsCompleted%></td>
@@ -87,7 +86,6 @@
                                             <td><%=program%></td>
                                         </tr>
                                         <tr>
-
                                             <td>Course(s) Completed</td>
                                             <td>:</td>
                                             <td><%=coursesCompleted%> (<%=coursesTotal%>)</td>
@@ -101,7 +99,7 @@
                                             <td><%=creditsTotal%></td>
                                             <td>CGPA</td>
                                             <td>:</td>
-                                            <td class="badge pull-left"></td><%=cgpa%>
+                                            <td class="badge pull-left"><%=cgpa%></td>
                                         </tr>
 
                                     </tbody></table>

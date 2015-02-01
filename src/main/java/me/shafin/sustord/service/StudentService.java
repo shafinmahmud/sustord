@@ -214,7 +214,7 @@ public class StudentService {
         session.getTransaction().commit();
 
         List<SyllabusPOJO> courseList = new ArrayList<SyllabusPOJO>();
-        List<SyllabusPOJO> allCourseRegistrations = getStudentRegisteredCoursesAll(getStudentTotalSemester());
+        List<SyllabusPOJO> allCourseRegistrations = getStudentRegisteredCoursesAll(getStudentCurrentSemester());
 
         for (Syllabus s : syllabusList) {
             SyllabusPOJO syllabusPojo = new SyllabusPOJO();
@@ -549,7 +549,7 @@ public class StudentService {
 
     public double getCreditsCompleted() {
         double completedCredits;
-        completedCredits = CgpaCalculation.getPassedCreditOfSemester(getStudentSyllabusAll(getStudentCurrentSemester()));
+        completedCredits = CgpaCalculation.getPassedCreditOfSemester(getStudentRegisteredCoursesAll(getStudentCurrentSemester()));
         return completedCredits;
     }
 
