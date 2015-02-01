@@ -6,7 +6,7 @@
         </li>
 
         <li>
-            <a href="../Academic/Curriculum.jsp"><span class="glyphicon glyphicon-tasks"></span>&nbsp;Curriculum</a></li>
+            <a href="../Academic/Curriculum.jsp"><span class="glyphicon glyphicon-book-open"></span>&nbsp;Curriculum</a></li>
         <li>
             <a href="../Academic/CourseDetails.jsp"><span class="glyphicon glyphicon-th-list"></span>&nbsp;Course Details</a>
         </li>
@@ -21,26 +21,26 @@
         <li class="nav-header">Statistics
         </li>
         <li>
-            <a href="../Soon/comingsoon.html"><span class="glyphicon glyphicon-flash"></span>&nbsp;Course Analysis</a></li>
+            <a href="../Soon/comingsoon.html"><span class="glyphicon glyphicon-pie-chart"></span>&nbsp;Course Analysis</a></li>
         <li>
-            <a href="../Soon/comingsoon.html"><span class="glyphicon glyphicon-usd"></span>&nbsp;Ranking</a>
+            <a href="../Soon/comingsoon.html"><span class="glyphicon glyphicon-podium"></span>&nbsp;Ranking</a>
         </li>
 
         <li class="nav-header">Data Submission
         </li>
-        <li><a href="../Data Submission/PersonalInformation.jsp"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;Personal Information</a></li>
+        <li><a href="../Data Submission/PersonalInformation.jsp"><span class="glyphicon glyphicon-user"></span>&nbsp;Personal Information</a></li>
         <li>
-            <a href="../Data Submission/CourseRegistration.jsp"><span class="glyphicon glyphicon-file"></span>&nbsp;Course Registration</a>
+            <a href="../Data Submission/CourseRegistration.jsp"><span class="glyphicon glyphicon-notes-2"></span>&nbsp;Course Registration</a>
         </li>
         <li>
-            <a href="../Data Submission/ResultUpdate.jsp"><span class="glyphicon glyphicon-file"></span>&nbsp;Result Update</a>
+            <a href="../Data Submission/ResultUpdate.jsp"><span class="glyphicon glyphicon-flash"></span>&nbsp;Result Update</a>
         </li>
 
 
-        <li class="nav-header">Notifications
+        <li class="nav-header">Options
         </li>
         <li><a href="../Soon/comingsoon.html"><span class="glyphicon glyphicon-envelope"></span>&nbsp;Request Status</a></li>
-
+        <li><a href="../Home/ChangePassword.jsp"><span class="glyphicon glyphicon-keys"></span>&nbsp;Change Password</a></li>
     </ul>
 
 </div>

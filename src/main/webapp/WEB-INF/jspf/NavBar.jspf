@@ -22,12 +22,7 @@
                 <li>
                     <a href="../Home/ProfileUser.jsp">Profile</a>
                 </li>
-                <li class="dropdown">
-                    <a href="" class="dropdown-toggle" data-toggle="dropdown">Options <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="../Home/ChangePassword.jsp">Change Password</a></li><!--change password link is not set yet-->
-                    </ul>
-                </li>
+               
                 <li><a href="../LogOutServlet">Logout</a></li><!--logout programming needs to be done here-->
             </ul>
         </div>
