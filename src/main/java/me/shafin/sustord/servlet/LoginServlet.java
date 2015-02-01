@@ -38,22 +38,24 @@ public class LoginServlet extends HttpServlet {
 
         StudentService studentService = new StudentService();
 
-        boolean verification = false;
+        String verification = "noresponse";
+
         if (userType.equals("student")) {
             verification = studentService.verifyLogin(userId, password);
         } else if (userType.equals("admin")) {
             // verification = loginService.authenticate(databaseConnection, userId, password, userType);        
         }
 
-        if (verification) {
+        if (verification.equals("verified")) {
             HttpSession session = request.getSession();
             session.setAttribute("studentService", studentService);
             String status = "ok";
             session.setAttribute("loginStatus", status);
-            response.getWriter().print("OK");
+            response.getWriter().print(verification);
 
         } else {
-            response.getWriter().print("ERROR");
+           // System.out.println("servlet print------------------" +verification);
+            response.getWriter().print(verification);
         }
 
     }

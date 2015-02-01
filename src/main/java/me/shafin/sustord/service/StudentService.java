@@ -9,6 +9,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 import me.shafin.sustord.bean.SyllabusPOJO;
@@ -43,8 +45,8 @@ public class StudentService {
      * @param passWord
      * @return
      */
-    public boolean verifyLogin(String registration, String passWord) {
-        boolean connectionStatus = false;
+    public String verifyLogin(String registration, String passWord) {
+        String connectionStatus = "denied";
         try {
             sessionFactory = HibernateUtil.getSessionFactory();
 
@@ -60,16 +62,19 @@ public class StudentService {
             session.close();
 
             if (!infos.isEmpty()) {
-
                 setStudentInfo(infos.get(0));
-                connectionStatus = true;
+                connectionStatus = "verified";
             }
-
-        } catch (Exception ex) {
-            connectionStatus = false;
-        } finally {
-            return connectionStatus;
+        } catch (ExceptionInInitializerError ex) {       
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            ex.printStackTrace(pw);
+            String errorString = sw.toString(); // stack trace as a string  
+            connectionStatus = errorString;
         }
+
+        return connectionStatus;
+
     }
 
     /**
@@ -479,10 +484,10 @@ public class StudentService {
             //getting all courses before uptoSemester from syllabus
             //here (uptoSemester-2) because we need to search from 2 semester backward
             List<SyllabusPOJO> allSyllabusCourses = getStudentSyllabusAll(uptoSemester - 2);
-      
+
             //getting all registered courses before uptoSemester from courseRegistration
             List<SyllabusPOJO> allCourseRegistrations = getStudentRegisteredCoursesAll(uptoSemester - 2);
-            
+
             //searching for the pending courses comparing allSyllabusCoursesModFilter and allCourseRegistrationsModFilter
             for (SyllabusPOJO syl : allSyllabusCourses) {
                 if (syl.getOfferingSemester() % 2 == uptoSemester % 2) {
@@ -490,7 +495,7 @@ public class StudentService {
                     boolean found = false;
                     for (SyllabusPOJO reg : allCourseRegistrations) {
                         if (reg.getTakenSemester() % 2 == uptoSemester % 2) {
-                           // System.out.println("registration: "+reg.getCourseCode());
+                            // System.out.println("registration: "+reg.getCourseCode());
                             if (syl.getCourseCode().equals(reg.getCourseCode())) {
                                 found = true;
                             }
@@ -760,7 +765,7 @@ public class StudentService {
                 maxVal = (Integer) maxReg.get(0);
             } else {
                 maxVal = 1;
-               // System.out.println("this is it");
+                // System.out.println("this is it");
             }
             return maxVal;
 
