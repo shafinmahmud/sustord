@@ -33,7 +33,7 @@ public class LogOutServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
         session.invalidate();
-        response.sendRedirect("/sustord");
+        response.sendRedirect("http://sustord-shafinmahmud.rhcloud.com");
 
     }
 

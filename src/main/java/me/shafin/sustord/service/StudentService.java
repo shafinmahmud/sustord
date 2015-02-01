@@ -65,7 +65,7 @@ public class StudentService {
                 setStudentInfo(infos.get(0));
                 connectionStatus = "verified";
             }
-        } catch (ExceptionInInitializerError ex) {       
+        } catch (ExceptionInInitializerError ex) {
             StringWriter sw = new StringWriter();
             PrintWriter pw = new PrintWriter(sw);
             ex.printStackTrace(pw);
@@ -525,12 +525,49 @@ public class StudentService {
         return "";
     }
 
+    /**
+     *
+     * @return
+     */
     public double getCGPA() {
         List<SyllabusPOJO> cummilativeCourses = getStudentRegisteredCoursesAll(getStudentTotalSemester());
 
         double cgpa = CgpaCalculation.getGradePointOfSemester(cummilativeCourses);
 
         return cgpa;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public double getTotalCredits() {
+        double totalCredit;
+        totalCredit = CgpaCalculation.getTotalCreditOfSemester(getStudentSyllabusAll(getStudentTotalSemester()));
+        return totalCredit;
+    }
+
+    public double getCreditsCompleted() {
+        double completedCredits;
+        completedCredits = CgpaCalculation.getPassedCreditOfSemester(getStudentSyllabusAll(getStudentCurrentSemester()));
+        return completedCredits;
+    }
+
+    public int getTotalCourses() {
+        int totalcourses;
+        totalcourses = getStudentSyllabusAll(getStudentTotalSemester()).size();
+        return totalcourses;
+    }
+
+    public int getCompletedCourses() {
+        int completedcourses = 0;
+        List<SyllabusPOJO> all = getStudentSyllabusAll(getStudentTotalSemester());
+        for(SyllabusPOJO spojo: all){
+            if(!spojo.getGrade().equals("F") || !spojo.getGrade().equals("N/A")){
+                completedcourses += 1;
+            }
+        }
+        return completedcourses;
     }
 
     /**

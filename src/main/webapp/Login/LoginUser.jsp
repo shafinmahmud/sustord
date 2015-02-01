@@ -18,7 +18,7 @@
         <%
             try {
                 if (session.getAttribute("loginStatus").equals("ok")) {
-                    response.sendRedirect("../Home/HomeUser.jsp");
+                    response.sendRedirect("http://sustord-shafinmahmud.rhcloud.com/Home/HomeUser.jsp");
                 }
             } catch (Exception e) {
 

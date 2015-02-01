@@ -46,6 +46,11 @@
                                 String program = studentService.getStudentProgramName();
                                 String school = studentService.getStudentSchoolName();
 
+                                double creditsCompleted = studentService.getCreditsCompleted();
+                                int coursesCompleted = studentService.getCompletedCourses();
+                                int coursesTotal = studentService.getTotalCourses();
+                                double creditsTotal = studentService.getTotalCredits();
+                                double cgpa = studentService.getCGPA();
 
                             %>  
                             <legend>Grade Report by Curriculum        
@@ -75,7 +80,7 @@
 
                                             <td>Credit(s) Completed</td>
                                             <td>:</td>
-                                            <td></td>
+                                            <td><%=creditsCompleted%></td>
                                             <td>Program</td>
                                             <td>:</td>
                                             <td><%=program%></td>
@@ -84,7 +89,7 @@
 
                                             <td>Course(s) Completed</td>
                                             <td>:</td>
-                                            <td></td>
+                                            <td><%=coursesCompleted%> (<%=coursesTotal%>)</td>
                                             <td>Session</td>
                                             <td>:</td>
                                             <td><%=sessionName%></td>
@@ -92,10 +97,10 @@
                                         <tr>
                                             <td>Total Credits</td>
                                             <td>:</td>
-                                            <td></td>
+                                            <td><%=creditsTotal%></td>
                                             <td>CGPA</td>
                                             <td>:</td>
-                                    <div><td class="badge pull-left"></td></div>
+                                    <div><td class="badge pull-left"></td><%=cgpa%></div>
 
                                     </tr>
 
@@ -111,7 +116,7 @@
                                         int currentSemester = studentService.getStudentCurrentSemester();
                                         for (int i = 0; i < currentSemester; i++) {
                                             String semesterName = FormatService.formatSemesterName(i + 1);
-                                            
+
                                     %>
                                     <table class="table table-bordered">
                                         <label Style="font-size: 13px"><%=semesterName%></label>
@@ -127,11 +132,11 @@
                                         </thead>
                                         <tbody>
                                             <%
-                                            List<SyllabusPOJO> courses = studentService.getStudentSyllabusAsEntity(i+1);
-                                            double totalCredit = 0;
-                                            double completedCredit =0;
-                                            
-                                                for(SyllabusPOJO s: courses) {
+                                                List<SyllabusPOJO> courses = studentService.getStudentSyllabusAsEntity(i + 1);
+                                                double totalCredit = 0;
+                                                double completedCredit = 0;
+
+                                                for (SyllabusPOJO s : courses) {
                                                     String courseCode = s.getCourseCode();
                                                     String title = s.getTitle();
                                                     double credit = s.getCredit();
@@ -139,8 +144,9 @@
                                                     String point = s.getPoint();
                                                     String passedOn = s.getPassedOn();
                                                     totalCredit += credit;
-                                                    if(!point.equals("-") && !point.equals("0.00"))
-                                                    completedCredit += credit;
+                                                    if (!point.equals("-") && !point.equals("0.00")) {
+                                                        completedCredit += credit;
+                                                    }
                                             %>
                                             <tr>
                                                 <td class="text-center"><%=courseCode%></td>
