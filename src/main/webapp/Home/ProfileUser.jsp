@@ -55,7 +55,9 @@
                                 String nationality = studentInfo.getPersonalInfo().getNationality();
                                 String blood = studentInfo.getPersonalInfo().getBloodGroup();
 
-
+                                double creditsCompleted = studentService.getCreditsCompleted();
+                                double creditsTotal = studentService.getTotalCredits();
+                                double cgpa = studentService.getCGPA();
                             %>
                             <legend style="font-size: 22px"><%=name%></legend>
 
@@ -69,11 +71,11 @@
                                         </tr>
                                         <tr>
                                             <td style="text-align: right">CGPA :</td>
-                                            <td style="text-align: left">3.04</td>
+                                            <td style="text-align: left"><%=cgpa%></td>
                                         </tr>
                                         <tr>
                                             <td style="text-align: right">Credit(s) completed :</td>
-                                            <td style="text-align: left">57</td>
+                                            <td style="text-align: left"><%=creditsCompleted%> out of <%=creditsTotal%></td>
                                         </tr>
                                         <tr>
                                             <td style="text-align: right">Session :</td>
