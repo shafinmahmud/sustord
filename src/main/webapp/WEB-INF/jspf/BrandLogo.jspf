@@ -1,0 +1,13 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+<div class="row">
+    <div class="col-sm-3 col-xs-12 text-center">
+        <img src="../page_files/images/sust-logo.jpg" height="92" alt="sust-logo">
+    </div>
+    <div class="col-sm-9 col-xs-12">
+        <blockquote>
+            <p class="sust_title">SHAHJALAL UNIVERSITY OF SCIENCE & TECHNOLOGY, SYLHET</p>
+            <label class="badge bg-primary" style="font-size: 16px">Online Result Database</label>
+        </blockquote>
+    </div>
+</div>

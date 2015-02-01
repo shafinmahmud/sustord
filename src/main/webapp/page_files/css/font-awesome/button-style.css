@@ -1,0 +1,115 @@
+
+button {
+  display: inline-table;
+  margin: 0 10px 0 0;
+  padding: 5px 5px;
+  font-size: 16px;
+  font-family: "Arial";
+  line-height: .35;
+  vertical-align: bottom;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+}
+button:focus {
+  outline: none
+}
+
+.border button {
+  color: #6496c8;
+  background: rgba(0,0,0,0);
+  border: solid 3px #6496c8;
+}
+.border button:hover,
+.border button.hover {
+  border-color: #346392;
+  color: #346392;
+}
+.border button:active,
+.border button.active {
+  border-color: #27496d;
+  color: #27496d;
+}
+
+
+.press button {
+  color: #fff;
+  background-color: #6496c8;
+  border: none;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 2px #27496d;
+  -moz-box-shadow: 0 2px #27496d;
+  box-shadow: 0 2px #27496d;
+}
+.press button:hover,
+.press button.hover {
+  background-color: #417cb8
+}
+.press button:active,
+.press button.active {
+  background-color: #417cb8;
+  -webkit-box-shadow: 0 5px #27496d;
+  -moz-box-shadow: 0 5px #27496d;
+  box-shadow: 0 5px #27496d;
+  -webkit-transform: translateY(5px);
+  -moz-transform: translateY(5px);
+  -ms-transform: translateY(5px);
+  -o-transform: translateY(5px);
+  transform: translateY(5px);
+}
+
+
+.border button {
+  color: #6496c8;
+  background: rgba(0,0,0,0);
+  border: solid 3px #6496c8;
+}
+.border button:hover,
+.border button.hover {
+  border-color: #346392;
+  color: #346392;
+}
+.border button:active,
+.border button.active {
+  border-color: #27496d;
+  color: #27496d;
+}
+
+
+.press button {
+  color: #fff;
+  background-color: #6496c8;
+  border: none;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 2px #27496d;
+  -moz-box-shadow: 0 2px #27496d;
+  box-shadow: 0 2px #27496d;
+}
+.press button:hover,
+.press button.hover {
+  background-color: #417cb8
+}
+.press button:active,
+.press button.active {
+  background-color: #417cb8;
+  -webkit-box-shadow: 0 5px #27496d;
+  -moz-box-shadow: 0 5px #27496d;
+  box-shadow: 0 5px #27496d;
+  -webkit-transform: translateY(5px);
+  -moz-transform: translateY(5px);
+  -ms-transform: translateY(5px);
+  -o-transform: translateY(5px);
+  transform: translateY(5px);
+}
+
+
