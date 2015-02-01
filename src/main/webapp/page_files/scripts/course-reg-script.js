@@ -55,7 +55,7 @@ $(document).ready(function () {
                 populateMainTable(avaiableCoursesJson);
                 
                 if (pendingCoursesJson.length != 0) {
-                    alert("pending");
+                   
                     populatePendingTable(pendingCoursesJson);
 
                     for (var i = 0; i < droppedCoursesJson.length; i++) {

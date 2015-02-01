@@ -563,7 +563,7 @@ public class StudentService {
         int completedcourses = 0;
         List<SyllabusPOJO> all = getStudentSyllabusAll(getStudentTotalSemester());
         for(SyllabusPOJO spojo: all){
-            if(!spojo.getGrade().equals("F") || !spojo.getGrade().equals("N/A")){
+            if(!spojo.getGrade().equals("F") && !spojo.getGrade().equals("N/A")){
                 completedcourses += 1;
             }
         }

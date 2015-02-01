@@ -49,14 +49,14 @@
                                 String dept = studentService.getStudentDepartmentName();
                                 String program = studentService.getStudentProgramName();
                                 String school = studentService.getStudentSchoolName();
-                                
+
                                 double creditsCompleted = studentService.getCreditsCompleted();
                                 int coursesCompleted = studentService.getCompletedCourses();
                                 int coursesTotal = studentService.getTotalCourses();
                                 double creditsTotal = studentService.getTotalCredits();
                                 double cgpa = studentService.getCGPA();
-                                
-                                
+
+
                             %>
                             <div class="grade-report">
                                 <table class="table table-bordered">
@@ -101,9 +101,8 @@
                                             <td><%=creditsTotal%></td>
                                             <td>CGPA</td>
                                             <td>:</td>
-                                    <div><td class="badge pull-left"></td><%=cgpa%></div>
-
-                                    </tr>
+                                            <td class="badge pull-left"></td><%=cgpa%>
+                                        </tr>
 
                                     </tbody></table>
                                 <div class="text-center"><h4><label>Taken Semesters</label></h4> </div>  
@@ -133,16 +132,15 @@
                                             double totalCredit = CgpaCalculation.getTotalCreditOfSemester(courses);
                                             double gradePoint = CgpaCalculation.getGradePointOfSemester(courses);
                                             String gradeLetter = CgpaCalculation.getGradeLetterFromGradePoint(gradePoint);
-                                            
-                                           //for cummilative calculation
-                                            List<SyllabusPOJO> cummilativeCourses = studentService.getStudentRegisteredCoursesAll(i+1);
+
+                                            //for cummilative calculation
+                                            List<SyllabusPOJO> cummilativeCourses = studentService.getStudentRegisteredCoursesAll(i + 1);
                                             double passedCreditC = CgpaCalculation.getPassedCreditOfSemester(cummilativeCourses);
                                             double totalCreditC = CgpaCalculation.getTotalCreditOfSemester(cummilativeCourses);
                                             double gradePointC = CgpaCalculation.getGradePointOfSemester(cummilativeCourses);
                                             String gradeLetterC = CgpaCalculation.getGradeLetterFromGradePoint(gradePointC);
                                             for (SyllabusPOJO s : courses) {
-                                                
-                                                
+
                                                 if (s.getOfferingSemester() != i + 1) {
                                                     drops.add(s);
                                                 } else {

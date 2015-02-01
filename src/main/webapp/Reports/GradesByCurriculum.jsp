@@ -100,7 +100,7 @@
                                             <td><%=creditsTotal%></td>
                                             <td>CGPA</td>
                                             <td>:</td>
-                                    <div><td class="badge pull-left"></td><%=cgpa%></div>
+                                 <td class="badge pull-left"></td><%=cgpa%>
 
                                     </tr>
 
