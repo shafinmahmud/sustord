@@ -1,41 +1,18 @@
+var changedGradeJson;
+var registeredCoursesJson = [];
+
 $(document).ready(function () {
 
-    var changedGradeJson;
-    var registeredCoursesJson = [];
+    $('#result-semester-dropdown').val(1).change();
+    ajaxCallForDropDown();
 
     $('#result-semester-dropdown').change(function () {
+        ajaxCallForDropDown()
 
-        $.ajax({
-            url: '../ResultUpdateServlet',
-            data: {
-                semester: $('#result-semester-dropdown').val()
-            },
-            type: 'POST',
-            success: function (takenCourses) {
-                $('#table-registered-courses tr').not(function () {
-                    if ($(this).has('th').length) {
-                        return true;
-                    }
-                }).remove();
-
-                if (takenCourses == 'EMPTY') {
-
-                } else {
-                    registeredCoursesJson = $.parseJSON(takenCourses);
-                    changedGradeJson = [];
-                    populateMainTable(registeredCoursesJson);
-                    printSumofCredit();
-                }
-
-            },
-            error: function () {
-                alert("ERROR");
-            }
-        });
     });
 
     $(document).on("change", ".dropdown-grade", (function () {
-    
+
         var courseRegIdFromDropDown = $(this).attr("id").substr(9);
         var changedValue = $(this).val();
         var doChange = true;
@@ -121,7 +98,7 @@ function populateMainTable(coursesJson) {
                 + title + '</td> <td class="credit">' +
                 +credit + '</td> <td>'
                 + '<div>'
-                + '<label class="label label-success">' + grade + '</label>'
+                + '<p>' + grade + '</p>'
                 + '</div></td> <td>'
                 + '<div>'
                 + '<select class="dropdown-grade" id="dropdown-' + courseRegId + '" style="width:70px; height: 20px; font-size: 12px">'
@@ -160,3 +137,32 @@ function printSumofCredit() {
     $("#taken_credit").html('<b>' + sum + '</b>');
 }
 
+function ajaxCallForDropDown() {
+    $.ajax({
+        url: '../ResultUpdateServlet',
+        data: {
+            semester: $('#result-semester-dropdown').val()
+        },
+        type: 'POST',
+        success: function (takenCourses) {
+            $('#table-registered-courses tr').not(function () {
+                if ($(this).has('th').length) {
+                    return true;
+                }
+            }).remove();
+
+            if (takenCourses == 'EMPTY') {
+
+            } else {
+                registeredCoursesJson = $.parseJSON(takenCourses);
+                changedGradeJson = [];
+                populateMainTable(registeredCoursesJson);
+                printSumofCredit();
+            }
+
+        },
+        error: function () {
+            alert("ERROR");
+        }
+    });
+}

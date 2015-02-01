@@ -41,7 +41,11 @@
                                 String dept = studentService.getStudentDepartmentName();
                                 String program = studentService.getStudentProgramName();
                                 String school = studentService.getStudentSchoolName();
-
+                                
+                                double creditsCompleted = studentService.getCreditsCompleted();
+                                double creditsTotal = studentService.getTotalCredits();
+                                double cgpa = studentService.getCGPA();
+                                
                                 String fatherName = studentInfo.getPersonalInfo().getFathersName();
                                 String motherName = studentInfo.getPersonalInfo().getMothersName();
                                 String presentAddress = studentInfo.getPersonalInfo().getPresentAddress();
@@ -55,9 +59,7 @@
                                 String nationality = studentInfo.getPersonalInfo().getNationality();
                                 String blood = studentInfo.getPersonalInfo().getBloodGroup();
 
-                                double creditsCompleted = studentService.getCreditsCompleted();
-                                double creditsTotal = studentService.getTotalCredits();
-                                double cgpa = studentService.getCGPA();
+
                             %>
                             <legend style="font-size: 22px"><%=name%></legend>
 
@@ -75,7 +77,7 @@
                                         </tr>
                                         <tr>
                                             <td style="text-align: right">Credit(s) completed :</td>
-                                            <td style="text-align: left"><%=creditsCompleted%> out of <%=creditsTotal%></td>
+                                            <td style="text-align: left"><%=creditsCompleted%> (<%=creditsTotal%>)</td>
                                         </tr>
                                         <tr>
                                             <td style="text-align: right">Session :</td>

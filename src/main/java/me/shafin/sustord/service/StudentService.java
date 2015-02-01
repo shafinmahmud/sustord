@@ -13,7 +13,9 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
+import me.shafin.sustord.bean.ClassRoutinePOJO;
 import me.shafin.sustord.bean.SyllabusPOJO;
+import me.shafin.sustord.entity.ClassRoutine;
 import me.shafin.sustord.entity.CourseRegistration;
 import me.shafin.sustord.entity.PersonalInfo;
 import me.shafin.sustord.entity.Prerequisite;
@@ -518,10 +520,24 @@ public class StudentService {
      * @param day
      * @return
      */
-    public String getStudentRoutine(int day) {
-
-        //determining the current semester for the student
-        //getting the current semester courses for the student
+    public String getStudentRoutine(String day) {
+        //its temporary work
+//        Session session = sessionFactory.openSession();
+//        session.beginTransaction();
+//
+//        List<ClassRoutinePOJO> dayRoutines;
+//        String hql = "FROM TimeSlot WHERE day = :day";
+//        Query query = session.createQuery(hql);
+//        List<TimeSlot>routines = (List<ClassRoutine>) query.list();
+//        
+//        session.getTransaction().commit();
+//        
+//        for(ClassRoutine r: routines){
+//            if(r.getTimeSlotIdFk().get)
+//            System.out.println(routine.getTitle());
+//        }
+//        
+//        session.close();
         return "";
     }
 
@@ -562,8 +578,8 @@ public class StudentService {
     public int getCompletedCourses() {
         int completedcourses = 0;
         List<SyllabusPOJO> all = getStudentSyllabusAll(getStudentTotalSemester());
-        for(SyllabusPOJO spojo: all){
-            if(!spojo.getGrade().equals("F") && !spojo.getGrade().equals("N/A")){
+        for (SyllabusPOJO spojo : all) {
+            if (!spojo.getGrade().equals("F") && !spojo.getGrade().equals("N/A")) {
                 completedcourses += 1;
             }
         }

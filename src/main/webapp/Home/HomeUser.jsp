@@ -84,10 +84,11 @@
                                     <tbody>
                                         <%
 
-                                            for (int i = 0; i < 7; i++) {
+                                            for (int i = 0; i < 6; i++) {
                                                 CalenderService calenderService = new CalenderService();
                                                 String date = calenderService.getDateLabel(i);
                                                 String day = calenderService.getDayLabel(i);
+                                                //studentService.getStudentRoutine(day);
 
                                         %>
                                         <tr>
@@ -96,11 +97,13 @@
                                                 <p><%=date%></p>            
                                             </td>
                                             <td>
+                                                <a>Computer Architecture</a>                    
                                                 <div>
-
-                                                    <p><i>Time:</i><br><label></label>
-                                                        <br></p>
-
+                                                    <small>Time: <label for="Sun_8:0_-_Sun_9:30">Sun 8:0 - Sun 9:30</label></small>
+                                                </div>
+                                                <a>Computer Networking</a>                    
+                                                <div>
+                                                    <small>Time: <label for="Sun_9:30_-_Sun_11:0">Sun 9:30 - Sun 11:0</label></small>
                                                 </div>
                                             </td>
                                         </tr>
@@ -123,8 +126,8 @@
                                         </thead>
                                         <tbody>
                                             <%
-                                            List<SyllabusPOJO> courseList;
-                                            courseList = studentService.getStudentRegisteredCoursesAsEntity(semx);
+                                                List<SyllabusPOJO> courseList;
+                                                courseList = studentService.getStudentRegisteredCoursesAsEntity(semx);
                                                 for (int j = 0; j < courseList.size(); j++) {
                                                     String courseCode = courseList.get(j).getCourseCode();
                                                     String title = courseList.get(j).getTitle();

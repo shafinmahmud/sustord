@@ -270,10 +270,10 @@ td,th {
 
 @font-face {
     font-family:'Glyphicons Halflings';src:url('/page_files/fonts/glyphicons-halflings-regular.eot');
-    src:url('/page_files/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),
-        url('/page_files/fonts/glyphicons-halflings-regular.woff') format('woff'),
-        url('/page_files/fonts/glyphicons-halflings-regular.ttf') format('truetype'),
-        url('/page_files/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+    src:url('../page_files/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),
+        url('../page_files/fonts/glyphicons-halflings-regular.woff') format('woff'),
+        url('../page_files/fonts/glyphicons-halflings-regular.ttf') format('truetype'),
+        url('../page_files/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
 
 .glyphicon {

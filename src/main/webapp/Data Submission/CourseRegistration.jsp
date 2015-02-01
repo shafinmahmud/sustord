@@ -43,7 +43,7 @@
                     <div class="margin5">
 
                         <fieldset>
-                            <legend>Registration
+                            <legend>Course Registration
                                 <select class="form-control pull-right" id="reg-semester-dropdown" name="reg-semester-dropdown" style="width: 250px">
                                     <option value="0" style="display:none">Choose Semester</option>
                                     <%                                        StudentService service = (StudentService) session.getAttribute("studentService");

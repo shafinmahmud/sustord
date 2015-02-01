@@ -40,149 +40,47 @@
                                 </div>
                                 <div class="col-md-5 col-lg-5">
                                     <select class="form-control pull-left" id="reg-semester-dropdown" name="reg-semester-dropdown" style="width: 250px">
-                                    
-                                    <%                                        StudentService service = (StudentService) session.getAttribute("studentService");
 
-                                        int numofsem = service.getStudentTotalSemester();
-                                        int currentSemester = 2;
+                                        <%                                        StudentService service = (StudentService) session.getAttribute("studentService");
 
-                                        for (int i = 1; i <= numofsem; i++) {
-                                            if (i == currentSemester) {
-                                    %>
-                                    <option value="<%=i%>"><%=FormatService.formatSemesterName(i)%></option>
-                                    <%
-                                    } else {
-                                    %>
-                                    <option value="<%=i%>"><%=FormatService.formatSemesterName(i)%></option>
-                                    <%
+                                            int numofsem = service.getStudentTotalSemester();
+                                            int currentSemester = 2;
+
+                                            for (int i = 1; i <= numofsem; i++) {
+                                                if (i == currentSemester) {
+                                        %>
+                                        <option value="<%=i%>"><%=FormatService.formatSemesterName(i)%></option>
+                                        <%
+                                        } else {
+                                        %>
+                                        <option value="<%=i%>"><%=FormatService.formatSemesterName(i)%></option>
+                                        <%
+                                                }
                                             }
-                                        }
-                                    %>
+                                        %>
 
-                                </select>
+                                    </select>
                                 </div>
-                                
+
                             </div>
                             <br>
                             <table class="table" style="background-color: #D8E2F3">
                                 <tbody><tr>
-                                        <td><label >INTRO. TO BEHAVIORAL SCIENCE [J]</label></td>
-                                        <td><label class="pull-right" >Total:100; Pass:50; Contributes:100%; Mark:A(90)</label></td>
+                                        <td><label >CSE 100 :  PROJECT WORK</label></td>
+                                        <td><p class="pull-right" ><i>2 Hours/Week, 1.0 Credit</i></p></td>
                                     </tr>
                                 </tbody>
                             </table>
                             <div class="margin-l5 ">
+                                <p style="font-size: 14px">Any project based on C language including implementation of Data Structure in acceptable.
+                                Gaming project using graphics.h library in C is preferable. Teachers must have to ensure every project
+                                is unique. Innovative project idea should get extra weight to prevent imitating old projects.</p>
 
-                                <div class="row">
-                                    <div class="col-md-7">
-                                        <label class="label-height-30" >Midterm for 2012-2013, Spring</label>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <label class="pull-right" >Total:100; Pass:50; Contributes:40%; Mark:A+(94)</label>
-                                    </div>
-                                </div>
-
-                                <div class="margin-l5">
-                                    <div class="row">
-                                        <div class="col-md-7">
-                                            <label class="label-height-30 font-weight-normal" >Assignments</label>
-
-                                        </div>
-                                        <div class="col-md-5">
-                                            <label class="pull-right font-weight-normal">Total:20; Pass:10; Contributes:20%; Mark:18</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="margin-l5">
-                                    <div class="row">
-                                        <div class="col-md-7">
-                                            <label class="label-height-30 font-weight-normal" >Written Exams</label>
-
-                                        </div>
-                                        <div class="col-md-5">
-                                            <label class="pull-right font-weight-normal">Total:50; Pass:25; Contributes:50%; Mark:46</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="margin-l5">
-                                    <div class="row">
-                                        <div class="col-md-7">
-                                            <label class="label-height-30 font-weight-normal" >Class Tests</label>
-
-                                        </div>
-                                        <div class="col-md-5">
-                                            <label class="pull-right font-weight-normal" >Total:20; Pass:10; Contributes:20%; Mark:18</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="margin-l5">
-                                    <div class="row">
-                                        <div class="col-md-7">
-                                            <label class="label-height-30 font-weight-normal" >Attendances&amp;Performance</label>
-
-                                        </div>
-                                        <div class="col-md-5">
-                                            <label class="pull-right font-weight-normal" >Total:10; Pass:5; Contributes:10%; Mark:10</label>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                             <br>
                             <div class="margin-l5 ">
 
-                                <div class="row">
-                                    <div class="col-md-7">
-                                        <label class="label-height-30" >Finalterm for 2012-2013, Spring</label>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <label class="pull-right">Total:100; Pass:50; Contributes:60%; Mark:A-(87)</label>
-                                    </div>
-                                </div>
 
-                                <div class="margin-l5">
-                                    <div class="row">
-                                        <div class="col-md-7">
-                                            <label class="label-height-30 font-weight-normal" >Written Exams</label>
-
-                                        </div>
-                                        <div class="col-md-5">
-                                            <label class="pull-right font-weight-normal" >Total:50; Pass:25; Contributes:50%; Mark:43</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="margin-l5">
-                                    <div class="row">
-                                        <div class="col-md-7">
-                                            <label class="label-height-30 font-weight-normal" >Class Tests</label>
-
-                                        </div>
-                                        <div class="col-md-5">
-                                            <label class="pull-right font-weight-normal" >Total:20; Pass:10; Contributes:20%; Mark:17</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="margin-l5">
-                                    <div class="row">
-                                        <div class="col-md-7">
-                                            <label class="label-height-30 font-weight-normal" >Assignments</label>
-
-                                        </div>
-                                        <div class="col-md-5">
-                                            <label class="pull-right font-weight-normal" >Total:20; Pass:10; Contributes:20%; Mark:17</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="margin-l5">
-                                    <div class="row">
-                                        <div class="col-md-7">
-                                            <label class="label-height-30 font-weight-normal">Attendances&amp;Performance</label>
-
-                                        </div>
-                                        <div class="col-md-5">
-                                            <label class="pull-right font-weight-normal" >Total:10; Pass:5; Contributes:10%; Mark:10</label>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                             <br>
                         </fieldset>

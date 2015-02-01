@@ -1,93 +1,16 @@
+var avaiableCoursesJson;
+var pendingCoursesJson;
+var droppedCoursesJson;
+var registeredCoursesJson;
+var choosedCoursesJson;
 
 $(document).ready(function () {
-
-    var avaiableCoursesJson;
-    var pendingCoursesJson;
-    var droppedCoursesJson;
-    var registeredCoursesJson;
-    var choosedCoursesJson;
+    $('#reg-semester-dropdown').val(1).change();
+    ajaxCallForDropDown();
 
     $('#reg-semester-dropdown').change(function () {
+        ajaxCallForDropDown();
 
-        $("#saving-anim").attr("src", "../page_files/icons/empty-icon.gif");
-        $("#status-message").html('');
-        $.ajax({
-            url: '../SyllabusServlet',
-            data: {
-                semester: $('#reg-semester-dropdown').val()
-            },
-            type: 'POST',
-            success: function (semesterCourseNtakenCourses) {
-
-                avaiableCoursesJson = [];
-                pendingCoursesJson = [];
-                droppedCoursesJson = [];
-                registeredCoursesJson = [];
-                choosedCoursesJson = [];
-
-                var arr = semesterCourseNtakenCourses.split('#');
-
-                if (arr[0] !== 'EMPTY') {
-                    avaiableCoursesJson = $.parseJSON(arr[0]);
-                }
-                if (arr[1] !== 'EMPTY') {
-                    pendingCoursesJson = $.parseJSON(arr[1]);
-                }
-                if (arr[2] !== 'EMPTY') {
-                    droppedCoursesJson = $.parseJSON(arr[2]);
-                }
-                if (arr[3] !== 'EMPTY') {
-                    registeredCoursesJson = $.parseJSON(arr[3]);
-                }
-
-                $('#course-table-main tr:gt(0)').remove();
-
-                $('#course-table-choosed tr').not(function () {
-                    if ($(this).has('th').length) {
-                        return true;
-                    }
-                }).remove();
-
-
-                var txt = $("#reg-semester-dropdown option:selected").text();
-                $('#sem-title').text(txt);
-
-                populateMainTable(avaiableCoursesJson);
-                
-                if (pendingCoursesJson.length != 0) {
-                   
-                    populatePendingTable(pendingCoursesJson);
-
-                    for (var i = 0; i < droppedCoursesJson.length; i++) {
-                        avaiableCoursesJson.push(droppedCoursesJson[i]);
-                    }
-                }
-
-                if (droppedCoursesJson.length != 0) {
-                    populateDroppedTable(droppedCoursesJson);
-
-                    for (var i = 0; i < droppedCoursesJson.length; i++) {
-                        avaiableCoursesJson.push(droppedCoursesJson[i]);
-                    }
-                }
-
-                for (var i = 0; i < registeredCoursesJson.length; i++) {
-
-                    var sylId = registeredCoursesJson[i].syllabusId;
-                    var code = registeredCoursesJson[i].courseCode;
-                    var title = registeredCoursesJson[i].title;
-                    var credit = registeredCoursesJson[i].credit;
-                    addSelectedCourse(sylId, code, title, credit);
-                    choosedCoursesJson.push(registeredCoursesJson[i]);
-                }
-
-                printSumofCredit();
-
-            },
-            error: function () {
-                alert("ERROR");
-            }
-        });
     });
 
 //following is the on click event with the .add-course class
@@ -195,7 +118,7 @@ function populateMainTable(coursesJson) {
 
 }
 
-function populatePendingTable(coursesJson){
+function populatePendingTable(coursesJson) {
     $('#course-table-main').append('<tr >'
             + '<td colspan="5" style="font-size: 13px; padding-top: 10px; text-align: center">'
             + '<i>Your pending courses from previous semester</i>'
@@ -278,6 +201,87 @@ function printSumofCredit() {
     $("#total_credit").html('<b>' + sum + '</b>');
 }
 
+function ajaxCallForDropDown() {
+    $("#saving-anim").attr("src", "../page_files/icons/empty-icon.gif");
+    $("#status-message").html('');
+    $.ajax({
+        url: '../SyllabusServlet',
+        data: {
+            semester: $('#reg-semester-dropdown').val()
+        },
+        type: 'POST',
+        success: function (semesterCourseNtakenCourses) {
+
+            avaiableCoursesJson = [];
+            pendingCoursesJson = [];
+            droppedCoursesJson = [];
+            registeredCoursesJson = [];
+            choosedCoursesJson = [];
+
+            var arr = semesterCourseNtakenCourses.split('#');
+
+            if (arr[0] !== 'EMPTY') {
+                avaiableCoursesJson = $.parseJSON(arr[0]);
+            }
+            if (arr[1] !== 'EMPTY') {
+                pendingCoursesJson = $.parseJSON(arr[1]);
+            }
+            if (arr[2] !== 'EMPTY') {
+                droppedCoursesJson = $.parseJSON(arr[2]);
+            }
+            if (arr[3] !== 'EMPTY') {
+                registeredCoursesJson = $.parseJSON(arr[3]);
+            }
+
+            $('#course-table-main tr:gt(0)').remove();
+
+            $('#course-table-choosed tr').not(function () {
+                if ($(this).has('th').length) {
+                    return true;
+                }
+            }).remove();
+
+
+            var txt = $("#reg-semester-dropdown option:selected").text();
+            $('#sem-title').text(txt);
+
+            populateMainTable(avaiableCoursesJson);
+
+            if (pendingCoursesJson.length != 0) {
+
+                populatePendingTable(pendingCoursesJson);
+
+                for (var i = 0; i < droppedCoursesJson.length; i++) {
+                    avaiableCoursesJson.push(droppedCoursesJson[i]);
+                }
+            }
+
+            if (droppedCoursesJson.length != 0) {
+                populateDroppedTable(droppedCoursesJson);
+
+                for (var i = 0; i < droppedCoursesJson.length; i++) {
+                    avaiableCoursesJson.push(droppedCoursesJson[i]);
+                }
+            }
+
+            for (var i = 0; i < registeredCoursesJson.length; i++) {
+
+                var sylId = registeredCoursesJson[i].syllabusId;
+                var code = registeredCoursesJson[i].courseCode;
+                var title = registeredCoursesJson[i].title;
+                var credit = registeredCoursesJson[i].credit;
+                addSelectedCourse(sylId, code, title, credit);
+                choosedCoursesJson.push(registeredCoursesJson[i]);
+            }
+
+            printSumofCredit();
+
+        },
+        error: function () {
+            alert("ERROR");
+        }
+    });
+}
 
 
 
