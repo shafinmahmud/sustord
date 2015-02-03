@@ -98,9 +98,9 @@ public class StudentPOJO{
                     
                     int comp = 0;
                     //ascending order
-                    if(valStd1 > valStd2){
+                    if(valStd1 < valStd2){
                         comp = 1;
-                    }else if(valStd1 < valStd2){
+                    }else if(valStd1 > valStd2){
                         comp = -1;
                     }
                     

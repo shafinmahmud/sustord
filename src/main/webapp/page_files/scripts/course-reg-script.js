@@ -75,7 +75,7 @@ $(document).ready(function () {
 
                 if (status === 'OK') {
                     $("#saving-anim").attr("src", "../page_files/icons/success-icon.png");
-                    $("#status-message").html("Congrats! You are Awsome!");
+                    $("#status-message").html("Done!!");
                 } else {
                     $("#saving-anim").attr("src", "../page_files/icons/failure-icon.png");
                     $("#status-message").html("OOPS! Duplicate Entry!");
