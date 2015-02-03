@@ -1,21 +1,21 @@
 /*************** F O N T S *************************/
 @font-face {
     font-family: 'GessoRegular';
-    src: url('fonts/GESSO___-webfont.eot');
-    src: url('fonts/GESSO___-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/GESSO___-webfont.woff') format('woff'),
-         url('fonts/GESSO___-webfont.ttf') format('truetype'),
-         url('fonts/GESSO___-webfont.svg#GessoRegular') format('svg');
+    src: url('../fonts/GESSO___-webfont.eot');
+    src: url('../fonts/GESSO___-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/GESSO___-webfont.woff') format('woff'),
+         url('../fonts/GESSO___-webfont.ttf') format('truetype'),
+         url('../fonts/GESSO___-webfont.svg#GessoRegular') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
     font-family: 'LintsecRegular';
-    src: url('fonts/Lintsec-webfont.eot');
-    src: url('fonts/Lintsec-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/Lintsec-webfont.woff') format('woff'),
-         url('fonts/Lintsec-webfont.ttf') format('truetype'),
-         url('fonts/Lintsec-webfont.svg#LintsecRegular') format('svg');
+    src: url('../fonts/Lintsec-webfont.eot');
+    src: url('../fonts/Lintsec-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/Lintsec-webfont.woff') format('woff'),
+         url('../fonts/Lintsec-webfont.ttf') format('truetype'),
+         url('../fonts/Lintsec-webfont.svg#LintsecRegular') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -28,7 +28,7 @@
 }
 body{
 	font-family: Arial, sans-serif;
-	background: url('images/dust.png') repeat;
+	background: url('../images/dust.png') repeat;
 	color: #080808;
 }
 
@@ -37,7 +37,7 @@ body{
 	width: 880px;
 	height: 310px;
 	margin: 140px auto;
-	background: url('images/uc.png') no-repeat;
+	background: url('../images/uc.png') no-repeat;
 	padding-top: 40px;
 }
 #content{

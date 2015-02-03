@@ -108,9 +108,6 @@ function populateMainTable(coursesJson) {
         $('#course-table-main').append('<tr id="main-tr-' + syllabusId + '"><td>' + code + '</td> <td>'
                 + title + '</td> <td>' +
                 +credit + '</td> <td>'
-                + '<div>'
-                + '<label class="label label-success">Valid</label>'
-                + '</div></td> <td>'
                 + '<div><section class="border">'
                 + '<button class="add-course" id="add-' + syllabusId + '">add</button></section>'
                 + '</div></td></tr>');
@@ -134,9 +131,6 @@ function populatePendingTable(coursesJson) {
         $('#course-table-main').append('<tr id="main-tr-' + syllabusId + '"><td>' + code + '</td> <td>'
                 + title + '</td> <td>' +
                 +credit + '</td> <td>'
-                + '<div>'
-                + '<label class="label label-success">Valid</label>'
-                + '</div></td> <td>'
                 + '<div><section class="border">'
                 + '<button class="add-course" id="add-' + syllabusId + '">add</button></section>'
                 + '</div></td></tr>');
@@ -161,9 +155,6 @@ function populateDroppedTable(coursesJson) {
         $('#course-table-main').append('<tr id="main-tr-' + syllabusId + '"><td>' + code + '</td> <td>'
                 + title + '</td> <td>' +
                 +credit + '</td> <td>'
-                + '<div>'
-                + '<label class="label label-success">Valid</label>'
-                + '</div></td> <td>'
                 + '<div><section class="border">'
                 + '<button class="add-course" id="add-' + syllabusId + '">add</button></section>'
                 + '</div></td></tr>');
@@ -176,9 +167,6 @@ function addSelectedCourse(syllbusId, code, title, credit) {
     $('#course-table-choosed tr.total-row').before('<tr id="choosed-tr-' + syllbusId + '"><td>' + code + '</td> <td>'
             + title + '</td> <td class="credit">' +
             +credit + '</td> <td>'
-            + '<div>'
-            + '<label class="label label-success">Valid</label>'
-            + '</div></td> <td>'
             + '<div ><section class="border">'
             + '<button class="remove-course" id="rem-' + syllbusId + '">rem</button></section>'
             + '</div></td></tr>');

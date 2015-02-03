@@ -72,10 +72,9 @@
                                         <thead >
                                             <tr>
                                                 <th style="width: 15%">Course Code</th>
-                                                <th style="width: 50%">Title</th>
-                                                <th style="width: 10%">Credit</th>
-                                                <th style="width: 15%">Status</th>
-                                                <th style="width: 10%">Add</th>
+                                                <th style="width: 55%">Title</th>
+                                                <th style="width: 15%">Credit</th>
+                                                <th style="width: 15%">Add</th>
                                             </tr>
                                         </thead>
                                         <tbody> 
@@ -97,10 +96,9 @@
                                 <thead>
                                     <tr>
                                         <th style="width: 15%">Course Code</th>
-                                        <th style="width: 50%">Title</th>
-                                        <th style="width: 10%">Credit</th>
-                                        <th style="width: 15%">Status</th>
-                                        <th style="width: 10%">Action</th>
+                                        <th style="width: 55%">Title</th>
+                                        <th style="width: 15%">Credit</th>
+                                        <th style="width: 15%">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>

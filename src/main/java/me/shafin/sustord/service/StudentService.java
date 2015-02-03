@@ -16,6 +16,7 @@ import java.util.List;
 import me.shafin.sustord.bean.ClassRoutinePOJO;
 import me.shafin.sustord.bean.SyllabusPOJO;
 import me.shafin.sustord.entity.ClassRoutine;
+import me.shafin.sustord.entity.Course;
 import me.shafin.sustord.entity.CourseRegistration;
 import me.shafin.sustord.entity.PersonalInfo;
 import me.shafin.sustord.entity.Prerequisite;
@@ -283,6 +284,25 @@ public class StudentService {
         return courseList;
     }
 
+    public String getStudentCourseDetails(String courseCode) {
+        String details = "";
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+
+        String hql = "FROM Course WHERE courseCode = :code";
+        Query query = session.createQuery(hql);
+        query.setString("code", courseCode);
+
+        List<Course> list = (List<Course>) query.list();
+        session.getTransaction().commit();
+
+        if (list.get(0).getContent() != null) {
+            details = list.get(0).getContent();
+        }
+        session.close();
+        return details;
+    }
+
     /**
      *
      * @param semester
@@ -347,6 +367,13 @@ public class StudentService {
                 }
                 syllabusPojo.setGrade(grade);
                 syllabusPojo.setPoint(CgpaCalculation.getGradePointFromGradeLetter(grade));
+
+                if (c.getSyllabusIdFk().getCourseIdFk().getTheoryOrLab() == 1) {
+                    syllabusPojo.setTheoryOrLab(true);
+                } else {
+                    syllabusPojo.setTheoryOrLab(false);
+                }
+                syllabusPojo.setHrsWeek(c.getSyllabusIdFk().getHrsWeek());
 
                 takenCourses.add(syllabusPojo);
             }
@@ -537,7 +564,6 @@ public class StudentService {
                 semester = 2;
             }
 
-            
             Session session = sessionFactory.openSession();
             session.beginTransaction();
 
@@ -556,13 +582,12 @@ public class StudentService {
                 if (!routines.isEmpty()) {
 
                     //System.out.println("slot: " + t.getDay() + " " + t.getStart() + "-" + t.getEnd());
-
                     for (ClassRoutine c : routines) {
                         if (c.getYear() == year && c.getSemester() == semester) {
                             //System.out.println("class: " + c.getSyllabusIdFk().getCourseIdFk().getCourseCode());
 
                             for (SyllabusPOJO reg : registrations) {
-                                
+
                                 String routineCourseCode = c.getSyllabusIdFk().getCourseIdFk().getCourseCode();
                                 if (reg.getCourseCode().equals(routineCourseCode)) {
                                     //then push data to ClassRoutinePOJO
@@ -572,7 +597,7 @@ public class StudentService {
                                     r.setDay(day);
                                     r.setStart(t.getStart());
                                     r.setEnd(t.getEnd());
-                                    
+
                                     myRoutines.add(r);
                                 }
                             }

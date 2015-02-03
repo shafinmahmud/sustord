@@ -4,6 +4,9 @@
     Author     : SHAFIN
 --%>
 
+<%@page import="me.shafin.sustord.bean.SyllabusPOJO"%>
+<%@page import="java.util.List"%>
+<%@page import="me.shafin.sustord.entity.StudentInfo"%>
 <%@page import="me.shafin.sustord.service.FormatService"%>
 <%@page import="me.shafin.sustord.service.StudentService"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -41,9 +44,9 @@
                                 <div class="col-md-5 col-lg-5">
                                     <select class="form-control pull-left" id="reg-semester-dropdown" name="reg-semester-dropdown" style="width: 250px">
 
-                                        <%                                        StudentService service = (StudentService) session.getAttribute("studentService");
+                                        <%                                            StudentService studentService = (StudentService) session.getAttribute("studentService");
 
-                                            int numofsem = service.getStudentTotalSemester();
+                                            int numofsem = studentService.getStudentTotalSemester();
                                             int currentSemester = 2;
 
                                             for (int i = 1; i <= numofsem; i++) {
@@ -64,20 +67,29 @@
 
                             </div>
                             <br>
+                            <%
+                                
+                                List<SyllabusPOJO> courseList;
+                                courseList = studentService.getStudentSyllabusAsEntity(6);
+                                
+                                for (SyllabusPOJO s : courseList) {
+                                    
+                            %>
                             <table class="table" style="background-color: #D8E2F3">
                                 <tbody><tr>
-                                        <td><label >CSE 100 :  PROJECT WORK</label></td>
-                                        <td><p class="pull-right" ><i>2 Hours/Week, 1.0 Credit</i></p></td>
+                                        <td><label ><%=s.getCourseCode()%>: <%=s.getTitle()%></label></td>
+                                        <td><p class="pull-right" ><i><%=s.getHrsWeek()%> Hours/Week, <%=s.getCredit()%> Credit</i></p></td>
                                     </tr>
                                 </tbody>
                             </table>
-                            <div class="margin-l5 ">
-                                <p style="font-size: 14px">Any project based on C language including implementation of Data Structure in acceptable.
-                                Gaming project using graphics.h library in C is preferable. Teachers must have to ensure every project
-                                is unique. Innovative project idea should get extra weight to prevent imitating old projects.</p>
-
+                            
+                            <div class="margin-l5 " style="font-size: 14px">
+                                <%=studentService.getStudentCourseDetails(s.getCourseCode())%>
                             </div>
                             <br>
+                            <%
+                                }
+                            %>
                             <div class="margin-l5 ">
 
 

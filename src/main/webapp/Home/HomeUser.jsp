@@ -136,29 +136,38 @@
                             <br>
                             <fieldset>
                                 <legend><%=semesterName%></legend>
-                                <div id="divCourseList"><table class="table">
+                                <div id="divCourseList"><table class="table table-condensed">
                                         <thead><tr>
                                                 <th>Course Code</th>
                                                 <th>Title</th>
                                                 <th>Credit</th>
-                                                <th>Remarks</th>
+                                                <th>Hours/Week</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <%
                                                 List<SyllabusPOJO> courseList;
                                                 courseList = studentService.getStudentRegisteredCoursesAsEntity(semx);
-                                                for (int j = 0; j < courseList.size(); j++) {
-                                                    String courseCode = courseList.get(j).getCourseCode();
-                                                    String title = courseList.get(j).getTitle();
-                                                    double credit = courseList.get(j).getCredit();
+                                                for (SyllabusPOJO s: courseList) {
+                                                    String courseCode = s.getCourseCode();
+                                                    String title = s.getTitle();
+                                                    double credit = s.getCredit();
+                                                    double hour = s.getHrsWeek();
+                                                    
+                                                    
+                                                    String hrsWeekString = "";
+                                                    if (s.isTheoryOrLab()) {
+                                                        hrsWeekString = String.valueOf(hour) + " + 0";
+                                                    } else { 
+                                                        hrsWeekString = "0 + " + String.valueOf(hour);
+                                                    }
                                             %>
                                             <tr>
                                                 <td><%=courseCode%></td> 
                                                 <td><%=title%></td> 
                                                 <td><%=credit%></td> 
                                                 <td> <div> 
-                                                        <label class="label label-success">Current</label>
+                                                        <p><%=hrsWeekString%></p>
                                                     </div>
                                                 </td>
                                             </tr>
