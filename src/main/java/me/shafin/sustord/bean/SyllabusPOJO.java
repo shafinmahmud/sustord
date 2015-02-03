@@ -20,6 +20,7 @@ public class SyllabusPOJO {
     private String point;
     private int offeringSemester;
     private int takenSemester;
+    private int attendYear;
     private String passedOn;
     private String status;
     private Double hrsWeek;
@@ -248,6 +249,20 @@ public class SyllabusPOJO {
      */
     public void setOfferingSemester(int offeringSemester) {
         this.offeringSemester = offeringSemester;
+    }
+
+    /**
+     * @return the attendYear
+     */
+    public int getAttendYear() {
+        return attendYear;
+    }
+
+    /**
+     * @param attendYear the attendYear to set
+     */
+    public void setAttendYear(int attendYear) {
+        this.attendYear = attendYear;
     }
 
 }

@@ -16,7 +16,7 @@ $(document).ready(function () {
 //following is the on click event with the .add-course class
 //for course add buttons
     $(document).on("click", ".add-course", function () {
-
+            
         var sylIdFromButton = $(this).attr("id").substr(4);
 
         var syllId, code, title, credit;
@@ -29,7 +29,7 @@ $(document).ready(function () {
                 code = avaiableCoursesJson[i].courseCode;
                 title = avaiableCoursesJson[i].title;
                 credit = avaiableCoursesJson[i].credit;
-
+                
                 choosedCoursesJson.push(avaiableCoursesJson[i]);
                 break;
             }
@@ -251,8 +251,8 @@ function ajaxCallForDropDown() {
 
                 populatePendingTable(pendingCoursesJson);
 
-                for (var i = 0; i < droppedCoursesJson.length; i++) {
-                    avaiableCoursesJson.push(droppedCoursesJson[i]);
+                for (var i = 0; i < pendingCoursesJson.length; i++) {
+                    avaiableCoursesJson.push(pendingCoursesJson[i]);
                 }
             }
 

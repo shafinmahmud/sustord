@@ -4,6 +4,8 @@
     Author     : SHAFIN
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="me.shafin.sustord.bean.ClassRoutinePOJO"%>
 <%@page import="me.shafin.sustord.bean.SyllabusPOJO"%>
 <%@page import="java.util.List"%>
 <%@page import="me.shafin.sustord.entity.CourseRegistration"%>
@@ -79,35 +81,53 @@
                                     }
                                 </style>
 
-                                <table class="scheduleTable">
+                                <table class="table table-striped">
 
                                     <tbody>
                                         <%
 
-                                            for (int i = 0; i < 6; i++) {
+                                            for (int i = 0; i < 7; i++) {
                                                 CalenderService calenderService = new CalenderService();
                                                 String date = calenderService.getDateLabel(i);
                                                 String day = calenderService.getDayLabel(i);
-                                                //studentService.getStudentRoutine(day);
+                                                //String routines = studentService.getStudentRoutine(day);
+                                                List<ClassRoutinePOJO> routines = studentService.getStudentRoutine(day);
+                                                
+                                                if(i==0)
+                                                    day = "TODAY";
+                                                else if(i==1)
+                                                    day = "TOMORROW";
+
 
                                         %>
                                         <tr>
                                             <td>
-                                                <p style="font-size: 13px"><b><%=day%></b><br></p>
+                                                <p style="font-size: 12px"><b><%=day%></b><br></p>
                                                 <p><%=date%></p>            
                                             </td>
                                             <td>
-                                                <a>Computer Architecture</a>                    
+                                                <%
+                                                    if (!routines.isEmpty()) {
+                                                        for (ClassRoutinePOJO r : routines) {
+                                                %>
                                                 <div>
-                                                    <small>Time: <label for="Sun_8:0_-_Sun_9:30">Sun 8:0 - Sun 9:30</label></small>
+                                                    <small>Time: <label><%=r.getStart()%> - <%=r.getEnd()%></label></small>
                                                 </div>
-                                                <a>Computer Networking</a>                    
-                                                <div>
-                                                    <small>Time: <label for="Sun_9:30_-_Sun_11:0">Sun 9:30 - Sun 11:0</label></small>
+                                                    <div><p style="font-size: 13px"><%=r.getCourseCode() + "  " + r.getTitle()%></p>       
                                                 </div>
+                                                <%}
+                                                    }else{
+                                                        %>
+                                                        <div><p style="font-size: 13px"><i>No Classes on this day</i></p>       
+                                                </div>
+                                                        <%
+                                                    }
+                                                %>
+
                                             </td>
                                         </tr>
-                                        <%           }
+                                        <%
+                                            }
                                         %>
                                     </tbody></table>
 

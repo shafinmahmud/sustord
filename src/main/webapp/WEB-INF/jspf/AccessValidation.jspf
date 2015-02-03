@@ -3,9 +3,9 @@
 <%
     try {
         if (!session.getAttribute("loginStatus").equals("ok")) {
-            response.sendRedirect("http://sustord-shafinmahmud.rhcloud.com/");
+            response.sendRedirect("../Login/LoginUser.jsp");
         }
     } catch (Exception e) {
-        response.sendRedirect("http://sustord-shafinmahmud.rhcloud.com/");
+        response.sendRedirect("../Login/LoginUser.jsp");
     }
 %>

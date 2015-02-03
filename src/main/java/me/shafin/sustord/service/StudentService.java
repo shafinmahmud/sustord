@@ -21,6 +21,7 @@ import me.shafin.sustord.entity.PersonalInfo;
 import me.shafin.sustord.entity.Prerequisite;
 import me.shafin.sustord.entity.StudentInfo;
 import me.shafin.sustord.entity.Syllabus;
+import me.shafin.sustord.entity.TimeSlot;
 import me.shafin.sustord.utility.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -330,6 +331,7 @@ public class StudentService {
                 syllabusPojo.setCourseCode(c.getSyllabusIdFk().getCourseIdFk().getCourseCode());
                 syllabusPojo.setTitle(c.getSyllabusIdFk().getCourseIdFk().getTitle());
                 syllabusPojo.setCredit(c.getSyllabusIdFk().getCourseIdFk().getCredit());
+                syllabusPojo.setAttendYear(c.getAttendYear());
 
                 String grade;
                 if (c.getGrade() == null || c.getGrade().equals("")) {
@@ -384,6 +386,7 @@ public class StudentService {
             syllabusPojo.setTitle(c.getSyllabusIdFk().getCourseIdFk().getTitle());
             syllabusPojo.setCredit(c.getSyllabusIdFk().getCourseIdFk().getCredit());
             syllabusPojo.setTakenSemester(c.getAttendSemester());
+            syllabusPojo.setAttendYear(c.getAttendYear());
 
             String grade;
             if (c.getGrade() == null || c.getGrade().equals("")) {
@@ -520,25 +523,73 @@ public class StudentService {
      * @param day
      * @return
      */
-    public String getStudentRoutine(String day) {
-        //its temporary work
-//        Session session = sessionFactory.openSession();
-//        session.beginTransaction();
-//
-//        List<ClassRoutinePOJO> dayRoutines;
-//        String hql = "FROM TimeSlot WHERE day = :day";
-//        Query query = session.createQuery(hql);
-//        List<TimeSlot>routines = (List<ClassRoutine>) query.list();
-//        
-//        session.getTransaction().commit();
-//        
-//        for(ClassRoutine r: routines){
-//            if(r.getTimeSlotIdFk().get)
-//            System.out.println(routine.getTitle());
-//        }
-//        
-//        session.close();
-        return "";
+    public List<ClassRoutinePOJO> getStudentRoutine(String day) {
+
+        List<ClassRoutinePOJO> myRoutines = new ArrayList<ClassRoutinePOJO>();
+        //getting the registered courses for the current semester
+        List<SyllabusPOJO> registrations = getStudentRegisteredCoursesAsEntity(getStudentCurrentSemester());
+        if (!registrations.isEmpty()) {
+            int year = registrations.get(0).getAttendYear();
+            int semester;
+            if (registrations.get(0).getTakenSemester() % 2 == 1) {
+                semester = 1;
+            } else {
+                semester = 2;
+            }
+
+            
+            Session session = sessionFactory.openSession();
+            session.beginTransaction();
+
+            //getting all timeSlots of the day
+            String hql = "FROM TimeSlot WHERE day= :day";
+            Query query = session.createQuery(hql);
+            query.setString("day", day);
+
+            List<TimeSlot> timeSlots = (List<TimeSlot>) query.list();
+
+            //getting all classRoutines of every timeSlot with Department year and semester match
+            for (TimeSlot t : timeSlots) {
+
+                List<ClassRoutine> routines = (List<ClassRoutine>) t.getClassRoutineCollection();
+
+                if (!routines.isEmpty()) {
+
+                    //System.out.println("slot: " + t.getDay() + " " + t.getStart() + "-" + t.getEnd());
+
+                    for (ClassRoutine c : routines) {
+                        if (c.getYear() == year && c.getSemester() == semester) {
+                            //System.out.println("class: " + c.getSyllabusIdFk().getCourseIdFk().getCourseCode());
+
+                            for (SyllabusPOJO reg : registrations) {
+                                
+                                String routineCourseCode = c.getSyllabusIdFk().getCourseIdFk().getCourseCode();
+                                if (reg.getCourseCode().equals(routineCourseCode)) {
+                                    //then push data to ClassRoutinePOJO
+                                    ClassRoutinePOJO r = new ClassRoutinePOJO();
+                                    r.setCourseCode(routineCourseCode);
+                                    r.setTitle(reg.getTitle());
+                                    r.setDay(day);
+                                    r.setStart(t.getStart());
+                                    r.setEnd(t.getEnd());
+                                    
+                                    myRoutines.add(r);
+                                }
+                            }
+
+                        }
+                    }
+
+                }
+
+            }
+            session.getTransaction().commit();
+            session.close();
+
+        }
+
+        //finally return the POJO collection
+        return myRoutines;
     }
 
     /**
