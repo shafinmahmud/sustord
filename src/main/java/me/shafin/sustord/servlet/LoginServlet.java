@@ -46,15 +46,19 @@ public class LoginServlet extends HttpServlet {
             // verification = loginService.authenticate(databaseConnection, userId, password, userType);        
         }
 
-        if (verification.equals("verified")) {
+        String[] arr = verification.split("#");
+        //System.out.println(arr[0]+" "+arr[1]);
+        if (arr[0].equals("verified")) {
+            
             HttpSession session = request.getSession();
             session.setAttribute("studentService", studentService);
             String status = "ok";
             session.setAttribute("loginStatus", status);
-            response.getWriter().print(verification);
+            session.setAttribute("regNo", arr[1]);
+            response.getWriter().print(arr[0]);
 
         } else {
-           // System.out.println("servlet print------------------" +verification);
+            // System.out.println("servlet print------------------" +verification);
             response.getWriter().print(verification);
         }
 

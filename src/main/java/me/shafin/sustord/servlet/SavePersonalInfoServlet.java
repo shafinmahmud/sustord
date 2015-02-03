@@ -33,7 +33,9 @@ public class SavePersonalInfoServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         StudentService service = (StudentService) request.getSession().getAttribute("studentService");
-        PersonalInfo personalInfo = service.getStudentInfo().getPersonalInfo();
+        String regNo = (String) request.getSession().getAttribute("regNo");
+        
+        PersonalInfo personalInfo = service.getStudentInfoObjectFromRegNo(regNo).getPersonalInfo();
         personalInfo.setFathersName(request.getParameter("fname"));
         personalInfo.setMothersName(request.getParameter("mname"));
         personalInfo.setPresentAddress(request.getParameter("pradd"));

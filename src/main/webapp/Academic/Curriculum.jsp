@@ -36,10 +36,11 @@
                         <fieldset>
                             <%                                StudentService studentService;
                                 studentService = (StudentService) session.getAttribute("studentService");
-                                StudentInfo studentInfo = studentService.getStudentInfo();
-                                String deptName = studentService.getStudentDepartmentName();
-                                String sessionName = studentService.getStudentSessiontName();
-                                String program = studentService.getStudentProgramName();
+                                String regNo = (String) request.getSession().getAttribute("regNo");
+                                StudentInfo studentInfo = studentService.getStudentInfoObjectFromRegNo(regNo);
+                                String deptName = studentService.getStudentDepartmentName(regNo);
+                                String sessionName = studentService.getStudentSessiontName(regNo);
+                                String program = studentService.getStudentProgramName(regNo);
 
                                 int semx = studentInfo.getStudentBatchIdFk().getDegreeOfferedIdFk().getDegreeIdFk().getTotalSemester();
 
@@ -75,7 +76,7 @@
                                                 int theoryCredit = 0;
                                                 int labCredit = 0;
                                                 List<SyllabusPOJO> courseList;
-                                                courseList = studentService.getStudentSyllabusAsEntity(i + 1);
+                                                courseList = studentService.getStudentSyllabusAsEntity(regNo,i + 1);
                                                 for (int j = 0; j < courseList.size(); j++) {
                                                     String courseCode = courseList.get(j).getCourseCode();
                                                     String title = courseList.get(j).getTitle();
@@ -122,7 +123,7 @@
                             <%
                                 }
 
-                                if (studentService.isStudentSyllabusHasOptionalCourses()) {                                   
+                                if (studentService.isStudentSyllabusHasOptionalCourses(regNo)) {                                   
                             %>
                             <div class="panel panel-default">
                                 <div class="panel-heading">
@@ -142,7 +143,7 @@
                                         <tbody>
                                             <%
                                     List<SyllabusPOJO> courseListOp;
-                                                courseListOp = studentService.getStudentSyllabusAsEntity(0);
+                                                courseListOp = studentService.getStudentSyllabusAsEntity(regNo,0);
                                                 for (int j = 0; j < courseListOp.size(); j++) {
                                                     String courseCode = courseListOp.get(j).getCourseCode();
                                                     String title = courseListOp.get(j).getTitle();

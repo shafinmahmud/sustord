@@ -23,7 +23,7 @@
         <li>
             <a href="../Soon/comingsoon.html"><span class="glyphicon glyphicon-pie-chart"></span>&nbsp;Course Analysis</a></li>
         <li>
-            <a href="../Soon/comingsoon.html"><span class="glyphicon glyphicon-podium"></span>&nbsp;Ranking</a>
+            <a href="../Statistics/Ranking.jsp"><span class="glyphicon glyphicon-podium"></span>&nbsp;Ranking</a>
         </li>
 
         <li class="nav-header">Data Submission

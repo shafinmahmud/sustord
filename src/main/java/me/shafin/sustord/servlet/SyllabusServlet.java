@@ -36,21 +36,22 @@ public class SyllabusServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         StudentService service = (StudentService) request.getSession().getAttribute("studentService");
+        String regNo = (String) request.getSession().getAttribute("regNo");
         int x = Integer.parseInt(request.getParameter("semester"));
 
-        List<SyllabusPOJO> syllabus = service.getStudentSyllabusAsEntity(x);
+        List<SyllabusPOJO> syllabus = service.getStudentSyllabusAsEntity(regNo,x);
         String syllabusCoursesJson = JsonConvertion.objectListToJsonString(syllabus);
         //System.out.println("syllabus: " + syllabusCoursesJson);
 
-        List<SyllabusPOJO> pending = service.getStudentPendingCoursesAsEntity(x);
+        List<SyllabusPOJO> pending = service.getStudentPendingCoursesAsEntity(regNo,x);
         String pendingCoursesJson = JsonConvertion.objectListToJsonString(pending);
         //System.out.println("pending: "+pendingCoursesJson);
 
-        List<SyllabusPOJO> dropped = service.getStudentDroppedCoursesAsEntity(x);
+        List<SyllabusPOJO> dropped = service.getStudentDroppedCoursesAsEntity(regNo,x);
         String droppedCoursesJson = JsonConvertion.objectListToJsonString(dropped);
        // System.out.println("dropped: "+droppedCoursesJson);
 
-        List<SyllabusPOJO> taken = service.getStudentRegisteredCoursesAsEntity(x);
+        List<SyllabusPOJO> taken = service.getStudentRegisteredCoursesAsEntity(regNo,x);
         String takenCoursesJson = JsonConvertion.objectListToJsonString(taken);
         //System.out.println("taken: "+takenCoursesJson);
 

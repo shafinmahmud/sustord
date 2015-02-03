@@ -44,8 +44,9 @@
                                         <option value="0" style="display:none">Choose Semester</option>
                                         <%
                                             StudentService service = (StudentService) session.getAttribute("studentService");
-
-                                            int numofsem = service.getStudentTotalSemester();
+                                            String regNo = (String) request.getSession().getAttribute("regNo");
+                                            
+                                            int numofsem = service.getStudentTotalSemester(regNo);
                                             int currentSemester = 2;
 
                                             for (int i = 1; i <= numofsem; i++) {

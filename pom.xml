@@ -85,11 +85,6 @@
 	  <version>2.3.1</version>
 	  <type>jar</type>
 	 </dependency>
-	 <dependency>
-	  <groupId>com.googlecode.lambdaj</groupId>
-	  <artifactId>lambdaj</artifactId>
-	  <version>2.3.3</version>
-	 </dependency>
 	</dependencies>
 	<profiles>
 		<profile>

@@ -34,9 +34,10 @@ public class ResultUpdateServlet extends HttpServlet {
 
        
         StudentService service = (StudentService) request.getSession().getAttribute("studentService");
+        String regNo = (String) request.getSession().getAttribute("regNo");
         int x = Integer.parseInt(request.getParameter("semester"));
          // System.out.println(x);
-        String takenCoursesJson = service.getStudentRegisteredCourses(x);
+        String takenCoursesJson = service.getStudentRegisteredCourses(regNo,x);
          //System.out.println(takenCoursesJson);
         if(takenCoursesJson.equals("[]")){
             takenCoursesJson = "EMPTY";

@@ -45,8 +45,8 @@
                                     <select class="form-control pull-left" id="reg-semester-dropdown" name="reg-semester-dropdown" style="width: 250px">
 
                                         <%                                            StudentService studentService = (StudentService) session.getAttribute("studentService");
-
-                                            int numofsem = studentService.getStudentTotalSemester();
+                                            String regNo = (String) request.getSession().getAttribute("regNo");
+                                            int numofsem = studentService.getStudentTotalSemester(regNo);
                                             int currentSemester = 2;
 
                                             for (int i = 1; i <= numofsem; i++) {
@@ -70,7 +70,7 @@
                             <%
                                 
                                 List<SyllabusPOJO> courseList;
-                                courseList = studentService.getStudentSyllabusAsEntity(6);
+                                courseList = studentService.getStudentSyllabusAsEntity(regNo,6);
                                 
                                 for (SyllabusPOJO s : courseList) {
                                     

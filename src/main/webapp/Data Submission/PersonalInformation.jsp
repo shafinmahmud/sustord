@@ -48,10 +48,11 @@
                         <legend>Personal Information</legend>
                         <%
                             StudentService service = (StudentService) session.getAttribute("studentService");
-                            StudentInfo studentInfo = service.getStudentInfo();
+                            String regNo = (String) request.getSession().getAttribute("regNo");
+                            StudentInfo studentInfo = service.getStudentInfoObjectFromRegNo(regNo);
 
                             PersonalInfo personalInfo = studentInfo.getPersonalInfo();
-                            String reg = service.getStudentInfo().getRegistrationNo();
+                            String reg = regNo;
                             String name = personalInfo.getName();
                             String presentAddress = personalInfo.getPresentAddress();
                             String permanentAddress = personalInfo.getPermanentAddress();

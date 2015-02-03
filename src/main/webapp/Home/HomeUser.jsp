@@ -40,10 +40,12 @@
                 <div id="main-content" class="col-md-10 column800">
                     <%                        StudentService studentService;
                         studentService = (StudentService) session.getAttribute("studentService");
-                        StudentInfo studentInfo = studentService.getStudentInfo();
+                        String regNo = (String) request.getSession().getAttribute("regNo");
+                        
+                        StudentInfo studentInfo = studentService.getStudentInfoObjectFromRegNo(regNo);
                         String name = studentInfo.getPersonalInfo().getName();
-                        String regNo = studentInfo.getRegistrationNo();
-                        int semx = studentService.getStudentCurrentSemester();
+                        
+                        int semx = studentService.getStudentCurrentSemester(regNo);
                         String semesterName = FormatService.formatSemesterName(semx);
                     %>
                     <div class="row">
@@ -91,7 +93,7 @@
                                                 String date = calenderService.getDateLabel(i);
                                                 String day = calenderService.getDayLabel(i);
                                                 //String routines = studentService.getStudentRoutine(day);
-                                                List<ClassRoutinePOJO> routines = studentService.getStudentRoutine(day);
+                                                List<ClassRoutinePOJO> routines = studentService.getStudentRoutine(regNo,day);
                                                 
                                                 if(i==0)
                                                     day = "TODAY";
@@ -147,7 +149,7 @@
                                         <tbody>
                                             <%
                                                 List<SyllabusPOJO> courseList;
-                                                courseList = studentService.getStudentRegisteredCoursesAsEntity(semx);
+                                                courseList = studentService.getStudentRegisteredCoursesAsEntity(regNo,semx);
                                                 for (SyllabusPOJO s: courseList) {
                                                     String courseCode = s.getCourseCode();
                                                     String title = s.getTitle();

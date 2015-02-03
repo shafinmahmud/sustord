@@ -12,8 +12,10 @@ import com.google.gson.JsonParser;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import me.shafin.sustord.bean.ClassRoutinePOJO;
+import me.shafin.sustord.bean.StudentPOJO;
 import me.shafin.sustord.bean.SyllabusPOJO;
 import me.shafin.sustord.entity.ClassRoutine;
 import me.shafin.sustord.entity.Course;
@@ -35,8 +37,11 @@ import org.hibernate.SessionFactory;
  */
 public class StudentService {
 
-    private SessionFactory sessionFactory;
-    private StudentInfo studentInfo = null;
+    private final SessionFactory sessionFactory;
+
+    public StudentService() throws ExceptionInInitializerError {
+        this.sessionFactory = HibernateUtil.getSessionFactory();
+    }
 
     /**
      * *****************************************************************************************************
@@ -50,26 +55,22 @@ public class StudentService {
      * @return
      */
     public String verifyLogin(String registration, String passWord) {
-        String connectionStatus = "denied";
+        String connectionStatus;
         try {
-            sessionFactory = HibernateUtil.getSessionFactory();
 
-            Session session = sessionFactory.openSession();
-            session.beginTransaction();
-            String hql = "FROM StudentInfo WHERE registrationNo = :reg and password = :pass";
-            Query query = session.createQuery(hql);
-            query.setParameter("reg", registration);
-            query.setParameter("pass", passWord);
-            List<StudentInfo> infos = (List<StudentInfo>) query.list();
-
-            session.getTransaction().commit();
-            session.close();
-
-            if (!infos.isEmpty()) {
-                setStudentInfo(infos.get(0));
-                connectionStatus = "verified";
+            StudentInfo student = getStudentInfoObjectFromRegNo(registration);
+            if (student != null) {
+                String truePassword = student.getPassword();
+                if (truePassword.equals(passWord)) {
+                    connectionStatus = "verified#" + student.getRegistrationNo();
+                } else {
+                    connectionStatus = "passError#";
+                }
+            } else {
+                connectionStatus = "regError#";
             }
-        } catch (ExceptionInInitializerError ex) {
+
+        } catch (Exception ex) {
             StringWriter sw = new StringWriter();
             PrintWriter pw = new PrintWriter(sw);
             ex.printStackTrace(pw);
@@ -85,43 +86,44 @@ public class StudentService {
      * *****************************************************************************************************
      * *************** GET COURSES FROM SYLLABUS AND REGISTRATION TABLE
      * *****************************************************************************************************
+     * @param regNo
+     * @return
      */
-    public boolean isStudentSyllabusHasOptionalCourses() {
-        List<SyllabusPOJO> studentSyllabusList = getStudentSyllabusAsEntity(0);
+    public boolean isStudentSyllabusHasOptionalCourses(String regNo) {
+        List<SyllabusPOJO> studentSyllabusList = getStudentSyllabusAsEntity(regNo, 0);
 
-        if (!studentSyllabusList.isEmpty()) {
-            return true;
-        } else {
-            return false;
-        }
+        return !studentSyllabusList.isEmpty();
     }
 
     /**
      *
+     * @param regNo
      * @param semester
      * @return
      */
-    public String getStudentSyllabus(int semester) {
+    public String getStudentSyllabus(String regNo, int semester) {
 
         List<SyllabusPOJO> courseList;
-        courseList = getStudentSyllabusAsEntity(semester);
-
+        courseList = getStudentSyllabusAsEntity(regNo, semester);
         String jsoListString = JsonConvertion.objectListToJsonString(courseList);
 
         return jsoListString;
-
     }
 
     /**
      *
+     * @param regNo
      * @param semester
      * @return
      */
-    public List<SyllabusPOJO> getStudentSyllabusAsEntity(int semester) {
+    public List<SyllabusPOJO> getStudentSyllabusAsEntity(String regNo, int semester) {
+
+        StudentInfo std = getStudentInfoObjectFromRegNo(regNo);
+
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
-        Integer batch = studentInfo.getStudentBatchIdFk().getStudentBatchId();
+        Integer batch = std.getStudentBatchIdFk().getStudentBatchId();
 
         String hql = "FROM Syllabus WHERE studentBatchIdFk = :batch and semester = :semester";
         Query query = session.createQuery(hql);
@@ -132,7 +134,7 @@ public class StudentService {
         session.getTransaction().commit();
 
         List<SyllabusPOJO> courseList = new ArrayList<SyllabusPOJO>();
-        List<SyllabusPOJO> allCourseRegistrations = getStudentRegisteredCoursesAll(getStudentTotalSemester());
+        List<SyllabusPOJO> allCourseRegistrations = getStudentRegisteredCoursesAll(regNo, getStudentTotalSemester(regNo));
 
         for (Syllabus s : syllabusList) {
             SyllabusPOJO syllabusPojo = new SyllabusPOJO();
@@ -200,14 +202,18 @@ public class StudentService {
 
     /**
      *
+     * @param regNo
      * @param uptoSemester
      * @return
      */
-    public List<SyllabusPOJO> getStudentSyllabusAll(int uptoSemester) {
+    public List<SyllabusPOJO> getStudentSyllabusAll(String regNo, int uptoSemester) {
+
+        StudentInfo std = getStudentInfoObjectFromRegNo(regNo);
+
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
-        Integer batch = studentInfo.getStudentBatchIdFk().getStudentBatchId();
+        Integer batch = std.getStudentBatchIdFk().getStudentBatchId();
 
         String hql = "FROM Syllabus WHERE studentBatchIdFk = :batch and semester <= :semester and semester > 0";
         Query query = session.createQuery(hql);
@@ -218,7 +224,7 @@ public class StudentService {
         session.getTransaction().commit();
 
         List<SyllabusPOJO> courseList = new ArrayList<SyllabusPOJO>();
-        List<SyllabusPOJO> allCourseRegistrations = getStudentRegisteredCoursesAll(getStudentCurrentSemester());
+        List<SyllabusPOJO> allCourseRegistrations = getStudentRegisteredCoursesAll(regNo, getStudentCurrentSemester(regNo));
 
         for (Syllabus s : syllabusList) {
             SyllabusPOJO syllabusPojo = new SyllabusPOJO();
@@ -305,12 +311,13 @@ public class StudentService {
 
     /**
      *
+     * @param regNo
      * @param semester
      * @return
      */
-    public String getStudentRegisteredCourses(int semester) {
+    public String getStudentRegisteredCourses(String regNo, int semester) {
 
-        List<SyllabusPOJO> takenCourses = getStudentRegisteredCoursesAsEntity(semester);
+        List<SyllabusPOJO> takenCourses = getStudentRegisteredCoursesAsEntity(regNo, semester);
 
         String jsoListString = JsonConvertion.objectListToJsonString(takenCourses);
 
@@ -319,17 +326,20 @@ public class StudentService {
 
     /**
      *
+     * @param regNo
      * @param semester
      * @return
      */
-    public List<SyllabusPOJO> getStudentRegisteredCoursesAsEntity(int semester) {
+    public List<SyllabusPOJO> getStudentRegisteredCoursesAsEntity(String regNo, int semester) {
+
+        StudentInfo std = getStudentInfoObjectFromRegNo(regNo);
 
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
         String hql = "FROM CourseRegistration WHERE studentInfoIdFk = :id and attendSemester = :semester";
         Query query = session.createQuery(hql);
-        query.setInteger("id", studentInfo.getStudentInfoId());
+        query.setInteger("id", std.getStudentInfoId());
         query.setParameter("semester", semester);
 
         List<CourseRegistration> allRegisteredCourses = (List<CourseRegistration>) query.list();
@@ -384,16 +394,20 @@ public class StudentService {
 
     /**
      *
+     * @param regNo
      * @param uptoSemester
      * @return
      */
-    public List<SyllabusPOJO> getStudentRegisteredCoursesAll(int uptoSemester) {
+    public List<SyllabusPOJO> getStudentRegisteredCoursesAll(String regNo, int uptoSemester) {
+
+        StudentInfo std = getStudentInfoObjectFromRegNo(regNo);
+
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
         String hql = "FROM CourseRegistration WHERE studentInfoIdFk = :id and attendSemester <= :uptoSem";
         Query query = session.createQuery(hql);
-        query.setInteger("id", studentInfo.getStudentInfoId());
+        query.setInteger("id", std.getStudentInfoId());
         query.setInteger("uptoSem", uptoSemester);
 
         List<CourseRegistration> allTakenCourses = (List<CourseRegistration>) query.list();
@@ -415,6 +429,15 @@ public class StudentService {
             syllabusPojo.setTakenSemester(c.getAttendSemester());
             syllabusPojo.setAttendYear(c.getAttendYear());
 
+            //hours/week
+            if (c.getSyllabusIdFk().getCourseIdFk().getTheoryOrLab() == 1) {
+                syllabusPojo.setTheoryOrLab(true);
+            } else {
+                syllabusPojo.setTheoryOrLab(false);
+            }
+            syllabusPojo.setHrsWeek(c.getSyllabusIdFk().getHrsWeek());
+
+            //grade
             String grade;
             if (c.getGrade() == null || c.getGrade().equals("")) {
                 grade = "N/A";
@@ -437,17 +460,18 @@ public class StudentService {
 
     /**
      *
+     * @param regNo
      * @param uptoSemester
      * @return
      */
-    public List<SyllabusPOJO> getStudentDroppedCoursesAsEntity(int uptoSemester) {
+    public List<SyllabusPOJO> getStudentDroppedCoursesAsEntity(String regNo, int uptoSemester) {
 
         List<SyllabusPOJO> finalFilter = new ArrayList<SyllabusPOJO>();
 
         if (uptoSemester > 2) {
             //filerting if he/she has passed the course any when
             //***************************************************************
-            List<SyllabusPOJO> allCourseRegistrations = getStudentRegisteredCoursesAll(getStudentTotalSemester());
+            List<SyllabusPOJO> allCourseRegistrations = getStudentRegisteredCoursesAll(regNo, getStudentTotalSemester(regNo));
             List<SyllabusPOJO> passedCourses = new ArrayList<SyllabusPOJO>();
             List<SyllabusPOJO> tempFilter = new ArrayList<SyllabusPOJO>();
 
@@ -497,28 +521,29 @@ public class StudentService {
 
     /**
      *
+     * @param regNo
      * @param uptoSemester
      * @return
      */
-    public String getStudentDroppedCourses(int uptoSemester) {
-        List<SyllabusPOJO> courses = getStudentDroppedCoursesAsEntity(uptoSemester);
+    public String getStudentDroppedCourses(String regNo, int uptoSemester) {
+        List<SyllabusPOJO> courses = getStudentDroppedCoursesAsEntity(regNo, uptoSemester);
 
         String jsonListString = JsonConvertion.objectListToJsonString(courses);
 
         return jsonListString;
     }
 
-    public List<SyllabusPOJO> getStudentPendingCoursesAsEntity(int uptoSemester) {
+    public List<SyllabusPOJO> getStudentPendingCoursesAsEntity(String regNo, int uptoSemester) {
         List<SyllabusPOJO> pendingCourses = new ArrayList<SyllabusPOJO>();
 
         if (uptoSemester > 2) {
 
             //getting all courses before uptoSemester from syllabus
             //here (uptoSemester-2) because we need to search from 2 semester backward
-            List<SyllabusPOJO> allSyllabusCourses = getStudentSyllabusAll(uptoSemester - 2);
+            List<SyllabusPOJO> allSyllabusCourses = getStudentSyllabusAll(regNo, uptoSemester - 2);
 
             //getting all registered courses before uptoSemester from courseRegistration
-            List<SyllabusPOJO> allCourseRegistrations = getStudentRegisteredCoursesAll(uptoSemester - 2);
+            List<SyllabusPOJO> allCourseRegistrations = getStudentRegisteredCoursesAll(regNo, uptoSemester - 2);
 
             //searching for the pending courses comparing allSyllabusCoursesModFilter and allCourseRegistrationsModFilter
             for (SyllabusPOJO syl : allSyllabusCourses) {
@@ -547,14 +572,15 @@ public class StudentService {
 
     /**
      *
+     * @param regNo
      * @param day
      * @return
      */
-    public List<ClassRoutinePOJO> getStudentRoutine(String day) {
+    public List<ClassRoutinePOJO> getStudentRoutine(String regNo, String day) {
 
         List<ClassRoutinePOJO> myRoutines = new ArrayList<ClassRoutinePOJO>();
         //getting the registered courses for the current semester
-        List<SyllabusPOJO> registrations = getStudentRegisteredCoursesAsEntity(getStudentCurrentSemester());
+        List<SyllabusPOJO> registrations = getStudentRegisteredCoursesAsEntity(regNo, getStudentCurrentSemester(regNo));
         if (!registrations.isEmpty()) {
             int year = registrations.get(0).getAttendYear();
             int semester;
@@ -619,10 +645,11 @@ public class StudentService {
 
     /**
      *
+     * @param regNo
      * @return
      */
-    public double getCGPA() {
-        List<SyllabusPOJO> cummilativeCourses = getStudentRegisteredCoursesAll(getStudentTotalSemester());
+    public double getCGPA(String regNo) {
+        List<SyllabusPOJO> cummilativeCourses = getStudentRegisteredCoursesAll(regNo, getStudentTotalSemester(regNo));
 
         double cgpa = CgpaCalculation.getGradePointOfSemester(cummilativeCourses);
 
@@ -631,35 +658,84 @@ public class StudentService {
 
     /**
      *
+     * @param regNo
      * @return
      */
-    public double getTotalCredits() {
+    public double getTotalCredits(String regNo) {
         double totalCredit;
-        totalCredit = CgpaCalculation.getTotalCreditOfSemester(getStudentSyllabusAll(getStudentTotalSemester()));
+        totalCredit = CgpaCalculation.getTotalCreditOfSemester(getStudentSyllabusAll(regNo, getStudentTotalSemester(regNo)));
         return totalCredit;
     }
 
-    public double getCreditsCompleted() {
+    public double getCreditsCompleted(String regNo) {
         double completedCredits;
-        completedCredits = CgpaCalculation.getPassedCreditOfSemester(getStudentRegisteredCoursesAll(getStudentCurrentSemester()));
+        completedCredits = CgpaCalculation.getPassedCreditOfSemester(getStudentRegisteredCoursesAll(regNo, getStudentCurrentSemester(regNo)));
         return completedCredits;
     }
 
-    public int getTotalCourses() {
+    public int getTotalCourses(String regNo) {
         int totalcourses;
-        totalcourses = getStudentSyllabusAll(getStudentTotalSemester()).size();
+        totalcourses = getStudentSyllabusAll(regNo, getStudentTotalSemester(regNo)).size();
         return totalcourses;
     }
 
-    public int getCompletedCourses() {
+    public int getCompletedCourses(String regNo) {
         int completedcourses = 0;
-        List<SyllabusPOJO> all = getStudentSyllabusAll(getStudentTotalSemester());
+        List<SyllabusPOJO> all = getStudentRegisteredCoursesAll(regNo, getStudentCurrentSemester(regNo));
         for (SyllabusPOJO spojo : all) {
-            if (!spojo.getGrade().equals("F") && !spojo.getGrade().equals("N/A")) {
+            if (spojo.getGrade().equals("A+")
+                    || spojo.getGrade().equals("A")
+                    || spojo.getGrade().equals("A-")
+                    || spojo.getGrade().equals("B+")
+                    || spojo.getGrade().equals("B")
+                    || spojo.getGrade().equals("B-")
+                    || spojo.getGrade().equals("C+")
+                    || spojo.getGrade().equals("C")
+                    || spojo.getGrade().equals("C-")) {
                 completedcourses += 1;
             }
         }
         return completedcourses;
+    }
+
+    public List<StudentPOJO> getStudentRankList(String regNo) {
+
+        StudentInfo std = getStudentInfoObjectFromRegNo(regNo);
+
+        List<StudentPOJO> students = new ArrayList<StudentPOJO>();
+
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+
+        //getting all timeSlots of the day
+        String hql = "FROM StudentInfo WHERE studentBatchIdFk= :batchId";
+        Query query = session.createQuery(hql);
+        query.setInteger("batchId", std.getStudentBatchIdFk().getStudentBatchId());
+
+        List<StudentInfo> studentInfos = (List<StudentInfo>) query.list();
+
+        for (StudentInfo s : studentInfos) {
+            String reg = s.getRegistrationNo();
+            
+            double cgpa = getCGPA(s.getRegistrationNo());
+            double cCredit = getCreditsCompleted(s.getRegistrationNo());
+            if (cgpa > 0) {
+                StudentPOJO guy = new StudentPOJO();
+                guy.setRegistrationNo(reg);
+                guy.setName(s.getPersonalInfo().getName());
+                guy.setCgpa(cgpa);
+                guy.setCompletedCredits(cCredit);
+                          
+                students.add(guy);
+            }
+
+        }
+        Collections.sort(students, StudentPOJO.CgpaMultiplyCreditComparator);
+        
+        session.getTransaction().commit();
+        session.close();
+
+        return students;
     }
 
     /**
@@ -695,7 +771,9 @@ public class StudentService {
      * @param semester
      * @return
      */
-    public boolean doStudentCourseRegistration(String jsonString, int semester) {
+    public boolean doStudentCourseRegistration(String regNo, String jsonString, int semester) {
+
+        StudentInfo std = getStudentInfoObjectFromRegNo(regNo);
 
         // System.out.println("input wish: " + jsonString);
         JsonParser parser = new JsonParser(); // declaring jsonparser
@@ -704,7 +782,7 @@ public class StudentService {
 
         //System.out.println("converted wish: " + wishList);
         //getting the currently registeres courses befor commit change
-        String currentCoursesJson = getStudentRegisteredCourses(semester);
+        String currentCoursesJson = getStudentRegisteredCourses(regNo, semester);
 
         //System.out.println("input target: " + currentCoursesJson);
         JsonParser parser1 = new JsonParser();
@@ -713,7 +791,7 @@ public class StudentService {
 
         //System.out.println("converted target: " + targetList);
         //generating the course taken year value from the semester
-        String batchSession = getStudentSessiontName();
+        String batchSession = getStudentSessiontName(regNo);
         int batchYear = Integer.parseInt(batchSession.substring(0, 4));
         String formatSemester = FormatService.formatSemesterNumber(semester);
         int academicYear = Integer.parseInt(formatSemester.substring(0, 1));
@@ -735,7 +813,7 @@ public class StudentService {
                 SyllabusPOJO addSyllabusPojo = gson.fromJson(jsonObjectString, SyllabusPOJO.class);
 
                 courseRegistration = new CourseRegistration();
-                courseRegistration.setStudentInfoIdFk(studentInfo);
+                courseRegistration.setStudentInfoIdFk(std);
                 courseRegistration.setAttendYear(attendedYear);
                 courseRegistration.setAttendSemester(semester);
 
@@ -774,7 +852,7 @@ public class StudentService {
 
                 if (!alreadyExists) {
                     courseRegistration = new CourseRegistration();
-                    courseRegistration.setStudentInfoIdFk(studentInfo);
+                    courseRegistration.setStudentInfoIdFk(std);
                     courseRegistration.setAttendYear(attendedYear);
                     courseRegistration.setAttendSemester(semester);
 
@@ -820,11 +898,12 @@ public class StudentService {
 
     /**
      *
+     * @param regNo
      * @param jsonString
      * @param semester
      * @return
      */
-    public boolean doStudentResultUpdate(String jsonString, int semester) {
+    public boolean doStudentResultUpdate(String regNo, String jsonString, int semester) {
 
         boolean status = false;
         //System.out.println("method accesses ! \n" + jsonString);
@@ -847,7 +926,7 @@ public class StudentService {
                 registration.setGrade(syllabusPojo.getGrade());
 
                 //verifying that this grade update doesnt contradict with other semesters' intake of the same course
-                List<SyllabusPOJO> allRegistered = getStudentRegisteredCoursesAll(getStudentCurrentSemester());
+                List<SyllabusPOJO> allRegistered = getStudentRegisteredCoursesAll(regNo, getStudentCurrentSemester(regNo));
                 for (SyllabusPOJO s : allRegistered) {
                     if (s.getCourseCode().equals(syllabusPojo.getCourseCode()) && s.getTakenSemester() > semester) {
 
@@ -873,17 +952,20 @@ public class StudentService {
 
     /**
      *
+     * @param regNo
      * @return
      */
-    public int getStudentCurrentSemester() {
+    public int getStudentCurrentSemester(String regNo) {
 
         try {
+            StudentInfo std = getStudentInfoObjectFromRegNo(regNo);
+
             Session session = sessionFactory.openSession();
             session.beginTransaction();
 
             String hql = "select max(attendSemester) FROM CourseRegistration WHERE studentInfoIdFk = :id";
             Query query = session.createQuery(hql);
-            query.setInteger("id", studentInfo.getStudentInfoId());
+            query.setInteger("id", std.getStudentInfoId());
             List maxReg = query.list();
 
             session.getTransaction().commit();
@@ -906,34 +988,62 @@ public class StudentService {
 
     /**
      *
+     * @param regNo
      * @return
      */
-    public String getStudentProgramName() {
-        String programName = studentInfo.getStudentBatchIdFk().getDegreeOfferedIdFk().getDegreeIdFk().getDegreeTypeName()
-                + " (" + studentInfo.getStudentBatchIdFk().getDegreeOfferedIdFk().getDegreeIdFk().getDegreeCategory() + ")";
+    public String getStudentProgramName(String regNo) {
+        StudentInfo std = getStudentInfoObjectFromRegNo(regNo);
+        String programName = std.getStudentBatchIdFk().getDegreeOfferedIdFk().getDegreeIdFk().getDegreeTypeName()
+                + " (" + std.getStudentBatchIdFk().getDegreeOfferedIdFk().getDegreeIdFk().getDegreeCategory() + ")";
         return programName;
     }
 
-    public String getStudentDepartmentName() {
-        String departmentName = studentInfo.getStudentBatchIdFk().getDegreeOfferedIdFk().getDeptIdFk().getDeptName();
+    public String getStudentDepartmentName(String regNo) {
+        StudentInfo std = getStudentInfoObjectFromRegNo(regNo);
+        String departmentName = std.getStudentBatchIdFk().getDegreeOfferedIdFk().getDeptIdFk().getDeptName();
         return departmentName;
     }
 
-    public String getStudentSchoolName() {
-        String schoolName = studentInfo.getStudentBatchIdFk().getDegreeOfferedIdFk()
+    public String getStudentSchoolName(String regNo) {
+        StudentInfo std = getStudentInfoObjectFromRegNo(regNo);
+        String schoolName = std.getStudentBatchIdFk().getDegreeOfferedIdFk()
                 .getDeptIdFk().getSchoolIdFk().getSchoolName();
         return schoolName;
     }
 
-    public int getStudentTotalSemester() {
-        int totalSemester = studentInfo.getStudentBatchIdFk().getDegreeOfferedIdFk().getDegreeIdFk().getTotalSemester();
+    public int getStudentTotalSemester(String regNo) {
+        StudentInfo std = getStudentInfoObjectFromRegNo(regNo);
+        int totalSemester = std.getStudentBatchIdFk().getDegreeOfferedIdFk().getDegreeIdFk().getTotalSemester();
 
         return totalSemester;
     }
 
-    public String getStudentSessiontName() {
-        String sessionName = studentInfo.getStudentBatchIdFk().getSession();
+    public String getStudentSessiontName(String regNo) {
+        StudentInfo std = getStudentInfoObjectFromRegNo(regNo);
+        String sessionName = std.getStudentBatchIdFk().getSession();
         return sessionName;
+    }
+
+    public StudentInfo getStudentInfoObjectFromRegNo(String regNo) {
+
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+
+        StudentInfo studentInfoObject = null;
+        String hql = "FROM StudentInfo WHERE registrationNo = :reg";
+        Query query = session.createQuery(hql);
+        query.setParameter("reg", regNo);
+
+        List<StudentInfo> infos = (List<StudentInfo>) query.list();
+
+        session.getTransaction().commit();
+        session.close();
+
+        if (!infos.isEmpty()) {
+            studentInfoObject = infos.get(0);
+        }
+
+        return studentInfoObject;
     }
 
     /**
@@ -946,20 +1056,6 @@ public class StudentService {
      */
     public SessionFactory getSessionFactory() {
         return sessionFactory;
-    }
-
-    /**
-     * @return the studentInfo
-     */
-    public StudentInfo getStudentInfo() {
-        return studentInfo;
-    }
-
-    /**
-     * @param studentInfo the studentInfo to set
-     */
-    public void setStudentInfo(StudentInfo studentInfo) {
-        this.studentInfo = studentInfo;
     }
 
 }

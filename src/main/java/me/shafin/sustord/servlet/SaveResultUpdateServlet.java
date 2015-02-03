@@ -33,7 +33,9 @@ public class SaveResultUpdateServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         StudentService service = (StudentService) request.getSession().getAttribute("studentService");
-        boolean b = service.doStudentResultUpdate(request.getParameter("jsonString"),
+        String regNo = (String) request.getSession().getAttribute("regNo");
+        
+        boolean b = service.doStudentResultUpdate(regNo,request.getParameter("jsonString"),
                Integer.parseInt(request.getParameter("semester")));
         
         PrintWriter out = response.getWriter();

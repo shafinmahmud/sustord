@@ -42,19 +42,20 @@
                             </legend>
                             <%StudentService studentService;
                                 studentService = (StudentService) session.getAttribute("studentService");
-                                StudentInfo studentInfo = studentService.getStudentInfo();
+                                String regNo = (String) request.getSession().getAttribute("regNo");
+                                StudentInfo studentInfo = studentService.getStudentInfoObjectFromRegNo(regNo);
+                                
                                 String name = studentInfo.getPersonalInfo().getName();
-                                String regNo = studentInfo.getRegistrationNo();
-                                String sessionName = studentService.getStudentSessiontName();
-                                String dept = studentService.getStudentDepartmentName();
-                                String program = studentService.getStudentProgramName();
-                                String school = studentService.getStudentSchoolName();
+                                String sessionName = studentService.getStudentSessiontName(regNo);
+                                String dept = studentService.getStudentDepartmentName(regNo);
+                                String program = studentService.getStudentProgramName(regNo);
+                                String school = studentService.getStudentSchoolName(regNo);
 
-                                double creditsCompleted = studentService.getCreditsCompleted();
-                                int coursesCompleted = studentService.getCompletedCourses();
-                                int coursesTotal = studentService.getTotalCourses();
-                                double creditsTotal = studentService.getTotalCredits();
-                                double cgpa = studentService.getCGPA();
+                                double creditsCompleted = studentService.getCreditsCompleted(regNo);
+                                int coursesCompleted = studentService.getCompletedCourses(regNo);
+                                int coursesTotal = studentService.getTotalCourses(regNo);
+                                double creditsTotal = studentService.getTotalCredits(regNo);
+                                double cgpa = studentService.getCGPA(regNo);
 
 
                             %>
@@ -107,7 +108,7 @@
 
 
                                 <%
-                                    int currentSemester = studentService.getStudentCurrentSemester();
+                                    int currentSemester = studentService.getStudentCurrentSemester(regNo);
                                     for (int i = 0; i < currentSemester; i++) {
                                         String semesterName = FormatService.formatSemesterName(i + 1);
                                 %>
@@ -123,7 +124,7 @@
 
                                         </tr>
                                         <%
-                                            List<SyllabusPOJO> courses = studentService.getStudentRegisteredCoursesAsEntity(i + 1);
+                                            List<SyllabusPOJO> courses = studentService.getStudentRegisteredCoursesAsEntity(regNo,i + 1);
                                             List<SyllabusPOJO> drops = new ArrayList<SyllabusPOJO>();
                                             //for current semester
                                             double passedCredit = CgpaCalculation.getPassedCreditOfSemester(courses);
@@ -132,7 +133,7 @@
                                             String gradeLetter = CgpaCalculation.getGradeLetterFromGradePoint(gradePoint);
 
                                             //for cummilative calculation
-                                            List<SyllabusPOJO> cummilativeCourses = studentService.getStudentRegisteredCoursesAll(i + 1);
+                                            List<SyllabusPOJO> cummilativeCourses = studentService.getStudentRegisteredCoursesAll(regNo,i + 1);
                                             double passedCreditC = CgpaCalculation.getPassedCreditOfSemester(cummilativeCourses);
                                             double totalCreditC = CgpaCalculation.getTotalCreditOfSemester(cummilativeCourses);
                                             double gradePointC = CgpaCalculation.getGradePointOfSemester(cummilativeCourses);
