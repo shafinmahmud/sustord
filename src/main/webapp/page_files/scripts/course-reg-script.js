@@ -47,7 +47,10 @@ $(document).ready(function () {
 
         var codeFromButton = $(this).attr("id").substr(4);
         $('#choosed-tr-' + codeFromButton).remove();
-
+        
+       // retriving back the button to main table here
+       
+    
         printSumofCredit();
 
         for (var i = 0; i < choosedCoursesJson.length; i++) {
@@ -108,7 +111,7 @@ function populateMainTable(coursesJson) {
         $('#course-table-main').append('<tr id="main-tr-' + syllabusId + '"><td>' + code + '</td> <td>'
                 + title + '</td> <td>' +
                 +credit + '</td> <td>'
-                + '<div><section class="border">'
+                + '<div id="main-'+syllabusId+'"><section class="border">'
                 + '<button class="add-course" id="add-' + syllabusId + '">add</button></section>'
                 + '</div></td></tr>');
     }
@@ -131,7 +134,7 @@ function populatePendingTable(coursesJson) {
         $('#course-table-main').append('<tr id="main-tr-' + syllabusId + '"><td>' + code + '</td> <td>'
                 + title + '</td> <td>' +
                 +credit + '</td> <td>'
-                + '<div><section class="border">'
+                + '<divid="main-'+syllabusId+'"><section class="border">'
                 + '<button class="add-course" id="add-' + syllabusId + '">add</button></section>'
                 + '</div></td></tr>');
     }
@@ -155,7 +158,7 @@ function populateDroppedTable(coursesJson) {
         $('#course-table-main').append('<tr id="main-tr-' + syllabusId + '"><td>' + code + '</td> <td>'
                 + title + '</td> <td>' +
                 +credit + '</td> <td>'
-                + '<div><section class="border">'
+                + '<divid="main-'+syllabusId+'"><section class="border">'
                 + '<button class="add-course" id="add-' + syllabusId + '">add</button></section>'
                 + '</div></td></tr>');
     }
@@ -167,7 +170,7 @@ function addSelectedCourse(syllbusId, code, title, credit) {
     $('#course-table-choosed tr.total-row').before('<tr id="choosed-tr-' + syllbusId + '"><td>' + code + '</td> <td>'
             + title + '</td> <td class="credit">' +
             +credit + '</td> <td>'
-            + '<div ><section class="border">'
+            + '<div><section class="border">'
             + '<button class="remove-course" id="rem-' + syllbusId + '">rem</button></section>'
             + '</div></td></tr>');
 

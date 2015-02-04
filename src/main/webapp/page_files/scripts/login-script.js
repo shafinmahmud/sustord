@@ -55,17 +55,27 @@ $(document).ready(function () {
                                         }
                                 );
 
-                    } else if(validationMsg == 'denied'){
+                    } else if(validationMsg == 'regError'){
                         
-                        var errormsg = "Invalid username or password.<br>"
+                        var errormsg = "Invalid Registration No.<br>"
                                 + "Make sure you typed the correct Registration No. "
-                                + "It usually looks like 2011331XXX. And make sure you remember your password.";
-                        $("#loading-anim").attr("src", "")
+                                + "It usually looks like YYYYDEPXXX. eg. 2011331001 ";
+                        $("#loading-anim").attr("src", "../page_files/icons/empty-icon.gif");
                         $("#messagebox").html(errormsg);
-                    }else if(validationMsg == 'noresponse'){
-                        alert("no way :/");
+                        
+                    } else if(validationMsg == 'passError'){
+                        var errormsg = "Wrong password.<br>"
+                                + "Have you changed your password? "
+                                + "If not, your default password is 123456";
+                        $("#loading-anim").attr("src", "../page_files/icons/empty-icon.gif");
+                        $("#messagebox").html(errormsg);
+                        
+                    } else if(validationMsg == 'noresponse'){
+                        alert("OOPS! Server isnt responsing :(");
+                        $("#loading-anim").attr("src", "../page_files/icons/empty-icon.gif");
                     }else{
-                        alert(validationMsg);
+                         alert(validationMsg);
+                        $("#loading-anim").attr("src", "../page_files/icons/empty-icon.gif");
                     }
                 },
                 error: function () {

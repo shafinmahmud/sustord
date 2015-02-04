@@ -38,7 +38,7 @@ public class LoginServlet extends HttpServlet {
 
         StudentService studentService = new StudentService();
 
-        String verification = "noresponse";
+        String verification = "noresponse#";
 
         if (userType.equals("student")) {
             verification = studentService.verifyLogin(userId, password);
@@ -59,7 +59,7 @@ public class LoginServlet extends HttpServlet {
 
         } else {
             // System.out.println("servlet print------------------" +verification);
-            response.getWriter().print(verification);
+            response.getWriter().print(arr[0]);
         }
 
     }
