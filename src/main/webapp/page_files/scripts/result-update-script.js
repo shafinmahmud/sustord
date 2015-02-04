@@ -102,7 +102,7 @@ function populateMainTable(coursesJson) {
                 + '</div></td> <td>'
                 + '<div>'
                 + '<select class="dropdown-grade" id="dropdown-' + courseRegId + '" style="width:70px; height: 20px; font-size: 12px">'
-                + '<option value="N/A">N/A</option>'
+                + '<option selected style="display:none">change</option>'
                 + '<option value="A+">A+</option>'
                 + '<option value="A">A</option>'
                 + '<option value="A-">A-</option>'
@@ -113,6 +113,7 @@ function populateMainTable(coursesJson) {
                 + '<option value="C">C</option>'
                 + '<option value="C-">C-</option>'
                 + '<option value="F">F</option>'
+                + '<option value="N/A">N/A</option>'
                 + '</select>'
                 + '</div>'
                 + '</td></tr>');

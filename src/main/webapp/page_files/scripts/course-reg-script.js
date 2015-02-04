@@ -33,16 +33,10 @@ $(document).ready(function () {
                 choosedCoursesJson.push(avaiableCoursesJson[i]);
                 break;
             }
-        }
-        
+        }       
         
         addSelectedCourse(syllId, code, title, credit);
         printSumofCredit();
-        $(this).remove();
-        
-        var codeFromButton = $(this).attr("id").substr(4)
-        var divId = '#main-button-div-' + codeFromButton;
-        putCheckMark(divId);
 
     });
 
@@ -179,8 +173,8 @@ function addSelectedCourse(syllbusId, code, title, credit) {
             + '<button class="remove-course" id="rem-' + syllbusId + '">rem</button></section>'
             + '</div></td></tr>');
 
-    $("#add-" + syllbusId).remove();
-    //putCheckMark(code);
+    //$("#add-" + syllbusId).remove();
+    putCheckMark("#main-button-div-"+syllbusId);
 }
 
 function printSumofCredit() {
