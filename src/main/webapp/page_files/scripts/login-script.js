@@ -79,7 +79,8 @@ $(document).ready(function () {
                     }
                 },
                 error: function () {
-                alert("UNKNOWN ERROR :(");
+                alert("hibernate.cfg.xml configuration error! :(");
+                $("#loading-anim").attr("src", "../page_files/icons/empty-icon.gif");
             }
             });
 

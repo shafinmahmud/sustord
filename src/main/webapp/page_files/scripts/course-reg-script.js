@@ -34,11 +34,15 @@ $(document).ready(function () {
                 break;
             }
         }
-
+        
+        
         addSelectedCourse(syllId, code, title, credit);
         printSumofCredit();
         $(this).remove();
-
+        
+        var codeFromButton = $(this).attr("id").substr(4)
+        var divId = '#main-button-div-' + codeFromButton;
+        putCheckMark(divId);
 
     });
 
@@ -49,7 +53,8 @@ $(document).ready(function () {
         $('#choosed-tr-' + codeFromButton).remove();
         
        // retriving back the button to main table here
-       
+       $('#main-button-div-' + codeFromButton).html('<div id="#main-button-div-'+codeFromButton+'"><section class="border">'
+                + '<button class="add-course" id="add-' + codeFromButton + '">add</button></section></div>');
     
         printSumofCredit();
 
@@ -111,7 +116,7 @@ function populateMainTable(coursesJson) {
         $('#course-table-main').append('<tr id="main-tr-' + syllabusId + '"><td>' + code + '</td> <td>'
                 + title + '</td> <td>' +
                 +credit + '</td> <td>'
-                + '<div id="main-'+syllabusId+'"><section class="border">'
+                + '<div id="main-button-div-'+syllabusId+'"><section class="border">'
                 + '<button class="add-course" id="add-' + syllabusId + '">add</button></section>'
                 + '</div></td></tr>');
     }
@@ -134,7 +139,7 @@ function populatePendingTable(coursesJson) {
         $('#course-table-main').append('<tr id="main-tr-' + syllabusId + '"><td>' + code + '</td> <td>'
                 + title + '</td> <td>' +
                 +credit + '</td> <td>'
-                + '<divid="main-'+syllabusId+'"><section class="border">'
+                + '<div id="main-button-div-'+syllabusId+'"><section class="border">'
                 + '<button class="add-course" id="add-' + syllabusId + '">add</button></section>'
                 + '</div></td></tr>');
     }
@@ -158,7 +163,7 @@ function populateDroppedTable(coursesJson) {
         $('#course-table-main').append('<tr id="main-tr-' + syllabusId + '"><td>' + code + '</td> <td>'
                 + title + '</td> <td>' +
                 +credit + '</td> <td>'
-                + '<divid="main-'+syllabusId+'"><section class="border">'
+                + '<div id="main-button-div-'+syllabusId+'"><section class="border">'
                 + '<button class="add-course" id="add-' + syllabusId + '">add</button></section>'
                 + '</div></td></tr>');
     }
@@ -190,6 +195,12 @@ function printSumofCredit() {
     });
 
     $("#total_credit").html('<b>' + sum + '</b>');
+}
+
+function putCheckMark(divId){
+    // adding green check mark
+       $(divId).html('<div id="'+divId+'"><section>'
+                + '<img src="../page_files/icons/success-icon.png" height="22" alt="checked"></section></div>');
 }
 
 function ajaxCallForDropDown() {
