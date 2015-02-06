@@ -313,10 +313,10 @@ $(document).ready(function () {
                         + $('#present-country').val();
 
                 var permanentadd = $('#permanent-street').val() + ',' + $('#permanent-area').val() + ','
-                        + $('#permanent-thana').val() + ', ' + $('#permanent-district').val() + ', '
+                        + $('#permanent-thana').val() + ',' + $('#permanent-district').val() + ','
                         + $('#permanent-country').val();
 
-
+                        //alert(permanentadd);
                 $.ajax({
                     url: '../SavePersonalInfoServlet',
                     data: {

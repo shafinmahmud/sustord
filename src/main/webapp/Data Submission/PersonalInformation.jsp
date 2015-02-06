@@ -65,21 +65,22 @@
                                 permanentAddress = "null,null,null,null,null";
                             }
 
-                            String[] parts = {};
+                            String[] parts1 = {};
+                            String[] parts2 = {};
 
-                            parts = presentAddress.split(",");
-                            String presentStreet = parts[0];
-                            String presentArea = parts[1];
-                            String presentThana = parts[2];
-                            String presentDistrict = parts[3];
-                            String presentCountry = parts[4];
+                            parts1 = presentAddress.split(",");
+                            String presentStreet = parts1[0];
+                            String presentArea = parts1[1];
+                            String presentThana = parts1[2];
+                            String presentDistrict = parts1[3];
+                            String presentCountry = parts1[4];
 
-                            parts = permanentAddress.split(",");
-                            String permanentStreet = parts[0];
-                            String permanentArea = parts[1];
-                            String permanentThana = parts[2];
-                            String permanentDistrict = parts[3];
-                            String permanentCountry = parts[4];
+                            parts2 = permanentAddress.split(",");
+                            String permanentStreet = parts2[0];
+                            String permanentArea = parts2[1];
+                            String permanentThana = parts2[2];
+                            String permanentDistrict = parts2[3];
+                            String permanentCountry = parts2[4];
 
 
                         %>
@@ -195,7 +196,7 @@
                                                                 <option value="0" style="display:none" >Country</option>
                                                                 <option value="1" style="display:none" >*Country</option>
                                                                 <option value="Bangladesh">Bangladesh</option>
-                                                                <option value="Others">Others</option>       
+                                                                <option value="Others">Others</option>        
                                                             </select>
                                                         </td>
                                                     </tr>
@@ -312,13 +313,15 @@
             var precountry = "<%=presentCountry%>";
             if (precountry !== "null")
                 $("#present-country").val(precountry);
-
+                 
             var percountry = "<%=permanentCountry%>";
+            
+            //alert(precountry+precountry.length+percountry+percountry.length);
             if (percountry !== "null")
                 $("#permanent-country").val(percountry);
 
             var gender = "<%=personalInfo.getSex()%>";
-            if (gender !== "null")
+            if (gender != "null")
                 $("#sex").val(gender);
 
             var religion = "<%=personalInfo.getReligion()%>";
