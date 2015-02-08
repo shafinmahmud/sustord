@@ -1,4 +1,5 @@
-var avaiableCoursesJson;
+var allCoursesJson;
+var regularCoursesJson;
 var pendingCoursesJson;
 var droppedCoursesJson;
 var registeredCoursesJson;
@@ -16,26 +17,21 @@ $(document).ready(function () {
 //following is the on click event with the .add-course class
 //for course add buttons
     $(document).on("click", ".add-course", function () {
-            
-        var sylIdFromButton = $(this).attr("id").substr(4);
 
-        var syllId, code, title, credit;
+        var syllIdFromButton = $(this).attr("id").substr(4);
 
-        for (var i = 0; i < avaiableCoursesJson.length; i++) {
+        toggleCourseButton(syllIdFromButton, 0);
+        setStatus(syllIdFromButton, 0);
 
-            syllId = avaiableCoursesJson[i].syllabusId;
+        for (var i = 0; i < allCoursesJson.length; i++) {
 
-            if (syllId == sylIdFromButton) { //alert here... NEVER USE === FOR COMPARISON
-                code = avaiableCoursesJson[i].courseCode;
-                title = avaiableCoursesJson[i].title;
-                credit = avaiableCoursesJson[i].credit;
-                
-                choosedCoursesJson.push(avaiableCoursesJson[i]);
+            syllId = allCoursesJson[i].syllabusId;
+
+            if (syllId == syllIdFromButton) { //alert here... NEVER USE === FOR COMPARISON               
+                choosedCoursesJson.push(allCoursesJson[i]);
                 break;
             }
-        }       
-        
-        addSelectedCourse(syllId, code, title, credit);
+        }
         printSumofCredit();
 
     });
@@ -43,20 +39,17 @@ $(document).ready(function () {
 
     $(document).on("click", ".remove-course", function () {
 
-        var codeFromButton = $(this).attr("id").substr(4);
-        $('#choosed-tr-' + codeFromButton).remove();
-        
-       // retriving back the button to main table here
-       $('#main-button-div-' + codeFromButton).html('<div id="#main-button-div-'+codeFromButton+'"><section class="border">'
-                + '<button class="add-course" id="add-' + codeFromButton + '">add</button></section></div>');
-    
-        printSumofCredit();
+        var syllIdFromButton = $(this).attr("id").substr(4);
+
+        toggleCourseButton(syllIdFromButton, 1);
+        setStatus(syllIdFromButton, 1);
 
         for (var i = 0; i < choosedCoursesJson.length; i++) {
-            if (choosedCoursesJson[i].syllabusId == codeFromButton) {
+            if (choosedCoursesJson[i].syllabusId == syllIdFromButton) {
                 choosedCoursesJson.splice(i, 1);
             }
         }
+        printSumofCredit();
     });
 
 
@@ -93,109 +86,6 @@ $(document).ready(function () {
 
 });
 
-function populateMainTable(coursesJson) {
-
-    $('#course-table-main').append('<tr >'
-            + '<td colspan="5" style="font-size: 13px; padding-top: 10px; text-align: center">'
-            + '<i>Regular courses</i>'
-            + '</td>'
-            + '</tr>');
-
-    for (var i = 0; i < coursesJson.length; i++) {
-
-        var syllabusId = coursesJson[i].syllabusId;
-        var code = coursesJson[i].courseCode;
-        var title = coursesJson[i].title;
-        var credit = coursesJson[i].credit;
-        $('#course-table-main').append('<tr id="main-tr-' + syllabusId + '"><td>' + code + '</td> <td>'
-                + title + '</td> <td>' +
-                +credit + '</td> <td>'
-                + '<div id="main-button-div-'+syllabusId+'"><section class="border">'
-                + '<button class="add-course" id="add-' + syllabusId + '">add</button></section>'
-                + '</div></td></tr>');
-    }
-
-}
-
-function populatePendingTable(coursesJson) {
-    $('#course-table-main').append('<tr >'
-            + '<td colspan="5" style="font-size: 13px; padding-top: 10px; text-align: center">'
-            + '<i>Your pending courses from previous semester</i>'
-            + '</td>'
-            + '</tr>');
-    // alert(coursesJson[0].courseCode);
-    for (var i = 0; i < coursesJson.length; i++) {
-
-        var syllabusId = coursesJson[i].syllabusId;
-        var code = coursesJson[i].courseCode;
-        var title = coursesJson[i].title;
-        var credit = coursesJson[i].credit;
-        $('#course-table-main').append('<tr id="main-tr-' + syllabusId + '"><td>' + code + '</td> <td>'
-                + title + '</td> <td>' +
-                +credit + '</td> <td>'
-                + '<div id="main-button-div-'+syllabusId+'"><section class="border">'
-                + '<button class="add-course" id="add-' + syllabusId + '">add</button></section>'
-                + '</div></td></tr>');
-    }
-}
-
-
-function populateDroppedTable(coursesJson) {
-
-    $('#course-table-main').append('<tr >'
-            + '<td colspan="5" style="font-size: 13px; padding-top: 10px; text-align: center">'
-            + '<i>Your Dropped courses available for this semester</i>'
-            + '</td>'
-            + '</tr>');
-    // alert(coursesJson[0].courseCode);
-    for (var i = 0; i < coursesJson.length; i++) {
-
-        var syllabusId = coursesJson[i].syllabusId;
-        var code = coursesJson[i].courseCode;
-        var title = coursesJson[i].title;
-        var credit = coursesJson[i].credit;
-        $('#course-table-main').append('<tr id="main-tr-' + syllabusId + '"><td>' + code + '</td> <td>'
-                + title + '</td> <td>' +
-                +credit + '</td> <td>'
-                + '<div id="main-button-div-'+syllabusId+'"><section class="border">'
-                + '<button class="add-course" id="add-' + syllabusId + '">add</button></section>'
-                + '</div></td></tr>');
-    }
-
-}
-
-function addSelectedCourse(syllbusId, code, title, credit) {
-
-    $('#course-table-choosed tr.total-row').before('<tr id="choosed-tr-' + syllbusId + '"><td>' + code + '</td> <td>'
-            + title + '</td> <td class="credit">' +
-            +credit + '</td> <td>'
-            + '<div><section class="border">'
-            + '<button class="remove-course" id="rem-' + syllbusId + '">rem</button></section>'
-            + '</div></td></tr>');
-
-    //$("#add-" + syllbusId).remove();
-    putCheckMark("#main-button-div-"+syllbusId);
-}
-
-function printSumofCredit() {
-    var sum = 0;
-    $(".credit").each(function () {
-
-        var value = $(this).text();
-        // add only if the value is number
-        if (!isNaN(value) && value.length !== 0) {
-            sum += parseFloat(value);
-        }
-    });
-
-    $("#total_credit").html('<b>' + sum + '</b>');
-}
-
-function putCheckMark(divId){
-    // adding green check mark
-       $(divId).html('<div id="'+divId+'"><section>'
-                + '<img src="../page_files/icons/success-icon.png" height="22" alt="checked"></section></div>');
-}
 
 function ajaxCallForDropDown() {
     $("#saving-anim").attr("src", "../page_files/icons/empty-icon.gif");
@@ -208,7 +98,8 @@ function ajaxCallForDropDown() {
         type: 'POST',
         success: function (semesterCourseNtakenCourses) {
 
-            avaiableCoursesJson = [];
+            allCoursesJson = [];
+            regularCoursesJson = [];
             pendingCoursesJson = [];
             droppedCoursesJson = [];
             registeredCoursesJson = [];
@@ -217,7 +108,7 @@ function ajaxCallForDropDown() {
             var arr = semesterCourseNtakenCourses.split('#');
 
             if (arr[0] !== 'EMPTY') {
-                avaiableCoursesJson = $.parseJSON(arr[0]);
+                regularCoursesJson = $.parseJSON(arr[0]);
             }
             if (arr[1] !== 'EMPTY') {
                 pendingCoursesJson = $.parseJSON(arr[1]);
@@ -229,45 +120,91 @@ function ajaxCallForDropDown() {
                 registeredCoursesJson = $.parseJSON(arr[3]);
             }
 
-            $('#course-table-main tr:gt(0)').remove();
 
-            $('#course-table-choosed tr').not(function () {
+            $('#course-table-main tr').not(function () {
                 if ($(this).has('th').length) {
                     return true;
                 }
             }).remove();
 
 
+            //we'll change it later
             var txt = $("#reg-semester-dropdown option:selected").text();
             $('#sem-title').text(txt);
 
-            populateMainTable(avaiableCoursesJson);
+
+            if (regularCoursesJson.length != 0) {
+
+//                $('#course-table-main').append('<tr >'
+//                        + '<td colspan="5" style="font-size: 13px; padding-top: 10px; text-align: center">'
+//                        + '<i>Regular courses</i>'
+//                        + '</td>'
+//                        + '</tr>');
+
+                populateRows(regularCoursesJson);//poulating main table with regular courses
+                //pushing all regularCourses to allCourses
+                for (var i = 0; i < regularCoursesJson.length; i++) {
+                    allCoursesJson.push(regularCoursesJson[i]);
+                }
+            } else {
+                //if there is no regularCourse what to do ? do it here
+            }
 
             if (pendingCoursesJson.length != 0) {
 
-                populatePendingTable(pendingCoursesJson);
+                $('#course-table-main').append('<tr >'
+                        + '<td colspan="5" style="font-size: 13px; padding-top: 10px; text-align: center">'
+                        + '<i>Your pending courses from previous semester</i>'
+                        + '</td>'
+                        + '</tr>');
 
+                populateRows(pendingCoursesJson);
                 for (var i = 0; i < pendingCoursesJson.length; i++) {
-                    avaiableCoursesJson.push(pendingCoursesJson[i]);
+                    allCoursesJson.push(pendingCoursesJson[i]);
                 }
+            } else {
+                //if there is no pendingCourse what to do ? do it here
             }
 
             if (droppedCoursesJson.length != 0) {
-                populateDroppedTable(droppedCoursesJson);
 
+                $('#course-table-main').append('<tr >'
+                        + '<td colspan="5" style="font-size: 13px; padding-top: 10px; text-align: center">'
+                        + '<i>Your Dropped courses available for this semester</i>'
+                        + '</td>'
+                        + '</tr>');
+
+                populateRows(droppedCoursesJson);
                 for (var i = 0; i < droppedCoursesJson.length; i++) {
-                    avaiableCoursesJson.push(droppedCoursesJson[i]);
+                    allCoursesJson.push(droppedCoursesJson[i]);
                 }
+            } else {
+                //if there is no pendingCourse what to do ? do it here
             }
 
-            for (var i = 0; i < registeredCoursesJson.length; i++) {
 
-                var sylId = registeredCoursesJson[i].syllabusId;
-                var code = registeredCoursesJson[i].courseCode;
-                var title = registeredCoursesJson[i].title;
-                var credit = registeredCoursesJson[i].credit;
-                addSelectedCourse(sylId, code, title, credit);
-                choosedCoursesJson.push(registeredCoursesJson[i]);
+            //itereting the registered courses here and deciding about the button and status
+            if (registeredCoursesJson.length != 0) {
+               
+                for (var i = 0; i < allCoursesJson.length; i++) {
+                    
+                    var found = false;
+                    var syllabusId = allCoursesJson[i].syllabusId;
+
+                    for (var j = 0; j < registeredCoursesJson.length; j++) {
+
+                        if (syllabusId == registeredCoursesJson[j].syllabusId) {
+                            //alert(syllabusId);
+                            found = true;
+                            choosedCoursesJson.push(registeredCoursesJson[j]);
+                        }
+                    }
+
+                    if (found) {                    
+                        toggleCourseButton(syllabusId, 0);
+                        setStatus(syllabusId, 0);
+                    }
+                }
             }
 
             printSumofCredit();
@@ -277,6 +214,79 @@ function ajaxCallForDropDown() {
             alert("ERROR");
         }
     });
+}
+
+
+
+//new function for new look
+function populateRows(coursesJson) {
+    for (var i = 0; i < coursesJson.length; i++) {
+
+        var syllabusId = coursesJson[i].syllabusId;
+        var code = coursesJson[i].courseCode;
+        var title = coursesJson[i].title;
+        var credit = coursesJson[i].credit;
+
+        $('#course-table-main').append('<tr id="main-tr-' + syllabusId + '"><td>' + code + '</td> <td>'
+                + title + '</td> <td style="text-align: center">' +
+                +credit + '</td> <td style="text-align: center"><div id="course-status-div-' + syllabusId + '"></div></td>'
+                + '<td style="text-align: center">'
+                + '<div id="main-button-div-' + syllabusId + '">'
+                + '</div></td></tr>');
+
+        //default status and button
+        toggleCourseButton(syllabusId, 1);
+        setStatus(syllabusId, 1);
+    }
+}
+
+
+//new function for status icon
+function toggleCourseButton(syllabusId, changeTo) {
+    //if status 0
+    if (changeTo == 1) {
+        $("#main-button-div-" + syllabusId).html('<div id="main-button-div-' + syllabusId + '"><section class="border">'
+                + '<button class="add-course" id="add-' + syllabusId + '">add</button></section>'
+                + '</div>');
+    } else {
+        //if status 1     
+        $("#main-button-div-" + syllabusId).html('<div id="main-button-div-' + syllabusId + '"><section class="border">'
+                + '<button class="remove-course" id="rem-' + syllabusId + '">rem</button></section>'
+                + '</div>');
+    }
+    //alert(divId);
+}
+
+//new function for button toggle
+function setStatus(syllabusId, status) {
+    //if changeTo is 1
+    if (status == 0) {
+        $("#course-status-div-" + syllabusId).html('<div id="course-status-div-' + syllabusId + '"><section>'
+                + '<img src="../page_files/icons/success-icon.png" height="22" alt="checked"></section></div>');
+    } else {
+        //if changeTo is 0
+        $("#course-status-div-" + syllabusId).html('<div id="course-status-div-' + syllabusId + '"><section>'
+                + '<img src="../page_files/icons/circle-icon.png" height="22" alt="checked"></section></div>');
+
+    }
+}
+
+function printSumofCredit() {
+    var sum = 0;
+//    $(".credit").each(function () {
+//
+//        var value = $(this).text();
+//        // add only if the value is number
+//        if (!isNaN(value) && value.length !== 0) {
+//            sum += parseFloat(value);
+//        }
+//    });
+
+    for (var i = 0; i<choosedCoursesJson.length; i++){
+        sum+= choosedCoursesJson[i].credit;
+    }
+
+    $("#total_credit").html('<b>' + sum + '</b>');
 }
 
 

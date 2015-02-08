@@ -37,93 +37,96 @@
                     <div class="margin5">
 
                         <fieldset>
-                            <legend>Result Update</legend>
-                            <div>
-                                <h2 style="font-size: 18px">Courses as Registration
-                                    <select class="form-control pull-right" id="result-semester-dropdown" name="reg-semester-dropdown" style="width: 250px">
-                                        <option value="0" style="display:none">Choose Semester</option>
-                                        <%
-                                            StudentService service = (StudentService) session.getAttribute("studentService");
-                                            String regNo = (String) request.getSession().getAttribute("regNo");
-                                            
-                                            int numofsem = service.getStudentTotalSemester(regNo);
-                                            int currentSemester = 2;
+                            <legend>Course Registration
 
-                                            for (int i = 1; i <= numofsem; i++) {
-                                                if (i == currentSemester) {
-                                        %>
-                                        <option value="<%=i%>"><%=FormatService.formatSemesterName(i)%></option>
-                                        <%
-                                        } else {
-                                        %>
-                                        <option value="<%=i%>"><%=FormatService.formatSemesterName(i)%></option>
-                                        <%
-                                                }
+                                <select class="form-control pull-right" id="result-semester-dropdown" name="reg-semester-dropdown" style="width: 250px">
+                                    <option value="0" style="display:none">Choose Semester</option>
+                                    <%                                            StudentService service = (StudentService) session.getAttribute("studentService");
+                                        String regNo = (String) request.getSession().getAttribute("regNo");
+
+                                        int numofsem = service.getStudentTotalSemester(regNo);
+                                        int currentSemester = 2;
+
+                                        for (int i = 1; i <= numofsem; i++) {
+                                            if (i == currentSemester) {
+                                    %>
+                                    <option value="<%=i%>"><%=FormatService.formatSemesterName(i)%></option>
+                                    <%
+                                    } else {
+                                    %>
+                                    <option value="<%=i%>"><%=FormatService.formatSemesterName(i)%></option>
+                                    <%
                                             }
-                                        %>
+                                        }
+                                    %>
 
-                                    </select>
-                                </h2>
-                                <div >
-                                    <table id="table-registered-courses" class="table table-condensed col-lg-10">
-
-                                        <thead>
-                                            <tr>
-                                                <th style="width: 15%">Course Code</th>
-                                                <th style="width: 60%">Title</th>
-                                                <th style="width: 10%">Credit</th>
-                                                <th style="width: 15%">Grade</th>
-                                                <th style="width: 25%">Change</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
+                                </select>
 
 
-                                            <tr class="total-row">
-                                                <th colspan="2" style="text-align: center">
-                                                    <b>Total credit taken</b>
-                                                </th>
-                                                <th id="taken_credit" colspan="3">
-                                                    <b>0</b>
-                                                </th>
-                                            </tr>
+                            </legend>
+                            <h4 id="sem-title">
+                                <br>
+                                Semster</h4>
+                            <div>
+                                <table id="table-registered-courses" class="table table-condensed col-lg-10">
+
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 15%">Course Code</th>
+                                            <th style="width: 60%">Title</th>
+                                            <th style="width: 10%; text-align: center">Credit</th>
+                                            <th style="width: 15%; text-align: center">Grade</th>
+                                            <th style="width: 25%">Change</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
 
 
-                                        </tbody></table>
-                                </div>
+                                        <tr class="total-row">
+                                            <th colspan="2" style="text-align: center">
+                                                <b>Total credit(s) taken</b>
+                                            </th>
+                                            <th style="text-align: center; font-size: 16px" id="taken_credit" colspan="1">
+                                                <b>0</b>
+                                            </th>
+                                        </tr>
 
+
+                                    </tbody></table>
                             </div>
 
-                        </fieldset>
-                        <div>
-                            <table class="table-condensed">
-                                <tr>
-                                    <td style="padding-left: 120px;">
-
-                                    </td>
-                                    <td >
-                                        <button  type="submit" class="btn btn-danger" id="confirm-result-update">Save</button>
-                                    </td>
-                                    <td>
-                                        <img  id="saving-anim" src="" height="25" alt="">
-                                    </td>
-                                    <td id="status-message">
-
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-
                     </div>
+
+                    </fieldset>
+                    <div>
+                        <table class="table-condensed">
+                            <tr>
+                                <td style="padding-left: 120px;">
+
+                                </td>
+                                <td >
+                                    <button  type="submit" class="btn btn-danger" id="confirm-result-update">Save</button>
+                                </td>
+                                <td>
+                                    <img  id="saving-anim" src="" height="25" alt="">
+                                </td>
+                                <td id="status-message">
+
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
                 </div>
             </div>
-
         </div>
 
-        <%@include  file="../WEB-INF/jspf/Footer.jspf"%>
+    </div>
+
+    <%@include  file="../WEB-INF/jspf/Footer.jspf"%>
 
 
-    </body>
+</body>
 
 </html>
 

@@ -47,7 +47,7 @@
                                 <select class="form-control pull-right" id="reg-semester-dropdown" name="reg-semester-dropdown" style="width: 250px">
                                     <option value="0" style="display:none">Choose Semester</option>
                                     <%                                        StudentService service = (StudentService) session.getAttribute("studentService");
-                                    String regNo = (String) request.getSession().getAttribute("regNo");
+                                        String regNo = (String) request.getSession().getAttribute("regNo");
                                         int numofsem = service.getStudentTotalSemester(regNo);
                                         int currentSemester = 2;
 
@@ -66,58 +66,43 @@
 
                                 </select>
                             </legend>
+                            <br>
+                            <h4 id="sem-title">
+                                <br>
+                                Semster</h4>
                             <div >
                                 <div id="div_main_table">
                                     <table id="course-table-main" class="table table-condensed col-lg-10">
                                         <thead >
                                             <tr>
                                                 <th style="width: 15%">Course Code</th>
-                                                <th style="width: 55%">Title</th>
-                                                <th style="width: 15%">Credit</th>
-                                                <th style="width: 15%">Add</th>
+                                                <th style="width: 50%">Title</th>
+                                                <th style="width: 10%; text-align: center">Credit</th>
+                                                <th style="width: 10%; text-align: center">Status</th>
+                                                <th style="width: 15%; text-align: center">Add</th>
                                             </tr>
                                         </thead>
                                         <tbody> 
-  
+
                                         </tbody>
+                                        <tfoot >
+                                            <tr class="total-row">
+                                                <th colspan="2" style="text-align: center">
+                                                    <b>Taken credit</b>
+                                                </th>
+                                                <th style="text-align: center; font-size: 16px" id="total_credit" colspan="1">
+                                                    <b>0</b>
+                                                </th>
+                                            </tr>
+                                        </tfoot>
                                     </table>
                                 </div>
-                                
+
                             </div>
 
                         </fieldset>
 
                         <fieldset>
-
-                            <legend id="sem-title">
-                                <br>
-                                Semester</legend>
-                            <table id="course-table-choosed" class="table table-condensed">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 15%">Course Code</th>
-                                        <th style="width: 55%">Title</th>
-                                        <th style="width: 15%">Credit</th>
-                                        <th style="width: 15%">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-
-                                </tbody>
-                                <tfoot >
-                                    <tr class="total-row">
-                                        <th colspan="2">
-                                            <b>Total credit</b>
-                                        </th>
-                                        <th id="total_credit" colspan="2">
-                                            <b>0</b>
-                                        </th>
-                                    </tr>
-                                </tfoot>
-
-
-                            </table>
 
                             <div>
                                 <table class="table-condensed">

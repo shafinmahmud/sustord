@@ -28,6 +28,10 @@
         <servlet-name>SaveResultUpdateServlet</servlet-name>
         <servlet-class>me.shafin.sustord.servlet.SaveResultUpdateServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>FileUploadHandler</servlet-name>
+        <servlet-class>me.shafin.sustord.servlet.FileUploadHandler</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LogOutServlet</servlet-name>
         <url-pattern>/LogOutServlet</url-pattern>
@@ -56,6 +60,8 @@
         <servlet-name>SaveResultUpdateServlet</servlet-name>
         <url-pattern>/SaveResultUpdateServlet</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FileUploadHandler</servlet-name>
+        <url-pattern>/FileUploadHandler</url-pattern>
+    </servlet-mapping>
 </web-app>
-
-

@@ -95,8 +95,8 @@ function populateMainTable(coursesJson) {
         var grade = coursesJson[i].grade;
 
         $('#table-registered-courses tr.total-row').before('<tr id="main-tr-' + courseRegId + '"><td>' + code + '</td> <td>'
-                + title + '</td> <td class="credit">' +
-                +credit + '</td> <td>'
+                + title + '</td> <td class="credit" style="text-align: center">' +
+                +credit + '</td> <td style="text-align: center">'
                 + '<div>'
                 + '<p>' + grade + '</p>'
                 + '</div></td> <td>'
@@ -151,6 +151,9 @@ function ajaxCallForDropDown() {
                     return true;
                 }
             }).remove();
+            
+            var txt = $("#result-semester-dropdown option:selected").text();
+            $('#sem-title').text(txt);
 
             if (takenCourses == 'EMPTY') {
 
