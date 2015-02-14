@@ -1,0 +1,80 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+<style>
+    /*************** F O N T S *************************/
+    @font-face {
+        font-family: 'GessoRegular';
+        src: url('../page_files/fonts/GESSO___-webfont.eot');
+        src: url('../page_files/fonts/GESSO___-webfont.eot?#iefix') format('embedded-opentype'),
+            url('../page_files/fonts/GESSO___-webfont.woff') format('woff'),
+            url('../page_files/fonts/GESSO___-webfont.ttf') format('truetype'),
+            url('../page_files/fonts/GESSO___-webfont.svg#GessoRegular') format('svg');
+        font-weight: normal;
+        font-style: normal;
+    }
+    @font-face {
+        font-family: 'LintsecRegular';
+        src: url('../page_files/fonts/Lintsec-webfont.eot');
+        src: url('../page_files/fonts/Lintsec-webfont.eot?#iefix') format('embedded-opentype'),
+            url('../page_files/fonts/Lintsec-webfont.woff') format('woff'),
+            url('../page_files/fonts/Lintsec-webfont.ttf') format('truetype'),
+            url('../page_files/fonts/Lintsec-webfont.svg#LintsecRegular') format('svg');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+
+
+    /********** G E N E R A L    S T Y L E ***************/
+    #wrapper{
+        width: 920px;
+        height: 350px;
+        margin-top: 50px;
+        margin-left: 210px;
+        margin-bottom: 50px;
+        background: url('../page_files/images/uc.png') no-repeat;
+    }
+    #content{
+        margin: -10px 0 0 380px;
+    }
+
+    /*********  L O G O  &  CM   S T Y L E *******************/
+    h1{
+        font-family: LintsecRegular;
+        font-weight: normal;
+        font-size: 32px;
+        text-align: center;
+        color: #FFF200;
+        background-color: #000;
+        padding: 13px 0px 10px 12px;
+        width: 350px;
+        border-radius: 50px;
+    }
+    h2{
+        font-family: GessoRegular;
+        font-weight: normal;
+        font-size: 75px;
+        margin: 0 0 -45px -4px;
+    }
+    p{
+        font-size: 16px;
+        text-shadow: 1px 1px 0 #fff;
+        font-weight: bold;
+    }
+    #o{
+        margin: 20px 0 -70px 0;
+        font-size: 28px;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+    a img{
+        margin: 5px 5px 5px 0;
+    }
+</style>
+<div id="wrapper"></div>
+<div>
+    <h2 style="text-align: center">UNDER </h2>
+    <br><br><br>
+    <h2 style="text-align: center">CONSTRUCTION</h2>
+    <br><br><br><br><br>
+</div>

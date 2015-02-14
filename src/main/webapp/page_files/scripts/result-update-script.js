@@ -2,13 +2,10 @@ var changedGradeJson;
 var registeredCoursesJson = [];
 
 $(document).ready(function () {
-
-    $('#result-semester-dropdown').val(1).change();
-    ajaxCallForDropDown();
-
+    ajaxCallForCurrentSemester();
+    
     $('#result-semester-dropdown').change(function () {
-        ajaxCallForDropDown()
-
+        ajaxCallForDropDown();
     });
 
     $(document).on("change", ".dropdown-grade", (function () {
@@ -93,12 +90,16 @@ function populateMainTable(coursesJson) {
         var title = coursesJson[i].title;
         var credit = coursesJson[i].credit;
         var grade = coursesJson[i].grade;
+        if(grade == 'N/A'){
+            grade = '<p style="color:#808080">N/A</p>';
+        }else{
+            grade = '<p><b>'+grade+'</b></p>';
+        }
 
         $('#table-registered-courses tr.total-row').before('<tr id="main-tr-' + courseRegId + '"><td>' + code + '</td> <td>'
                 + title + '</td> <td class="credit" style="text-align: center">' +
                 +credit + '</td> <td style="text-align: center">'
-                + '<div>'
-                + '<p>' + grade + '</p>'
+                + '<div>' + grade
                 + '</div></td> <td>'
                 + '<div>'
                 + '<select class="dropdown-grade" id="dropdown-' + courseRegId + '" style="width:70px; height: 20px; font-size: 12px">'
@@ -136,6 +137,20 @@ function printSumofCredit() {
     });
 
     $("#taken_credit").html('<b>' + sum + '</b>');
+}
+
+function ajaxCallForCurrentSemester() {
+
+    $.ajax({
+        url: '../GetCurrentSemester',
+        type: 'POST',
+        success: function (currentSemester) {
+            $('#result-semester-dropdown').val(currentSemester).change();
+        },
+        error: function () {
+            alert("ERRORX");
+        }
+    });
 }
 
 function ajaxCallForDropDown() {

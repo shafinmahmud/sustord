@@ -23,7 +23,7 @@
                                                                    -webkit-transition:0s all!important;}
             </style>
             <meta name="viewport" content="width=device-width">
-            <title>Curriculum</title>
+            <title>Grade by Semester</title>
             <link href="../page_files/css/style.css" rel="stylesheet">
         </head>
         <body>
@@ -38,7 +38,7 @@
                         <fieldset>
 
                             <legend>Grade Report by Semester
-                                <a href="" class="btn btn-danger btn-xs pull-right">Print</a>
+                               <a class="btn btn-danger btn-xs pull-right" type="submit" value="print" onClick="window.print()">Print</a>
                             </legend>
                             <%StudentService studentService;
                                 studentService = (StudentService) session.getAttribute("studentService");

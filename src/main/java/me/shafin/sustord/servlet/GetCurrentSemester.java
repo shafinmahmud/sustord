@@ -6,17 +6,19 @@
 package me.shafin.sustord.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import me.shafin.sustord.service.StudentService;
 
 /**
  *
  * @author SHAFIN
  */
-public class LogOutServlet extends HttpServlet {
+public class GetCurrentSemester extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,9 +34,13 @@ public class LogOutServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         HttpSession session = request.getSession();
-        session.invalidate();
-        response.sendRedirect("Login/LoginUser.jsp");
-
+        StudentService studentService = (StudentService) session.getAttribute("studentService");
+        String regNo = (String) request.getSession().getAttribute("regNo");
+        int sem = studentService.getStudentCurrentSemester(regNo);
+        //System.out.println(sem);
+        PrintWriter out = response.getWriter();
+        out.print(sem);
+        out.flush();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

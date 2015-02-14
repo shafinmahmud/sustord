@@ -2,15 +2,15 @@
 <%@ page pageEncoding="UTF-8" %>
 <div id="footer">
     <div> 
-        <a href="">Home</a> | 
-        <a href="">Profile</a> | 
-        <a href="">Courses & Results</a> | 
-        <a href="">Batch Overview</a> | 
-        <a href="">Standings</a> | 
-        <a href="">Syllabus</a> | 
-        <a href="">Grade</a> | 
-        <a href="">Course Edit</a> | 
-        <a href="">Result Edit</a> 
+        <a href="../Home/HomeUser.jsp">Home</a> | 
+        <a href="../Home/ProfileUser.jsp">Profile</a> | 
+        <a href="../Academic/Curriculum.jsp">Curriculum</a> | 
+        <a href="../Academic/CourseDetails.jsp">Course Details</a> | 
+        <a href="../Reports/GradesByCurriculum.jsp">Grade by curriculum</a> | 
+        <a href="../Reports/GradesBySemester.jsp">Grade by Semester</a> | 
+        <a href="../Statistics/CourseAnalysis.jsp">Course Analysis</a> | 
+        <a href="../Statistics/Ranking.jsp">Ranking</a> |
+        <a href="../Notifications/RequestStatus.jsp">Request Status</a>
     </div>
     <b>© Shahjalal University of Science &amp; Technology <!--Shahjalal University of Science & Technology--> 2014</b><br>
     Developed by <a href="http://www.facebook.com/shafin.mahmud">Shafin Mahmud</a> | 

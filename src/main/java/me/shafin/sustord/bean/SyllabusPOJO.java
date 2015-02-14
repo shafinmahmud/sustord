@@ -16,6 +16,7 @@ public class SyllabusPOJO {
     private String title;
     private double credit;
     private String prerequisite;
+    private String courseDetails;
     private String grade;
     private String point;
     private int offeringSemester;
@@ -263,6 +264,20 @@ public class SyllabusPOJO {
      */
     public void setAttendYear(int attendYear) {
         this.attendYear = attendYear;
+    }
+
+    /**
+     * @return the courseDetails
+     */
+    public String getCourseDetails() {
+        return courseDetails;
+    }
+
+    /**
+     * @param courseDetails the courseDetails to set
+     */
+    public void setCourseDetails(String courseDetails) {
+        this.courseDetails = courseDetails;
     }
 
 }

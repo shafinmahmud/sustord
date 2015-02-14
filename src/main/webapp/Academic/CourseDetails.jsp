@@ -23,6 +23,17 @@
             <meta name="viewport" content="width=device-width">
             <title>Curriculum</title>
             <link href="../page_files/css/style.css" rel="stylesheet">
+
+            <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700' rel='stylesheet' type='text/css'>
+            <link rel="stylesheet" href="../page_files/css/font-awesome/font-awesome.css">
+            <link rel="stylesheet" href="../page_files/css/font-awesome/button-style.css" />
+
+            <link href='http://fonts.googleapis.com/css?family=Bitter:400,700' rel='stylesheet' type='text/css'>
+            <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+            <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css"/>
+            <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+
+            <script src="../page_files/scripts/course-details-script.js"></script>
         </head>
         <body>
             <%@include  file="../WEB-INF/jspf/AccessValidation.jspf"%>
@@ -42,7 +53,7 @@
                                     <p class="label-height-30" style="text-align: right; font-size: 17px" >Choose Semester</p>
                                 </div>
                                 <div class="col-md-5 col-lg-5">
-                                    <select class="form-control pull-left" id="reg-semester-dropdown" name="reg-semester-dropdown" style="width: 250px">
+                                    <select class="form-control pull-left" id="semester-dropdown" name="reg-semester-dropdown" style="width: 250px">
 
                                         <%                                            StudentService studentService = (StudentService) session.getAttribute("studentService");
                                             String regNo = (String) request.getSession().getAttribute("regNo");
@@ -61,35 +72,16 @@
                                                 }
                                             }
                                         %>
-
+                                        <option value="0">Optional Courses</option>
                                     </select>
                                 </div>
 
                             </div>
                             <br>
-                            <%
-                                
-                                List<SyllabusPOJO> courseList;
-                                courseList = studentService.getStudentSyllabusAsEntity(regNo,6);
-                                
-                                for (SyllabusPOJO s : courseList) {
-                                    
-                            %>
-                            <table class="table" style="background-color: #D8E2F3">
-                                <tbody><tr>
-                                        <td><label ><%=s.getCourseCode()%>: <%=s.getTitle()%></label></td>
-                                        <td><p class="pull-right" ><i><%=s.getHrsWeek()%> Hours/Week, <%=s.getCredit()%> Credit</i></p></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            
-                            <div class="margin-l5 " style="font-size: 14px">
-                                <%=studentService.getStudentCourseDetails(s.getCourseCode())%>
+
+                            <div id="details-div">
+
                             </div>
-                            <br>
-                            <%
-                                }
-                            %>
                             <div class="margin-l5 ">
 
 
@@ -97,8 +89,6 @@
                             <br>
                         </fieldset>
                     </div>
-
-
                 </div>
             </div>
         </div>

@@ -6,12 +6,10 @@ var registeredCoursesJson;
 var choosedCoursesJson;
 
 $(document).ready(function () {
-    $('#reg-semester-dropdown').val(1).change();
-    ajaxCallForDropDown();
+    ajaxCallForCurrentSemester();
 
     $('#reg-semester-dropdown').change(function () {
         ajaxCallForDropDown();
-
     });
 
 //following is the on click event with the .add-course class
@@ -86,6 +84,19 @@ $(document).ready(function () {
 
 });
 
+function ajaxCallForCurrentSemester() {
+
+    $.ajax({
+        url: '../GetCurrentSemester',
+        type: 'POST',
+        success: function (currentSemester) {
+            $('#reg-semester-dropdown').val(currentSemester).change();
+        },
+        error: function () {
+            alert("ERRORX");
+        }
+    });
+}
 
 function ajaxCallForDropDown() {
     $("#saving-anim").attr("src", "../page_files/icons/empty-icon.gif");
@@ -135,12 +146,6 @@ function ajaxCallForDropDown() {
 
             if (regularCoursesJson.length != 0) {
 
-//                $('#course-table-main').append('<tr >'
-//                        + '<td colspan="5" style="font-size: 13px; padding-top: 10px; text-align: center">'
-//                        + '<i>Regular courses</i>'
-//                        + '</td>'
-//                        + '</tr>');
-
                 populateRows(regularCoursesJson);//poulating main table with regular courses
                 //pushing all regularCourses to allCourses
                 for (var i = 0; i < regularCoursesJson.length; i++) {
@@ -185,9 +190,9 @@ function ajaxCallForDropDown() {
 
             //itereting the registered courses here and deciding about the button and status
             if (registeredCoursesJson.length != 0) {
-               
+
                 for (var i = 0; i < allCoursesJson.length; i++) {
-                    
+
                     var found = false;
                     var syllabusId = allCoursesJson[i].syllabusId;
 
@@ -200,7 +205,7 @@ function ajaxCallForDropDown() {
                         }
                     }
 
-                    if (found) {                    
+                    if (found) {
                         toggleCourseButton(syllabusId, 0);
                         setStatus(syllabusId, 0);
                     }
@@ -282,8 +287,8 @@ function printSumofCredit() {
 //        }
 //    });
 
-    for (var i = 0; i<choosedCoursesJson.length; i++){
-        sum+= choosedCoursesJson[i].credit;
+    for (var i = 0; i < choosedCoursesJson.length; i++) {
+        sum += choosedCoursesJson[i].credit;
     }
 
     $("#total_credit").html('<b>' + sum + '</b>');
