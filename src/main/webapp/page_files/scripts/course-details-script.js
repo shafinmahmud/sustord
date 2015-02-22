@@ -56,7 +56,7 @@ function printCourseDetails(courseObject) {
     var hrs = courseObject.hrsWeek;
     var details = courseObject.courseDetails;
 
-    $('#details-div').append('<table class="table" style="background-color: #D8E2F3"> '
+    $('#details-div').append('<table class="table" style="background-color: #BCED91"> '
             + '<tbody>'
             + '<tr>'
             + '<td>'

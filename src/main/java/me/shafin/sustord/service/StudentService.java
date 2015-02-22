@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import me.shafin.sustord.bean.ClassRoutinePOJO;
+import me.shafin.sustord.bean.SemesterStatPOJO;
 import me.shafin.sustord.bean.StudentPOJO;
 import me.shafin.sustord.bean.SyllabusPOJO;
 import me.shafin.sustord.entity.ClassRoutine;
@@ -290,6 +291,11 @@ public class StudentService {
         return courseList;
     }
 
+    /**
+     *
+     * @param courseCode
+     * @return
+     */
     public String getStudentCourseDetails(String courseCode) {
         String details = "";
         Session session = sessionFactory.openSession();
@@ -707,7 +713,7 @@ public class StudentService {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
-        //getting all timeSlots of the day
+        //getting all student of that batch in list
         String hql = "FROM StudentInfo WHERE studentBatchIdFk= :batchId";
         Query query = session.createQuery(hql);
         query.setInteger("batchId", std.getStudentBatchIdFk().getStudentBatchId());
@@ -716,7 +722,7 @@ public class StudentService {
 
         for (StudentInfo s : studentInfos) {
             String reg = s.getRegistrationNo();
-            
+
             double cgpa = getCGPA(s.getRegistrationNo());
             double cCredit = getCreditsCompleted(s.getRegistrationNo());
             if (cgpa > 0) {
@@ -725,17 +731,158 @@ public class StudentService {
                 guy.setName(s.getPersonalInfo().getName());
                 guy.setCgpa(cgpa);
                 guy.setCompletedCredits(cCredit);
-                          
+
                 students.add(guy);
             }
 
         }
         Collections.sort(students, StudentPOJO.CgpaMultiplyCreditComparator);
-        
+
         session.getTransaction().commit();
         session.close();
 
         return students;
+    }
+
+    /**
+     * *****************************************************************************************************
+     * *************** STATISTICS METHODS
+     * *****************************************************************************************************
+     * @param regNo
+     * @param semester
+     * @return
+     */
+    public SemesterStatPOJO getSemesterStatistics(String regNo, int semester) {
+
+        StudentInfo std = getStudentInfoObjectFromRegNo(regNo);
+        int Ap, A, Am, Bp, B, Bm, Cp, C, Cm, F;
+
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+
+        //getting all student of that batch in list
+        String hql = "FROM StudentInfo WHERE studentBatchIdFk= :batchId";
+        Query query = session.createQuery(hql);
+        query.setInteger("batchId", std.getStudentBatchIdFk().getStudentBatchId());
+        List<StudentInfo> studentInfos = (List<StudentInfo>) query.list();
+
+
+        Ap = A = Am = Bp = B = Bm = Cp = C = Cm = F = 0;
+        for (StudentInfo s : studentInfos) {
+
+            List<SyllabusPOJO> registeredCourses = getStudentRegisteredCoursesAsEntity(s.getRegistrationNo(), semester);
+
+            double gradePoint = CgpaCalculation.getGradePointOfSemester(registeredCourses);
+            String gradeLetter = CgpaCalculation.getGradeLetterFromGradePoint(gradePoint);
+
+            if (gradeLetter.equals("A+")) {
+                Ap++;
+            } else if (gradeLetter.equals("A")) {
+                A++;
+            } else if (gradeLetter.equals("A-")) {
+                Am++;
+            } else if (gradeLetter.equals("B+")) {
+                Bp++;
+            } else if (gradeLetter.equals("B")) {
+                B++;
+            } else if (gradeLetter.equals("B-")) {
+                Bm++;
+            } else if (gradeLetter.equals("C+")) {
+                Cp++;
+            } else if (gradeLetter.equals("C")) {
+                C++;
+            } else if (gradeLetter.equals("C-")) {
+                Cm++;
+            } else if (gradeLetter.equals("F")) {
+                //F++;
+            } else {
+                System.out.println("nothing to do with this gradeletter");
+            }
+        }
+
+        SemesterStatPOJO stat = new SemesterStatPOJO();
+        stat.setSemesterGradeDistributionMap(Ap, A, Am, Bp, B, Bm, Cp, C, Cm, F);
+        
+        //getting the syllabus courses 
+        List<SyllabusPOJO> syllabusCourses = getStudentSyllabusAsEntity(regNo, semester);
+
+        for (SyllabusPOJO s : syllabusCourses) {
+            Ap = A = Am = Bp = B = Bm = Cp = C = Cm = F = 0;
+            s.setNoOfAttendedStudent(getStatOfTotalCourseAttend(s, std.getStudentBatchIdFk().getStudentBatchId(), semester));
+            Ap = getStatOfCourseGrade(s, std.getStudentBatchIdFk().getStudentBatchId(), semester, "A+");
+            A = getStatOfCourseGrade(s, std.getStudentBatchIdFk().getStudentBatchId(), semester, "A");
+            Am = getStatOfCourseGrade(s, std.getStudentBatchIdFk().getStudentBatchId(), semester, "A-");
+            Bp = getStatOfCourseGrade(s, std.getStudentBatchIdFk().getStudentBatchId(), semester, "B+");
+            B = getStatOfCourseGrade(s, std.getStudentBatchIdFk().getStudentBatchId(), semester, "B");
+            Bm = getStatOfCourseGrade(s, std.getStudentBatchIdFk().getStudentBatchId(), semester, "B-");
+            Cp = getStatOfCourseGrade(s, std.getStudentBatchIdFk().getStudentBatchId(), semester, "C+");
+            C = getStatOfCourseGrade(s, std.getStudentBatchIdFk().getStudentBatchId(), semester, "C");
+            Cm = getStatOfCourseGrade(s, std.getStudentBatchIdFk().getStudentBatchId(), semester, "C-");
+            F = getStatOfCourseGrade(s, std.getStudentBatchIdFk().getStudentBatchId(), semester, "F");
+
+            s.setCourseGradeDistributionMap(Ap, A, Am, Bp, B, Bm, Cp, C, Cm, F);
+        }
+        
+        stat.setCourseStat(syllabusCourses);
+        
+        session.getTransaction().commit();
+        session.close();
+
+        return stat;
+    }
+
+    /**
+     * ************************************************************************
+     * STATISTICS HELPER METHODS
+     * ************************************************************************
+     * @param s
+     * @param batchId
+     * @param semester
+     * @return
+     */
+    public int getStatOfTotalCourseAttend(SyllabusPOJO s, int batchId, int semester) {
+
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        //getting the course attend count from hql
+         String hql = "select count(*) from CourseRegistration "
+                + "where syllabusIdFk = :syllabusId and approval = 1 and attendSemester = :semester "
+                + "and studentInfoIdFk in (select studentInfoId from StudentInfo "
+                + "where studentBatchIdFk = :batchId)";
+        Query query = session.createQuery(hql);
+        query.setInteger("syllabusId", s.getSyllabusId());
+        query.setInteger("semester", semester);
+        query.setInteger("batchId", batchId);
+
+        Long attendedStudent = (Long) query.uniqueResult();
+
+        session.getTransaction().commit();
+        session.close();
+
+        return attendedStudent.intValue();
+    }
+
+    public int getStatOfCourseGrade(SyllabusPOJO s, int batchId, int semester, String gradeLetter) {
+
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        //getting the course attend count from hql
+        String hql = "select count(*) from CourseRegistration "
+                + "where syllabusIdFk = :syllabusId and approval = 1 and attendSemester = :semester and grade = :gradeLetter "
+                + "and studentInfoIdFk in (select studentInfoId from StudentInfo "
+                + "where studentBatchIdFk = :batchId)";
+        Query query = session.createQuery(hql);
+        query.setInteger("syllabusId", s.getSyllabusId());
+        query.setInteger("semester", semester);
+        query.setString("gradeLetter", gradeLetter);
+        query.setInteger("batchId", batchId);
+
+        Long gradeCount = (Long) query.uniqueResult();
+
+        session.getTransaction().commit();
+        session.close();
+
+        return gradeCount.intValue();
     }
 
     /**

@@ -2,6 +2,9 @@
  */
 package me.shafin.sustord.bean;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  *
  * @author SHAFIN
@@ -26,6 +29,10 @@ public class SyllabusPOJO {
     private String status;
     private Double hrsWeek;
     private boolean theoryOrLab;
+
+    //for statistics
+    private Map courseGradeDistributionMap;
+    private int noOfAttendedStudent;
 
     /**
      * @return the courseCodeString
@@ -165,7 +172,7 @@ public class SyllabusPOJO {
      */
     public void setGrade(String grade) {
         this.grade = grade;
-        
+
     }
 
     /**
@@ -278,6 +285,59 @@ public class SyllabusPOJO {
      */
     public void setCourseDetails(String courseDetails) {
         this.courseDetails = courseDetails;
+    }
+
+    /**
+     * @return the gradeDistributionMap
+     */
+    public Map getCourseGradeDistributionMap() {
+        return courseGradeDistributionMap;
+    }
+
+    /**
+     * @param Ap
+     * @param A
+     * @param Am
+     * @param Bp
+     * @param B
+     * @param Bm
+     * @param Cp
+     * @param C
+     * @param Cm
+     * @param F
+     */
+    public void setCourseGradeDistributionMap(int Ap, int A, int Am,
+            int Bp, int B, int Bm,
+            int Cp, int C, int Cm, int F) {
+        
+        Map map = new HashMap();
+        
+        map.put("Ap", Ap);
+        map.put("A", A);
+        map.put("Am", Am);
+        map.put("Bp", Bp);
+        map.put("B", B);
+        map.put("Bm", Bm);
+        map.put("Cp", Cp);
+        map.put("C", C);
+        map.put("Cm", Cm);
+        map.put("F", F);
+
+        this.courseGradeDistributionMap = map;
+    }
+
+    /**
+     * @return the noOfAttendedStudent
+     */
+    public int getNoOfAttendedStudent() {
+        return noOfAttendedStudent;
+    }
+
+    /**
+     * @param noOfAttendedStudent the noOfAttendedStudent to set
+     */
+    public void setNoOfAttendedStudent(int noOfAttendedStudent) {
+        this.noOfAttendedStudent = noOfAttendedStudent;
     }
 
 }

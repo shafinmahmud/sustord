@@ -37,36 +37,41 @@
                     <div class="margin5">
 
                         <fieldset>
-                            <legend>Course Registration
+                            <table class="table">
+                                <tbody>
+                                    <tr style="background-color: #D8E2F3;">
+                                        <td>
+                                <legend>Result update</legend>
+                                </td>
+                                <td>
+                                    <select class="form-control pull-right" id="result-semester-dropdown" name="reg-semester-dropdown" style="width: 250px">
+                                        <%                                            StudentService studentService = (StudentService) session.getAttribute("studentService");
+                                            String regNo = (String) request.getSession().getAttribute("regNo");
+                                            int numofsem = studentService.getStudentTotalSemester(regNo);
+                                            int currentSemester = 2;
 
-                                <select class="form-control pull-right" id="result-semester-dropdown" name="reg-semester-dropdown" style="width: 250px">
-                                    <option value="0" style="display:none">Choose Semester</option>
-                                    <%                                            StudentService service = (StudentService) session.getAttribute("studentService");
-                                        String regNo = (String) request.getSession().getAttribute("regNo");
-
-                                        int numofsem = service.getStudentTotalSemester(regNo);
-                                        int currentSemester = 2;
-
-                                        for (int i = 1; i <= numofsem; i++) {
-                                            if (i == currentSemester) {
-                                    %>
-                                    <option value="<%=i%>"><%=FormatService.formatSemesterName(i)%></option>
-                                    <%
-                                    } else {
-                                    %>
-                                    <option value="<%=i%>"><%=FormatService.formatSemesterName(i)%></option>
-                                    <%
+                                            for (int i = 1; i <= numofsem; i++) {
+                                                if (i == currentSemester) {
+                                        %>
+                                        <option value="<%=i%>"><%=FormatService.formatSemesterName(i)%></option>
+                                        <%
+                                        } else {
+                                        %>
+                                        <option value="<%=i%>"><%=FormatService.formatSemesterName(i)%></option>
+                                        <%
+                                                }
                                             }
-                                        }
-                                    %>
+                                        %>
 
-                                </select>
+                                    </select>
 
-
-                            </legend>
-                            <h4 id="sem-title">
-                                <br>
-                                Semster</h4>
+                                </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <br>
+                            <h4 id="sem-title"><br></h4>
+                            <br>
                             <div>
                                 <table id="table-registered-courses" class="table table-condensed col-lg-10">
 
@@ -94,39 +99,40 @@
 
                                     </tbody></table>
                             </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <div>
+                                <table class="table-condensed">
+                                    <tr>
+                                        <td style="padding-left: 120px;">
+
+                                        </td>
+                                        <td >
+                                            <button  type="submit" class="btn btn-danger" id="confirm-result-update">Save</button>
+                                        </td>
+                                        <td>
+                                            <img  id="saving-anim" src="" height="25" alt="">
+                                        </td>
+                                        <td id="status-message">
+
+                                        </td>
+                                    </tr>
+                                </table>
+                                <br>
+                            </div>
+                        </fieldset>
 
                     </div>
-
-                    </fieldset>
-                    <div>
-                        <table class="table-condensed">
-                            <tr>
-                                <td style="padding-left: 120px;">
-
-                                </td>
-                                <td >
-                                    <button  type="submit" class="btn btn-danger" id="confirm-result-update">Save</button>
-                                </td>
-                                <td>
-                                    <img  id="saving-anim" src="" height="25" alt="">
-                                </td>
-                                <td id="status-message">
-
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-
                 </div>
             </div>
+
         </div>
 
-    </div>
-
-    <%@include  file="../WEB-INF/jspf/Footer.jspf"%>
+        <%@include  file="../WEB-INF/jspf/Footer.jspf"%>
 
 
-</body>
+    </body>
 
 </html>
 

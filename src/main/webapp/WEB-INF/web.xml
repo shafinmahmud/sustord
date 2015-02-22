@@ -40,6 +40,10 @@
         <servlet-name>GetCurrentSemester</servlet-name>
         <servlet-class>me.shafin.sustord.servlet.GetCurrentSemester</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SemesterStatServlet</servlet-name>
+        <servlet-class>me.shafin.sustord.servlet.SemesterStatServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LogOutServlet</servlet-name>
         <url-pattern>/LogOutServlet</url-pattern>
@@ -79,5 +83,9 @@
     <servlet-mapping>
         <servlet-name>GetCurrentSemester</servlet-name>
         <url-pattern>/GetCurrentSemester</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SemesterStatServlet</servlet-name>
+        <url-pattern>/SemesterStatServlet</url-pattern>
     </servlet-mapping>
 </web-app>

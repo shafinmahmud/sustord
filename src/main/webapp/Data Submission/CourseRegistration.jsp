@@ -43,33 +43,41 @@
                     <div class="margin5">
 
                         <fieldset>
-                            <legend>Course Registration
-                                <select class="form-control pull-right" id="reg-semester-dropdown" name="reg-semester-dropdown" style="width: 250px">
-                                    <option value="0" style="display:none">Choose Semester</option>
-                                    <%                                        StudentService service = (StudentService) session.getAttribute("studentService");
-                                        String regNo = (String) request.getSession().getAttribute("regNo");
-                                        int numofsem = service.getStudentTotalSemester(regNo);
-                                        int currentSemester = 2;
+                             <table class="table">
+                                <tbody>
+                                    <tr style="background-color: #D8E2F3;">
+                                        <td>
+                                           <legend>Course Registration</legend>
+                                        </td>
+                                        <td>
+                                            <select class="form-control pull-right" id="reg-semester-dropdown" name="reg-semester-dropdown" style="width: 250px">
+                                                <%                                            StudentService studentService = (StudentService) session.getAttribute("studentService");
+                                                    String regNo = (String) request.getSession().getAttribute("regNo");
+                                                    int numofsem = studentService.getStudentTotalSemester(regNo);
+                                                    int currentSemester = 2;
 
-                                        for (int i = 1; i <= numofsem; i++) {
-                                            if (i == currentSemester) {
-                                    %>
-                                    <option value="<%=i%>"><%=FormatService.formatSemesterName(i)%></option>
-                                    <%
-                                    } else {
-                                    %>
-                                    <option value="<%=i%>"><%=FormatService.formatSemesterName(i)%></option>
-                                    <%
-                                            }
-                                        }
-                                    %>
+                                                    for (int i = 1; i <= numofsem; i++) {
+                                                        if (i == currentSemester) {
+                                                %>
+                                                <option value="<%=i%>"><%=FormatService.formatSemesterName(i)%></option>
+                                                <%
+                                                } else {
+                                                %>
+                                                <option value="<%=i%>"><%=FormatService.formatSemesterName(i)%></option>
+                                                <%
+                                                        }
+                                                    }
+                                                %>
+                                               
+                                            </select>
 
-                                </select>
-                            </legend>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                             <br>
-                            <h4 id="sem-title">
-                                <br>
-                                Semster</h4>
+                            <h4 id="sem-title"><br></h4>
+                            <br>
                             <div >
                                 <div id="div_main_table">
                                     <table id="course-table-main" class="table table-condensed col-lg-10">
@@ -122,6 +130,7 @@
                                     </tr>
 
                                 </table>
+                                <br>
                             </div>
                         </fieldset>
 

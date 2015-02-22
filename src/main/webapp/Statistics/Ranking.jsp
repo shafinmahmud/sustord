@@ -22,6 +22,10 @@
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
             <meta name="viewport" content="width=device-width">
             <link href="../page_files/css/style.css" rel="stylesheet">
+
+            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+            <script src="http://code.highcharts.com/highcharts.js"></script>
+
             <script src=""></script>
         </head>
         <body>
@@ -34,64 +38,135 @@
                 <div id="main-content" class="col-md-10 column800">
                     <div class="col-lg-12">
                         <fieldset>
-                            <legend>Ranking by CGPA</legend>
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 5%">#Rank</th>
-                                        <th style="width: 40%">Name</th>
-                                        <th style="width: 15%">Registration No</th>
-                                        <th style="width: 20%; text-align: center">Completed Credits</th>
-                                        <th style="width: 20%; text-align: center">CGPA</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <%                                        StudentService studentService;
-                                        studentService = (StudentService) session.getAttribute("studentService");
-                                        String myRegNo = (String) request.getSession().getAttribute("regNo");
-                                        List<StudentPOJO> students = studentService.getStudentRankList(myRegNo);
+                            <legend>CGPA Analysis</legend>
 
-                                        for (StudentPOJO s : students) {
-                                            String name = s.getName().toUpperCase();
-                                            String reg = s.getRegistrationNo();
-                                            double completedCredit = s.getCompletedCredits();
-                                            double cgpa = s.getCgpa();
-                                            
-                                            if(myRegNo.equals(reg)){
-                                            
-                                    %>
-                                           <tr>
-                                               <td class="text-center"><b>#<%=students.indexOf(s)+1%></b></td>
-                                               <td><b><%=name%></b></td>
-                                               <td  class="text-center"><b><%=reg%></b></td>
-                                               <td  class="text-center"><b><%=completedCredit%></b></td>
-                                               <td  class="text-center"><b><%=cgpa%></b></td>
-                                            </tr>
-                                    <%
-                                        }else{
-                                                %>
-                                                <tr>
-                                               <td class="text-center">#<%=students.indexOf(s)+1%></td>
-                                                <td><%=name%></td>
-                                                <td  class="text-center"><%=reg%></td>
-                                                <td  class="text-center"><%=completedCredit%></td>
-                                                <td  class="text-center"><%=cgpa%></td>
-                                            </tr>
-                                                <%
+                            <div id="line-chart-div" style="width: 100%; height: 400px;"></div>
+                            <script>
+                                $(function () {
+                                    $('#line-chart-div').highcharts({
+                                        chart: {
+                                            type: 'column'
+                                        },
+                                        title: {
+                                            text: 'Grade Distribution'
+                                        },
+                                        subtitle: {
+                                            text: 'Third year First semester'
+                                        },
+                                        xAxis: {
+                                            type: 'category',
+                                            labels: {
+                                                rotation: -45,
+                                                style: {
+                                                    fontSize: '13px',
+                                                    fontFamily: 'Verdana, sans-serif'
+                                                }
                                             }
-                                        }
-                                    %>
-                                </tbody>
+                                        },
+                                        yAxis: {
+                                            min: 0,
+                                            title: {
+                                                text: 'No. of students'
+                                            }
+                                        },
+                                        legend: {
+                                            enabled: false
+                                        },
+                                        tooltip: {
+                                            pointFormat: 'Population in 2008: <b>{point.y:.1f} millions</b>'
+                                        },
+                                        series: [{
+                                                name: 'Population',
+                                                data: [
+                                                    ['A+', 2],
+                                                    ['A', 8],
+                                                    ['A-', 14],
+                                                    ['B+', 14],
+                                                    ['B', 19],
+                                                    ['B-', 12],
+                                                    ['C+', 11],
+                                                    ['C', 1],
+                                                    ['C-', 11],
+                                                    ['F', 10],
+                                                ],
+                                                dataLabels: {
+                                                    enabled: true,
+                                                    rotation: -90,
+                                                    color: '#FFFFFF',
+                                                    align: 'right',
+                                                    x: 4,
+                                                    y: 10,
+                                                    style: {
+                                                        fontSize: '13px',
+                                                        fontFamily: 'Verdana, sans-serif',
+                                                        textShadow: '0 0 3px black'
+                                                    }
+                                                }
+                                            }]
+                                    });
+                                });
 
-                            </table>
-
-                        </fieldset>
-
+                            </script>
                     </div>
+                    <br>
+
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th style="width: 5%">#Rank</th>
+                                <th style="width: 40%">Name</th>
+                                <th style="width: 15%">Registration No</th>
+                                <th style="width: 20%; text-align: center">Completed Credits</th>
+                                <th style="width: 20%; text-align: center">CGPA</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%                                        StudentService studentService;
+                                studentService = (StudentService) session.getAttribute("studentService");
+                                String myRegNo = (String) request.getSession().getAttribute("regNo");
+                                List<StudentPOJO> students = studentService.getStudentRankList(myRegNo);
+
+                                for (StudentPOJO s : students) {
+                                    String name = s.getName().toUpperCase();
+                                    String reg = s.getRegistrationNo();
+                                    double completedCredit = s.getCompletedCredits();
+                                    double cgpa = s.getCgpa();
+
+                                    if (myRegNo.equals(reg)) {
+
+                            %>
+                            <tr>
+                                <td class="text-center"><b>#<%=students.indexOf(s) + 1%></b></td>
+                                <td><b><%=name%></b></td>
+                                <td  class="text-center"><b><%=reg%></b></td>
+                                <td  class="text-center"><b><%=completedCredit%></b></td>
+                                <td  class="text-center"><b><%=cgpa%></b></td>
+                            </tr>
+                            <%
+                            } else {
+                            %>
+                            <tr>
+                                <td class="text-center">#<%=students.indexOf(s) + 1%></td>
+                                <td><%=name%></td>
+                                <td  class="text-center"><%=reg%></td>
+                                <td  class="text-center"><%=completedCredit%></td>
+                                <td  class="text-center"><%=cgpa%></td>
+                            </tr>
+                            <%
+                                    }
+                                }
+                            %>
+                        </tbody>
+
+                    </table>
+
+                    </fieldset>
 
                 </div>
+
             </div>
         </div>
-        <%@include  file="../WEB-INF/jspf/Footer.jspf"%>
-    </body>
+    </div>
+    <%@include  file="../WEB-INF/jspf/Footer.jspf"%>
+</body>
 </html>

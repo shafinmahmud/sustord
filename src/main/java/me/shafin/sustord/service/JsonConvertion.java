@@ -10,21 +10,27 @@ import java.util.List;
  * @author SHAFIN
  */
 public class JsonConvertion {
-    
+
+    public static String objectToJsonString(Object object) {
+        Gson gson = new Gson();
+        String jsonString = gson.toJson(object);
+        return jsonString;
+    }
+
     public static <T> String objectListToJsonString(List<T> objectList) {
-        
+
         String jsonListString = "";
         Gson gson = new Gson();
         int size = objectList.size();
-        
-         if (size == 0) {
+
+        if (size == 0) {
             jsonListString = "[]";
         }
-         
+
         for (int i = 0; i < size; i++) {
-            
+
             String jsonString = gson.toJson(objectList.get(i));
-            
+
             if (size > 2) {
                 if (i == 0) {
                     jsonListString = jsonListString.concat("[" + jsonString + ",");
@@ -40,7 +46,7 @@ public class JsonConvertion {
                     jsonListString = jsonListString.concat(jsonString + "]");
                 }
             } else {
-                jsonListString = "["+jsonString+"]";
+                jsonListString = "[" + jsonString + "]";
             }
         }
         return jsonListString;

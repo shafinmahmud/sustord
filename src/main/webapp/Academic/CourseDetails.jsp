@@ -46,37 +46,40 @@
 
                     <div class="margin5">
                         <fieldset>
-                            <legend>Academic Course details
-                            </legend>
-                            <div class="row">
-                                <div class="col-md-3 col-lg-3">
-                                    <p class="label-height-30" style="text-align: right; font-size: 17px" >Choose Semester</p>
-                                </div>
-                                <div class="col-md-5 col-lg-5">
-                                    <select class="form-control pull-left" id="semester-dropdown" name="reg-semester-dropdown" style="width: 250px">
+                           
+                            <table class="table">
+                                <tbody>
+                                    <tr style="background-color: #D8E2F3;">
+                                        <td>
+                                           <legend>Course Details</legend>
+                                        </td>
+                                        <td>
+                                            <select class="form-control pull-right" id="semester-dropdown" name="reg-semester-dropdown" style="width: 250px">
+                                                <%                                            StudentService studentService = (StudentService) session.getAttribute("studentService");
+                                                    String regNo = (String) request.getSession().getAttribute("regNo");
+                                                    int numofsem = studentService.getStudentTotalSemester(regNo);
+                                                    int currentSemester = 2;
 
-                                        <%                                            StudentService studentService = (StudentService) session.getAttribute("studentService");
-                                            String regNo = (String) request.getSession().getAttribute("regNo");
-                                            int numofsem = studentService.getStudentTotalSemester(regNo);
-                                            int currentSemester = 2;
+                                                    for (int i = 1; i <= numofsem; i++) {
+                                                        if (i == currentSemester) {
+                                                %>
+                                                <option value="<%=i%>"><%=FormatService.formatSemesterName(i)%></option>
+                                                <%
+                                                } else {
+                                                %>
+                                                <option value="<%=i%>"><%=FormatService.formatSemesterName(i)%></option>
+                                                <%
+                                                        }
+                                                    }
+                                                %>
+                                                <option value="0">Optional Courses</option>
+                                            </select>
 
-                                            for (int i = 1; i <= numofsem; i++) {
-                                                if (i == currentSemester) {
-                                        %>
-                                        <option value="<%=i%>"><%=FormatService.formatSemesterName(i)%></option>
-                                        <%
-                                        } else {
-                                        %>
-                                        <option value="<%=i%>"><%=FormatService.formatSemesterName(i)%></option>
-                                        <%
-                                                }
-                                            }
-                                        %>
-                                        <option value="0">Optional Courses</option>
-                                    </select>
-                                </div>
-
-                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                                
                             <br>
 
                             <div id="details-div">
