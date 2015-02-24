@@ -23,7 +23,7 @@
         <li>
             <a href="../Statistics/CourseAnalysis.jsp"><span class="glyphicon glyphicon-pie-chart"></span>&nbsp;Course Analysis</a></li>
         <li>
-            <a href="../Statistics/Ranking.jsp"><span class="glyphicon glyphicon-podium"></span>&nbsp;Ranking</a>
+            <a href="../Statistics/CgpaAnalysis.jsp"><span class="glyphicon glyphicon-podium"></span>&nbsp;CGPA Analysis</a>
         </li>
 
         <li class="nav-header">Data Submission

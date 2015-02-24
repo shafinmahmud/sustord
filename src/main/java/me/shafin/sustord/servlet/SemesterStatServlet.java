@@ -44,7 +44,7 @@ public class SemesterStatServlet extends HttpServlet {
         String regNo = (String) request.getSession().getAttribute("regNo");
         SemesterStatPOJO stat = studentService.getSemesterStatistics(regNo, sem);
         String statJson = JsonConvertion.objectToJsonString(stat);
-        System.out.println(statJson);
+        //System.out.println(statJson);
 
         PrintWriter out = response.getWriter();
         out.print(statJson);

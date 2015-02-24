@@ -3,8 +3,9 @@ var registeredCoursesJson = [];
 
 $(document).ready(function () {
     ajaxCallForCurrentSemester();
-    
+
     $('#result-semester-dropdown').change(function () {
+
         ajaxCallForDropDown();
     });
 
@@ -13,7 +14,7 @@ $(document).ready(function () {
         var courseRegIdFromDropDown = $(this).attr("id").substr(9);
         var changedValue = $(this).val();
         var doChange = true;
-
+//        alert($('#dropdown-' + courseRegIdFromDropDown).val().length);
         //checking if the grade is changed before this change
         for (var i = 0; i < changedGradeJson.length; i++) {
             if (courseRegIdFromDropDown == changedGradeJson[i].courseRegistrationId) {
@@ -126,7 +127,7 @@ function ajaxCallForDropDown() {
                     return true;
                 }
             }).remove();
-            
+
             var txt = $("#result-semester-dropdown option:selected").text();
             $('#sem-title').text(txt);
 
@@ -156,10 +157,10 @@ function populateMainTable(coursesJson) {
         var title = coursesJson[i].title;
         var credit = coursesJson[i].credit;
         var grade = coursesJson[i].grade;
-        if(grade == 'N/A'){
+        if (grade == 'N/A') {
             grade = '<p style="color:#808080">N/A</p>';
-        }else{
-            grade = '<p><b>'+grade+'</b></p>';
+        } else {
+            grade = '<p><b>' + grade + '</b></p>';
         }
 
         $('#table-registered-courses tr.total-row').before('<tr id="main-tr-' + courseRegId + '"><td>' + code + '</td> <td>'

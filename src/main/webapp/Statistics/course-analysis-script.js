@@ -66,7 +66,7 @@ function ajaxCallForDropDown() {
             c = semesterStatJson.semesterGradeDistributionMap.C;
             cm = semesterStatJson.semesterGradeDistributionMap.Cp;
             f = semesterStatJson.semesterGradeDistributionMap.F;
- 
+
             printBarChart();
 
             for (var i = 0; i < semesterStatJson.courseStat.length; i++) {
@@ -158,28 +158,53 @@ function printPieChart(courseObject) {
     var code = courseObject.courseCode;
     var title = courseObject.title;
     var attend = courseObject.noOfAttendedStudent;
-  
+
+    var obatainedGrade = courseObject.grade;
+    obatainedGrade = $.trim(obatainedGrade); // trimming spaces from the first and last spaces
+
+    if (obatainedGrade.length > 2) {
+        obatainedGrade = courseObject.grade.slice(-2);
+    }
+    // alert(obatainedGrade.length + ' ' + obatainedGrade);
+
+    var dataSet = [];
+    var letterArray = ["A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-", "F"];
+    var gradeArray = [
+        courseObject.courseGradeDistributionMap.Ap,
+        courseObject.courseGradeDistributionMap.A,
+        courseObject.courseGradeDistributionMap.Am,
+        courseObject.courseGradeDistributionMap.Bp,
+        courseObject.courseGradeDistributionMap.B,
+        courseObject.courseGradeDistributionMap.Bm,
+        courseObject.courseGradeDistributionMap.Cp,
+        courseObject.courseGradeDistributionMap.C,
+        courseObject.courseGradeDistributionMap.Cm,
+        courseObject.courseGradeDistributionMap.F
+    ];
+
+
+    for (var i = 0; i < letterArray.length; i++) {
+        // alert(letterArray[i].length + ' ' + letterArray[i] + '---' + obatainedGrade.length + ' ' + obatainedGrade);
+        if (letterArray[i] === obatainedGrade) {
+//            alert(letterArray[i]);
+            var gradeObject = {
+                name: letterArray[i],
+                y: gradeArray[i],
+                sliced: true,
+                selected: true
+            };
+            dataSet.push(gradeObject);
+        } else {
+            dataSet.push([letterArray[i], gradeArray[i]]);
+        }
+    }
+
     var gradeObject = {
         type: 'pie',
         name: 'grade',
-        data: [
-            ['A+', courseObject.courseGradeDistributionMap.Ap],
-            ['A', courseObject.courseGradeDistributionMap.A],
-            ['A-', courseObject.courseGradeDistributionMap.Am],
-            {
-                name: 'B+',
-                y: courseObject.courseGradeDistributionMap.Bp,
-                sliced: true,
-                selected: true
-            },
-            ['B', courseObject.courseGradeDistributionMap.B],
-            ['B-', courseObject.courseGradeDistributionMap.Bm],
-            ['C+', courseObject.courseGradeDistributionMap.Cp],
-            ['C', courseObject.courseGradeDistributionMap.C],
-            ['C-', courseObject.courseGradeDistributionMap.Cm],
-            ['F', courseObject.courseGradeDistributionMap.F]
-        ]
+        data: dataSet
     };
+
     $('#pie-chart-table').append('<tr>'
             + '<td>'
             + '<div id="container-' + syllabusId + '"style="width: 350px; height: 350px;"></div>'
@@ -189,13 +214,11 @@ function printPieChart(courseObject) {
             + '<p style="font-size: 16px"><b>' + code + ' </b> </p>'
             + '<p style="font-size: 16px">' + title + '</p>'
             + '<p style="font-size: 14px">Course Attends: ' + attend + '</p>'
-            + '<p style="font-size: 14px">Max. grade:</p>'
-            + '<p style="font-size: 14px">Avg. grade: </p>'
-            + '<p style="font-size: 14px">No of Failed: </p>'
-
+            + '<p style="font-size: 14px">Obtained grade: ' + courseObject.grade + '</p>'
             + '</td>'
             + '</tr>');
 
+    alert(dataSet);
     // Build the chart
     $("#container-" + syllabusId).highcharts({
         chart: {
@@ -218,7 +241,9 @@ function printPieChart(courseObject) {
                     enabled: false,
                     distance: 10
                 },
-                showInLegend: true
+                showInLegend: true,
+                colors: ['#27ae60', '#2ecc71', '#90ed7d', '#2980b9', '#3498db',
+                    '#91e8e1', '#e67e22', '#F39C12', '#F9BF3B', '#e74c3c']
             }
         },
         legend: {

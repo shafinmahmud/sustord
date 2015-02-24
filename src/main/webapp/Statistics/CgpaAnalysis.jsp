@@ -4,6 +4,9 @@
     Author     : SHAFIN
 --%>
 
+<%@page import="me.shafin.sustord.service.StatisticsHelper"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.HashMap"%>
 <%@page import="me.shafin.sustord.bean.StudentPOJO"%>
 <%@page import="java.util.List"%>
 <%@page import="me.shafin.sustord.entity.StudentInfo"%>
@@ -38,6 +41,14 @@
                 <div id="main-content" class="col-md-10 column800">
                     <div class="col-lg-12">
                         <fieldset>
+                            <%                                    StudentService studentService;
+                                studentService = (StudentService) session.getAttribute("studentService");
+                                String myRegNo = (String) request.getSession().getAttribute("regNo");
+                                List<StudentPOJO> students = studentService.getStudentRankList(myRegNo);
+
+                                Map map = StatisticsHelper.getCgpaDistibutionMap(students);
+
+                            %>                               
                             <legend>CGPA Analysis</legend>
 
                             <div id="line-chart-div" style="width: 100%; height: 400px;"></div>
@@ -51,7 +62,7 @@
                                             text: 'Grade Distribution'
                                         },
                                         subtitle: {
-                                            text: 'Third year First semester'
+                                            text: $('#semester-dropdown option:selected').text()
                                         },
                                         xAxis: {
                                             type: 'category',
@@ -73,21 +84,21 @@
                                             enabled: false
                                         },
                                         tooltip: {
-                                            pointFormat: 'Population in 2008: <b>{point.y:.1f} millions</b>'
+                                            pointFormat: '<b>{point.y:.1f}</b>'
                                         },
                                         series: [{
                                                 name: 'Population',
                                                 data: [
-                                                    ['A+', 2],
-                                                    ['A', 8],
-                                                    ['A-', 14],
-                                                    ['B+', 14],
-                                                    ['B', 19],
-                                                    ['B-', 12],
-                                                    ['C+', 11],
-                                                    ['C', 1],
-                                                    ['C-', 11],
-                                                    ['F', 10],
+                                                    ['A+', <%=map.get("Ap")%>],
+                                                    ['A', <%=map.get("A")%>],
+                                                    ['A-', <%=map.get("Am")%>],
+                                                    ['B+', <%=map.get("Bp")%>],
+                                                    ['B', <%=map.get("B")%>],
+                                                    ['B-', <%=map.get("Bm")%>],
+                                                    ['C+', <%=map.get("Cp")%>],
+                                                    ['C', <%=map.get("C")%>],
+                                                    ['C-', <%=map.get("Cm")%>],
+                                                    ['F', <%=map.get("F")%>],
                                                 ],
                                                 dataLabels: {
                                                     enabled: true,
@@ -107,58 +118,57 @@
                                 });
 
                             </script>
+                        </fieldset>
                     </div>
                     <br>
+                    <br>
+                    <br>
+                    <legend>CGPA Ranking</legend>
+                    <fieldset>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th style="width: 5%">#Rank</th>
+                                    <th style="width: 40%">Name</th>
+                                    <th style="width: 15%">Registration No</th>
+                                    <th style="width: 20%; text-align: center">Completed Credits</th>
+                                    <th style="width: 20%; text-align: center">CGPA</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for (StudentPOJO s : students) {
+                                        String name = s.getName().toUpperCase();
+                                        String reg = s.getRegistrationNo();
+                                        double completedCredit = s.getCompletedCredits();
+                                        double cgpa = s.getCgpa();
 
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th style="width: 5%">#Rank</th>
-                                <th style="width: 40%">Name</th>
-                                <th style="width: 15%">Registration No</th>
-                                <th style="width: 20%; text-align: center">Completed Credits</th>
-                                <th style="width: 20%; text-align: center">CGPA</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <%                                        StudentService studentService;
-                                studentService = (StudentService) session.getAttribute("studentService");
-                                String myRegNo = (String) request.getSession().getAttribute("regNo");
-                                List<StudentPOJO> students = studentService.getStudentRankList(myRegNo);
+                                        if (myRegNo.equals(reg)) {
 
-                                for (StudentPOJO s : students) {
-                                    String name = s.getName().toUpperCase();
-                                    String reg = s.getRegistrationNo();
-                                    double completedCredit = s.getCompletedCredits();
-                                    double cgpa = s.getCgpa();
-
-                                    if (myRegNo.equals(reg)) {
-
-                            %>
-                            <tr>
-                                <td class="text-center"><b>#<%=students.indexOf(s) + 1%></b></td>
-                                <td><b><%=name%></b></td>
-                                <td  class="text-center"><b><%=reg%></b></td>
-                                <td  class="text-center"><b><%=completedCredit%></b></td>
-                                <td  class="text-center"><b><%=cgpa%></b></td>
-                            </tr>
-                            <%
-                            } else {
-                            %>
-                            <tr>
-                                <td class="text-center">#<%=students.indexOf(s) + 1%></td>
-                                <td><%=name%></td>
-                                <td  class="text-center"><%=reg%></td>
-                                <td  class="text-center"><%=completedCredit%></td>
-                                <td  class="text-center"><%=cgpa%></td>
-                            </tr>
-                            <%
+                                %>
+                                <tr>
+                                    <td class="text-center"><b>#<%=students.indexOf(s) + 1%></b></td>
+                                    <td><b><%=name%></b></td>
+                                    <td  class="text-center"><b><%=reg%></b></td>
+                                    <td  class="text-center"><b><%=completedCredit%></b></td>
+                                    <td  class="text-center"><b><%=cgpa%></b></td>
+                                </tr>
+                                <%
+                                } else {
+                                %>
+                                <tr>
+                                    <td class="text-center">#<%=students.indexOf(s) + 1%></td>
+                                    <td><%=name%></td>
+                                    <td  class="text-center"><%=reg%></td>
+                                    <td  class="text-center"><%=completedCredit%></td>
+                                    <td  class="text-center"><%=cgpa%></td>
+                                </tr>
+                                <%
+                                        }
                                     }
-                                }
-                            %>
-                        </tbody>
+                                %>
+                            </tbody>
 
-                    </table>
+                        </table>
 
                     </fieldset>
 
