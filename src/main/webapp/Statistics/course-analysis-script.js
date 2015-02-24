@@ -218,7 +218,7 @@ function printPieChart(courseObject) {
             + '</td>'
             + '</tr>');
 
-    alert(dataSet);
+    //alert(dataSet);
     // Build the chart
     $("#container-" + syllabusId).highcharts({
         chart: {
