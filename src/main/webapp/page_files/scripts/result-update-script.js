@@ -64,6 +64,7 @@ $(document).ready(function () {
             type: 'POST',
             success: function (status) {
                 if (status == 'OK') {
+                    ajaxCallForDropDown();
                     $("#saving-anim").attr("src", "../page_files/icons/success-icon.png");
                     $("#status-message").html("Congrats! Grades Updated!");
                 } else {
@@ -81,48 +82,7 @@ $(document).ready(function () {
 });
 
 
-function populateMainTable(coursesJson) {
 
-    for (var i = 0; i < coursesJson.length; i++) {
-
-        var courseRegId = coursesJson[i].courseRegistrationId;
-        var code = coursesJson[i].courseCode;
-        var title = coursesJson[i].title;
-        var credit = coursesJson[i].credit;
-        var grade = coursesJson[i].grade;
-        if(grade == 'N/A'){
-            grade = '<p style="color:#808080">N/A</p>';
-        }else{
-            grade = '<p><b>'+grade+'</b></p>';
-        }
-
-        $('#table-registered-courses tr.total-row').before('<tr id="main-tr-' + courseRegId + '"><td>' + code + '</td> <td>'
-                + title + '</td> <td class="credit" style="text-align: center">' +
-                +credit + '</td> <td style="text-align: center">'
-                + '<div>' + grade
-                + '</div></td> <td>'
-                + '<div>'
-                + '<select class="dropdown-grade" id="dropdown-' + courseRegId + '" style="width:70px; height: 20px; font-size: 12px">'
-                + '<option selected style="display:none">change</option>'
-                + '<option value="A+">A+</option>'
-                + '<option value="A">A</option>'
-                + '<option value="A-">A-</option>'
-                + '<option value="B+">B+</option>'
-                + '<option value="B">B</option>'
-                + '<option value="B-">B-</option>'
-                + '<option value="C+">C+</option>'
-                + '<option value="C">C</option>'
-                + '<option value="C-">C-</option>'
-                + '<option value="F">F</option>'
-                + '<option value="N/A">N/A</option>'
-                + '</select>'
-                + '</div>'
-                + '</td></tr>');
-
-        // $('dropdown-88').val('A');
-    }
-
-}
 
 
 function printSumofCredit() {
@@ -184,4 +144,48 @@ function ajaxCallForDropDown() {
             alert("ERROR");
         }
     });
+}
+
+
+function populateMainTable(coursesJson) {
+
+    for (var i = 0; i < coursesJson.length; i++) {
+
+        var courseRegId = coursesJson[i].courseRegistrationId;
+        var code = coursesJson[i].courseCode;
+        var title = coursesJson[i].title;
+        var credit = coursesJson[i].credit;
+        var grade = coursesJson[i].grade;
+        if(grade == 'N/A'){
+            grade = '<p style="color:#808080">N/A</p>';
+        }else{
+            grade = '<p><b>'+grade+'</b></p>';
+        }
+
+        $('#table-registered-courses tr.total-row').before('<tr id="main-tr-' + courseRegId + '"><td>' + code + '</td> <td>'
+                + title + '</td> <td class="credit" style="text-align: center">' +
+                +credit + '</td> <td style="text-align: center">'
+                + '<div>' + grade
+                + '</div></td> <td>'
+                + '<div>'
+                + '<select class="dropdown-grade" id="dropdown-' + courseRegId + '" style="width:70px; height: 20px; font-size: 12px">'
+                + '<option selected style="display:none">change</option>'
+                + '<option value="A+">A+</option>'
+                + '<option value="A">A</option>'
+                + '<option value="A-">A-</option>'
+                + '<option value="B+">B+</option>'
+                + '<option value="B">B</option>'
+                + '<option value="B-">B-</option>'
+                + '<option value="C+">C+</option>'
+                + '<option value="C">C</option>'
+                + '<option value="C-">C-</option>'
+                + '<option value="F">F</option>'
+                + '<option value="N/A">N/A</option>'
+                + '</select>'
+                + '</div>'
+                + '</td></tr>');
+
+        // $('dropdown-88').val('A');
+    }
+
 }

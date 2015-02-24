@@ -24,7 +24,7 @@ function ajaxCallForCurrentSemester() {
         url: '../GetCurrentSemester',
         type: 'POST',
         success: function (currentSemester) {
-            $('#semester-dropdown').val(currentSemester - 2).change();
+            $('#semester-dropdown').val(currentSemester).change();
         },
         error: function () {
             alert("ERRORX");

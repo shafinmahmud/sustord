@@ -34,19 +34,19 @@
         <property name="hibernate.connection.username">adminA1k8pBf</property>
         <property name="hibernate.connection.password">qZvnWqvPuV6E</property>
         
-        <!-- Database connection
+        <!-- Database connection-->
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="hibernate.connection.url">jdbc:mysql://localhost/sustord</property>
         <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.connection.password">1234</property>-->
+        <property name="hibernate.connection.password">1234</property>
 
-        <!-- JDBC connection pool (use the built-in) -->
+        <!-- JDBC connection pool (use the built-in) 
         <property name="hibernate.c3p0.acquire_increment">1</property>
         <property name="hibernate.c3p0.idle_test_period">100</property>
         <property name="hibernate.c3p0.max_size">10</property>
         <property name="hibernate.c3p0.max_statements">10</property>
         <property name="hibernate.c3p0.min_size">10</property>
-        <property name="hibernate.c3p0.timeout">100</property>
+        <property name="hibernate.c3p0.timeout">100</property>-->
 
         <!-- SQL dialect -->
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
