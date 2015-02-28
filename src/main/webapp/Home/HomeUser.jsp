@@ -27,8 +27,11 @@
             </style>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
             <meta name="viewport" content="width=device-width">
+
+            <%@include  file="../WEB-INF/jspf/BootstrapInclude.jspf"%>
+
             <link href="../page_files/css/style.css" rel="stylesheet">
-            <script src=""></script>
+
         </head>
         <body>
             <%@include  file="../WEB-INF/jspf/AccessValidation.jspf"%>
@@ -41,10 +44,10 @@
                     <%                        StudentService studentService;
                         studentService = (StudentService) session.getAttribute("studentService");
                         String regNo = (String) request.getSession().getAttribute("regNo");
-                        
+
                         StudentInfo studentInfo = studentService.getStudentInfoObjectFromRegNo(regNo);
                         String name = studentInfo.getPersonalInfo().getName();
-                        
+
                         int semx = studentService.getStudentCurrentSemester(regNo);
                         String semesterName = FormatService.formatSemesterName(semx);
                     %>
@@ -93,12 +96,13 @@
                                                 String date = calenderService.getDateLabel(i);
                                                 String day = calenderService.getDayLabel(i);
                                                 //String routines = studentService.getStudentRoutine(day);
-                                                List<ClassRoutinePOJO> routines = studentService.getStudentRoutine(regNo,day);
-                                                
-                                                if(i==0)
+                                                List<ClassRoutinePOJO> routines = studentService.getStudentRoutine(regNo, day);
+
+                                                if (i == 0) {
                                                     day = "TODAY";
-                                                else if(i==1)
+                                                } else if (i == 1) {
                                                     day = "TOMORROW";
+                                                }
 
 
                                         %>
@@ -113,16 +117,16 @@
                                                         for (ClassRoutinePOJO r : routines) {
                                                 %>
                                                 <div>
-                                                    <small>Time: <label><%=r.getStart()%> - <%=r.getEnd()%></label></small>
+                                                    <i><small>Time: <label><%=r.getStart()%> - <%=r.getEnd()%></label></small></i>
                                                 </div>
-                                                    <div><p style="font-size: 13px"><%=r.getCourseCode() + "  " + r.getTitle()%></p>       
+                                                <div><p style="font-size: 13px"><%=r.getCourseCode() + "  " + r.getTitle()%></p>       
                                                 </div>
                                                 <%}
-                                                    }else{
-                                                        %>
-                                                        <div><p style="font-size: 13px"><i>No Classes on this day</i></p>       
+                                                } else {
+                                                %>
+                                                <div><p style="font-size: 13px"><i>No Classes on this day</i></p>       
                                                 </div>
-                                                        <%
+                                                <%
                                                     }
                                                 %>
 
@@ -149,18 +153,17 @@
                                         <tbody>
                                             <%
                                                 List<SyllabusPOJO> courseList;
-                                                courseList = studentService.getStudentRegisteredCoursesAsEntity(regNo,semx);
-                                                for (SyllabusPOJO s: courseList) {
+                                                courseList = studentService.getStudentRegisteredCoursesAsEntity(regNo, semx);
+                                                for (SyllabusPOJO s : courseList) {
                                                     String courseCode = s.getCourseCode();
                                                     String title = s.getTitle();
                                                     double credit = s.getCredit();
                                                     double hour = s.getHrsWeek();
-                                                    
-                                                    
+
                                                     String hrsWeekString = "";
                                                     if (s.isTheoryOrLab()) {
                                                         hrsWeekString = String.valueOf(hour) + " + 0";
-                                                    } else { 
+                                                    } else {
                                                         hrsWeekString = "0 + " + String.valueOf(hour);
                                                     }
                                             %>

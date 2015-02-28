@@ -21,7 +21,9 @@
                                                                    -webkit-transition:0s all!important;}
             </style>
             <meta name="viewport" content="width=device-width">
-            <title>Curriculum</title>
+            <title>Course Details</title>
+            
+            <%@include  file="../WEB-INF/jspf/BootstrapInclude.jspf"%>
             <link href="../page_files/css/style.css" rel="stylesheet">
 
             <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700' rel='stylesheet' type='text/css'>
@@ -46,40 +48,40 @@
 
                     <div class="margin5">
                         <fieldset>
-                           
+
                             <table class="table">
                                 <tbody>
                                     <tr style="background-color: #D8E2F3;">
                                         <td>
-                                           <legend>Course Details</legend>
-                                        </td>
-                                        <td>
-                                            <select class="form-control pull-right" id="semester-dropdown" name="reg-semester-dropdown" style="width: 250px">
-                                                <%                                            StudentService studentService = (StudentService) session.getAttribute("studentService");
-                                                    String regNo = (String) request.getSession().getAttribute("regNo");
-                                                    int numofsem = studentService.getStudentTotalSemester(regNo);
-                                                    int currentSemester = 2;
+                                <legend>Course Details</legend>
+                                </td>
+                                <td>
+                                    <select class="form-control pull-right" id="semester-dropdown" name="reg-semester-dropdown" style="width: 250px">
+                                        <%                                            StudentService studentService = (StudentService) session.getAttribute("studentService");
+                                            String regNo = (String) request.getSession().getAttribute("regNo");
+                                            int numofsem = studentService.getStudentTotalSemester(regNo);
+                                            int currentSemester = 2;
 
-                                                    for (int i = 1; i <= numofsem; i++) {
-                                                        if (i == currentSemester) {
-                                                %>
-                                                <option value="<%=i%>"><%=FormatService.formatSemesterName(i)%></option>
-                                                <%
-                                                } else {
-                                                %>
-                                                <option value="<%=i%>"><%=FormatService.formatSemesterName(i)%></option>
-                                                <%
-                                                        }
-                                                    }
-                                                %>
-                                                <option value="0">Optional Courses</option>
-                                            </select>
+                                            for (int i = 1; i <= numofsem; i++) {
+                                                if (i == currentSemester) {
+                                        %>
+                                        <option value="<%=i%>"><%=FormatService.formatSemesterName(i)%></option>
+                                        <%
+                                        } else {
+                                        %>
+                                        <option value="<%=i%>"><%=FormatService.formatSemesterName(i)%></option>
+                                        <%
+                                                }
+                                            }
+                                        %>
+                                        <option value="0">Optional Courses</option>
+                                    </select>
 
-                                        </td>
-                                    </tr>
+                                </td>
+                                </tr>
                                 </tbody>
                             </table>
-                                
+
                             <br>
 
                             <div id="details-div">

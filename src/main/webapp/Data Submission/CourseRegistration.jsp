@@ -17,8 +17,9 @@
         <style type="text/css"></style>
         <meta name="viewport" content="width=device-width">
         <title>Course Registration</title>
+        <%@include  file="../WEB-INF/jspf/BootstrapInclude.jspf"%>
         <link href="../page_files/css/style.css" rel="stylesheet">
-
+        
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="../page_files/css/font-awesome/font-awesome.css">
         <link rel="stylesheet" href="../page_files/css/font-awesome/button-style.css" />

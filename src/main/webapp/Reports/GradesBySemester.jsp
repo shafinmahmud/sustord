@@ -24,6 +24,7 @@
             </style>
             <meta name="viewport" content="width=device-width">
             <title>Grade by Semester</title>
+            <%@include  file="../WEB-INF/jspf/BootstrapInclude.jspf"%>
             <link href="../page_files/css/style.css" rel="stylesheet">
         </head>
         <body>
@@ -38,13 +39,13 @@
                         <fieldset>
 
                             <legend>Grade Report by Semester
-                               <a class="btn btn-danger btn-xs pull-right" type="submit" value="print" onClick="window.print()">Print</a>
+                                <a class="btn btn-danger btn-xs pull-right" type="submit" value="print" onClick="window.print()">Print</a>
                             </legend>
                             <%StudentService studentService;
                                 studentService = (StudentService) session.getAttribute("studentService");
                                 String regNo = (String) request.getSession().getAttribute("regNo");
                                 StudentInfo studentInfo = studentService.getStudentInfoObjectFromRegNo(regNo);
-                                
+
                                 String name = studentInfo.getPersonalInfo().getName();
                                 String sessionName = studentService.getStudentSessiontName(regNo);
                                 String dept = studentService.getStudentDepartmentName(regNo);
@@ -124,7 +125,7 @@
 
                                         </tr>
                                         <%
-                                            List<SyllabusPOJO> courses = studentService.getStudentRegisteredCoursesAsEntity(regNo,i + 1);
+                                            List<SyllabusPOJO> courses = studentService.getStudentRegisteredCoursesAsEntity(regNo, i + 1);
                                             List<SyllabusPOJO> drops = new ArrayList<SyllabusPOJO>();
                                             //for current semester
                                             double passedCredit = CgpaCalculation.getPassedCreditOfSemester(courses);
@@ -133,7 +134,7 @@
                                             String gradeLetter = CgpaCalculation.getGradeLetterFromGradePoint(gradePoint);
 
                                             //for cummilative calculation
-                                            List<SyllabusPOJO> cummilativeCourses = studentService.getStudentRegisteredCoursesAll(regNo,i + 1);
+                                            List<SyllabusPOJO> cummilativeCourses = studentService.getStudentRegisteredCoursesAll(regNo, i + 1);
                                             double passedCreditC = CgpaCalculation.getPassedCreditOfSemester(cummilativeCourses);
                                             double totalCreditC = CgpaCalculation.getTotalCreditOfSemester(cummilativeCourses);
                                             double gradePointC = CgpaCalculation.getGradePointOfSemester(cummilativeCourses);

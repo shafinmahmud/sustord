@@ -14,6 +14,7 @@
         <style type="text/css"></style>
         <meta name="viewport" content="width=device-width">
         <title>Result Edit</title>
+        <%@include  file="../WEB-INF/jspf/BootstrapInclude.jspf"%>
         <link href="../page_files/css/style.css" rel="stylesheet">
 
         <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>

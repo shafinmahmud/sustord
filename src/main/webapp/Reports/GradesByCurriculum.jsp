@@ -23,7 +23,8 @@
             </style>
             <meta name="viewport" content="width=device-width">
             <title>Grade by Curriculum</title>
-            <link href="../page_files/css/style.css" rel="stylesheet">
+            <%@include  file="../WEB-INF/jspf/BootstrapInclude.jspf"%>
+            <link href="../page_files/css/style.css" rel="stylesheet"></link>
         </head>
         <body>
             <%@include  file="../WEB-INF/jspf/AccessValidation.jspf"%>
@@ -40,9 +41,9 @@
                                 studentService = (StudentService) session.getAttribute("studentService");
                                 String regNo = (String) request.getSession().getAttribute("regNo");
                                 StudentInfo studentInfo = studentService.getStudentInfoObjectFromRegNo(regNo);
-                                
+
                                 String name = studentInfo.getPersonalInfo().getName();
-                                
+
                                 String sessionName = studentService.getStudentSessiontName(regNo);
                                 String dept = studentService.getStudentDepartmentName(regNo);
                                 String program = studentService.getStudentProgramName(regNo);
@@ -102,9 +103,9 @@
                                             <td><%=creditsTotal%></td>
                                             <td>CGPA</td>
                                             <td>:</td>
-                                 <td class="badge pull-left"><%=cgpa%></td>
+                                            <td class="badge pull-left"><%=cgpa%></td>
 
-                                    </tr>
+                                        </tr>
 
                                     </tbody></table>
                                 <div class="text-center"><h4><label>Academic Semesters</label></h4> </div>         
@@ -134,7 +135,7 @@
                                         </thead>
                                         <tbody>
                                             <%
-                                                List<SyllabusPOJO> courses = studentService.getStudentSyllabusAsEntity(regNo,i + 1);
+                                                List<SyllabusPOJO> courses = studentService.getStudentSyllabusAsEntity(regNo, i + 1);
                                                 double totalCredit = 0;
                                                 double completedCredit = 0;
 

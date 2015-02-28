@@ -20,6 +20,7 @@
             </style>
             <meta name="viewport" content="width=device-width">
             <title>Curriculum</title>
+            <%@include  file="../WEB-INF/jspf/BootstrapInclude.jspf"%>
             <link href="../page_files/css/style.css" rel="stylesheet">
         </head>
         <body>
@@ -37,16 +38,16 @@
                                 String regNo = (String) request.getSession().getAttribute("regNo");
                                 StudentInfo studentInfo = studentService.getStudentInfoObjectFromRegNo(regNo);
                                 String name = studentInfo.getPersonalInfo().getName();
-                                
+
                                 String sessionName = studentService.getStudentSessiontName(regNo);
                                 String dept = studentService.getStudentDepartmentName(regNo);
                                 String program = studentService.getStudentProgramName(regNo);
                                 String school = studentService.getStudentSchoolName(regNo);
-                                
+
                                 double creditsCompleted = studentService.getCreditsCompleted(regNo);
                                 double creditsTotal = studentService.getTotalCredits(regNo);
                                 double cgpa = studentService.getCGPA(regNo);
-                                
+
                                 String fatherName = studentInfo.getPersonalInfo().getFathersName();
                                 String motherName = studentInfo.getPersonalInfo().getMothersName();
                                 String presentAddress = studentInfo.getPersonalInfo().getPresentAddress();

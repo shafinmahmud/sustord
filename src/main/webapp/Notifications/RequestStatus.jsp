@@ -11,6 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width">
         <title>Request Status</title>
+        <%@include  file="../WEB-INF/jspf/BootstrapInclude.jspf"%>
         <link href="../page_files/css/style.css" rel="stylesheet">
     </head>
     <body>

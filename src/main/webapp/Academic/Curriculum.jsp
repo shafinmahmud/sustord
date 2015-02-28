@@ -22,6 +22,7 @@
             </style>
             <meta name="viewport" content="width=device-width">
             <title>Curriculum</title>
+            <%@include  file="../WEB-INF/jspf/BootstrapInclude.jspf"%>
             <link href="../page_files/css/style.css" rel="stylesheet">
         </head>
         <body>

@@ -22,6 +22,7 @@
         <style type="text/css"></style>
         <meta name="viewport" content="width=device-width">
         <title>Personal Information</title>
+        <%@include  file="../WEB-INF/jspf/BootstrapInclude.jspf"%>
         <link href="../page_files/css/style.css" rel="stylesheet">
 
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>

@@ -15,6 +15,7 @@
         <title>Course Analysis</title>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
         <script src="http://code.highcharts.com/highcharts.js"></script>
+        <%@include  file="../WEB-INF/jspf/BootstrapInclude.jspf"%>
         <link href="../page_files/css/style.css" rel="stylesheet">
 
         <script src="./course-analysis-script.js"></script>
@@ -29,44 +30,45 @@
 
                     <div class="margin5">
                         <fieldset>
-                            
+
                             <table class="table">
                                 <tbody>
                                     <tr style="background-color: #D8E2F3;">
                                         <td>
-                                           <legend>Semester Grade Analysis</legend>
-                                        </td>
-                                        <td>
-                                            <select class="form-control pull-right" id="semester-dropdown" name="reg-semester-dropdown" style="width: 250px">
-                                                <%                                            StudentService studentService = (StudentService) session.getAttribute("studentService");
-                                                    String regNo = (String) request.getSession().getAttribute("regNo");
-                                                    int numofsem = studentService.getStudentTotalSemester(regNo);
-                                                    int currentSemester = 2;
+                                <legend>Semester Grade Analysis</legend>
+                                </td>
+                                <td>
+                                    <select class="form-control pull-right" id="semester-dropdown" name="reg-semester-dropdown" style="width: 250px">
+                                        <%                                            
+                                            StudentService studentService = (StudentService) session.getAttribute("studentService");
+                                            String regNo = (String) request.getSession().getAttribute("regNo");
+                                            int numofsem = studentService.getStudentTotalSemester(regNo);
+                                            int currentSemester = 2;
 
-                                                    for (int i = 1; i <= numofsem; i++) {
-                                                        if (i == currentSemester) {
-                                                %>
-                                                <option value="<%=i%>"><%=FormatService.formatSemesterName(i)%></option>
-                                                <%
-                                                } else {
-                                                %>
-                                                <option value="<%=i%>"><%=FormatService.formatSemesterName(i)%></option>
-                                                <%
-                                                        }
-                                                    }
-                                                %>
-                                                <option value="0">Optional Courses</option>
-                                            </select>
+                                            for (int i = 1; i <= numofsem; i++) {
+                                                if (i == currentSemester) {
+                                        %>
+                                        <option value="<%=i%>"><%=FormatService.formatSemesterName(i)%></option>
+                                        <%
+                                        } else {
+                                        %>
+                                        <option value="<%=i%>"><%=FormatService.formatSemesterName(i)%></option>
+                                        <%
+                                                }
+                                            }
+                                        %>
+                                        <option value="0">Optional Courses</option>
+                                    </select>
 
-                                        </td>
-                                    </tr>
+                                </td>
+                                </tr>
                                 </tbody>
                             </table>
 
                             <br>
 
                             <div id="bar-chart-div"></div>
-                            
+
                             <br>
                             <br>
                             <p style="font-size: 20px; text-align: center">Course Grade Distribution</p>

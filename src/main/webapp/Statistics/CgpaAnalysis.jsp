@@ -24,7 +24,8 @@
             </style>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
             <meta name="viewport" content="width=device-width">
-            <link href="../page_files/css/style.css" rel="stylesheet">
+                    <%@include  file="../WEB-INF/jspf/BootstrapInclude.jspf"%>
+        <link href="../page_files/css/style.css" rel="stylesheet">
 
             <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
             <script src="http://code.highcharts.com/highcharts.js"></script>
@@ -41,7 +42,8 @@
                 <div id="main-content" class="col-md-10 column800">
                     <div class="col-lg-12">
                         <fieldset>
-                            <%                                    StudentService studentService;
+                            <%                                    
+                                StudentService studentService;
                                 studentService = (StudentService) session.getAttribute("studentService");
                                 String myRegNo = (String) request.getSession().getAttribute("regNo");
                                 List<StudentPOJO> students = studentService.getStudentRankList(myRegNo);
@@ -125,7 +127,7 @@
                     <br>
                     <legend>CGPA Ranking</legend>
                     <fieldset>
-                        <table class="table table-striped">
+                        <table class="table table-condensed">
                             <thead>
                                 <tr>
                                     <th style="width: 5%">#Rank</th>
@@ -145,7 +147,7 @@
                                         if (myRegNo.equals(reg)) {
 
                                 %>
-                                <tr>
+                                <tr class="success">
                                     <td class="text-center"><b>#<%=students.indexOf(s) + 1%></b></td>
                                     <td><b><%=name%></b></td>
                                     <td  class="text-center"><b><%=reg%></b></td>
