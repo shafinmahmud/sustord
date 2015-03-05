@@ -4,7 +4,6 @@
     Author     : SHAFIN
 --%>
 
-<%@page import="com.sun.javafx.scene.control.skin.VirtualFlow.ArrayLinkedList"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="me.shafin.sustord.bean.ClassRoutinePOJO"%>
 <%@page import="me.shafin.sustord.bean.SyllabusPOJO"%>
