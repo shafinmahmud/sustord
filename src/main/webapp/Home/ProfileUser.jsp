@@ -102,16 +102,8 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="col-md-4"> 
-                                <%
-                                    if (regNo.equals("2011331001")) {
-                                %>
-                                <img class="img-responsive" src="../page_files/images/2011331001.jpg" data-src="holder.js/170x200" alt="pic"> 
-                                <%} else {
-                                %>
-                                <img class="img-responsive" src="../page_files/images/empty-profile-pic.gif" data-src="holder.js/170x200" alt="pic"> 
-                                <%}
-                                %> 
+                            <div class="col-md-4">           
+                                <img class="img-responsive" src="../page_files/images/profilepic/<%=studentService.getPhotoUrl(regNo)%>" alt="pic">                                
                             </div>
 
 

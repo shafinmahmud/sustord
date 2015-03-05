@@ -16,6 +16,7 @@ public class SyllabusPOJO {
     private String courseCode;
     private String offerringDept;
     private String acceptingDept;
+    private String courseRegistrationStatus;
     private String title;
     private double credit;
     private String prerequisite;
@@ -338,6 +339,20 @@ public class SyllabusPOJO {
      */
     public void setNoOfAttendedStudent(int noOfAttendedStudent) {
         this.noOfAttendedStudent = noOfAttendedStudent;
+    }
+
+    /**
+     * @return the courseRegistrationStatus
+     */
+    public String getCourseRegistrationStatus() {
+        return courseRegistrationStatus;
+    }
+
+    /**
+     * @param courseRegistrationStatus the courseRegistrationStatus to set
+     */
+    public void setCourseRegistrationStatus(String courseRegistrationStatus) {
+        this.courseRegistrationStatus = courseRegistrationStatus;
     }
 
 }

@@ -4,6 +4,7 @@
     Author     : SHAFIN
 --%>
 
+<%@page import="com.sun.javafx.scene.control.skin.VirtualFlow.ArrayLinkedList"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="me.shafin.sustord.bean.ClassRoutinePOJO"%>
 <%@page import="me.shafin.sustord.bean.SyllabusPOJO"%>
@@ -50,19 +51,24 @@
 
                         int semx = studentService.getStudentCurrentSemester(regNo);
                         String semesterName = FormatService.formatSemesterName(semx);
+                        
                     %>
                     <div class="row">
-                        <div class="col-sm-12 col-xs-12 col-md-3 column200-quick">
+                        <div class="col-sm-12 col-xs-12 col-md-3 column200-quick ">
                             <br>
                             <div class="text-center home-profile-title">
                                 <a href="../Home/ProfileUser.jsp">
-                                    <div style="font-size: 16px"><%=regNo%></div>
-                                    <div><%=name%></div>
+                                    <img src="../page_files/images/profilepic/<%=studentService.getPhotoUrl(regNo)%>" class="img-circle" height="92" alt="User Image" />
                                 </a>
+                                
+                                <br><br>
+                                <a href="../Home/ProfileUser.jsp">  
+                                    <div><%=name%></div>
+                                    <div style="font-size: 14px"><%=regNo%></div>
+                                </a>
+                                <hr>
+                                <br>
                             </div>
-                            <br>
-                            <hr>
-                            <br>
                         </div>
                         <div class="col-sm-12 col-xs-12 col-md-9 column600">
 
@@ -103,8 +109,6 @@
                                                 } else if (i == 1) {
                                                     day = "TOMORROW";
                                                 }
-
-
                                         %>
                                         <tr>
                                             <td>
@@ -152,9 +156,60 @@
                                         </thead>
                                         <tbody>
                                             <%
-                                                List<SyllabusPOJO> courseList;
-                                                courseList = studentService.getStudentRegisteredCoursesAsEntity(regNo, semx);
-                                                for (SyllabusPOJO s : courseList) {
+                                                List<SyllabusPOJO> registeredList;
+                                                List<SyllabusPOJO> regularList;
+                                                List<SyllabusPOJO> droppedList;
+
+                                                registeredList = studentService.getStudentRegisteredCoursesAsEntity(regNo, semx);
+                                                regularList = new ArrayList<SyllabusPOJO>();
+                                                droppedList = new ArrayList<SyllabusPOJO>();
+                                                double totalCredit = 0;
+                                                
+                                                for (SyllabusPOJO s : registeredList) {
+                                                    if (s.getOfferingSemester() != semx) {
+                                                        droppedList.add(s);
+                                                    } else {
+                                                        regularList.add(s);
+                                                    }
+                                                    totalCredit += s.getCredit();
+                                                }
+
+                                                for (SyllabusPOJO s : regularList) {
+
+                                                    String courseCode = s.getCourseCode();
+                                                    String title = s.getTitle();
+                                                    double credit = s.getCredit();
+                                                    double hour = s.getHrsWeek();
+
+                                                    String hrsWeekString = "";
+                                                    if (s.isTheoryOrLab()) {
+                                                        hrsWeekString = String.valueOf(hour) + " + 0";
+                                                    } else {
+                                                        hrsWeekString = "0 + " + String.valueOf(hour);
+                                                    }
+
+
+                                            %>
+                                            <tr>
+                                                <td><%=courseCode%></td> 
+                                                <td><%=title%></td> 
+                                                <td><%=credit%></td> 
+                                                <td> <div> 
+                                                        <p><%=hrsWeekString%></p>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <%
+                                                }
+                                                if (droppedList.size() != 0) {
+
+                                            %>
+                                            <tr  class="danger">
+                                                <td colspan="4" style="font-size: 13px; padding-top: 10px; text-align: center"><i>Dropped courses</i></td>   
+                                            </tr>
+
+                                            <%                                                for (SyllabusPOJO s : droppedList) {
+
                                                     String courseCode = s.getCourseCode();
                                                     String title = s.getTitle();
                                                     double credit = s.getCredit();
@@ -177,11 +232,22 @@
                                                 </td>
                                             </tr>
                                             <%
+                                                    }
                                                 }
                                             %>
-
+                                        <tfoot >
+                                            <tr>
+                                                <th colspan="2" style="text-align: center">
+                                                    <b>Total credit</b>
+                                                </th>
+                                                <th style="text-align: left; font-size: 14px" id="total_credit" colspan="2">
+                                                    <b><%=totalCredit%></b>
+                                                </th>
+                                            </tr>
+                                        </tfoot>
                                         </tbody></table>
                                 </div>
+                                      
                             </fieldset>
                         </div>
                     </div>

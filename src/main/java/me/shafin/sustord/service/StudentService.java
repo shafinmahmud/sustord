@@ -364,6 +364,7 @@ public class StudentService {
                 syllabusPojo.setCourseRegistrationId(c.getCourseRegistrationId());
                 syllabusPojo.setSyllabusId(c.getSyllabusIdFk().getSyllabusId());
                 syllabusPojo.setOfferingSemester(c.getSyllabusIdFk().getSemester());
+                syllabusPojo.setTakenSemester(semester);
                 syllabusPojo.setCourseCode(c.getSyllabusIdFk().getCourseIdFk().getCourseCode());
                 syllabusPojo.setTitle(c.getSyllabusIdFk().getCourseIdFk().getTitle());
                 syllabusPojo.setCredit(c.getSyllabusIdFk().getCourseIdFk().getCredit());
@@ -371,16 +372,13 @@ public class StudentService {
 
                 String grade;
                 if (c.getGrade() == null || c.getGrade().equals("")) {
-                    grade = "N/A";
-
-                    syllabusPojo.setStatus("N/A");
+                    grade = "N/A";      
                 } else if (c.getGrade().equals("F")) {
-                    grade = "F";
-                    syllabusPojo.setStatus("DROPPED");
+                    grade = "F";                
                 } else {
-                    grade = c.getGrade();
-                    syllabusPojo.setStatus("PASSED");
+                    grade = c.getGrade();                 
                 }
+                
                 syllabusPojo.setGrade(grade);
                 syllabusPojo.setPoint(CgpaCalculation.getGradePointFromGradeLetter(grade));
 
@@ -1171,6 +1169,12 @@ public class StudentService {
         return sessionName;
     }
 
+    public String getPhotoUrl(String regNo) {
+        StudentInfo std = getStudentInfoObjectFromRegNo(regNo);
+        String url = std.getPersonalInfo().getPhotoUrl();
+        return url;
+    }
+    
     public StudentInfo getStudentInfoObjectFromRegNo(String regNo) {
 
         Session session = sessionFactory.openSession();

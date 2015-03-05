@@ -91,9 +91,9 @@ public class PersonalInfo implements Serializable {
     @Size(max = 45)
     @Column(name = "contact")
     private String contact;
-    @Lob
-    @Column(name = "photo")
-    private byte[] photo;
+    @Size(max = 45)
+    @Column(name = "photo_url")
+    private String photoUrl;
     @JoinColumn(name = "student_info_id_fk", referencedColumnName = "student_info_id")
     @OneToOne(optional = false)
     private StudentInfo studentInfoIdFk;
@@ -217,12 +217,12 @@ public class PersonalInfo implements Serializable {
         this.contact = contact;
     }
 
-    public byte[] getPhoto() {
-        return photo;
+    public String getPhotoUrl() {
+        return photoUrl;
     }
 
-    public void setPhoto(byte[] photo) {
-        this.photo = photo;
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
     }
 
     public StudentInfo getStudentInfoIdFk() {

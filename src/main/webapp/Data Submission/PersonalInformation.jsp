@@ -294,54 +294,52 @@
 
                                     </table>
                                 </div>
-                                <div > 
-                                    <img class="" src="../page_files/images/empty-profile-pic.gif" height="250" alt="pic"> 
-                                </div>
                             </form>
-                            <div class="col-lg-3">
+                            <div class="col-md-3"> 
+                                <img class="img-responsive" src="../page_files/images/profilepic/<%=service.getPhotoUrl(regNo)%>" alt="pic"> 
                                 <h4> Choose Image </h4>
                                 <form action="upload" method="post" enctype="multipart/form-data">
                                     <input class ="fileupload" type="file" name="file" />
                                     <input type="submit" value="upload" />
-                                </form>         
+                                </form>
+                            </div>
+
                             </div>
 
                         </div>
-
                     </div>
                 </div>
+
             </div>
 
-        </div>
+            <%@include  file="../WEB-INF/jspf/Footer.jspf"%>
 
-        <%@include  file="../WEB-INF/jspf/Footer.jspf"%>
-
-        <script>
+            <script>
 
 
-            var precountry = "<%=presentCountry%>";
-            if (precountry !== "null")
-                $("#present-country").val(precountry);
-            var percountry = "<%=permanentCountry%>";
-            //alert(precountry+precountry.length+percountry+percountry.length);
-            if (percountry !== "null")
-                $("#permanent-country").val(percountry);
-            var gender = "<%=personalInfo.getSex()%>";
-            if (gender != "null")
-                $("#sex").val(gender);
-            var religion = "<%=personalInfo.getReligion()%>";
-            if (religion !== "null")
-                $("#religion").val(religion);
-            var maritalst = "<%=personalInfo.getMaritalStatus()%>";
-            if (maritalst !== "null") {
-                $("#marital-status").val(maritalst);
-            }
+                var precountry = "<%=presentCountry%>";
+                if (precountry !== "null")
+                    $("#present-country").val(precountry);
+                var percountry = "<%=permanentCountry%>";
+                //alert(precountry+precountry.length+percountry+percountry.length);
+                if (percountry !== "null")
+                    $("#permanent-country").val(percountry);
+                var gender = "<%=personalInfo.getSex()%>";
+                if (gender != "null")
+                    $("#sex").val(gender);
+                var religion = "<%=personalInfo.getReligion()%>";
+                if (religion !== "null")
+                    $("#religion").val(religion);
+                var maritalst = "<%=personalInfo.getMaritalStatus()%>";
+                if (maritalst !== "null") {
+                    $("#marital-status").val(maritalst);
+                }
 
 
-            var blood = "<%=personalInfo.getBloodGroup()%>";
-            if (blood !== "null")
-                $("#blood-group").val(blood);
-        </script>
+                var blood = "<%=personalInfo.getBloodGroup()%>";
+                if (blood !== "null")
+                    $("#blood-group").val(blood);
+            </script>
 
     </body>
 
