@@ -297,11 +297,11 @@
                             </form>
                             <div class="col-md-3"> 
                                 <img class="img-responsive" src="../page_files/images/profilepic/<%=service.getPhotoUrl(regNo)%>" alt="pic"> 
-                                <h4> Choose Image </h4>
+                                <!--<h4> Choose Image </h4>
                                 <form action="upload" method="post" enctype="multipart/form-data">
                                     <input class ="fileupload" type="file" name="file" />
                                     <input type="submit" value="upload" />
-                                </form>
+                                </form>-->
                             </div>
 
                             </div>
