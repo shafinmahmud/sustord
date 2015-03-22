@@ -10,7 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import me.shafin.sustord.entity.PersonalInfo;
+import me.shafin.sustord.model.PersonalInfo;
 import me.shafin.sustord.service.StudentService;
 
 /**

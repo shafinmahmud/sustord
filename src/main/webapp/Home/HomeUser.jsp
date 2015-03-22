@@ -4,62 +4,65 @@
     Author     : SHAFIN
 --%>
 
+<%@page import="me.shafin.sustord.controller.UserHomeController"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="me.shafin.sustord.bean.ClassRoutinePOJO"%>
 <%@page import="me.shafin.sustord.bean.SyllabusPOJO"%>
 <%@page import="java.util.List"%>
-<%@page import="me.shafin.sustord.entity.CourseRegistration"%>
+<%@page import="me.shafin.sustord.model.CourseRegistration"%>
 <%@page import="me.shafin.sustord.service.FormatService"%>
 <%@page import="me.shafin.sustord.service.CalenderService"%>
-<%@page import="me.shafin.sustord.entity.StudentInfo"%>
+<%@page import="me.shafin.sustord.model.StudentInfo"%>
 <%@page import="me.shafin.sustord.service.StudentService"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
 <html>
     <head>
-        <title>Home</title>
-        <style type="text/css">
-            [ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide
-            {display:none !important;
-            }ng\:form{display:block;}.ng-animate-block-transitions{transition:0s all!important;
-                                                                   -webkit-transition:0s all!important;}
-            </style>
-            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-            <meta name="viewport" content="width=device-width">
+        <title>Home</title>    
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width">
 
-            <%@include  file="../WEB-INF/jspf/BootstrapInclude.jspf"%>
+        <!-- Including Bootstrap-->
+        <%@include  file="../WEB-INF/jspf/BootstrapInclude.jspf"%>
+        <!-- style sheet for this page-->
+        <link href="../page_files/css/style.css" rel="stylesheet">
 
-            <link href="../page_files/css/style.css" rel="stylesheet">
+    </head>
+    <body>
+        <!-- validating access to this page-->
+        <%@include  file="../WEB-INF/jspf/AccessValidation.jspf"%>
+        <!-- nav bar portion -->
+        <%@include  file="../WEB-INF/jspf/NavBar.jspf"%>
 
-        </head>
-        <body>
-            <%@include  file="../WEB-INF/jspf/AccessValidation.jspf"%>
-            <%@include  file="../WEB-INF/jspf/NavBar.jspf"%>
-
-            <div class="portal-body">
+        <div class="portal-body">
             <div class="row">
+
+                <!-- Side bar portion -->
                 <%@include  file="../WEB-INF/jspf/SideBar.jspf"%>
+
                 <div id="main-content" class="col-md-10 column800">
                     <%                        StudentService studentService;
                         studentService = (StudentService) session.getAttribute("studentService");
+                        
                         String regNo = (String) request.getSession().getAttribute("regNo");
-
-                        StudentInfo studentInfo = studentService.getStudentInfoObjectFromRegNo(regNo);
-                        String name = studentInfo.getPersonalInfo().getName();
+                        
+                        UserHomeController homeController = new UserHomeController(regNo);
+                        String name = homeController.getStudentName();
+                        String url =  homeController.getStudentPhotoUrl();
 
                         int semx = studentService.getStudentCurrentSemester(regNo);
                         String semesterName = FormatService.formatSemesterName(semx);
-                        
+
                     %>
                     <div class="row">
                         <div class="col-sm-12 col-xs-12 col-md-3 column200-quick ">
                             <br>
                             <div class="text-center home-profile-title">
                                 <a href="../Home/ProfileUser.jsp">
-                                    <img src="../page_files/images/profilepic/<%=studentService.getPhotoUrl(regNo)%>" class="img-circle" height="92" alt="User Image" />
+                                    <img src="../page_files/images/profilepic/<%=url%>" class="img-circle" height="92" alt="User Image" />
                                 </a>
-                                
+
                                 <br><br>
                                 <a href="../Home/ProfileUser.jsp">  
                                     <div><%=name%></div>
@@ -163,7 +166,7 @@
                                                 regularList = new ArrayList<SyllabusPOJO>();
                                                 droppedList = new ArrayList<SyllabusPOJO>();
                                                 double totalCredit = 0;
-                                                
+
                                                 for (SyllabusPOJO s : registeredList) {
                                                     if (s.getOfferingSemester() != semx) {
                                                         droppedList.add(s);
@@ -246,13 +249,15 @@
                                         </tfoot>
                                         </tbody></table>
                                 </div>
-                                      
+
                             </fieldset>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- footer portion -->
         <%@include  file="../WEB-INF/jspf/Footer.jspf"%>
 
     </body></html>

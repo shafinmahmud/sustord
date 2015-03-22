@@ -61,22 +61,22 @@
         <property name="hbm2ddl.auto">update</property>
         
         <!-- Names the annotated entity class -->
-        <mapping class="me.shafin.sustord.entity.StudentBatch"/>
-        <mapping class="me.shafin.sustord.entity.PersonalInfo"/>
-        <mapping class="me.shafin.sustord.entity.AdminDashboardCourseRegistration"/>
-        <mapping class="me.shafin.sustord.entity.Department"/>
-        <mapping class="me.shafin.sustord.entity.ClassRoutine"/>
-        <mapping class="me.shafin.sustord.entity.Syllabus"/>
-        <mapping class="me.shafin.sustord.entity.Course"/>
-        <mapping class="me.shafin.sustord.entity.AdminDashboardProfile"/>
-        <mapping class="me.shafin.sustord.entity.TimeSlot"/>
-        <mapping class="me.shafin.sustord.entity.Degree"/>
-        <mapping class="me.shafin.sustord.entity.CourseRegistration"/>
-        <mapping class="me.shafin.sustord.entity.Prerequisite"/>
-        <mapping class="me.shafin.sustord.entity.School"/>
-        <mapping class="me.shafin.sustord.entity.DegreeOffered"/>
-        <mapping class="me.shafin.sustord.entity.AdminInfo"/>
-        <mapping class="me.shafin.sustord.entity.StudentInfo"/>
+        <mapping class="me.shafin.sustord.model.StudentBatch"/>
+        <mapping class="me.shafin.sustord.model.PersonalInfo"/>
+        <mapping class="me.shafin.sustord.model.AdminDashboardCourseRegistration"/>
+        <mapping class="me.shafin.sustord.model.Department"/>
+        <mapping class="me.shafin.sustord.model.ClassRoutine"/>
+        <mapping class="me.shafin.sustord.model.Syllabus"/>
+        <mapping class="me.shafin.sustord.model.Course"/>
+        <mapping class="me.shafin.sustord.model.AdminDashboardProfile"/>
+        <mapping class="me.shafin.sustord.model.TimeSlot"/>
+        <mapping class="me.shafin.sustord.model.Degree"/>
+        <mapping class="me.shafin.sustord.model.CourseRegistration"/>
+        <mapping class="me.shafin.sustord.model.Prerequisite"/>
+        <mapping class="me.shafin.sustord.model.School"/>
+        <mapping class="me.shafin.sustord.model.DegreeOffered"/>
+        <mapping class="me.shafin.sustord.model.AdminInfo"/>
+        <mapping class="me.shafin.sustord.model.StudentInfo"/>
 
     </session-factory>
 

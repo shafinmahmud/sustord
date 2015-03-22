@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package me.shafin.sustord.servlet;
 
 import java.io.IOException;
@@ -11,6 +6,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import me.shafin.sustord.controller.LoginController;
 import me.shafin.sustord.service.StudentService;
 
 /**
@@ -33,7 +29,7 @@ public class LoginServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         String userType = request.getParameter("ut");
-        String userId = request.getParameter("un");
+        String registrationNo = request.getParameter("un");
         String password = request.getParameter("pw");
 
         StudentService studentService = new StudentService();
@@ -41,9 +37,9 @@ public class LoginServlet extends HttpServlet {
         String verification = "noresponse#";
 
         if (userType.equals("student")) {
-            verification = studentService.verifyLogin(userId, password);
+            verification = LoginController.authencateStudent(registrationNo, password);
         } else if (userType.equals("admin")) {
-            // verification = loginService.authenticate(databaseConnection, userId, password, userType);        
+                  
         }
 
         String[] arr = verification.split("#");

@@ -18,14 +18,14 @@ import me.shafin.sustord.bean.ClassRoutinePOJO;
 import me.shafin.sustord.bean.SemesterStatPOJO;
 import me.shafin.sustord.bean.StudentPOJO;
 import me.shafin.sustord.bean.SyllabusPOJO;
-import me.shafin.sustord.entity.ClassRoutine;
-import me.shafin.sustord.entity.Course;
-import me.shafin.sustord.entity.CourseRegistration;
-import me.shafin.sustord.entity.PersonalInfo;
-import me.shafin.sustord.entity.Prerequisite;
-import me.shafin.sustord.entity.StudentInfo;
-import me.shafin.sustord.entity.Syllabus;
-import me.shafin.sustord.entity.TimeSlot;
+import me.shafin.sustord.model.ClassRoutine;
+import me.shafin.sustord.model.Course;
+import me.shafin.sustord.model.CourseRegistration;
+import me.shafin.sustord.model.PersonalInfo;
+import me.shafin.sustord.model.Prerequisite;
+import me.shafin.sustord.model.StudentInfo;
+import me.shafin.sustord.model.Syllabus;
+import me.shafin.sustord.model.TimeSlot;
 import me.shafin.sustord.utility.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -1131,30 +1131,6 @@ public class StudentService {
 
     }
 
-    /**
-     *
-     * @param regNo
-     * @return
-     */
-    public String getStudentProgramName(String regNo) {
-        StudentInfo std = getStudentInfoObjectFromRegNo(regNo);
-        String programName = std.getStudentBatchIdFk().getDegreeOfferedIdFk().getDegreeIdFk().getDegreeTypeName()
-                + " (" + std.getStudentBatchIdFk().getDegreeOfferedIdFk().getDegreeIdFk().getDegreeCategory() + ")";
-        return programName;
-    }
-
-    public String getStudentDepartmentName(String regNo) {
-        StudentInfo std = getStudentInfoObjectFromRegNo(regNo);
-        String departmentName = std.getStudentBatchIdFk().getDegreeOfferedIdFk().getDeptIdFk().getDeptName();
-        return departmentName;
-    }
-
-    public String getStudentSchoolName(String regNo) {
-        StudentInfo std = getStudentInfoObjectFromRegNo(regNo);
-        String schoolName = std.getStudentBatchIdFk().getDegreeOfferedIdFk()
-                .getDeptIdFk().getSchoolIdFk().getSchoolName();
-        return schoolName;
-    }
 
     public int getStudentTotalSemester(String regNo) {
         StudentInfo std = getStudentInfoObjectFromRegNo(regNo);
@@ -1169,11 +1145,6 @@ public class StudentService {
         return sessionName;
     }
 
-    public String getPhotoUrl(String regNo) {
-        StudentInfo std = getStudentInfoObjectFromRegNo(regNo);
-        String url = std.getPersonalInfo().getPhotoUrl();
-        return url;
-    }
     
     public StudentInfo getStudentInfoObjectFromRegNo(String regNo) {
 

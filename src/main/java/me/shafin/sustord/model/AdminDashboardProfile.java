@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package me.shafin.sustord.entity;
+package me.shafin.sustord.model;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -14,10 +14,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -26,38 +27,41 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author SHAFIN
  */
 @Entity
-@Table(name = "personal_info")
+@Table(name = "admin_dashboard_profile")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "PersonalInfo.findAll", query = "SELECT p FROM PersonalInfo p"),
-    @NamedQuery(name = "PersonalInfo.findByPersonalInfoId", query = "SELECT p FROM PersonalInfo p WHERE p.personalInfoId = :personalInfoId"),
-    @NamedQuery(name = "PersonalInfo.findByName", query = "SELECT p FROM PersonalInfo p WHERE p.name = :name"),
-    @NamedQuery(name = "PersonalInfo.findByFathersName", query = "SELECT p FROM PersonalInfo p WHERE p.fathersName = :fathersName"),
-    @NamedQuery(name = "PersonalInfo.findByMothersName", query = "SELECT p FROM PersonalInfo p WHERE p.mothersName = :mothersName"),
-    @NamedQuery(name = "PersonalInfo.findBySex", query = "SELECT p FROM PersonalInfo p WHERE p.sex = :sex"),
-    @NamedQuery(name = "PersonalInfo.findByReligion", query = "SELECT p FROM PersonalInfo p WHERE p.religion = :religion"),
-    @NamedQuery(name = "PersonalInfo.findByNationality", query = "SELECT p FROM PersonalInfo p WHERE p.nationality = :nationality"),
-    @NamedQuery(name = "PersonalInfo.findByMaritalStatus", query = "SELECT p FROM PersonalInfo p WHERE p.maritalStatus = :maritalStatus"),
-    @NamedQuery(name = "PersonalInfo.findByDateOfBirth", query = "SELECT p FROM PersonalInfo p WHERE p.dateOfBirth = :dateOfBirth"),
-    @NamedQuery(name = "PersonalInfo.findByBloodGroup", query = "SELECT p FROM PersonalInfo p WHERE p.bloodGroup = :bloodGroup"),
-    @NamedQuery(name = "PersonalInfo.findByPresentAddress", query = "SELECT p FROM PersonalInfo p WHERE p.presentAddress = :presentAddress"),
-    @NamedQuery(name = "PersonalInfo.findByPermanentAddress", query = "SELECT p FROM PersonalInfo p WHERE p.permanentAddress = :permanentAddress"),
-    @NamedQuery(name = "PersonalInfo.findByEmail", query = "SELECT p FROM PersonalInfo p WHERE p.email = :email"),
-    @NamedQuery(name = "PersonalInfo.findByContact", query = "SELECT p FROM PersonalInfo p WHERE p.contact = :contact")})
-public class PersonalInfo implements Serializable {
+    @NamedQuery(name = "AdminDashboardProfile.findAll", query = "SELECT a FROM AdminDashboardProfile a"),
+    @NamedQuery(name = "AdminDashboardProfile.findByAdminDashboardProfileId", query = "SELECT a FROM AdminDashboardProfile a WHERE a.adminDashboardProfileId = :adminDashboardProfileId"),
+    @NamedQuery(name = "AdminDashboardProfile.findByName", query = "SELECT a FROM AdminDashboardProfile a WHERE a.name = :name"),
+    @NamedQuery(name = "AdminDashboardProfile.findByFathersName", query = "SELECT a FROM AdminDashboardProfile a WHERE a.fathersName = :fathersName"),
+    @NamedQuery(name = "AdminDashboardProfile.findByMothersName", query = "SELECT a FROM AdminDashboardProfile a WHERE a.mothersName = :mothersName"),
+    @NamedQuery(name = "AdminDashboardProfile.findBySex", query = "SELECT a FROM AdminDashboardProfile a WHERE a.sex = :sex"),
+    @NamedQuery(name = "AdminDashboardProfile.findByReligion", query = "SELECT a FROM AdminDashboardProfile a WHERE a.religion = :religion"),
+    @NamedQuery(name = "AdminDashboardProfile.findByNationality", query = "SELECT a FROM AdminDashboardProfile a WHERE a.nationality = :nationality"),
+    @NamedQuery(name = "AdminDashboardProfile.findByMaritalStatus", query = "SELECT a FROM AdminDashboardProfile a WHERE a.maritalStatus = :maritalStatus"),
+    @NamedQuery(name = "AdminDashboardProfile.findByDateOfBirth", query = "SELECT a FROM AdminDashboardProfile a WHERE a.dateOfBirth = :dateOfBirth"),
+    @NamedQuery(name = "AdminDashboardProfile.findByBloodGroup", query = "SELECT a FROM AdminDashboardProfile a WHERE a.bloodGroup = :bloodGroup"),
+    @NamedQuery(name = "AdminDashboardProfile.findByPresentAddress", query = "SELECT a FROM AdminDashboardProfile a WHERE a.presentAddress = :presentAddress"),
+    @NamedQuery(name = "AdminDashboardProfile.findByPermanentAddress", query = "SELECT a FROM AdminDashboardProfile a WHERE a.permanentAddress = :permanentAddress"),
+    @NamedQuery(name = "AdminDashboardProfile.findByEmail", query = "SELECT a FROM AdminDashboardProfile a WHERE a.email = :email"),
+    @NamedQuery(name = "AdminDashboardProfile.findByContact", query = "SELECT a FROM AdminDashboardProfile a WHERE a.contact = :contact"),
+    @NamedQuery(name = "AdminDashboardProfile.findByApproval", query = "SELECT a FROM AdminDashboardProfile a WHERE a.approval = :approval")})
+public class AdminDashboardProfile implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "personal_info_id")
-    private Integer personalInfoId;
-    @Size(max = 250)
+    @Column(name = "admin_dashboard_profile_id")
+    private Integer adminDashboardProfileId;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 100)
     @Column(name = "name")
     private String name;
-    @Size(max = 250)
+    @Size(max = 100)
     @Column(name = "fathers_name")
     private String fathersName;
-    @Size(max = 250)
+    @Size(max = 100)
     @Column(name = "mothers_name")
     private String mothersName;
     @Size(max = 10)
@@ -78,10 +82,10 @@ public class PersonalInfo implements Serializable {
     @Size(max = 10)
     @Column(name = "blood_group")
     private String bloodGroup;
-    @Size(max = 400)
+    @Size(max = 300)
     @Column(name = "present_address")
     private String presentAddress;
-    @Size(max = 400)
+    @Size(max = 300)
     @Column(name = "permanent_address")
     private String permanentAddress;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
@@ -91,26 +95,36 @@ public class PersonalInfo implements Serializable {
     @Size(max = 45)
     @Column(name = "contact")
     private String contact;
-    @Size(max = 45)
-    @Column(name = "photo_url")
-    private String photoUrl;
+    @Lob
+    @Column(name = "photo")
+    private byte[] photo;
+    @Column(name = "approval")
+    private Short approval;
+    @JoinColumn(name = "student_batch_id_fk", referencedColumnName = "student_batch_id")
+    @ManyToOne(optional = false)
+    private StudentBatch studentBatchIdFk;
     @JoinColumn(name = "student_info_id_fk", referencedColumnName = "student_info_id")
-    @OneToOne(optional = false)
+    @ManyToOne(optional = false)
     private StudentInfo studentInfoIdFk;
 
-    public PersonalInfo() {
+    public AdminDashboardProfile() {
     }
 
-    public PersonalInfo(Integer personalInfoId) {
-        this.personalInfoId = personalInfoId;
+    public AdminDashboardProfile(Integer adminDashboardProfileId) {
+        this.adminDashboardProfileId = adminDashboardProfileId;
     }
 
-    public Integer getPersonalInfoId() {
-        return personalInfoId;
+    public AdminDashboardProfile(Integer adminDashboardProfileId, String name) {
+        this.adminDashboardProfileId = adminDashboardProfileId;
+        this.name = name;
     }
 
-    public void setPersonalInfoId(Integer personalInfoId) {
-        this.personalInfoId = personalInfoId;
+    public Integer getAdminDashboardProfileId() {
+        return adminDashboardProfileId;
+    }
+
+    public void setAdminDashboardProfileId(Integer adminDashboardProfileId) {
+        this.adminDashboardProfileId = adminDashboardProfileId;
     }
 
     public String getName() {
@@ -217,12 +231,28 @@ public class PersonalInfo implements Serializable {
         this.contact = contact;
     }
 
-    public String getPhotoUrl() {
-        return photoUrl;
+    public byte[] getPhoto() {
+        return photo;
     }
 
-    public void setPhotoUrl(String photoUrl) {
-        this.photoUrl = photoUrl;
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
+    }
+
+    public Short getApproval() {
+        return approval;
+    }
+
+    public void setApproval(Short approval) {
+        this.approval = approval;
+    }
+
+    public StudentBatch getStudentBatchIdFk() {
+        return studentBatchIdFk;
+    }
+
+    public void setStudentBatchIdFk(StudentBatch studentBatchIdFk) {
+        this.studentBatchIdFk = studentBatchIdFk;
     }
 
     public StudentInfo getStudentInfoIdFk() {
@@ -236,18 +266,18 @@ public class PersonalInfo implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (personalInfoId != null ? personalInfoId.hashCode() : 0);
+        hash += (adminDashboardProfileId != null ? adminDashboardProfileId.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PersonalInfo)) {
+        if (!(object instanceof AdminDashboardProfile)) {
             return false;
         }
-        PersonalInfo other = (PersonalInfo) object;
-        if ((this.personalInfoId == null && other.personalInfoId != null) || (this.personalInfoId != null && !this.personalInfoId.equals(other.personalInfoId))) {
+        AdminDashboardProfile other = (AdminDashboardProfile) object;
+        if ((this.adminDashboardProfileId == null && other.adminDashboardProfileId != null) || (this.adminDashboardProfileId != null && !this.adminDashboardProfileId.equals(other.adminDashboardProfileId))) {
             return false;
         }
         return true;
@@ -255,7 +285,7 @@ public class PersonalInfo implements Serializable {
 
     @Override
     public String toString() {
-        return "me.shafin.sustord.entity.PersonalInfo[ personalInfoId=" + personalInfoId + " ]";
+        return "me.shafin.sustord.entity.AdminDashboardProfile[ adminDashboardProfileId=" + adminDashboardProfileId + " ]";
     }
     
 }

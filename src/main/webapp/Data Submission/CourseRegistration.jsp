@@ -5,8 +5,8 @@
 --%>
 
 <%@page import="java.util.List"%>
-<%@page import="me.shafin.sustord.entity.Syllabus"%>
-<%@page import="me.shafin.sustord.entity.StudentInfo"%>
+<%@page import="me.shafin.sustord.model.Syllabus"%>
+<%@page import="me.shafin.sustord.model.StudentInfo"%>
 <%@page import="me.shafin.sustord.service.StudentService"%>
 <%@page import="me.shafin.sustord.service.FormatService"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

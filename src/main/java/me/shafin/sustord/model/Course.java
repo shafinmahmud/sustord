@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package me.shafin.sustord.entity;
+package me.shafin.sustord.model;
 
 import java.io.Serializable;
 import java.util.Collection;

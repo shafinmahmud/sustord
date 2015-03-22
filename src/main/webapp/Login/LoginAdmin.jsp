@@ -10,7 +10,7 @@
     <head>
         <meta name="viewport" content="width=device-width">       
         <title>SUST-ORD</title>
-        <link href="../page_files/css/loginStyle.css" rel="stylesheet">
+        <link href="../page_files/css/login.css" rel="stylesheet">
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>     
         <script src=""></script>
     </head>

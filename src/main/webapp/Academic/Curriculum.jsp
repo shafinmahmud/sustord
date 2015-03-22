@@ -4,47 +4,48 @@
     Author     : SHAFIN
 --%>
 
+<%@page import="me.shafin.sustord.bean.OptionalCoursePojo"%>
+<%@page import="me.shafin.sustord.bean.SyllabusCoursePojo"%>
+<%@page import="me.shafin.sustord.controller.CurriculumController"%>
 <%@page import="java.util.List"%>
 <%@page import="me.shafin.sustord.bean.SyllabusPOJO"%>
 <%@page import="me.shafin.sustord.service.FormatService"%>
-<%@page import="me.shafin.sustord.entity.StudentInfo"%>
+<%@page import="me.shafin.sustord.model.StudentInfo"%>
 <%@page import="me.shafin.sustord.service.StudentService"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
+        <title>Curriculum</title>    
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <style type="text/css">
-            [ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide
-            {display:none !important;
-            }ng\:form{display:block;}.ng-animate-block-transitions{transition:0s all!important;
-                                                                   -webkit-transition:0s all!important;}
-            </style>
-            <meta name="viewport" content="width=device-width">
-            <title>Curriculum</title>
-            <%@include  file="../WEB-INF/jspf/BootstrapInclude.jspf"%>
-            <link href="../page_files/css/style.css" rel="stylesheet">
-        </head>
-        <body>
-            <%@include  file="../WEB-INF/jspf/AccessValidation.jspf"%>
-            <%@include  file="../WEB-INF/jspf/NavBar.jspf"%>
+        <meta name="viewport" content="width=device-width">
 
-            <div class="portal-body">
+        <!-- Including Bootstrap-->
+        <%@include  file="../WEB-INF/jspf/BootstrapInclude.jspf"%>
+        <!-- style sheet for this page-->
+        <link href="../page_files/css/style.css" rel="stylesheet">
+    </head>
+    <body>
+        <!-- validating access to this page-->
+        <%@include  file="../WEB-INF/jspf/AccessValidation.jspf"%>
+        <!-- nav bar portion -->
+        <%@include  file="../WEB-INF/jspf/NavBar.jspf"%>
+
+        <div class="portal-body">
             <div class="row">
+                <!-- Side bar portion -->
                 <%@include  file="../WEB-INF/jspf/SideBar.jspf"%>
+
                 <div id="main-content" class="col-md-10 column800">
                     <div class="margin5">
                         <fieldset>
-                            <%                                StudentService studentService;
-                                studentService = (StudentService) session.getAttribute("studentService");
-                                String regNo = (String) request.getSession().getAttribute("regNo");
-                                StudentInfo studentInfo = studentService.getStudentInfoObjectFromRegNo(regNo);
-                                String deptName = studentService.getStudentDepartmentName(regNo);
-                                String sessionName = studentService.getStudentSessiontName(regNo);
-                                String program = studentService.getStudentProgramName(regNo);
+                            <%                                String regNo = (String) request.getSession().getAttribute("regNo");
 
-                                int semx = studentInfo.getStudentBatchIdFk().getDegreeOfferedIdFk().getDegreeIdFk().getTotalSemester();
-
+                                CurriculumController curriculumController = new CurriculumController(regNo);
+                                String deptName = curriculumController.getStudentDepartmentName();
+                                String sessionName = curriculumController.getStudentAcademicSession();
+                                String program = curriculumController.getStudentProgramName();
+                                int totalSemester = curriculumController.getTotalAcademicSemester();
                             %>
                             <legend style="font-size: 22px">Syllabus</legend>
                             <h4 style="text-transform: uppercase;">DEPARTMENT OF <%=deptName%></h4>
@@ -52,7 +53,7 @@
                             <h4>Session: <%=sessionName%></h4>
 
                             <%
-                                for (int i = 0; i < semx; i++) {
+                                for (int i = 0; i < totalSemester; i++) {
                                     String semesterName = FormatService.formatSemesterName(i + 1);
                             %>
                             <div class="panel panel-default">
@@ -76,19 +77,20 @@
                                                 double totalCredit = 0;
                                                 int theoryCredit = 0;
                                                 int labCredit = 0;
-                                                List<SyllabusPOJO> courseList;
-                                                courseList = studentService.getStudentSyllabusAsEntity(regNo,i + 1);
-                                                for (int j = 0; j < courseList.size(); j++) {
-                                                    String courseCode = courseList.get(j).getCourseCode();
-                                                    String title = courseList.get(j).getTitle();
-                                                    String dept = courseList.get(j).getOfferringDept();
-                                                    double credit = courseList.get(j).getCredit();
+                                                List<SyllabusCoursePojo> courseList;
+                                                courseList = curriculumController.getAcademicSyllabus(i + 1);
+
+                                                for (SyllabusCoursePojo course : courseList) {
+                                                    String courseCode = course.getCourseCode();
+                                                    String title = course.getCourseTitle();
+                                                    String dept = course.getOfferingDeptCode();
+                                                    double credit = course.getCredit();
                                                     totalCredit += credit;
-                                                    String prereq = courseList.get(j).getPrerequisite();
-                                                    int hrsWeek = courseList.get(j).getHrsWeek().intValue();
+                                                    String prereq = course.getPrerequisite();
+                                                    int hrsWeek = course.getCourseHoursPerWeek().intValue();
 
                                                     String hrsWeekString = "";
-                                                    if (courseList.get(j).isTheoryOrLab()) {
+                                                    if (course.isTheoryOrLab()) {
                                                         theoryCredit += hrsWeek;
                                                         hrsWeekString = String.valueOf(hrsWeek) + " + 0";
                                                     } else {
@@ -123,8 +125,9 @@
 
                             <%
                                 }
+                                List<OptionalCoursePojo> optionalList = curriculumController.getOptionalCourses();
+                                if (optionalList.size() > 0) {
 
-                                if (studentService.isStudentSyllabusHasOptionalCourses(regNo)) {                                   
                             %>
                             <div class="panel panel-default">
                                 <div class="panel-heading">
@@ -133,26 +136,22 @@
                                 <div class="panel-body padding-none">
                                     <table class="table table-bordered margin-none curriculum-info">
                                         <thead>
-                                        <tr>
-                                            <th style="width: 15%"><b>Course Code</b></th>
-                                            <th style="width: 45%"><b>Course Title</b>/th>
-                                            <th style="width: 10%" class="text-center"><b>Dept.</b></th>
-                                            <th style="width: 10%" class="text-center"><b>Credits</b></th>
-                                            <th style="width: 20%"><b>Prerequisite</b></th>
-                                        </tr>
+                                            <tr>
+                                                <th style="width: 15%"><b>Course Code</b></th>
+                                                <th style="width: 45%"><b>Course Title</b>/th>
+                                                <th style="width: 10%" class="text-center"><b>Dept.</b></th>
+                                                <th style="width: 10%" class="text-center"><b>Credits</b></th>
+                                                <th style="width: 20%"><b>Prerequisite</b></th>
+                                            </tr>
                                         </thead>
                                         <tbody>
-                                            <%
-                                    List<SyllabusPOJO> courseListOp;
-                                                courseListOp = studentService.getStudentSyllabusAsEntity(regNo,0);
-                                                for (int j = 0; j < courseListOp.size(); j++) {
-                                                    String courseCode = courseListOp.get(j).getCourseCode();
-                                                    String title = courseListOp.get(j).getTitle();
-                                                    String dept = courseListOp.get(j).getOfferringDept();
-                                                    double credit = courseListOp.get(j).getCredit();
-                                                    
-                                                    String prereq = courseListOp.get(j).getPrerequisite();
-                                    %>
+                                            <%                                                for (OptionalCoursePojo optional : optionalList) {
+                                                    String courseCode = optional.getCourseCode();
+                                                    String title = optional.getCourseTitle();
+                                                    String dept = optional.getOfferingDeptCode();
+                                                    double credit = optional.getCredit();
+                                                    String prereq = optional.getPrerequisite();
+                                            %>
                                             <tr>
                                                 <td><%=courseCode%></td>   
                                                 <td><%=title%></td>   
@@ -168,7 +167,7 @@
                                 </div>
                             </div>
 
-                            <%                                
+                            <%
                                 }
                             %> 
                         </fieldset>
@@ -178,6 +177,7 @@
                 </div>
             </div>
         </div>
+        <!-- Footer section -->
         <%@include  file="../WEB-INF/jspf/Footer.jspf"%>
     </body>
 </html>

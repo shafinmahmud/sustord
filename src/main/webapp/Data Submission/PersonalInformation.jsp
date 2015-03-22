@@ -9,9 +9,9 @@
 <%@page import="java.util.Collections"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
-<%@page import="me.shafin.sustord.entity.Syllabus"%>
-<%@page import="me.shafin.sustord.entity.StudentInfo"%>
-<%@page import="me.shafin.sustord.entity.PersonalInfo"%>
+<%@page import="me.shafin.sustord.model.Syllabus"%>
+<%@page import="me.shafin.sustord.model.StudentInfo"%>
+<%@page import="me.shafin.sustord.model.PersonalInfo"%>
 <%@page import="me.shafin.sustord.service.StudentService"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 

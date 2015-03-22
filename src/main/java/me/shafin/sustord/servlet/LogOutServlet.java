@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import me.shafin.sustord.utility.ServiceDispatcher;
 
 /**
  *
@@ -30,7 +31,8 @@ public class LogOutServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
+        
+        ServiceDispatcher.nullifyServiceDispatchers();
         HttpSession session = request.getSession();
         session.invalidate();
         response.sendRedirect("Login/LoginUser.jsp");

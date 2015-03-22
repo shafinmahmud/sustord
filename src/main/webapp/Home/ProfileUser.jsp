@@ -4,62 +4,69 @@
     Author     : SHAFIN
 --%>
 
-<%@page import="me.shafin.sustord.entity.StudentInfo"%>
+<%@page import="me.shafin.sustord.controller.UserProfileController"%>
+<%@page import="me.shafin.sustord.model.StudentInfo"%>
 <%@page import="me.shafin.sustord.service.StudentService"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-
+        <title>Profile</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <style type="text/css">
-            [ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide
-            {display:none !important;
-            }ng\:form{display:block;}.ng-animate-block-transitions{transition:0s all!important;
-                                                                   -webkit-transition:0s all!important;}
-            </style>
-            <meta name="viewport" content="width=device-width">
-            <title>Curriculum</title>
-            <%@include  file="../WEB-INF/jspf/BootstrapInclude.jspf"%>
-            <link href="../page_files/css/style.css" rel="stylesheet">
-        </head>
-        <body>
-            <%@include  file="../WEB-INF/jspf/AccessValidation.jspf"%>
-            <%@include  file="../WEB-INF/jspf/NavBar.jspf"%>
+        <meta name="viewport" content="width=device-width">
 
-            <div class="portal-body">
+        <!-- Including Bootstrap-->
+        <%@include  file="../WEB-INF/jspf/BootstrapInclude.jspf"%>
+        <!-- style sheet for this page-->
+        <link href="../page_files/css/style.css" rel="stylesheet">
+
+    </head>
+    <body>
+         <!-- validating access to this page-->
+        <%@include  file="../WEB-INF/jspf/AccessValidation.jspf"%>
+        <!-- nav bar portion -->
+        <%@include  file="../WEB-INF/jspf/NavBar.jspf"%>
+
+        <div class="portal-body">
             <div class="row">
+                
+                 <!-- Side bar portion -->
                 <%@include  file="../WEB-INF/jspf/SideBar.jspf"%>
                 <div id="main-content" class="col-md-10 column800">
                     <div class="margin5">
                         <fieldset>
                             <%                                StudentService studentService;
                                 studentService = (StudentService) session.getAttribute("studentService");
+                                
+                                
                                 String regNo = (String) request.getSession().getAttribute("regNo");
-                                StudentInfo studentInfo = studentService.getStudentInfoObjectFromRegNo(regNo);
-                                String name = studentInfo.getPersonalInfo().getName();
+                                
+                                UserProfileController profileController = new UserProfileController(regNo);
+                                String name = profileController.getStudentName();
 
-                                String sessionName = studentService.getStudentSessiontName(regNo);
-                                String dept = studentService.getStudentDepartmentName(regNo);
-                                String program = studentService.getStudentProgramName(regNo);
-                                String school = studentService.getStudentSchoolName(regNo);
+                                String sessionName = profileController.getStudentAcademicSession();
+                                String dept = profileController.getStudentDepartmentName();
+                                String program = profileController.getStudentProgramName();
+                                String school = profileController.getStudentSchoolName();
 
                                 double creditsCompleted = studentService.getCreditsCompleted(regNo);
                                 double creditsTotal = studentService.getTotalCredits(regNo);
                                 double cgpa = studentService.getCGPA(regNo);
 
-                                String fatherName = studentInfo.getPersonalInfo().getFathersName();
-                                String motherName = studentInfo.getPersonalInfo().getMothersName();
-                                String presentAddress = studentInfo.getPersonalInfo().getPresentAddress();
-                                String permanentAddress = studentInfo.getPersonalInfo().getPermanentAddress();
-                                String phone = studentInfo.getPersonalInfo().getContact();
-                                String email = studentInfo.getPersonalInfo().getEmail();
-                                String sex = studentInfo.getPersonalInfo().getSex();
-                                String religion = studentInfo.getPersonalInfo().getReligion();
-                                String dob = studentInfo.getPersonalInfo().getDateOfBirth();
-                                String marital = studentInfo.getPersonalInfo().getMaritalStatus();
-                                String nationality = studentInfo.getPersonalInfo().getNationality();
-                                String blood = studentInfo.getPersonalInfo().getBloodGroup();
+                                String fatherName = profileController.getFatherName();
+                                String motherName = profileController.getMotherName();
+                                String presentAddress = profileController.getPresentAddress();
+                                String permanentAddress = profileController.getPermanentAddress();
+                                String phone = profileController.getPhone();
+                                String email = profileController.getEmail();
+                                String sex = profileController.getSex();
+                                String religion = profileController.getReligion();
+                                String dob = profileController.getDob();
+                                String marital = profileController.getMaritalStatus();
+                                String nationality = profileController.getNationality();
+                                String blood = profileController.getBloodGroup();
+                                
+                                String photoUrl = profileController.getStudentPhotoUrl();
 
 
                             %>
@@ -103,7 +110,7 @@
                                 </table>
                             </div>
                             <div class="col-md-4">           
-                                <img class="img-responsive" src="../page_files/images/profilepic/<%=studentService.getPhotoUrl(regNo)%>" alt="pic">                                
+                                <img class="img-responsive" src="../page_files/images/profilepic/<%=photoUrl%>" alt="pic">                                
                             </div>
 
 
