@@ -4,6 +4,7 @@
     Author     : SHAFIN
 --%>
 
+<%@page import="me.shafin.sustord.controller.EditProfileController"%>
 <%@page import="me.shafin.sustord.service.FormatService"%>
 <%@page import="java.util.Comparator"%>
 <%@page import="java.util.Collections"%>
@@ -21,18 +22,22 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <style type="text/css"></style>
         <meta name="viewport" content="width=device-width">
-        <title>Personal Information</title>
+        <title>Edit Profile</title>
+        
+         <!-- Including Bootstrap-->
         <%@include  file="../WEB-INF/jspf/BootstrapInclude.jspf"%>
+        
+        <!-- style sheet for this page-->
         <link href="../page_files/css/style.css" rel="stylesheet">
+        
+        <!-- script for this page-->
+        <script src="edit-profile-script.js"></script>
+        
+        <!-- Including jquery library-->
+        <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
 
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css"/>
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
-
-        <script src="../page_files/scripts/personal-info-script.js"></script>
-
-
-
 
     </head>
     <body>
@@ -47,16 +52,39 @@
                     <div class="margin5">
 
                         <legend>Personal Information</legend>
-                        <%                            StudentService service = (StudentService) session.getAttribute("studentService");
+                        <%                           
+                            StudentService service = (StudentService) session.getAttribute("studentService");
                             String regNo = (String) request.getSession().getAttribute("regNo");
                             StudentInfo studentInfo = service.getStudentInfoObjectFromRegNo(regNo);
+                            
+                            EditProfileController controller = new EditProfileController(regNo);
+                            String name = controller.getStudentName();
 
-                            PersonalInfo personalInfo = studentInfo.getPersonalInfo();
-                            String reg = regNo;
-                            String name = personalInfo.getName();
-                            String presentAddress = personalInfo.getPresentAddress();
-                            String permanentAddress = personalInfo.getPermanentAddress();
+                            String sessionName = controller.getStudentAcademicSession();
+                            String dept = controller.getStudentDepartmentName();
+                            String program = controller.getStudentProgramName();
+                            String school = controller.getStudentSchoolName();
 
+                            double creditsCompleted = service.getCreditsCompleted(regNo);
+                            double creditsTotal = service.getTotalCredits(regNo);
+                            double cgpa = service.getCGPA(regNo);
+
+                            String fatherName = controller.getFatherName();
+                            String motherName = controller.getMotherName();
+                            String presentAddress = controller.getPresentAddress();
+                            String permanentAddress = controller.getPermanentAddress();
+                            String phone = controller.getPhone();
+                            String email = controller.getEmail();
+                            String sex = controller.getSex();
+                            String religion = controller.getReligion();
+                            String dob = controller.getDob();
+                            String marital = controller.getMaritalStatus();
+                            String nationality = controller.getNationality();
+                            String blood = controller.getBloodGroup();
+                            
+                            String photoUrl = controller.getStudentPhotoUrl();
+                            
+                            
                             if (presentAddress == null) {
                                 presentAddress = "null,null,null,null,null";
                             }
@@ -98,7 +126,7 @@
                                                 <label >Registration No:</label>
                                             </td>
                                             <td style="text-align: left">
-                                                <p style="font-size: 14px"><%=reg%></p>
+                                                <p style="font-size: 14px"><%=regNo%></p>
                                             </td>
                                         </tr> 
                                         <tr>
@@ -115,13 +143,13 @@
                                                 <label>Father's name:</label>
                                             </td>
                                             <td style="text-align: left">
-                                                <input id="father" style="" class="form-control input-sm" name="fathersname" type="text" placeholder="Your father's name" value="<%=personalInfo.getFathersName()%>">
+                                                <input id="father" style="" class="form-control input-sm" name="fathersname" type="text" placeholder="Your father's name" value="<%=fatherName%>">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td style="text-align: right"><label>Mother's name:</label></td>
                                             <td style="text-align: left">
-                                                <input id="mother" style="" class="form-control input-sm" name="mothersname" type="text" placeholder="Your mother's name" value="<%=personalInfo.getMothersName()%>">
+                                                <input id="mother" style="" class="form-control input-sm" name="mothersname" type="text" placeholder="Your mother's name" value="<%=motherName%>">
                                             </td>
                                         </tr>
                                         <tr>
@@ -207,17 +235,17 @@
                                         <tr>
                                             <td style="text-align: right"><label>Phone:</label></td>
                                             <td style="text-align: left">
-                                                <input id="phone" style="" name="phone" class="form-control input-sm" type="text" value="<%=personalInfo.getContact()%>"  placeholder="Your cell phone number ex: 01XXXXXXXXX" ></td>
+                                                <input id="phone" style="" name="phone" class="form-control input-sm" type="text" value="<%=phone%>"  placeholder="Your cell phone number ex: 01XXXXXXXXX" ></td>
                                         </tr>
                                         <tr>
                                             <td style="text-align: right"><label>Email:</label></td>
                                             <td style="text-align: left">
-                                                <input id="email" style="" name="email" class="form-control input-sm" type="text" value="<%=personalInfo.getEmail()%>" placeholder="Your email address ex: example@domain.com" ></td>
+                                                <input id="email" style="" name="email" class="form-control input-sm" type="text" value="<%=email%>" placeholder="Your email address ex: example@domain.com" ></td>
                                         </tr>
                                         <tr>
                                             <td style="text-align: right"><label>Date of Birth:</label></td>
                                             <td style="text-align: left">
-                                                <input  style="; width:190px" name="dob" id = "dob" class="form-control input-sm" type="text" value="<%=personalInfo.getDateOfBirth()%>" placeholder="mm / dd / yyyy"></td>
+                                                <input  style="; width:190px" name="dob" id = "dob" class="form-control input-sm" type="text" value="<%=dob%>" placeholder="mm / dd / yyyy"></td>
                                         </tr>
 
 
@@ -296,7 +324,7 @@
                                 </div>
                             </form>
                             <div class="col-md-3"> 
-                                <img class="img-responsive" src="../page_files/images/profilepic/<%=service.getPhotoUrl(regNo)%>" alt="pic"> 
+                                <img class="img-responsive" src="../page_files/images/profilepic/<%=photoUrl%>" alt="pic"> 
                                 <!--<h4> Choose Image </h4>
                                 <form action="upload" method="post" enctype="multipart/form-data">
                                     <input class ="fileupload" type="file" name="file" />
@@ -315,8 +343,6 @@
             <%@include  file="../WEB-INF/jspf/Footer.jspf"%>
 
             <script>
-
-
                 var precountry = "<%=presentCountry%>";
                 if (precountry !== "null")
                     $("#present-country").val(precountry);
@@ -324,19 +350,19 @@
                 //alert(precountry+precountry.length+percountry+percountry.length);
                 if (percountry !== "null")
                     $("#permanent-country").val(percountry);
-                var gender = "<%=personalInfo.getSex()%>";
+                var gender = "<%=sex%>";
                 if (gender != "null")
                     $("#sex").val(gender);
-                var religion = "<%=personalInfo.getReligion()%>";
+                var religion = "<%=religion%>";
                 if (religion !== "null")
                     $("#religion").val(religion);
-                var maritalst = "<%=personalInfo.getMaritalStatus()%>";
+                var maritalst = "<%=marital%>";
                 if (maritalst !== "null") {
                     $("#marital-status").val(maritalst);
                 }
 
 
-                var blood = "<%=personalInfo.getBloodGroup()%>";
+                var blood = "<%=blood%>";
                 if (blood !== "null")
                     $("#blood-group").val(blood);
             </script>

@@ -29,9 +29,7 @@
 
         <li class="nav-header">Data Submission
         </li>
-        <li>
-            <a href="../Data Submission/PersonalInformation.jsp"><span class="glyphicon glyphicon-user"></span>&nbsp;Personal Information</a>
-        </li>
+        
         <li>
             <a href="../Data Submission/CourseRegistration.jsp"><span class="glyphicon glyphicon-sort-by-attributes-alt"></span>&nbsp;Course Registration</a>
         </li>

@@ -9,7 +9,7 @@
 <%@page import="java.util.HashMap"%>
 <%@page import="me.shafin.sustord.bean.StudentPOJO"%>
 <%@page import="java.util.List"%>
-<%@page import="me.shafin.sustord.entity.StudentInfo"%>
+<%@page import="me.shafin.sustord.model.StudentInfo"%>
 <%@page import="me.shafin.sustord.service.StudentService"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

@@ -20,8 +20,10 @@
 
         <!-- Including Bootstrap-->
         <%@include  file="../WEB-INF/jspf/BootstrapInclude.jspf"%>
+        
         <!-- Including jquery library-->
         <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+        
         <!-- style sheet -->
         <link href="../page_files/css/style.css" rel="stylesheet">
 
