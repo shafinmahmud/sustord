@@ -13,25 +13,25 @@ import me.shafin.sustord.utility.ServiceDispatcher;
  *
  * @author SHAFIN
  */
-public class StudentInfoService {
+public class PersonalInfoService {
 
     private final StudentInfo studentInfo;
     private static final String NULL_RESPONSE = " - ";
     private static final String ERROR_RESPONSE = ":/";
 
     /* Constructor thats is private and get accesses through static helper method  */
-    private StudentInfoService(StudentInfo studentInfo) throws Exception {
+    private PersonalInfoService(StudentInfo studentInfo) throws Exception {
         this.studentInfo = studentInfo;
     }
 
-    /* Constructor helper for singleton StudentInfoService  */
-    public static StudentInfoService forSingletonStudentInfoService(String registrationNo) throws Exception {
-        return new StudentInfoService(ServiceDispatcher.getSingletonStudentInfo(registrationNo));
+    /* Constructor helper for singleton PersonalInfoService  */
+    public static PersonalInfoService forSingletonStudentInfoService(String registrationNo) throws Exception {
+        return new PersonalInfoService(ServiceDispatcher.getSingletonStudentInfo(registrationNo));
     }
 
-    /* Constructor helper for prototype StudentInfoService  */
-    public static StudentInfoService forProtypeStudentInfoService(String registrationNo) throws Exception {
-        return new StudentInfoService(StudentInfoDao.getStudentInfoObject(registrationNo));
+    /* Constructor helper for prototype PersonalInfoService  */
+    public static PersonalInfoService forProtypeStudentInfoService(String registrationNo) throws Exception {
+        return new PersonalInfoService(StudentInfoDao.getStudentInfoObject(registrationNo));
     }
 
     /* Personal Information  */
@@ -44,7 +44,7 @@ public class StudentInfoService {
                 return string;
             }
         } catch (Exception ex) {
-            Logger.getLogger(StudentInfoService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PersonalInfoService.class.getName()).log(Level.SEVERE, null, ex);
             return ERROR_RESPONSE;
         }
     }
@@ -58,7 +58,7 @@ public class StudentInfoService {
                 return string;
             }
         } catch (Exception ex) {
-            Logger.getLogger(StudentInfoService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PersonalInfoService.class.getName()).log(Level.SEVERE, null, ex);
             return ERROR_RESPONSE;
         }
     }
@@ -72,7 +72,7 @@ public class StudentInfoService {
                 return string;
             }
         } catch (Exception ex) {
-            Logger.getLogger(StudentInfoService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PersonalInfoService.class.getName()).log(Level.SEVERE, null, ex);
             return ERROR_RESPONSE;
         }
     }
@@ -86,7 +86,7 @@ public class StudentInfoService {
                 return string;
             }
         } catch (Exception ex) {
-            Logger.getLogger(StudentInfoService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PersonalInfoService.class.getName()).log(Level.SEVERE, null, ex);
             return ERROR_RESPONSE;
         }
     }
@@ -100,7 +100,7 @@ public class StudentInfoService {
                 return string;
             }
         } catch (Exception ex) {
-            Logger.getLogger(StudentInfoService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PersonalInfoService.class.getName()).log(Level.SEVERE, null, ex);
             return ERROR_RESPONSE;
         }
     }
@@ -114,7 +114,7 @@ public class StudentInfoService {
                 return string;
             }
         } catch (Exception ex) {
-            Logger.getLogger(StudentInfoService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PersonalInfoService.class.getName()).log(Level.SEVERE, null, ex);
             return ERROR_RESPONSE;
         }
     }
@@ -128,7 +128,7 @@ public class StudentInfoService {
                 return string;
             }
         } catch (Exception ex) {
-            Logger.getLogger(StudentInfoService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PersonalInfoService.class.getName()).log(Level.SEVERE, null, ex);
             return ERROR_RESPONSE;
         }
     }
@@ -142,7 +142,7 @@ public class StudentInfoService {
                 return string;
             }
         } catch (Exception ex) {
-            Logger.getLogger(StudentInfoService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PersonalInfoService.class.getName()).log(Level.SEVERE, null, ex);
             return ERROR_RESPONSE;
         }
     }
@@ -156,7 +156,7 @@ public class StudentInfoService {
                 return string;
             }
         } catch (Exception ex) {
-            Logger.getLogger(StudentInfoService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PersonalInfoService.class.getName()).log(Level.SEVERE, null, ex);
             return ERROR_RESPONSE;
         }
     }
@@ -170,7 +170,7 @@ public class StudentInfoService {
                 return string;
             }
         } catch (Exception ex) {
-            Logger.getLogger(StudentInfoService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PersonalInfoService.class.getName()).log(Level.SEVERE, null, ex);
             return ERROR_RESPONSE;
         }
     }
@@ -184,7 +184,7 @@ public class StudentInfoService {
                 return string;
             }
         } catch (Exception ex) {
-            Logger.getLogger(StudentInfoService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PersonalInfoService.class.getName()).log(Level.SEVERE, null, ex);
             return ERROR_RESPONSE;
         }
     }
@@ -198,7 +198,7 @@ public class StudentInfoService {
                 return string;
             }
         } catch (Exception ex) {
-            Logger.getLogger(StudentInfoService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PersonalInfoService.class.getName()).log(Level.SEVERE, null, ex);
             return ERROR_RESPONSE;
         }
     }
@@ -212,7 +212,7 @@ public class StudentInfoService {
                 return string;
             }
         } catch (Exception ex) {
-            Logger.getLogger(StudentInfoService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PersonalInfoService.class.getName()).log(Level.SEVERE, null, ex);
             return ERROR_RESPONSE;
         }
     }
@@ -226,27 +226,9 @@ public class StudentInfoService {
                 return string;
             }
         } catch (Exception ex) {
-            Logger.getLogger(StudentInfoService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PersonalInfoService.class.getName()).log(Level.SEVERE, null, ex);
             return ERROR_RESPONSE;
         }
     }
 
-    /* Academic Information  */
-    public String getStudentProgramName() {
-         String programName = studentInfo.getStudentBatchIdFk().getDegreeOfferedIdFk().getDegreeIdFk().getDegreeTypeName()
-                + " (" + studentInfo.getStudentBatchIdFk().getDegreeOfferedIdFk().getDegreeIdFk().getDegreeCategory() + ")";
-        return programName;
-    }
-    
-    public String getStudentDepartmentName() {
-        return studentInfo.getStudentBatchIdFk().getDegreeOfferedIdFk().getDeptIdFk().getDeptName();
-    }
-
-    public String getStudentSchoolName() {
-        return studentInfo.getStudentBatchIdFk().getDegreeOfferedIdFk().getDeptIdFk().getSchoolIdFk().getSchoolName();
-    }
-
-    public String getStudentAcademicSession() {
-        return studentInfo.getStudentBatchIdFk().getSession();
-    }
 }

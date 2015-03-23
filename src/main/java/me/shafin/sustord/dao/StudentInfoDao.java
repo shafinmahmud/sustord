@@ -35,7 +35,6 @@ public class StudentInfoDao {
                 studentInfo = null;
             }
         } catch (Exception e) {
-            //session.getTransaction().rollback();
             throw new HibernateException(e.getMessage());
         } finally{
             session.close();

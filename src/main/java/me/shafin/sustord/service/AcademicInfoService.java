@@ -41,9 +41,29 @@ public class AcademicInfoService {
         return new AcademicInfoService(StudentInfoDao.getStudentInfoObject(registrationNo));
     }
 
+    /* Academic Information  */
+    public String getStudentProgramName() {
+         String programName = studentInfo.getStudentBatchIdFk().getDegreeOfferedIdFk().getDegreeIdFk().getDegreeTypeName()
+                + " (" + studentInfo.getStudentBatchIdFk().getDegreeOfferedIdFk().getDegreeIdFk().getDegreeCategory() + ")";
+        return programName;
+    }
+    
+    public String getStudentDepartmentName() {
+        return studentInfo.getStudentBatchIdFk().getDegreeOfferedIdFk().getDeptIdFk().getDeptName();
+    }
+
+    public String getStudentSchoolName() {
+        return studentInfo.getStudentBatchIdFk().getDegreeOfferedIdFk().getDeptIdFk().getSchoolIdFk().getSchoolName();
+    }
+
+    public String getStudentAcademicSession() {
+        return studentInfo.getStudentBatchIdFk().getSession();
+    }
+    
     public int getTotalAcadmicSemester(){
         return studentInfo.getStudentBatchIdFk().getDegreeOfferedIdFk().getDegreeIdFk().getTotalSemester();
     }
+    
     
     public List<SyllabusCoursePojo> getAcademicCoursesOfSemester(int semester) {
         try {
@@ -130,4 +150,6 @@ public class AcademicInfoService {
             return new ArrayList<OptionalCoursePojo>();
         }
     }
+    
+    
 }

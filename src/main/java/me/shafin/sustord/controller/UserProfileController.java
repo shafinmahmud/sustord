@@ -2,95 +2,97 @@ package me.shafin.sustord.controller;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import me.shafin.sustord.service.StudentInfoService;
+import me.shafin.sustord.service.AcademicInfoService;
+import me.shafin.sustord.service.PersonalInfoService;
 
 /**
  *
  * @author SHAFIN
  */
 public class UserProfileController {
-    
-    private StudentInfoService informationService;
-    
+
+    private PersonalInfoService personalInfoService;
+    private AcademicInfoService academicInfoService;
+
     public UserProfileController(String registrationNo) {
         try {
-            this.informationService = StudentInfoService.forSingletonStudentInfoService(registrationNo);
+            this.personalInfoService = PersonalInfoService.forSingletonStudentInfoService(registrationNo);
+            this.academicInfoService = AcademicInfoService.forSingletonAcademicInfoService(registrationNo);
         } catch (Exception ex) {
             Logger.getLogger(UserHomeController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    
+
     public String getStudentName() {
-             return informationService.getStudentName();   
+        return personalInfoService.getStudentName();
     }
 
-    public String getFatherName() {      
-            return informationService.getFatherName();
+    public String getFatherName() {
+        return personalInfoService.getFatherName();
     }
 
-    public String getMotherName() {       
-            return informationService.getMotherName();
+    public String getMotherName() {
+        return personalInfoService.getMotherName();
     }
 
     public String getPresentAddress() {
-            return informationService.getPresentAddress();   
+        return personalInfoService.getPresentAddress();
     }
 
     public String getPermanentAddress() {
-            return informationService.getPermanentAddress();
+        return personalInfoService.getPermanentAddress();
     }
 
     public String getPhone() {
-            return informationService.getPhone();
+        return personalInfoService.getPhone();
     }
 
     public String getEmail() {
-            return informationService.getEmail();
+        return personalInfoService.getEmail();
     }
 
     public String getDob() {
-            return informationService.getDob();
+        return personalInfoService.getDob();
     }
 
     public String getSex() {
-            return informationService.getSex();
+        return personalInfoService.getSex();
     }
 
     public String getReligion() {
-            return informationService.getReligion();
+        return personalInfoService.getReligion();
     }
 
     public String getNationality() {
-            return informationService.getNationality();
+        return personalInfoService.getNationality();
     }
 
     public String getMaritalStatus() {
-            return informationService.getMaritalStatus();
+        return personalInfoService.getMaritalStatus();
     }
 
     public String getBloodGroup() {
-            return informationService.getBloodGroup();
+        return personalInfoService.getBloodGroup();
     }
 
     public String getStudentPhotoUrl() {
-            return informationService.getStudentPhotoUrl();
+        return personalInfoService.getStudentPhotoUrl();
     }
-    
-   /* Academic Information  */
+
+    /* Academic Information  */
     public String getStudentProgramName() {
-        return informationService.getStudentProgramName();
+        return academicInfoService.getStudentProgramName();
     }
-    
+
     public String getStudentDepartmentName() {
-        return informationService.getStudentDepartmentName();
+        return academicInfoService.getStudentDepartmentName();
     }
 
     public String getStudentSchoolName() {
-        return informationService.getStudentSchoolName();
+        return academicInfoService.getStudentSchoolName();
     }
 
     public String getStudentAcademicSession() {
-        return informationService.getStudentAcademicSession();
+        return academicInfoService.getStudentAcademicSession();
     }
 }

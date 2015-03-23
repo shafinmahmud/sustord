@@ -2,7 +2,7 @@ package me.shafin.sustord.controller;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import me.shafin.sustord.service.StudentInfoService;
+import me.shafin.sustord.service.PersonalInfoService;
 
 /**
  *
@@ -10,11 +10,11 @@ import me.shafin.sustord.service.StudentInfoService;
  */
 public class UserHomeController {
 
-    private StudentInfoService informationService;
+    private PersonalInfoService informationService;
 
     public UserHomeController(String registrationNo) {
         try {
-            this.informationService = StudentInfoService.forSingletonStudentInfoService(registrationNo);
+            this.informationService = PersonalInfoService.forSingletonStudentInfoService(registrationNo);
         } catch (Exception ex) {
             Logger.getLogger(UserHomeController.class.getName()).log(Level.SEVERE, null, ex);
         }

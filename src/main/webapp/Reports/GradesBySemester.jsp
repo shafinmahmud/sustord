@@ -4,34 +4,34 @@
     Author     : SHAFIN
 --%>
 
+<%@page import="me.shafin.sustord.controller.GradeBySemesterController"%>
 <%@page import="me.shafin.sustord.service.CgpaCalculation"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="me.shafin.sustord.bean.SyllabusPOJO"%>
 <%@page import="java.util.List"%>
 <%@page import="me.shafin.sustord.service.FormatService"%>
-<%@page import="me.shafin.sustord.entity.StudentInfo"%>
+<%@page import="me.shafin.sustord.model.StudentInfo"%>
 <%@page import="me.shafin.sustord.service.StudentService"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <style type="text/css">
-            [ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide
-            {display:none !important;
-            }ng\:form{display:block;}.ng-animate-block-transitions{transition:0s all!important;
-                                                                   -webkit-transition:0s all!important;}
-            </style>
-            <meta name="viewport" content="width=device-width">
-            <title>Grade by Semester</title>
-            <%@include  file="../WEB-INF/jspf/BootstrapInclude.jspf"%>
-            <link href="../page_files/css/style.css" rel="stylesheet">
-        </head>
-        <body>
-            <%@include  file="../WEB-INF/jspf/AccessValidation.jspf"%>
-            <%@include  file="../WEB-INF/jspf/NavBar.jspf"%>
+        <meta name="viewport" content="width=device-width">
+        <title>Grade by Semester</title>
 
-            <div class="portal-body">
+        <!-- Including Bootstrap-->
+        <%@include  file="../WEB-INF/jspf/BootstrapInclude.jspf"%>
+        <!-- style sheet -->
+        <link href="../page_files/css/style.css" rel="stylesheet">
+    </head>
+    <body>
+        <!-- validating access to this page-->
+        <%@include  file="../WEB-INF/jspf/AccessValidation.jspf"%>
+        <!-- nav bar portion -->
+        <%@include  file="../WEB-INF/jspf/NavBar.jspf"%>
+
+        <div class="portal-body">
             <div class="row">
                 <%@include  file="../WEB-INF/jspf/SideBar.jspf"%>
                 <div id="main-content" class="col-md-10 column800">
@@ -44,13 +44,14 @@
                             <%StudentService studentService;
                                 studentService = (StudentService) session.getAttribute("studentService");
                                 String regNo = (String) request.getSession().getAttribute("regNo");
-                                StudentInfo studentInfo = studentService.getStudentInfoObjectFromRegNo(regNo);
 
-                                String name = studentInfo.getPersonalInfo().getName();
-                                String sessionName = studentService.getStudentSessiontName(regNo);
-                                String dept = studentService.getStudentDepartmentName(regNo);
-                                String program = studentService.getStudentProgramName(regNo);
-                                String school = studentService.getStudentSchoolName(regNo);
+                                GradeBySemesterController controller = new GradeBySemesterController(regNo);
+
+                                String name = controller.getStudentName();
+                                String sessionName = controller.getStudentAcademicSession();
+                                String dept = controller.getStudentDepartmentName();
+                                String program = controller.getStudentProgramName();
+                                String school = controller.getStudentSchoolName();
 
                                 double creditsCompleted = studentService.getCreditsCompleted(regNo);
                                 int coursesCompleted = studentService.getCompletedCourses(regNo);
