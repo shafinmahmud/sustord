@@ -10,9 +10,6 @@
 <%@page import="java.util.Collections"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
-<%@page import="me.shafin.sustord.model.Syllabus"%>
-<%@page import="me.shafin.sustord.model.StudentInfo"%>
-<%@page import="me.shafin.sustord.model.PersonalInfo"%>
 <%@page import="me.shafin.sustord.service.StudentService"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -33,8 +30,10 @@
         <!-- script for this page-->
         <script src="edit-profile-script.js"></script>
         
-        <!-- Including jquery library-->
-        <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <!-- jQuery library-->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>  
+        
+       <!-- <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>-->
 
         <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css"/>
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
@@ -53,21 +52,10 @@
 
                         <legend>Personal Information</legend>
                         <%                           
-                            StudentService service = (StudentService) session.getAttribute("studentService");
                             String regNo = (String) request.getSession().getAttribute("regNo");
-                            StudentInfo studentInfo = service.getStudentInfoObjectFromRegNo(regNo);
                             
                             EditProfileController controller = new EditProfileController(regNo);
                             String name = controller.getStudentName();
-
-                            String sessionName = controller.getStudentAcademicSession();
-                            String dept = controller.getStudentDepartmentName();
-                            String program = controller.getStudentProgramName();
-                            String school = controller.getStudentSchoolName();
-
-                            double creditsCompleted = service.getCreditsCompleted(regNo);
-                            double creditsTotal = service.getTotalCredits(regNo);
-                            double cgpa = service.getCGPA(regNo);
 
                             String fatherName = controller.getFatherName();
                             String motherName = controller.getMotherName();
@@ -79,7 +67,6 @@
                             String religion = controller.getReligion();
                             String dob = controller.getDob();
                             String marital = controller.getMaritalStatus();
-                            String nationality = controller.getNationality();
                             String blood = controller.getBloodGroup();
                             
                             String photoUrl = controller.getStudentPhotoUrl();
@@ -109,8 +96,6 @@
                             String permanentThana = parts2[2];
                             String permanentDistrict = parts2[3];
                             String permanentCountry = parts2[4];
-
-
                         %>
 
 
@@ -360,7 +345,6 @@
                 if (maritalst !== "null") {
                     $("#marital-status").val(maritalst);
                 }
-
 
                 var blood = "<%=blood%>";
                 if (blood !== "null")

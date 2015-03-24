@@ -71,7 +71,7 @@
 
                             %>
                             <legend style="font-size: 22px"><%=name%>
-                            <a class="btn btn-primary btn-xs pull-right" href="EditProfile.jsp" type="submit">Edit</a>
+                            <a class="btn btn-danger btn-xs pull-right" href="EditProfile.jsp" type="submit">Edit</a>
                             </legend>
     
                             <div class="col-md-8">

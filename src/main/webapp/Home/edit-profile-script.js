@@ -3,7 +3,7 @@
 
 $(document).ready(function () {
 
-
+    alert("entered1");
     $('#father').focus(function () {
         if ($('#father').val() === "*Required") {
 
@@ -231,6 +231,7 @@ $(document).ready(function () {
 
 
     $("#confirm-personal").click(function () {
+        alert("entered");
 
         var warning = "*Required";
         var continueflag = true;
@@ -316,7 +317,7 @@ $(document).ready(function () {
                         + $('#permanent-thana').val() + ',' + $('#permanent-district').val() + ','
                         + $('#permanent-country').val();
 
-                        //alert(permanentadd);
+                //alert(permanentadd);
                 $.ajax({
                     url: '../SavePersonalInfoServlet',
                     data: {
@@ -336,7 +337,7 @@ $(document).ready(function () {
                     type: 'POST',
                     success: function (succ) {
                         if (succ !== 'ERROR') {
-                            $("#saving-anim").attr("src", "../page_files/icons/success-icon.png");                               
+                            $("#saving-anim").attr("src", "../page_files/icons/success-icon.png");
 
                         } else {
                             alert("error");
