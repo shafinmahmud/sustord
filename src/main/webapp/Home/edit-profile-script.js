@@ -3,7 +3,6 @@
 
 $(document).ready(function () {
 
-    alert("entered1");
     $('#father').focus(function () {
         if ($('#father').val() === "*Required") {
 
@@ -231,7 +230,6 @@ $(document).ready(function () {
 
 
     $("#confirm-personal").click(function () {
-        alert("entered");
 
         var warning = "*Required";
         var continueflag = true;

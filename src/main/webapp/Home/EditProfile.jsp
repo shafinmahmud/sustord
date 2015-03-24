@@ -20,23 +20,21 @@
         <style type="text/css"></style>
         <meta name="viewport" content="width=device-width">
         <title>Edit Profile</title>
-        
-         <!-- Including Bootstrap-->
-        <%@include  file="../WEB-INF/jspf/BootstrapInclude.jspf"%>
-        
-        <!-- style sheet for this page-->
-        <link href="../page_files/css/style.css" rel="stylesheet">
-        
-        <!-- script for this page-->
-        <script src="edit-profile-script.js"></script>
-        
         <!-- jQuery library-->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>  
-        
-       <!-- <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>-->
 
         <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css"/>
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+
+        <!-- Including Bootstrap-->
+        <%@include  file="../WEB-INF/jspf/BootstrapInclude.jspf"%>
+
+        <!-- style sheet for this page-->
+        <link href="../page_files/css/style.css" rel="stylesheet">
+
+        <!-- script for this page-->
+        <script src="edit-profile-script.js"></script>
+
 
     </head>
     <body>
@@ -51,9 +49,8 @@
                     <div class="margin5">
 
                         <legend>Personal Information</legend>
-                        <%                           
-                            String regNo = (String) request.getSession().getAttribute("regNo");
-                            
+                        <%                            String regNo = (String) request.getSession().getAttribute("regNo");
+
                             EditProfileController controller = new EditProfileController(regNo);
                             String name = controller.getStudentName();
 
@@ -68,10 +65,9 @@
                             String dob = controller.getDob();
                             String marital = controller.getMaritalStatus();
                             String blood = controller.getBloodGroup();
-                            
+
                             String photoUrl = controller.getStudentPhotoUrl();
-                            
-                            
+
                             if (presentAddress == null) {
                                 presentAddress = "null,null,null,null,null";
                             }
@@ -100,45 +96,61 @@
 
 
                         <div id = "personal-divsec">
-                            <form id = "personal-info-form" action="" method="get" role="form"> 
+                            <form class="form-horizontal col-lg-8" role="form">
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-3">Registration No:</label>
+                                    <div class="col-sm-9">
+                                        <p style="font-size: 14px"><%=regNo%></p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-3" for="pwd">Name:</label>
+                                    <div class="col-sm-9">          
+                                        <p style="font-size: 14px"><%=name%><p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-3" for="pwd">Father's name:</label>
+                                    <div class="col-sm-9">    
+                                        <input type="text" id="father" class="form-control input-sm" name="fathersname"  placeholder="Your father's name" value="<%=fatherName%>">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-3" for="pwd">Mother's name:</label>
+                                    <div class="col-sm-9">    
+                                        <input type="text" id="mother" class="form-control input-sm" name="mohtersname"  placeholder="Your mother's name" value="<%=motherName%>">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-3" for="pwd">Present address:</label>
+                                    <div class="col-sm-9 form-inline">   
+                                        <div class="">
+                                            <input id="present-street"  style="" class="form-control input-sm" name="presentstreet" type="text"  placeholder="house/street" value="<%=presentStreet%>"/>
+                                            <input id="present-area" style="" class="form-control input-sm" name="presentarea" type="text"  placeholder="Area" value="<%=presentArea%>"/>
+                                        </div>
+
+                                        <input id="present-thana" style="" class="form-control input-sm" name="presentthana" type="text"  placeholder="Thana" value="<%=presentThana%>"/>
+
+                                        <input id="present-district" style="" class="form-control input-sm" name="presentdistrict" type="text"   placeholder="District" value="<%=presentDistrict%>" />
+
+                                        <select id="present-country" name="presentcountry" class="form-control pull-left input-sm"  style="width:100%; ">
+                                            <option value="0" style="display:none" >Country</option>
+                                            <option value="1" style="display:none" >*Country</option>
+                                            <option value="Bangladesh">Bangladesh</option>
+                                            <option value="Others">Others</option>      
+                                        </select>
+
+                                    </div>
+                                </div>
 
                                 <div  class="col-lg-9">
 
                                     <table class="table">
 
                                         <tr>
-                                            <td style="text-align: right">
-                                                <label >Registration No:</label>
-                                            </td>
-                                            <td style="text-align: left">
-                                                <p style="font-size: 14px"><%=regNo%></p>
-                                            </td>
-                                        </tr> 
-                                        <tr>
-                                            <td style="text-align: right">
-                                                <label >Name:</label>
-                                            </td>
-                                            <td style="text-align: left">
-                                                <p style="font-size: 14px"><%=name%><p>
-                                            </td>
-                                        </tr> 
 
-                                        <tr>
-                                            <td style="text-align: right">
-                                                <label>Father's name:</label>
-                                            </td>
-                                            <td style="text-align: left">
-                                                <input id="father" style="" class="form-control input-sm" name="fathersname" type="text" placeholder="Your father's name" value="<%=fatherName%>">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align: right"><label>Mother's name:</label></td>
-                                            <td style="text-align: left">
-                                                <input id="mother" style="" class="form-control input-sm" name="mothersname" type="text" placeholder="Your mother's name" value="<%=motherName%>">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align: right"><label>Present address:</label></td>
 
                                             <td style="text-align: left">
 
@@ -307,6 +319,46 @@
 
                                     </table>
                                 </div>
+                                <div class="form-group">        
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <div class="checkbox">
+                                            <label><input type="checkbox"> Remember me</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">        
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button type="submit" class="btn btn-default">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <form id = "personal-info-form" action="" method="get" role="form"> 
+
+                                <div  class="col-lg-9">
+
+                                    <table>
+
+                                        <tr>
+                                            <td></td>
+                                            <td style="padding-top: 5%">
+                                                <div>
+                                                    <table class="table-condensed">
+                                                        <tr>
+                                                            <td>
+                                                                <button  type="submit" class="btn btn-danger" id="confirm-personal">Submit</button>
+                                                            </td>
+                                                            <td>
+                                                                <img  id="saving-anim" src="" height="25" alt="">
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+
+                                            </td>
+                                        </tr>                              
+
+                                    </table>
+                                </div>
                             </form>
                             <div class="col-md-3"> 
                                 <img class="img-responsive" src="../page_files/images/profilepic/<%=photoUrl%>" alt="pic"> 
@@ -317,39 +369,39 @@
                                 </form>-->
                             </div>
 
-                            </div>
-
                         </div>
+
                     </div>
                 </div>
-
             </div>
 
-            <%@include  file="../WEB-INF/jspf/Footer.jspf"%>
+        </div>
 
-            <script>
-                var precountry = "<%=presentCountry%>";
-                if (precountry !== "null")
-                    $("#present-country").val(precountry);
-                var percountry = "<%=permanentCountry%>";
-                //alert(precountry+precountry.length+percountry+percountry.length);
-                if (percountry !== "null")
-                    $("#permanent-country").val(percountry);
-                var gender = "<%=sex%>";
-                if (gender != "null")
-                    $("#sex").val(gender);
-                var religion = "<%=religion%>";
-                if (religion !== "null")
-                    $("#religion").val(religion);
-                var maritalst = "<%=marital%>";
-                if (maritalst !== "null") {
-                    $("#marital-status").val(maritalst);
-                }
+        <%@include  file="../WEB-INF/jspf/Footer.jspf"%>
 
-                var blood = "<%=blood%>";
-                if (blood !== "null")
-                    $("#blood-group").val(blood);
-            </script>
+        <script>
+            var precountry = "<%=presentCountry%>";
+            if (precountry !== "null")
+                $("#present-country").val(precountry);
+            var percountry = "<%=permanentCountry%>";
+            //alert(precountry+precountry.length+percountry+percountry.length);
+            if (percountry !== "null")
+                $("#permanent-country").val(percountry);
+            var gender = "<%=sex%>";
+            if (gender != "null")
+                $("#sex").val(gender);
+            var religion = "<%=religion%>";
+            if (religion !== "null")
+                $("#religion").val(religion);
+            var maritalst = "<%=marital%>";
+            if (maritalst !== "null") {
+                $("#marital-status").val(maritalst);
+            }
+
+            var blood = "<%=blood%>";
+            if (blood !== "null")
+                $("#blood-group").val(blood);
+        </script>
 
     </body>
 
