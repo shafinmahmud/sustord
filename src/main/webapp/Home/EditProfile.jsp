@@ -23,9 +23,6 @@
         <!-- jQuery library-->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>  
 
-        <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css"/>
-        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
-
         <!-- Including Bootstrap-->
         <%@include  file="../WEB-INF/jspf/BootstrapInclude.jspf"%>
 
@@ -195,7 +192,7 @@
                                     <div class="form-group">
                                         <label class="control-label col-sm-3">Date of Birth:</label>
                                         <div class="col-sm-9"> 
-                                            <input  style="; width:190px" name="dob" id = "dob" class="form-control input-sm" type="text" value="<%=dob%>" placeholder="mm / dd / yyyy">
+                                            <input  style="width:190px" name="dob" id = "dob" class="form-control input-sm" type="date" value="<%=dob%>" placeholder="mm / dd / yyyy">
                                         </div>
                                     </div>
 
@@ -258,17 +255,22 @@
                                     </div>
 
                                 </div>
-
-                                <div class="form-group">        
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button  type="submit" class="btn btn-danger" id="confirm-personal">Submit</button>
+                                    </div>
+                                </div>
+                                        
+                                <!--<div class="form-group">        
                                     <ul id="a-form" class="col-sm-offset-2 col-sm-10">
                                         <li>
-                                            <button  type="submit" class="btn btn-danger" id="confirm-personal">Submit</button>
+                                            
                                             <img  id="saving-anim" src="" height="25" alt="">                                       
                                         </li>
                                     </ul>
-                                </div>
+                                </div>-->
                             </form>
-                            
+
                             <div class="col-sm-3"> 
                                 <img class="img-responsive" src="../page_files/images/profilepic/<%=photoUrl%>" alt="pic"> 
                                 <!--<h4> Choose Image </h4>
