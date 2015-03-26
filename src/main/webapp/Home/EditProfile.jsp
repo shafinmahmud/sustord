@@ -106,27 +106,30 @@
                                         <p style="font-size: 14px"><%=regNo%></p>
                                     </div>
                                 </div>
+
                                 <div class="form-group">
-                                    <label class="control-label col-sm-3" for="pwd">Name:</label>
+                                    <label class="control-label col-sm-3">Name:</label>
                                     <div class="col-sm-9">          
                                         <p style="font-size: 14px"><%=name%><p>
                                     </div>
                                 </div>
+
                                 <div class="form-group">
-                                    <label class="control-label col-sm-3" for="pwd">Father's name:</label>
+                                    <label class="control-label col-sm-3">Father's name:</label>
                                     <div class="col-sm-9">    
                                         <input type="text" id="father" class="form-control input-sm" name="fathersname"  placeholder="Your father's name" value="<%=fatherName%>">
                                     </div>
                                 </div>
+
                                 <div class="form-group">
-                                    <label class="control-label col-sm-3" for="pwd">Mother's name:</label>
+                                    <label class="control-label col-sm-3">Mother's name:</label>
                                     <div class="col-sm-9">    
                                         <input type="text" id="mother" class="form-control input-sm" name="mohtersname"  placeholder="Your mother's name" value="<%=motherName%>">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="control-label col-sm-3" for="pwd">Present address:</label>
+                                    <label class="control-label col-sm-3">Present address:</label>
                                     <div class="col-sm-9 form-inline">   
                                         <ul id="a-form">
                                             <li>
@@ -139,7 +142,7 @@
                                                 <input id="present-district" style="" class="form-control input-sm" name="presentdistrict" type="text"   placeholder="District" value="<%=presentDistrict%>" />
                                             </li>
                                             <li>
-                                                <select id="present-country" name="presentcountry" class="form-control pull-left input-sm"  style="width:100%; ">
+                                                <select id="present-country" name="presentcountry" class="form-control pull-left input-sm"  style="width:50%; ">
                                                     <option value="0" style="display:none" >Country</option>
                                                     <option value="1" style="display:none" >*Country</option>
                                                     <option value="Bangladesh">Bangladesh</option>
@@ -153,7 +156,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="control-label col-sm-3" for="pwd">Permanent address:</label>
+                                    <label class="control-label col-sm-3">Permanent address:</label>
                                     <div class="col-sm-9 form-inline">   
                                         <ul id="a-form">
                                             <li>
@@ -165,7 +168,7 @@
                                                 <input id="permanent-district" style="" name="permanentdistrict" class="form-control input-sm" type="text"  placeholder="District" value="<%=permanentDistrict%>"/>
                                             </li>
                                             <li>
-                                                <select id = "permanent-country" name="permanentcountry" class="form-control pull-left input-sm"  style="width:100%; ">
+                                                <select id = "permanent-country" name="permanentcountry" class="form-control pull-left input-sm"  style="width:50%; ">
                                                     <option value="0" style="display:none" >Country</option>
                                                     <option value="1" style="display:none" >*Country</option>
                                                     <option value="Bangladesh">Bangladesh</option>
@@ -174,104 +177,97 @@
                                             </li>
                                         </ul>
                                     </div>
-
-                                    <div class="form-group">
-                                        <label class="control-label col-sm-3">Phone:</label>
-                                        <div class="col-sm-9"> 
-                                            <input id="phone" style="" name="phone" class="form-control input-sm" type="text" value="<%=phone%>"  placeholder="Your cell phone number ex: 01XXXXXXXXX" >
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="control-label col-sm-3">Email:</label>
-                                        <div class="col-sm-9"> 
-                                            <input id="email" style="" name="email" class="form-control input-sm" type="text" value="<%=email%>" placeholder="Your email address ex: example@domain.com" >
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="control-label col-sm-3">Date of Birth:</label>
-                                        <div class="col-sm-9"> 
-                                            <input  style="width:190px" name="dob" id = "dob" class="form-control input-sm" type="date" value="<%=dob%>" placeholder="mm / dd / yyyy">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="control-label col-sm-3">Gender:</label>
-                                        <div class="col-sm-9"> 
-                                            <select class="form-control pull-left input-sm" id="sex" name="sex" style="width:190px; ">
-                                                <option value="0" style="display:none" >Choose your gender</option>
-                                                <option value="1" style="display:none" >*Choose your gender</option>
-                                                <option value="Male">Male</option>
-                                                <option value="Female">Female</option>       
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="control-label col-sm-3">Religion:</label>
-                                        <div class="col-sm-9"> 
-                                            <select class="form-control pull-left input-sm" id="religion" name="religion" style="width:190px; ">
-                                                <option value="0" style="display:none" >Religion of you</option>
-                                                <option value="1" style="display:none" >*Religion of you</option>
-                                                <option value="Muslim">Muslim</option>
-                                                <option value="Hindu">Hindu</option>
-                                                <option value="Christian">Christian</option>
-                                                <option value="Buddhist">Buddhist</option>
-                                                <option value="Others">Others</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="control-label col-sm-3">Marital status:</label>
-                                        <div class="col-sm-9"> 
-                                            <select class="form-control pull-left input-sm" id="marital-status" name="maritalstatus" style="width:190px; ">
-                                                <option value="0" style="display:none" >Are you married?</option>
-                                                <option value="1" style="display:none" >*Are you married?</option>
-                                                <option value="Single">Single</option>
-                                                <option value="Married">Married</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="form-group">
-                                        <label class="control-label col-sm-3">Marital status:</label>
-                                        <div class="col-sm-9"> 
-                                            <select class="form-control pull-left input-sm" id="blood-group" name="bloodgroup" style="width:160px; ">
-                                                <option  value="0" style="display:none" >Your Blood group</option>
-                                                <option  value="1" style="display:none" >*Your Blood group</option>
-                                                <option value="A+ve">A+ve</option>
-                                                <option value="A-ve">A-ve</option>
-                                                <option value="B+ve">B+ve</option>
-                                                <option value="B-ve">B-ve</option>
-                                                <option value="AB+ve">AB+ve</option>
-                                                <option value="AB-ve">AB-ve</option>
-                                                <option value="O+ve">O+ve</option>
-                                                <option value="O-ve">O-ve</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
                                 </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-3">Phone:</label>
+                                    <div class="col-sm-9"> 
+                                        <input id="phone" style="" name="phone" class="form-control input-sm" type="text" value="<%=phone%>"  placeholder="Your cell phone number ex: 01XXXXXXXXX" >
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-3">Email:</label>
+                                    <div class="col-sm-9"> 
+                                        <input id="email" style="" name="email" class="form-control input-sm" type="text" value="<%=email%>" placeholder="Your email address ex: example@domain.com" >
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-3">Date of Birth:</label>
+                                    <div class="col-sm-9"> 
+                                        <input  style="width:190px" name="dob" id = "dob" class="form-control input-sm" type="date" value="<%=dob%>" placeholder="mm / dd / yyyy">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-3">Gender:</label>
+                                    <div class="col-sm-9"> 
+                                        <select class="form-control pull-left input-sm" id="sex" name="sex" style="width:190px; ">
+                                            <option value="0" style="display:none" >Choose your gender</option>
+                                            <option value="1" style="display:none" >*Choose your gender</option>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>       
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-3">Religion:</label>
+                                    <div class="col-sm-9"> 
+                                        <select class="form-control pull-left input-sm" id="religion" name="religion" style="width:190px; ">
+                                            <option value="0" style="display:none" >Religion of you</option>
+                                            <option value="1" style="display:none" >*Religion of you</option>
+                                            <option value="Muslim">Muslim</option>
+                                            <option value="Hindu">Hindu</option>
+                                            <option value="Christian">Christian</option>
+                                            <option value="Buddhist">Buddhist</option>
+                                            <option value="Others">Others</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-3">Marital status:</label>
+                                    <div class="col-sm-9"> 
+                                        <select class="form-control pull-left input-sm" id="marital-status" name="maritalstatus" style="width:190px; ">
+                                            <option value="0" style="display:none" >Are you married?</option>
+                                            <option value="1" style="display:none" >*Are you married?</option>
+                                            <option value="Single">Single</option>
+                                            <option value="Married">Married</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-3">Marital status:</label>
+                                    <div class="col-sm-9"> 
+                                        <select class="form-control pull-left input-sm" id="blood-group" name="bloodgroup" style="width:160px; ">
+                                            <option  value="0" style="display:none" >Your Blood group</option>
+                                            <option  value="1" style="display:none" >*Your Blood group</option>
+                                            <option value="A+ve">A+ve</option>
+                                            <option value="A-ve">A-ve</option>
+                                            <option value="B+ve">B+ve</option>
+                                            <option value="B-ve">B-ve</option>
+                                            <option value="AB+ve">AB+ve</option>
+                                            <option value="AB-ve">AB-ve</option>
+                                            <option value="O+ve">O+ve</option>
+                                            <option value="O-ve">O-ve</option>
+                                        </select>
+                                    </div>
+                                </div>
+
                                 <div class="form-group">
                                     <div class="col-sm-offset-2 col-sm-10">
                                         <button  type="submit" class="btn btn-danger" id="confirm-personal">Submit</button>
+                                        <img  id="saving-anim" src="" height="25" alt=""> 
                                     </div>
                                 </div>
-                                        
-                                <!--<div class="form-group">        
-                                    <ul id="a-form" class="col-sm-offset-2 col-sm-10">
-                                        <li>
-                                            
-                                            <img  id="saving-anim" src="" height="25" alt="">                                       
-                                        </li>
-                                    </ul>
-                                </div>-->
+
                             </form>
 
-                            <div class="col-sm-3"> 
+                            <div class="col-sm-4"> 
                                 <img class="img-responsive" src="../page_files/images/profilepic/<%=photoUrl%>" alt="pic"> 
                                 <!--<h4> Choose Image </h4>
                                 <form action="upload" method="post" enctype="multipart/form-data">
