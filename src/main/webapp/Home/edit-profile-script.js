@@ -170,7 +170,7 @@ $(document).ready(function () {
         }
     });
 
-    $("#dob").datepicker();
+   // $("#dob").datepicker();
 
     $('#sex').focus(function () {
         if ($('#sex').val() === "1") {
