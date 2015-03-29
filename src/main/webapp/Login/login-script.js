@@ -22,7 +22,7 @@ $(document).ready(function () {
 
  // handling event for the empty input in the Registration No field 
     $('#username').bind('input', function () {// get the current value of registration No.
-        if ($('#username').val() === "") {
+        if ($.trim($('#username').val()).length === 0) {
             $("#reg-no").addClass("has-error");
             //$('#need-id-error').html('*Registration No required.');
             //$("#messagebox").html('');
@@ -47,13 +47,17 @@ $(document).ready(function () {
 
  // Onclick actions for the Login button
     $('#login').click(function () {
+       
+       var userNameLength = $.trim($('#username').val()).length; // username is trimed to check white spaces
+       var passwordLength = $('#password').val().length; // password should not be trimed
+      // alert(userNameLength + " "+passwordLength);
+       
+        if ( userNameLength === 0 || passwordLength === 0) {
 
-        if ($('#username').val() === "" || $('#password').val() === "") {
-
-            if ($('#username').val() === "") {
+            if (!(userNameLength > 0)) {
                 $("#reg-no").addClass("has-error");
             }
-            if ($('#password').val() === "") {
+            if (!(passwordLength > 0)) {
                 $("#pass").addClass("has-error");
                 // $('#need-pass-error').html('*Password required.');
             }
