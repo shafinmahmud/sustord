@@ -58,22 +58,18 @@
                         <input id="password"  autocomplete="off" class="form-control valid" name="Password" type="password">
                         <p id="need-pass-error" class="requiredwarning small"></p>
                     </div> 
-
-                    <div>
-                        <table class="table-condensed">
-                            <tr>
-                                <td>
-                                    <button type="submit" class="btn btn-primary" id="login" >Sign In</button>
-                                </td>
-                                <td>
-
-                                </td>
-                                <td>
-                                    <img  id="loading-anim" src="" height="22" alt="">
-                                </td>
-                            </tr>
-                        </table>
+                    <div class="form-group">
+                         <div>
+                             <div>
+                                 <button type="submit" class="btn btn-primary" id="login" >Sign In</button>
+                             
+                                 <img  id="loading-anim" src="" height="22" alt="">
+                             </div>
+                             
+                         </div>
+                        
                     </div>
+                   
 
                 </form>
 
