@@ -103,14 +103,14 @@
                                 <div class="form-group">
                                     <label class="control-label col-sm-3">Registration No:</label>
                                     <div class="col-sm-9">
-                                        <p style="font-size: 14px"><%=regNo%></p>
+                                       <input type="text" class="form-control input-sm"  value="<%=regNo%>" readonly>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="control-label col-sm-3">Name:</label>
-                                    <div class="col-sm-9">          
-                                        <p style="font-size: 14px"><%=name%><p>
+                                    <div class="col-sm-9">        
+                                        <input type="text" class="form-control input-sm"  value="<%=name%>" readonly>
                                     </div>
                                 </div>
 
@@ -142,7 +142,7 @@
                                                 <input id="present-district" style="" class="form-control input-sm" name="presentdistrict" type="text"   placeholder="District" value="<%=presentDistrict%>" />
                                             </li>
                                             <li>
-                                                <select id="present-country" name="presentcountry" class="form-control pull-left input-sm"  style="width:50%; ">
+                                                <select id="present-country" name="presentcountry" class="form-control pull-left input-sm"  style="width:45%; ">
                                                     <option value="0" style="display:none" >Country</option>
                                                     <option value="1" style="display:none" >*Country</option>
                                                     <option value="Bangladesh">Bangladesh</option>
@@ -168,7 +168,7 @@
                                                 <input id="permanent-district" style="" name="permanentdistrict" class="form-control input-sm" type="text"  placeholder="District" value="<%=permanentDistrict%>"/>
                                             </li>
                                             <li>
-                                                <select id = "permanent-country" name="permanentcountry" class="form-control pull-left input-sm"  style="width:50%; ">
+                                                <select id = "permanent-country" name="permanentcountry" class="form-control pull-left input-sm"  style="width:45%; ">
                                                     <option value="0" style="display:none" >Country</option>
                                                     <option value="1" style="display:none" >*Country</option>
                                                     <option value="Bangladesh">Bangladesh</option>
@@ -267,7 +267,7 @@
 
                             </form>
 
-                            <div class="col-sm-4"> 
+                            <div class="col-lg-4"> 
                                 <img class="img-responsive" src="../page_files/images/profilepic/<%=photoUrl%>" alt="pic"> 
                                 <!--<h4> Choose Image </h4>
                                 <form action="upload" method="post" enctype="multipart/form-data">
