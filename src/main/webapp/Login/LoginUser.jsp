@@ -49,12 +49,12 @@
                         <input id="usertype" name="UserType" value="student">    
                     </div>
                     <div id="reg-no" class="form-group">
-                        <label class="control-label" for="UserName">Registration No</label>
+                        <label class="control-label" for="username">Registration No</label>
                         <input id="username" autocomplete="off" class="form-control valid"  name="UserName" type="text" value="">
                         <p id="need-id-error" class="requiredwarning small"></p>
                     </div>
                     <div id="pass" class="form-group">
-                        <label class="control-label" for="Password">Password</label>
+                        <label class="control-label" for="password">Password</label>
                         <input id="password"  autocomplete="off" class="form-control valid" name="Password" type="password">
                         <p id="need-pass-error" class="requiredwarning small"></p>
                     </div> 
