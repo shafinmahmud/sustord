@@ -18,34 +18,34 @@ public class FormatService {
 
         switch (semesterNo) {
             case 1:
-                name = "First year First semester";
+                name = "1st year 1st semester";
                 break;
             case 2:
-                name = "First year Second semester";
+                name = "1st year 2nd semester";
                 break;
             case 3:
-                name = "Second year First semester";
+                name = "2nd year 1st semester";
                 break;
             case 4:
-                name = "Second year Second semester";
+                name = "2nd year 2nd semester";
                 break;
             case 5:
-                name = "Third year First semester";
+                name = "3rd year 1st semester";
                 break;
             case 6:
-                name = "Third year Second semester";
+                name = "3rd year 2nd semester";
                 break;
             case 7:
-                name = "Fourth year First semester";
+                name = "4th year 1st semester";
                 break;
             case 8:
-                name = "Fourth year Second semester";
+                name = "4th year 2nd semester";
                 break;
             case 9:
-                name = "Fifth year First semester";
+                name = "5th year 1st semester";
                 break;
             case 10:
-                name = "Fifth year Second semester";
+                name = "5th year 2nd semester";
                 break;
             case 0:
                 name = "Optional Courses";

@@ -98,7 +98,7 @@
 
 
 
-                        <form class="form-horizontal col-sm-8" role="form">
+                        <form id="info-form" class="form-horizontal col-sm-8" role="form">
 
                             <div class="form-group">
                                 <label class="control-label col-sm-3">Registration No:</label>
@@ -114,7 +114,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
+                            <div id="fathername-div" class="form-group">
                                 <label class="control-label col-sm-3">Father's name:</label>
                                 <div class="col-sm-9">    
                                     <input type="text" id="father" class="form-control input-sm" name="fathersname"  placeholder="Your father's name" value="<%=fatherName%>">
@@ -182,7 +182,7 @@
                             <div class="form-group">
                                 <label class="control-label col-sm-3">Phone:</label>
                                 <div class="col-sm-9"> 
-                                    <input id="phone" name="phone" class="form-control input-sm" type="number" value="<%=phone%>"  placeholder="Your cell phone number ex: 01XXXXXXXXX" required>
+                                    <input id="phone" name="phone" class="form-control input-sm" type="tel" value="<%=phone%>"  placeholder="Your cell phone number ex: 01XXXXXXXXX" required>
                                 </div>
                             </div>
 
