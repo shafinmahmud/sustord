@@ -13,8 +13,9 @@ public class LoginController {
     public static String authencateStudent(String registrationNo, String password) {
         String authenticationMessage;
         try {
-            if(LoginService.verifyRegistrationNo(registrationNo)){
-                if(LoginService.verifyPassword(registrationNo,password)){
+            LoginService loginService = LoginService.forSingletonLoginService(registrationNo);
+            if(loginService.verifyRegistrationNo()){
+                if(loginService.verifyPassword(password)){
                     authenticationMessage = "verified#" + registrationNo;
                 }else{
                     authenticationMessage = "passError#";

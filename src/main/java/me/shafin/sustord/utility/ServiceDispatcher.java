@@ -5,6 +5,8 @@
  */
 package me.shafin.sustord.utility;
 
+import java.util.ArrayList;
+import java.util.List;
 import me.shafin.sustord.dao.StudentInfoDao;
 import me.shafin.sustord.model.StudentInfo;
 
@@ -14,16 +16,29 @@ import me.shafin.sustord.model.StudentInfo;
  */
 public class ServiceDispatcher {
 
-    private static StudentInfo singletonStudentInfo;
+    private static List<StudentInfo> singletonStudentInfoList = new ArrayList<StudentInfo>();
 
     public static StudentInfo getSingletonStudentInfo(String registrationNo) throws Exception {
-        if (singletonStudentInfo == null) {
-            singletonStudentInfo = StudentInfoDao.getStudentInfoObject(registrationNo);
+
+        for (StudentInfo studentInfo : singletonStudentInfoList) {
+            if (studentInfo.getRegistrationNo().equals(registrationNo)) {
+                 System.out.println("found studentinfo: "+studentInfo.getRegistrationNo());
+                return studentInfo;
+            }
         }
-        return singletonStudentInfo;
+
+        StudentInfo newStudentInfo = StudentInfoDao.getStudentInfoObject(registrationNo);
+        singletonStudentInfoList.add(newStudentInfo);
+        return newStudentInfo;
     }
 
-    public static void nullifyServiceDispatchers() {
-        singletonStudentInfo = null;
+    public static void nullifyServiceDispatchers(String registrationNo) {
+
+        for (StudentInfo exitingStudenInfo : singletonStudentInfoList) {
+            if (exitingStudenInfo.getRegistrationNo().equals(registrationNo)) {
+                singletonStudentInfoList.remove(exitingStudenInfo);
+                break;
+            }
+        }
     }
 }
