@@ -259,12 +259,11 @@
                             </div>
 
                             <div class="form-group">
-                                <div class="col-sm-offset-3 col-sm-9">
-                                    <div class="col-xs-4">
-                                        <button  type="submit" class="btn btn-danger" id="confirm-personal">Submit</button>
-                                    </div>
-                                    <div class="col-xm-8">
-                                        <img  id="saving-anim" src="" height="30">
+                                <div>
+                                    <div class="col-md-offset-4 col-xs-offset-1">
+                                        <button type="submit" class="btn btn-danger col-xs-offset-0" id="confirm-personal">Submit</button>                   
+                                        <img  class="col-xs-offset-1" id="saving-anim" src="..\page_files\icons\empty-icon.gif" height="25">
+                                        <!--<p id="messagebox" class="alert-warning col-md-offset-4"> </p>-->
                                     </div>                                   
                                 </div>
                             </div>
