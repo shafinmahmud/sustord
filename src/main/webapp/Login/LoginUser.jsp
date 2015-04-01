@@ -59,18 +59,13 @@
                         <p id="need-pass-error" class="requiredwarning small"></p>
                     </div> 
                     <div class="form-group">
-                         <div>
-                             <div>
-                                 <button type="submit" class="btn btn-primary" id="login" >Sign In</button>
-                             
-                                 <img  id="loading-anim" src="" height="22" alt="">
-                             </div>
-                             
-                         </div>
-                        
+                        <div>
+                            <div >
+                                <button type="submit" class="btn btn-primary" id="login" >Sign In</button>      
+                                <img  class="col-xs-offset-1" id="loading-anim" src="..\page_files\icons\empty-icon.gif" height="25" alt="">
+                            </div>   
+                        </div>
                     </div>
-                   
-
                 </form>
 
                 <div class="login_forgotpassword">

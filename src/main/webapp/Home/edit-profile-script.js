@@ -9,6 +9,7 @@ $(document).ready(function () {
 
 // ---------------       ERROR MESSAGES    -------------------
     var requiredMessage = "One or more field is required!";
+    var warningMessage = "No field is changed!";
     var successMessage = "Your profile has been updated!";
     var serverErrorMessage = "Server Error: Server isnt responding :/";
     // ---------------   ICON AND ANIMATION URLs -------------------  
@@ -257,11 +258,12 @@ $(document).ready(function () {
         changedFormData = $('#info-form').serializeArray();
 
         if (JSON.stringify(changedFormData) === JSON.stringify(initialFormData)) {
-            //alert("no change");
-            highlightChangedField();
+            $("#saving-anim").attr("src", "../page_files/icons/warning-icon.png");
+            $("#messagebox").html(warningMessage);
+            //highlightChangedField();
         } else {
 
-            highlightChangedField();
+            //highlightChangedField();
 
             var warning = "*Required";
             var continueflag = true;
@@ -370,12 +372,13 @@ $(document).ready(function () {
             }
             return false;
         }
+        return false;
     });
 });
 
 function highlightChangedField() {
 
     //changedFormData;
-            alert(JSON.stringify(initialFormData));
+            //alert(JSON.stringify(initialFormData));
 }
 
