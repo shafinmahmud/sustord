@@ -2,10 +2,11 @@
 <%@ page pageEncoding="UTF-8" %>
 <%
     try {
-        if (!session.getAttribute("loginStatus").equals("ok")) {
-            response.sendRedirect("../Login/LoginUser.jsp");
+        
+        if (session == null) {
+            //response.sendRedirect("../Login/LoginUser.jsp");         
         }
     } catch (Exception e) {
-        response.sendRedirect("../Login/LoginUser.jsp");
+        //response.sendRedirect("../Login/LoginUser.jsp");
     }
 %>
