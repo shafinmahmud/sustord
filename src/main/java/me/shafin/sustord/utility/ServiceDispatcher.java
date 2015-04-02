@@ -20,10 +20,12 @@ public class ServiceDispatcher {
 
     public static StudentInfo getSingletonStudentInfo(String registrationNo) throws Exception {
 
-        for (StudentInfo studentInfo : singletonStudentInfoList) {
-            if (studentInfo.getRegistrationNo().equals(registrationNo)) {
-                 System.out.println("found studentinfo: "+studentInfo.getRegistrationNo());
-                return studentInfo;
+        if (!singletonStudentInfoList.isEmpty()) {
+            for (StudentInfo studentInfo : singletonStudentInfoList) {
+                if (studentInfo.getRegistrationNo().equals(registrationNo)) {
+                    System.out.println("found studentinfo: " + studentInfo.getRegistrationNo());
+                    return studentInfo;
+                }
             }
         }
 
