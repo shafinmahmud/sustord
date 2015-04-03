@@ -66,10 +66,12 @@ public class AccessFilter implements Filter {
             String sessionValue = (String) httpRequest.getSession().getAttribute("loginStatus");
 
             //validate that there exist a authentic session and not a login page
-            if ((sessionValue != null && sessionValue.equals("ok")) || url.endsWith("Login/LoginUser.jsp")) { 
+            if ((sessionValue != null && sessionValue.equals("ok")) || 
+                    (url.endsWith("LoginUser.jsp") || url.endsWith("LoginAdmin.jsp"))) { 
                     chain.doFilter(request, response);                                          
             } else {
-                httmlResponse.sendRedirect("../Login/LoginUser.jsp");
+               // chain.doFilter(request, response);   
+                  httmlResponse.sendRedirect("../Login/LoginUser.jsp");
             }
 
         } catch (Throwable t) {

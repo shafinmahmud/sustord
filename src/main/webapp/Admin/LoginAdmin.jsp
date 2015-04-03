@@ -1,6 +1,6 @@
-<%--
-    Document   : LoginUser
-    Created on : Dec 25, 2014, 10:21:59 AM
+<%-- 
+    Document   : LoginAdmin
+    Created on : Dec 25, 2014, 10:30:37 AM
     Author     : SHAFIN
 --%>
 
@@ -16,30 +16,22 @@
 
         <!-- style sheet for this page-->
         <link href="../page_files/css/login.css" rel="stylesheet">
-        <!-- java script for the login page-->
+        <!-- java script for the login -->
         <script src="login-script.js"></script>
     </head>
     <body>
 
         <!-- validating login status-->
-        <%
-            try {
-                if (session.getAttribute("loginStatus").equals("ok")) {
-                    response.sendRedirect("../Home/HomeUser.jsp");
-                }
-            } catch (Exception e) {
-
-            }
-        %>
+        
 
 
         <div class="row">
-            <div class="col-md-7 col-sm-7 hidden-xs login_left">
+            <div class="col-md-7 col-sm-7 hidden-xs login_left_admin">
 
             </div>
             <div class="col-sm-12 login_panel">
                 <%@include  file="../WEB-INF/jspf/BrandLogo.jspf"%>
-                <div id="before-form" class="login_header">Sign in with your Registration Number.</div>
+                <div id="before-form" class="login_header">Sign in with your Admin ID.</div>
                 <div>                  
                     <p id="messagebox" class="requiredwarning small"></p>
                 </div>
@@ -49,7 +41,7 @@
                         <input id="usertype" name="UserType" value="student">    
                     </div>
                     <div id="reg-no" class="form-group">
-                        <label class="control-label" for="username">Registration No</label>
+                        <label class="control-label" for="username">Admin ID</label>
                         <input id="username" autocomplete="off" class="form-control valid"  name="UserName" type="text" value="">
                         <p id="need-id-error" class="requiredwarning small"></p>
                     </div>
@@ -70,7 +62,7 @@
 
                 <div class="login_forgotpassword">
                     <a href="">Can’t access your account?</a> <br>
-                    <a href="../Admin/LoginAdmin.jsp">I'm Admin</a></div>
+                    <a href="../Login/LoginUser.jsp">I'm user</a></div>
             </div>
         </div> 
     </body>
