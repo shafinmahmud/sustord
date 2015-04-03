@@ -34,8 +34,8 @@ public class StudentInfoDao {
             }else{
                 studentInfo = null;
             }
-        } catch (Exception e) {
-            throw new HibernateException(e.getMessage());
+        } catch (HibernateException e) {        
+            throw new ExceptionInInitializerError(e.getMessage());
         } finally{
             session.close();
         }
