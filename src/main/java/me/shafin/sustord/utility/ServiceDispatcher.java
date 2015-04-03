@@ -30,7 +30,9 @@ public class ServiceDispatcher {
         }
 
         StudentInfo newStudentInfo = StudentInfoDao.getStudentInfoObject(registrationNo);
-        singletonStudentInfoList.add(newStudentInfo);
+        if(newStudentInfo != null){
+            singletonStudentInfoList.add(newStudentInfo);
+        }    
         return newStudentInfo;
     }
 
