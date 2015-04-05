@@ -43,21 +43,13 @@
                                             StudentService studentService = (StudentService) session.getAttribute("studentService");
                                             String regNo = (String) request.getSession().getAttribute("regNo");
                                             int numofsem = studentService.getStudentTotalSemester(regNo);
-                                            int currentSemester = 2;
 
-                                            for (int i = 1; i <= numofsem; i++) {
-                                                if (i == currentSemester) {
-                                        %>
+                                            for (int i = 1; i <= numofsem; i++) {                                               
+                                        %>                                       
                                         <option value="<%=i%>"><%=FormatService.formatSemesterName(i)%></option>
                                         <%
-                                        } else {
-                                        %>
-                                        <option value="<%=i%>"><%=FormatService.formatSemesterName(i)%></option>
-                                        <%
-                                                }
                                             }
                                         %>
-                                        <option value="0">Optional Courses</option>
                                     </select>
 
                                 </td>

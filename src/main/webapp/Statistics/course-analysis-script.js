@@ -11,26 +11,27 @@ var f = 0;
 
 $(document).ready(function () {
 
-    ajaxCallForCurrentSemester();
-
+    //ajaxCallForCurrentSemester();
+    ajaxCallForDropDown();
+    
     $('#semester-dropdown').change(function () {
         ajaxCallForDropDown();
     });
 });
 
-function ajaxCallForCurrentSemester() {
-
-    $.ajax({
-        url: '../GetCurrentSemester',
-        type: 'POST',
-        success: function (currentSemester) {
-            $('#semester-dropdown').val(currentSemester).change();
-        },
-        error: function () {
-            alert("ERRORX");
-        }
-    });
-}
+//function ajaxCallForCurrentSemester() {
+//
+//    $.ajax({
+//        url: '../GetCurrentSemester',
+//        type: 'POST',
+//        success: function (currentSemester) {
+//            $('#semester-dropdown').val(currentSemester).change();
+//        },
+//        error: function () {
+//            alert("ERRORX");
+//        }
+//    });
+//}
 
 function ajaxCallForDropDown() {
     $.ajax({
