@@ -107,7 +107,7 @@ $(document).ready(function () {
                     }
                 },
                 error: function () {
-                    alert(ajaxErrorMessage);
+                    $("#messagebox").html(ajaxErrorMessage);
                     $("#loading-anim").attr("src", emptyIconUrl);
                 }
             });

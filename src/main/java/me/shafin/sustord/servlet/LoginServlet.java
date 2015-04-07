@@ -1,6 +1,8 @@
 package me.shafin.sustord.servlet;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,11 +23,8 @@ public class LoginServlet extends HttpServlet {
      *
      * @param request servlet request
      * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) {
         response.setContentType("text/html;charset=UTF-8");
 
         String userType = request.getParameter("ut");
@@ -51,11 +50,19 @@ public class LoginServlet extends HttpServlet {
             String status = "ok";
             session.setAttribute("loginStatus", status);
             session.setAttribute("regNo", arr[1]);
-            response.getWriter().print(arr[0]);
+            try {
+                response.getWriter().print(arr[0]);
+            } catch (IOException ex) {
+                Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
         } else {
-            // System.out.println("servlet print------------------" +verification);
-            response.getWriter().print(arr[0]);
+            try {
+                // System.out.println("servlet print------------------" +verification);
+                response.getWriter().print(arr[0]);
+            } catch (IOException ex) {
+                Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
     }
