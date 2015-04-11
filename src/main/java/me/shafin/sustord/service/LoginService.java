@@ -1,8 +1,10 @@
 package me.shafin.sustord.service;
 
+import java.sql.SQLException;
 import me.shafin.sustord.dao.StudentInfoDao;
 import me.shafin.sustord.model.StudentInfo;
 import me.shafin.sustord.utility.ServiceDispatcher;
+import org.hibernate.HibernateException;
 
 /**
  *
@@ -15,17 +17,17 @@ public class LoginService {
     private static final String ERROR_RESPONSE = ":/";
 
     /* Constructor thats is private and get accesses through static helper method  */
-    private LoginService(StudentInfo studentInfo) throws Exception {
+    private LoginService(StudentInfo studentInfo) throws HibernateException {
         this.studentInfo = studentInfo;
     }
 
     /* Constructor helper for singleton LoginService  */
-    public static LoginService forSingletonLoginService(String registrationNo) throws Exception {
+    public static LoginService forSingletonLoginService(String registrationNo) throws HibernateException, SQLException, Exception {
         return new LoginService(ServiceDispatcher.getSingletonStudentInfo(registrationNo));
     }
 
     /* Constructor helper for prototype LoginService  */
-    public static LoginService forProtypeLoginService(String registrationNo) throws Exception {
+    public static LoginService forProtypeLoginService(String registrationNo) throws  HibernateException,SQLException{
         return new LoginService(StudentInfoDao.getStudentInfoObject(registrationNo));
     }
 

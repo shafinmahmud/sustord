@@ -1,6 +1,9 @@
 package me.shafin.sustord.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -8,7 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import me.shafin.sustord.bean.LoginMessage;
 import me.shafin.sustord.controller.LoginController;
+import me.shafin.sustord.service.JsonConvertion;
 import me.shafin.sustord.service.StudentService;
 
 /**
@@ -25,46 +30,72 @@ public class LoginServlet extends HttpServlet {
      * @param response servlet response
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) {
-        response.setContentType("text/html;charset=UTF-8");
+        try {
+            response.setContentType("text/html;charset=UTF-8");
 
-        String userType = request.getParameter("ut");
-        String registrationNo = request.getParameter("un");
-        String password = request.getParameter("pw");
+            String userType = request.getParameter("ut");
+            String registrationNo = request.getParameter("un");
+            String password = request.getParameter("pw");
 
-        StudentService studentService = new StudentService();
+            LoginMessage message = new LoginMessage();
 
-        String verification = "noresponse#";
+            if (userType.equals("student")) {
+                message = LoginController.authencateStudent(registrationNo, password);
+            } else if (userType.equals("admin")) {
 
-        if (userType.equals("student")) {
-            verification = LoginController.authencateStudent(registrationNo, password);
-        } else if (userType.equals("admin")) {
-                  
-        }
-
-        String[] arr = verification.split("#");
-        //System.out.println(arr[0]+" "+arr[1]);
-        if (arr[0].equals("verified")) {
-            
-            HttpSession session = request.getSession();
-            session.setAttribute("studentService", studentService);
-            String status = "ok";
-            session.setAttribute("loginStatus", status);
-            session.setAttribute("regNo", arr[1]);
-            try {
-                response.getWriter().print(arr[0]);
-            } catch (IOException ex) {
-                Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-        } else {
-            try {
-                // System.out.println("servlet print------------------" +verification);
-                response.getWriter().print(arr[0]);
-            } catch (IOException ex) {
-                Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+            StudentService service = LoginController.temporarySupport();
 
+            if (message.isREGISTRATION_NO_VALID() && message.isPASSWORD_VALID()) {
+                HttpSession session = request.getSession();
+                session.setAttribute("studentService", service);
+                session.setAttribute("loginStatus", "ok");
+                session.setAttribute("regNo", message.getRequestedRegistrationNo());
+                try {
+                    String messageJson = JsonConvertion.objectToJsonString(message);
+                    PrintWriter out = response.getWriter();
+                    out.print(messageJson);
+                    System.out.println(messageJson);
+                    out.flush();
+                } catch (IOException ex) {
+                    Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            } else {
+                try {
+                    String messageJson = JsonConvertion.objectToJsonString(message);
+                    PrintWriter out = response.getWriter();
+                    System.out.println(messageJson);
+                    out.print(messageJson);
+                    out.flush();
+                } catch (IOException ex) {
+                    Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+        } catch (ExceptionInInitializerError ex) {
+            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            ex.printStackTrace(pw);
+            String errorString = sw.toString(); // stack trace as a string  
+
+            //temporary way to handle service class exception. intend to remove later
+            try {
+                PrintWriter out = response.getWriter();
+                LoginMessage message = new LoginMessage();
+                message.setMessageHeader("Sql Exception");
+                message.setMessageBody(errorString);
+                out.print(JsonConvertion.objectToJsonString(message));
+                out.flush();
+            } catch (IOException io) {
+                Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, io);
+            }
+
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

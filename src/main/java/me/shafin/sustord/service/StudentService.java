@@ -9,8 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import java.io.PrintWriter;
-import java.io.StringWriter;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -40,7 +39,7 @@ public class StudentService {
 
     private final SessionFactory sessionFactory;
 
-    public StudentService() throws ExceptionInInitializerError {
+    public StudentService() throws ExceptionInInitializerError, SQLException {
         this.sessionFactory = HibernateUtil.getSessionFactory();
     }
 

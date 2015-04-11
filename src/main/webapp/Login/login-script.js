@@ -10,8 +10,9 @@ $(document).ready(function () {
             + "Have you changed your password? "
             + "If not, your default password is 123456";
 
-    var serverErrorMessage = "Server Error: Server isnt responding :(";
-    var ajaxErrorMessage = "hibernate.cfg.xml configuration error! :(";
+    var serverErrorMessage = "Server Error: Server isnt responsing :(";
+    var unknownErrorMessage = "Problem connecting the database :(";
+    var ajaxErrorMessage = "Ajax operation failed! :(";
 
     // ---------------   ICON AND ANIMATION URLs -------------------  
     var loaderUrl = "../page_files/icons/ajax-loader.gif";
@@ -77,8 +78,11 @@ $(document).ready(function () {
                     pw: $('#password').val()
                 },
                 type: 'POST',
-                success: function (validationMsg) {
-                    if (validationMsg == 'verified') {
+                success: function (messageString) {
+                    var messageJson = $.parseJSON(messageString);
+                    
+                    if (messageJson.REGISTRATION_NO_VALID .toString() === "true" && 
+                            messageJson.PASSWORD_VALID.toString() === "true") {
 
                         $("#loading-anim").attr("src", successUrl)
                                 .fadeTo(9, 1,
@@ -88,27 +92,32 @@ $(document).ready(function () {
                                         }
                                 );
 
-                    } else if (validationMsg == 'regError') {
+                    } else if (messageJson.REGISTRATION_NO_VALID.toString() !== 'true') {
 
                         $("#loading-anim").attr("src", emptyIconUrl);
                         $("#messagebox").html(regErrorMessage);
 
-                    } else if (validationMsg == 'passError') {
+                    } else if (messageJson.PASSWORD_VALID.toString() !== 'true') {
 
                         $("#loading-anim").attr("src", emptyIconUrl);
                         $("#messagebox").html(passErrorMessage);
 
-                    } else if (validationMsg == 'noresponse') {
-                        alert(serverErrorMessage);
+                    } else if (messageJson.REGISTRATION_NO_VALID.toString() === 'null') {
+                        alert(messageJson.messageBody);
+                        $("#messagebox").html(serverErrorMessage);
                         $("#loading-anim").attr("src", emptyIconUrl);
                     } else {
-                        alert(validationMsg);
+                        alert("got it");
+                        alert(messageJson.messageBody);
+                        $("#messagebox").html(unknownErrorMessage);
                         $("#loading-anim").attr("src", emptyIconUrl);
                     }
                 },
-                error: function () {
-                    $("#messagebox").html(ajaxErrorMessage);
+                error: function (messageString) {
+                    //alert("oops");
+                    alert(JSON.stringify(messageString));
                     $("#loading-anim").attr("src", emptyIconUrl);
+                    $("#messagebox").html(ajaxErrorMessage);                   
                 }
             });
 

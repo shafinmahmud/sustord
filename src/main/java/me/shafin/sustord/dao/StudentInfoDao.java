@@ -2,6 +2,7 @@
  */
 package me.shafin.sustord.dao;
 
+import java.sql.SQLException;
 import java.util.List;
 import me.shafin.sustord.model.StudentInfo;
 import me.shafin.sustord.utility.HibernateUtil;
@@ -15,12 +16,12 @@ import org.hibernate.Session;
  */
 public class StudentInfoDao {
 
-    public static StudentInfo getStudentInfoObject(String registrationNo) throws Exception {
+    public static StudentInfo getStudentInfoObject(String registrationNo) throws HibernateException, SQLException{
         StudentInfo studentInfo;
         Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-        
         try {
+
+            session.beginTransaction();
             String hql = "from StudentInfo where registrationNo = :reg";
             Query query = session.createQuery(hql);
             query.setParameter("reg", registrationNo);
@@ -31,16 +32,16 @@ public class StudentInfoDao {
 
             if (!infos.isEmpty()) {
                 studentInfo = infos.get(0);
-            }else{
+            } else {
                 studentInfo = null;
             }
-        } catch (HibernateException e) {        
+        } catch (Exception e) {
             throw new ExceptionInInitializerError(e.getMessage());
-        } finally{
+        } finally {
             session.close();
         }
 
         return studentInfo;
     }
-    
+
 }

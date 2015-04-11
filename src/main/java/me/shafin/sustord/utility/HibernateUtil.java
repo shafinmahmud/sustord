@@ -5,6 +5,7 @@
  */
 package me.shafin.sustord.utility;
 
+import java.sql.SQLException;
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -20,17 +21,14 @@ public class HibernateUtil {
 
     private static SessionFactory sessionFactorySingletone;
 
-    public static SessionFactory getSessionFactory() {
+    public static SessionFactory getSessionFactory() throws HibernateException, SQLException {
         if (sessionFactorySingletone == null) {
-            try {
-                Configuration configuration = new Configuration().configure();
-                StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder()
-                        .applySettings(configuration.getProperties());
-                sessionFactorySingletone = configuration.buildSessionFactory(builder.build());
-            } catch (HibernateException ex) {
-                System.err.println("Initial SessionFactory creation failed." + ex);
-                throw new ExceptionInInitializerError(ex);
-            }
+
+            Configuration configuration = new Configuration().configure();
+            StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder()
+                    .applySettings(configuration.getProperties());
+            sessionFactorySingletone = configuration.buildSessionFactory(builder.build());
+
         }
         return sessionFactorySingletone;
     }
