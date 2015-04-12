@@ -11,7 +11,7 @@ $(document).ready(function () {
             + "If not, your default password is 123456";
 
     var serverErrorMessage = "Server Error: Server isnt responsing :(";
-    var unknownErrorMessage = "Problem connecting the database :(";
+    var unknownErrorMessage = "Unknwon error occured :(";
     var ajaxErrorMessage = "Ajax operation failed! :(";
 
     // ---------------   ICON AND ANIMATION URLs -------------------  
@@ -107,8 +107,8 @@ $(document).ready(function () {
                         $("#messagebox").html(serverErrorMessage);
                         $("#loading-anim").attr("src", emptyIconUrl);
                     } else {
-                        alert("got it");
-                        alert(messageJson.messageBody);
+                        //alert("got it");
+                       // alert(messageJson.messageBody);
                         $("#messagebox").html(unknownErrorMessage);
                         $("#loading-anim").attr("src", emptyIconUrl);
                     }

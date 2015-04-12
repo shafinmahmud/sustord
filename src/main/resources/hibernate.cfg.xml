@@ -1,52 +1,29 @@
 <?xml version='1.0' encoding='utf-8'?>
-<!--
-~ Hibernate, Relational Persistence for Idiomatic Java
-~
-~ Copyright (c) 2010, Red Hat Inc. or third-party contributors as
-~ indicated by the @author tags or express copyright attribution
-~ statements applied by the authors.  All third-party contributions are
-~ distributed under license by Red Hat Inc.
-~
-~ This copyrighted material is made available to anyone wishing to use, modify,
-~ copy, or redistribute it subject to the terms and conditions of the GNU
-~ Lesser General Public License, as published by the Free Software Foundation.
-~
-~ This program is distributed in the hope that it will be useful,
-~ but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
-~ or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License
-~ for more details.
-~
-~ You should have received a copy of the GNU Lesser General Public License
-~ along with this distribution; if not, write to:
-~ Free Software Foundation, Inc.
-~ 51 Franklin Street, Fifth Floor
-~ Boston, MA  02110-1301  USA
--->
+
 <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" 
 "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 
 <hibernate-configuration>
     
     <session-factory>
-        <!-- Database connection settings
-        
+        <!-- Database connection settings-->       
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="hibernate.connection.url">jdbc:mysql://127.3.214.2:3306/sustord?autoReconnect=true</property>
         <property name="hibernate.connection.username">adminA1k8pBf</property>
-        <property name="hibernate.connection.password">qZvnWqvPuV6E</property>-->
+        <property name="hibernate.connection.password">qZvnWqvPuV6E</property>
         
         <!-- Database connection-->
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="hibernate.connection.url">jdbc:mysql://localhost/sustord</property>
         <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.connection.password">1234</property>
+        <property name="hibernate.connection.password">1234</property>-->
         
         
         <!-- configuration pool via c3p0-->   
         <property name="hibernate.c3p0.acquire_increment">1</property>   
         <property name="hibernate.c3p0.idle_test_period">10</property> <!-- seconds -->   
         <property name="hibernate.c3p0.max_size">100</property>   
-        <property name="hibernate.c3p0.max_statements">0</property>   
+        <property name="hibernate.c3p0.max_statements">10</property>   
         <property name="hibernate.c3p0.min_size">1</property>   
         <property name="hibernate.c3p0.timeout">3600</property> <!-- seconds -->  
 
