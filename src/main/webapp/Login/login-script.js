@@ -115,9 +115,10 @@ $(document).ready(function () {
                 },
                 error: function (messageString) {
                     //alert("oops");
+                    $("#messagebox").html(ajaxErrorMessage);   
                     alert(JSON.stringify(messageString));
                     $("#loading-anim").attr("src", emptyIconUrl);
-                    $("#messagebox").html(ajaxErrorMessage);                   
+                                    
                 }
             });
 
