@@ -8,7 +8,7 @@
     <session-factory>
         <!-- Database connection settings    --> 
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://127.3.214.2:3306/sustord?autoReconnect=true</property>
+        <property name="hibernate.connection.url">jdbc:mysql://127.3.214.2:3306/sustord</property>
         <property name="hibernate.connection.username">adminA1k8pBf</property>
         <property name="hibernate.connection.password">qZvnWqvPuV6E</property>  
         
@@ -19,19 +19,23 @@
         <property name="hibernate.connection.password">1234</property>--> 
         
         
+        <property name="connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>
         <!-- configuration pool via c3p0-->   
-        <property name="hibernate.c3p0.acquire_increment">1</property>   
-        <property name="hibernate.c3p0.max_size">100</property>   
-        <property name="hibernate.c3p0.max_statements">10</property>   
+        <property name="hibernate.c3p0.acquire_increment">1</property> 
+        <!-- Minimum number of JDBC connections in the pool. Hibernate default: 1 -->  
         <property name="hibernate.c3p0.min_size">1</property>   
+        <!-- Maximum number of JDBC connections in the pool. Hibernate default: 100 -->
+        <property name="hibernate.c3p0.max_size">100</property>  
+        <!-- Number of prepared statements will be cached. Increase performance. Hibernate default: 0 , caching is disable. --> 
+        <property name="hibernate.c3p0.max_statements">10</property>   
+        <!--  When an idle connection is removed from the pool (in second). Hibernate default: 0, never expire.--> 
         <property name="hibernate.c3p0.timeout">3600</property> <!-- seconds -->  
         
         <!--  Connection testing settings -->
         <property name="hibernate.c3p0.validate">false</property>
-        <!-- following setup ensures that the connections in my pool are still
-         valid preventing errors from using dead connections  -->
         <property name="hibernate.c3p0.idle_test_period">30</property> <!-- seconds --> 
-        <property name="hibernate.c3p0.automaticTestTable">conTestTable</property>
+        <property name="hibernate.c3p0.testConnectionOnCheckout">true</property>
+
         
         <!-- SQL dialect -->
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
