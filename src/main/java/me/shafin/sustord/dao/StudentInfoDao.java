@@ -17,7 +17,7 @@ import org.hibernate.Session;
 public class StudentInfoDao {
 
     public static StudentInfo getStudentInfoObject(String registrationNo) throws HibernateException, SQLException{
-        StudentInfo studentInfo;
+        StudentInfo studentInfo = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
 
@@ -32,9 +32,7 @@ public class StudentInfoDao {
 
             if (!infos.isEmpty()) {
                 studentInfo = infos.get(0);
-            } else {
-                studentInfo = null;
-            }
+            } 
         } catch (Exception e) {
             throw new ExceptionInInitializerError(e.getMessage());
         } finally {
