@@ -30,11 +30,11 @@
         <!--  When an idle connection is removed from the pool (in second). Hibernate default: 0, never expire.--> 
         <property name="hibernate.c3p0.timeout">3600</property> <!-- seconds -->  
         
-        <!--  Connection testing settings 
+        <!--  Connection testing settings -->
         <property name="hibernate.c3p0.validate">true</property>
-        <property name="hibernate.c3p0.idle_test_period">30</property>  seconds 
+        <property name="hibernate.c3p0.idle_test_period">30</property> <!-- seconds --> 
         <property name="hibernate.c3p0.preferredTestQuery">SELECT 1;</property> 
-        <property name="hibernate.c3p0.testConnectionOnCheckout">true</property>-->
+        <property name="hibernate.c3p0.testConnectionOnCheckout">true</property>
 
         
         <!-- SQL dialect -->
