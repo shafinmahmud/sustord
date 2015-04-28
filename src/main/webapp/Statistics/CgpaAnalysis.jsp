@@ -4,7 +4,7 @@
     Author     : SHAFIN
 --%>
 
-<%@page import="me.shafin.sustord.service.StatisticsHelper"%>
+<%@page import="me.shafin.sustord.utility.StatisticsHelper"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="me.shafin.sustord.bean.StudentPOJO"%>
