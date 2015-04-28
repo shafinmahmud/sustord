@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import me.shafin.sustord.bean.SyllabusPOJO;
-import me.shafin.sustord.service.JsonConvertion;
+import me.shafin.sustord.utility.JsonConvertion;
 import me.shafin.sustord.service.StudentService;
 
 /**

@@ -5,11 +5,11 @@
 --%>
 
 <%@page import="me.shafin.sustord.controller.GradeBySemesterController"%>
-<%@page import="me.shafin.sustord.service.CgpaCalculation"%>
+<%@page import="me.shafin.sustord.utility.CgpaCalculation"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="me.shafin.sustord.bean.SyllabusPOJO"%>
 <%@page import="java.util.List"%>
-<%@page import="me.shafin.sustord.service.FormatService"%>
+<%@page import="me.shafin.sustord.utility.FormatService"%>
 <%@page import="me.shafin.sustord.model.StudentInfo"%>
 <%@page import="me.shafin.sustord.service.StudentService"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

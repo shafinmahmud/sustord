@@ -14,12 +14,12 @@ import org.hibernate.Session;
  * @author SHAFIN
  */
 public class SyllabusDao {
-    
+
     public static List<Syllabus> getSyllabusObjectsOfSemester(int studentBatchIdFk, int semester) throws Exception {
-        
+
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        
+
         try {
             String hql = "from Syllabus where studentBatchIdFk = :batchId and semester = :sem";
             Query query = session.createQuery(hql);
@@ -32,14 +32,16 @@ public class SyllabusDao {
 
             if (!syllabusList.isEmpty()) {
                 return syllabusList;
-            }else{
+            } else {
                 return null;
             }
         } catch (Exception e) {
             session.getTransaction().rollback();
             throw new HibernateException(e.getMessage());
-        } finally{
+        } finally {
             session.close();
         }
     }
+
+    
 }

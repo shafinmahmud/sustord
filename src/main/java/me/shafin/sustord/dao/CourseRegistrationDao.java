@@ -41,4 +41,31 @@ public class CourseRegistrationDao {
             session.close();
         }
     }
+    
+    public static List<CourseRegistration> getRegisteredCourseListOfSemester(Integer studentInfoId, int semester) throws HibernateException, SQLException {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        try {
+            String hql = "from CourseRegistration where studentInfoIdFk = :id and attendSemester = :sem";
+            Query query = session.createQuery(hql);
+            query.setInteger("id", studentInfoId);
+            query.setInteger("sem", semester);
+
+            List<CourseRegistration> courseRegistrations = (List<CourseRegistration>) query.list();
+
+            session.getTransaction().commit();
+
+            if (!courseRegistrations.isEmpty()) {
+                return courseRegistrations;
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            throw new HibernateException(e.getMessage());
+        } finally {
+            session.close();
+        }
+    }
 }

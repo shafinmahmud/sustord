@@ -4,7 +4,7 @@
     Author     : SHAFIN
 --%>
 
-<%@page import="me.shafin.sustord.service.FormatService"%>
+<%@page import="me.shafin.sustord.utility.FormatService"%>
 <%@page import="me.shafin.sustord.service.StudentService"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

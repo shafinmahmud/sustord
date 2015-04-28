@@ -14,7 +14,7 @@ public class UserHomeController {
 
     public UserHomeController(String registrationNo) {
         try {
-            this.informationService = PersonalInfoService.forSingletonStudentInfoService(registrationNo);
+            this.informationService = new PersonalInfoService(registrationNo);
         } catch (Exception ex) {
             Logger.getLogger(UserHomeController.class.getName()).log(Level.SEVERE, null, ex);
         }

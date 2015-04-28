@@ -41,5 +41,30 @@ public class StudentInfoDao {
 
         return studentInfo;
     }
+    
+    public static List<StudentInfo> getStudentInfoObjects(Integer studentBatch) throws HibernateException, SQLException{
+       
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+
+            session.beginTransaction();
+            String hql = "from StudentInfo where studentBatchIdFk = :batchId";
+            Query query = session.createQuery(hql);
+            query.setInteger("batchId", studentBatch);
+
+            List<StudentInfo> infos = (List<StudentInfo>) query.list();
+
+            session.getTransaction().commit();
+
+            if (!infos.isEmpty()) {
+                return infos;
+            } 
+        } catch (Exception e) {
+            throw new ExceptionInInitializerError(e.getMessage());
+        } finally {
+            session.close();
+        }
+        return null;
+    }
 
 }

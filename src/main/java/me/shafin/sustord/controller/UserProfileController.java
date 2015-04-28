@@ -16,8 +16,8 @@ public class UserProfileController {
 
     public UserProfileController(String registrationNo) {
         try {
-            this.personalInfoService = PersonalInfoService.forSingletonStudentInfoService(registrationNo);
-            this.academicInfoService = AcademicInfoService.forSingletonAcademicInfoService(registrationNo);
+            this.personalInfoService = new PersonalInfoService(registrationNo);
+            this.academicInfoService = new AcademicInfoService(registrationNo);
         } catch (Exception ex) {
             Logger.getLogger(UserHomeController.class.getName()).log(Level.SEVERE, null, ex);
         }

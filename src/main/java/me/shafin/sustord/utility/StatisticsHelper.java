@@ -1,6 +1,6 @@
 /*
  */
-package me.shafin.sustord.service;
+package me.shafin.sustord.utility;
 
 import java.util.HashMap;
 import java.util.List;

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import me.shafin.sustord.bean.LoginMessage;
 import me.shafin.sustord.controller.LoginController;
-import me.shafin.sustord.service.JsonConvertion;
+import me.shafin.sustord.utility.JsonConvertion;
 import me.shafin.sustord.service.StudentService;
 
 /**

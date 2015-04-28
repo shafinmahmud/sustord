@@ -5,7 +5,7 @@
 --%>
 
 <%@page import="me.shafin.sustord.controller.EditProfileController"%>
-<%@page import="me.shafin.sustord.service.FormatService"%>
+<%@page import="me.shafin.sustord.utility.FormatService"%>
 <%@page import="java.util.Comparator"%>
 <%@page import="java.util.Collections"%>
 <%@page import="java.util.ArrayList"%>

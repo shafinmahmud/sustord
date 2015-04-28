@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import me.shafin.sustord.bean.SemesterStatPOJO;
 import me.shafin.sustord.bean.SyllabusPOJO;
-import me.shafin.sustord.service.JsonConvertion;
+import me.shafin.sustord.utility.JsonConvertion;
 import me.shafin.sustord.service.StudentService;
 
 /**

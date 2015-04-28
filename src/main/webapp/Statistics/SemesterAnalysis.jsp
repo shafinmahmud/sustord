@@ -4,7 +4,10 @@
     Author     : SHAFIN
 --%>
 
-<%@page import="me.shafin.sustord.service.FormatService"%>
+<%@page import="java.util.List"%>
+<%@page import="me.shafin.sustord.pojo.StudentGradeRankedPojo"%>
+<%@page import="me.shafin.sustord.controller.SemesterAnalysisController"%>
+<%@page import="me.shafin.sustord.utility.FormatService"%>
 <%@page import="me.shafin.sustord.service.StudentService"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -30,6 +33,10 @@
                 <div id="main-content" class="col-md-10 column800">
 
                     <div class="margin5">
+                        <%                            
+                            String regNo = (String) request.getSession().getAttribute("regNo");
+                            SemesterAnalysisController controller = new SemesterAnalysisController(regNo);
+                        %>
                         <fieldset>
 
                             <table class="table">
@@ -40,10 +47,9 @@
                                 </td>
                                 <td>
                                     <select class="form-control pull-right" id="semester-dropdown" name="reg-semester-dropdown" style="width: 250px">
-                                        <%                                            StudentService studentService = (StudentService) session.getAttribute("studentService");
-                                            String regNo = (String) request.getSession().getAttribute("regNo");
-                                            int numofsem = studentService.getStudentTotalSemester(regNo);
 
+                                        <%
+                                            int numofsem = controller.getTotalAcademicSemester();
                                             for (int i = 1; i <= numofsem; i++) {
                                         %>                                       
                                         <option value="<%=i%>"><%=FormatService.formatSemesterName(i)%></option>
@@ -86,13 +92,21 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                <%
+                                            List<StudentGradeRankedPojo> list = controller.getSemesterRankList(5);
+                                                    for (StudentGradeRankedPojo rank: list) {
+                                                        
+                                                %>
                                                 <tr>
-                                                    <td class="text-center"></td>
-                                                    <td></td>
-                                                    <td  class="text-center"></td>
-                                                    <td  class="text-center"></td>
-                                                    <td  class="text-center"></td>
+                                                    <td class="text-center"><%=rank.getGradeWiseRank()%></td>
+                                                    <td><%=rank.getName()%></td>
+                                                    <td  class="text-center"><%=rank.getRegistrationNo()%></td>
+                                                    <td  class="text-center"><%=rank.getCompletedCredits()%></td>
+                                                    <td  class="text-center"><%=rank.getGradePoint()%></td>
                                                 </tr>
+                                                <%
+                                                    }
+                                                %>
                                             </tbody>
                                         </table>
                                     </div>

@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import me.shafin.sustord.bean.OptionalCoursePojo;
 import me.shafin.sustord.bean.SyllabusCoursePojo;
 import me.shafin.sustord.service.AcademicInfoService;
+import me.shafin.sustord.service.CurricularInfoService;
 
 /**
  *
@@ -16,10 +17,12 @@ import me.shafin.sustord.service.AcademicInfoService;
 public class CurriculumController {
 
     private AcademicInfoService academicInfoService;
+    private CurricularInfoService curricularInfoService;
 
     public CurriculumController(String registrationNo) {
         try {
-            this.academicInfoService = AcademicInfoService.forSingletonAcademicInfoService(registrationNo);
+            this.academicInfoService = new AcademicInfoService(registrationNo);
+            this.curricularInfoService = new CurricularInfoService(registrationNo);
         } catch (Exception ex) {
             Logger.getLogger(UserHomeController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -46,10 +49,10 @@ public class CurriculumController {
     }
     
     public List<SyllabusCoursePojo> getAcademicSyllabus(int semester) {
-        return academicInfoService.getAcademicCoursesOfSemester(semester);
+        return curricularInfoService.getAcademicCoursesOfSemester(semester);
     }
     
     public List<OptionalCoursePojo> getOptionalCourses(){
-        return academicInfoService.getOptionalCoursesOfSyllabus();
+        return curricularInfoService.getOptionalCoursesOfSyllabus();
     }
 }

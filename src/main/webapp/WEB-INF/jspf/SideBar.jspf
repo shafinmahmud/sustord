@@ -21,7 +21,7 @@
         <li class="nav-header">Statistics
         </li>
         <li>
-            <a href="../Statistics/CourseAnalysis.jsp"><span class="glyphicon glyphicon-blackboard"></span>&nbsp;Course Analysis</a>
+            <a href="../Statistics/SemesterAnalysis.jsp"><span class="glyphicon glyphicon-blackboard"></span>&nbsp;Semester Analysis</a>
         </li>
         <li>
             <a href="../Statistics/CgpaAnalysis.jsp"><span class="glyphicon glyphicon-stats"></span>&nbsp;CGPA Analysis</a>

@@ -10,8 +10,8 @@
 <%@page import="me.shafin.sustord.bean.SyllabusPOJO"%>
 <%@page import="java.util.List"%>
 <%@page import="me.shafin.sustord.model.CourseRegistration"%>
-<%@page import="me.shafin.sustord.service.FormatService"%>
-<%@page import="me.shafin.sustord.service.CalenderService"%>
+<%@page import="me.shafin.sustord.utility.FormatService"%>
+<%@page import="me.shafin.sustord.utility.CalenderService"%>
 <%@page import="me.shafin.sustord.model.StudentInfo"%>
 <%@page import="me.shafin.sustord.service.StudentService"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

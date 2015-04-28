@@ -5,34 +5,22 @@ package me.shafin.sustord.service;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import me.shafin.sustord.dao.PersonalInfoDao;
-import me.shafin.sustord.dao.StudentInfoDao;
-import me.shafin.sustord.model.StudentInfo;
-import me.shafin.sustord.utility.ServiceDispatcher;
 
 /**
  *
  * @author SHAFIN
  */
-public class PersonalInfoService {
+public class PersonalInfoService extends IdentityService{
 
-    private final StudentInfo studentInfo;
     private static final String NULL_RESPONSE = " - ";
     private static final String ERROR_RESPONSE = ":/";
 
     /* Constructor thats is private and get accesses through static helper method  */
-    private PersonalInfoService(StudentInfo studentInfo) throws Exception {
-        this.studentInfo = studentInfo;
+    public PersonalInfoService(String registrationNo) throws Exception {
+        super(IdentityService.forSingletonIdentityService(registrationNo));
     }
 
-    /* Constructor helper for singleton PersonalInfoService  */
-    public static PersonalInfoService forSingletonStudentInfoService(String registrationNo) throws Exception {
-        return new PersonalInfoService(ServiceDispatcher.getSingletonStudentInfo(registrationNo));
-    }
-
-    /* Constructor helper for prototype PersonalInfoService  */
-    public static PersonalInfoService forProtypeStudentInfoService(String registrationNo) throws Exception {
-        return new PersonalInfoService(StudentInfoDao.getStudentInfoObject(registrationNo));
-    }
+    
 
     /* Personal Information  */
     public String getStudentName() {

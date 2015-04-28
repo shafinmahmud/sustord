@@ -1,6 +1,6 @@
 /*
  */
-package me.shafin.sustord.service;
+package me.shafin.sustord.utility;
 
 import com.google.gson.Gson;
 import java.util.List;
