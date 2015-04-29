@@ -8,34 +8,34 @@ package me.shafin.sustord.pojo;
  */
 public class StudentGradePojo extends StudentPojo{
     
-    private double CompletedCredits;
-    private double GradePoint;
+    private double completedCredits;
+    private double gradePoint;
 
     /**
-     * @return the CompletedCredits
+     * @return the completedCredits
      */
     public double getCompletedCredits() {
-        return CompletedCredits;
+        return completedCredits;
     }
 
     /**
-     * @param CompletedCredits the CompletedCredits to set
+     * @param CompletedCredits the completedCredits to set
      */
     public void setCompletedCredits(double CompletedCredits) {
-        this.CompletedCredits = CompletedCredits;
+        this.completedCredits = CompletedCredits;
     }
 
     /**
-     * @return the GradePoint
+     * @return the gradePoint
      */
     public double getGradePoint() {
-        return GradePoint;
+        return gradePoint;
     }
 
     /**
-     * @param GradePoint the GradePoint to set
+     * @param GradePoint the gradePoint to set
      */
     public void setGradePoint(double GradePoint) {
-        this.GradePoint = GradePoint;
+        this.gradePoint = GradePoint;
     }
 }

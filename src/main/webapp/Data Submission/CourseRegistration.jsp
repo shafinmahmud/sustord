@@ -30,7 +30,7 @@
         <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css"/>
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
 
-        <script src="../page_files/scripts/course-reg-script.js"></script>
+        <script src="./course-reg-script.js"></script>
 
     </head>
     <body>

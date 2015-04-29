@@ -10,10 +10,7 @@ var cm = 0;
 var f = 0;
 
 $(document).ready(function () {
-
-    //ajaxCallForCurrentSemester();
     ajaxCallForDropDown();
-    
     $('#semester-dropdown').change(function () {
         ajaxCallForDropDown();
     });
@@ -68,11 +65,14 @@ function ajaxCallForDropDown() {
             cm = semesterStatJson.semesterGradeDistributionMap.Cp;
             f = semesterStatJson.semesterGradeDistributionMap.F;
 
-            printBarChart();
+            printBarChart(semesterStatJson);
 
             for (var i = 0; i < semesterStatJson.courseStat.length; i++) {
                 printPieChart(semesterStatJson.courseStat[i]);
             }
+
+            printRankedList(semesterStatJson.studentRankedList);
+
         },
         error: function () {
             alert("CourseDetails ERROR");
@@ -260,4 +260,19 @@ function printPieChart(courseObject) {
 
 }
 
+
+function printRankedList(rankedList) {
+    $('#semester-rank-table').find("tr:gt(0)").remove();
+    
+    for (i = 0; i < rankedList.length; i++) {
+        $('#semester-rank-table').append('<tr>'
+                + '<td class="text-center">' + rankedList[i].gradeWiseRank + '</td>'
+                + '<td>' + rankedList[i].name + '</td>'
+                + '<td  class="text-center">' + rankedList[i].registrationNo + '</td>'
+                + '<td  class="text-center">' + rankedList[i].completedCredits + '</td>'
+                + '<td  class="text-center">' + rankedList[i].gradePoint + '</td>'
+                + '</tr>');
+    }
+
+}
 

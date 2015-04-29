@@ -1,19 +1,21 @@
 /*
  */
-package me.shafin.sustord.bean;
+package me.shafin.sustord.pojo;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import me.shafin.sustord.bean.SyllabusPOJO;
 
 /**
  *
  * @author SHAFIN
  */
-public class SemesterStatPOJO {
+public class StatSemesterPojo {
     
     private Map semesterGradeDistributionMap;
     private List<SyllabusPOJO> courseStat;
+    private List<StudentGradeRankedPojo> studentRankedList;
 
     /**
      * @return the semesterGradeDistributionMap
@@ -65,5 +67,19 @@ public class SemesterStatPOJO {
      */
     public void setCourseStat(List<SyllabusPOJO> courseStat) {
         this.courseStat = courseStat;
+    }
+
+    /**
+     * @return the studentRankedList
+     */
+    public List<StudentGradeRankedPojo> getStudentRankedList() {
+        return studentRankedList;
+    }
+
+    /**
+     * @param studentRankedList the studentRankedList to set
+     */
+    public void setStudentRankedList(List<StudentGradeRankedPojo> studentRankedList) {
+        this.studentRankedList = studentRankedList;
     }
 }

@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import me.shafin.sustord.bean.ClassRoutinePOJO;
-import me.shafin.sustord.bean.SemesterStatPOJO;
+import me.shafin.sustord.pojo.StatSemesterPojo;
 import me.shafin.sustord.bean.StudentPOJO;
 import me.shafin.sustord.bean.SyllabusPOJO;
 import me.shafin.sustord.model.ClassRoutine;
@@ -762,12 +762,12 @@ public class StudentService {
      * @param semester
      * @return
      */
-    public SemesterStatPOJO getSemesterStatistics(String regNo, int semester) {
+    public StatSemesterPojo getSemesterStatistics(String regNo, int semester) {
 
         StudentInfo std = getStudentInfoObjectFromRegNo(regNo);
         int Ap, A, Am, Bp, B, Bm, Cp, C, Cm, F;
 
-        SemesterStatPOJO stat = new SemesterStatPOJO();
+        StatSemesterPojo stat = new StatSemesterPojo();
 
         Session session = sessionFactory.openSession();
 

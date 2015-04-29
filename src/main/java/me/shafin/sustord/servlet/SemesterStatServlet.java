@@ -7,14 +7,13 @@ package me.shafin.sustord.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import me.shafin.sustord.bean.SemesterStatPOJO;
-import me.shafin.sustord.bean.SyllabusPOJO;
+import me.shafin.sustord.controller.SemesterAnalysisController;
+import me.shafin.sustord.pojo.StatSemesterPojo;
 import me.shafin.sustord.utility.JsonConvertion;
 import me.shafin.sustord.service.StudentService;
 
@@ -42,7 +41,11 @@ public class SemesterStatServlet extends HttpServlet {
         int sem = Integer.parseInt(request.getParameter("semester"));
 
         String regNo = (String) request.getSession().getAttribute("regNo");
-        SemesterStatPOJO stat = studentService.getSemesterStatistics(regNo, sem);
+        StatSemesterPojo stat = studentService.getSemesterStatistics(regNo, sem);
+        
+        SemesterAnalysisController controller = new SemesterAnalysisController(regNo);
+        stat.setStudentRankedList(controller.getSemesterRankList(sem));
+        
         String statJson = JsonConvertion.objectToJsonString(stat);
         //System.out.println(statJson);
 

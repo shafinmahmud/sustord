@@ -22,7 +22,7 @@
 
         <link href="../page_files/css/style.css" rel="stylesheet">
 
-        <script src="./course-analysis-script.js"></script>
+        <script src="./semester-analysis-script.js"></script>
     </head>
     <body>
         <%@include  file="../WEB-INF/jspf/AccessValidation.jspf"%>
@@ -81,7 +81,7 @@
                                         </table>
                                     </div>
                                     <div id="sectionB" class="tab-pane fade">
-                                        <table class="table table-condensed">
+                                        <table id="semester-rank-table" class="table table-condensed">
                                             <thead>
                                                 <tr>
                                                     <th style="width: 5%">#Rank</th>
@@ -92,21 +92,8 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <%
-                                            List<StudentGradeRankedPojo> list = controller.getSemesterRankList(5);
-                                                    for (StudentGradeRankedPojo rank: list) {
-                                                        
-                                                %>
-                                                <tr>
-                                                    <td class="text-center"><%=rank.getGradeWiseRank()%></td>
-                                                    <td><%=rank.getName()%></td>
-                                                    <td  class="text-center"><%=rank.getRegistrationNo()%></td>
-                                                    <td  class="text-center"><%=rank.getCompletedCredits()%></td>
-                                                    <td  class="text-center"><%=rank.getGradePoint()%></td>
-                                                </tr>
-                                                <%
-                                                    }
-                                                %>
+                                               
+                                                
                                             </tbody>
                                         </table>
                                     </div>

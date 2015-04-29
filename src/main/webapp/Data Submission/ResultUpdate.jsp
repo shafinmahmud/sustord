@@ -21,7 +21,7 @@
         <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css"/>
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
 
-        <script src="../page_files/scripts/result-update-script.js"></script>
+        <script src="./result-update-script.js"></script>
 
 
 

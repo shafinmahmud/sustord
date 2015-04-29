@@ -12,11 +12,11 @@
         <property name="hibernate.connection.username">adminA1k8pBf</property>
         <property name="hibernate.connection.password">qZvnWqvPuV6E</property> 
         
-        <!-- Database connection    
+        <!-- Database connection  
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="hibernate.connection.url">jdbc:mysql://localhost/sustord</property>
         <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.connection.password">1234</property>  -->
+        <property name="hibernate.connection.password">1234</property> --> 
         
         <!-- configuration pool via c3p0-->  
         <property name="connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property> 
