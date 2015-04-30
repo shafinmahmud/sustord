@@ -6,10 +6,10 @@ package me.shafin.sustord.service;
  *
  * @author SHAFIN
  */
-public class AcademicInfoService extends IdentityService{
+public class AcademicInfoService extends StudentIdentityService{
 
     public AcademicInfoService(String registrationNo) throws Exception{
-         super(IdentityService.forSingletonIdentityService(registrationNo));
+         super(StudentIdentityService.forSingletonIdentityService(registrationNo));
     }
 
     /* Academic Information  */

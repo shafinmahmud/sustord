@@ -1,23 +1,23 @@
 
 $(document).ready(function () {
 
-    // ---------------       ERROR MESSAGES    -------------------
-    var regErrorMessage = "Invalid Registration No.<br>"
-            + "Make sure you typed the valid Registration No. "
-            + "It usually looks like YYYYDEPXXX. eg. 2011331001 ";
+     // ---------------       ERROR MESSAGES    -------------------
+    var idErrorMessage = "Invalid Admin ID.<br>"
+            + "Make sure your typed ID is corredt. "
+            + "It usually looks like YYYYDEPXXX. eg. 20113310BA ";
 
     var passErrorMessage = "Wrong password.<br>"
             + "Have you changed your password? "
             + "If not, your default password is 123456";
 
-    var serverErrorMessage = "Server Error: Server isnt responding :(";
-    var ajaxErrorMessage = "hibernate.cfg.xml configuration error! :(";
+    var serverErrorMessage = "Server Error: Server isnt responsing :(";
+    var unknownErrorMessage = "Unknwon error occured :(";
+    var ajaxErrorMessage = "Ajax operation failed! :(";
 
     // ---------------   ICON AND ANIMATION URLs -------------------  
     var loaderUrl = "../page_files/icons/ajax-loader.gif";
     var successUrl = "../page_files/icons/success-icon.png";
     var emptyIconUrl = "../page_files/icons/empty-icon.gif";
-
 
 
  // handling event for the empty input in the Registration No field 
@@ -77,38 +77,47 @@ $(document).ready(function () {
                     pw: $('#password').val()
                 },
                 type: 'POST',
-                success: function (validationMsg) {
-                    if (validationMsg == 'verified') {
+               success: function (messageString) {
+                    var messageJson = $.parseJSON(messageString);
+                    
+                    if (messageJson.requestedIdValid.toString() === "true" && 
+                            messageJson.requestedPasswordValid.toString() === "true") {
 
                         $("#loading-anim").attr("src", successUrl)
                                 .fadeTo(9, 1,
                                         function ()
                                         {
-                                            document.location = '../Admin/HomeAdmin.jsp';
+                                            document.location = 'HomeAdmin.jsp';
                                         }
                                 );
 
-                    } else if (validationMsg == 'regError') {
+                    } else if (messageJson.requestedIdValid.toString() !== 'true') {
 
                         $("#loading-anim").attr("src", emptyIconUrl);
-                        $("#messagebox").html(regErrorMessage);
+                        $("#messagebox").html(idErrorMessage);
 
-                    } else if (validationMsg == 'passError') {
+                    } else if (messageJson.requestedPasswordValid.toString() !== 'true') {
 
                         $("#loading-anim").attr("src", emptyIconUrl);
                         $("#messagebox").html(passErrorMessage);
 
-                    } else if (validationMsg == 'noresponse') {
-                        alert(serverErrorMessage);
+                    } else if (messageJson.requestedIdValid.toString() === 'null') {
+                        alert(messageJson.messageBody);
+                        $("#messagebox").html(serverErrorMessage);
                         $("#loading-anim").attr("src", emptyIconUrl);
                     } else {
-                        alert(validationMsg);
+                        //alert("got it");
+                       // alert(messageJson.messageBody);
+                        $("#messagebox").html(unknownErrorMessage);
                         $("#loading-anim").attr("src", emptyIconUrl);
                     }
                 },
-                error: function () {
-                    alert(ajaxErrorMessage);
+                error: function (messageString) {
+                    //alert("oops");
+                    $("#messagebox").html(ajaxErrorMessage);   
+                    alert(JSON.stringify(messageString));
                     $("#loading-anim").attr("src", emptyIconUrl);
+                                    
                 }
             });
 

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import me.shafin.sustord.bean.LoginMessage;
+import me.shafin.sustord.pojo.LoginMessage;
 import me.shafin.sustord.controller.LoginController;
 import me.shafin.sustord.utility.JsonConvertion;
 import me.shafin.sustord.service.StudentService;
@@ -34,24 +34,33 @@ public class LoginServlet extends HttpServlet {
             response.setContentType("text/html;charset=UTF-8");
 
             String userType = request.getParameter("ut");
-            String registrationNo = request.getParameter("un");
+            String id = request.getParameter("un");
             String password = request.getParameter("pw");
 
             LoginMessage message = new LoginMessage();
 
             if (userType.equals("student")) {
-                message = LoginController.authencateStudent(registrationNo, password);
-            } else if (userType.equals("admin")) {
+                message = LoginController.authencateStudent(id, password);
+            } else if (userType.equals("batchAdmin")) {
+                message = LoginController.authencateBatchAdmin(id, password);
+            } else {
 
             }
 
-            StudentService service = LoginController.temporarySupport();
+            if (message.isRequestedIdValid() && message.isRequestedPasswordValid()) {
 
-            if (message.isREGISTRATION_NO_VALID() && message.isPASSWORD_VALID()) {
                 HttpSession session = request.getSession();
-                session.setAttribute("studentService", service);
+
+                if (userType.equalsIgnoreCase("student")) {
+                    StudentService service = LoginController.temporarySupport();
+                    session.setAttribute("studentService", service);
+                    session.setAttribute("regNo", message.getRequestedId());
+                }else{
+                    session.setAttribute("id", message.getRequestedId());
+                }
+
                 session.setAttribute("loginStatus", "ok");
-                session.setAttribute("regNo", message.getRequestedRegistrationNo());
+                
                 try {
                     String messageJson = JsonConvertion.objectToJsonString(message);
                     PrintWriter out = response.getWriter();
@@ -87,7 +96,7 @@ public class LoginServlet extends HttpServlet {
             try {
                 PrintWriter out = response.getWriter();
                 LoginMessage message = new LoginMessage();
-                message.setMessageHeader("Sql Exception");
+                message.setMessageTitle("Sql Exception");
                 message.setMessageBody(errorString);
                 out.print(JsonConvertion.objectToJsonString(message));
                 out.flush();

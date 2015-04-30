@@ -1,13 +1,12 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
  */
 package me.shafin.sustord.utility;
 
 import java.util.ArrayList;
 import java.util.List;
+import me.shafin.sustord.dao.AdminInfoDao;
 import me.shafin.sustord.dao.StudentInfoDao;
+import me.shafin.sustord.model.AdminInfo;
 import me.shafin.sustord.model.StudentInfo;
 
 /**
@@ -17,6 +16,7 @@ import me.shafin.sustord.model.StudentInfo;
 public class ServiceDispatcher {
 
     private static List<StudentInfo> singletonStudentInfoList = new ArrayList<StudentInfo>();
+    private static List<AdminInfo> singletonAdminInfoList = new ArrayList<AdminInfo>();
 
     public static StudentInfo getSingletonStudentInfo(String registrationNo) throws Exception {
 
@@ -35,12 +35,39 @@ public class ServiceDispatcher {
         }    
         return newStudentInfo;
     }
+    
+    public static AdminInfo getSingletonAdminInfo(String adminNo) throws Exception {
 
-    public static void nullifyServiceDispatchers(String registrationNo) {
+        if (!singletonAdminInfoList.isEmpty()) {
+            for (AdminInfo adminInfo : singletonAdminInfoList) {
+                if (adminInfo.getAdminNo().equals(adminNo)) {
+                    return adminInfo;
+                }
+            }
+        }
+
+        AdminInfo newAdminInfo = AdminInfoDao.getAdminInfoObject(adminNo);
+        if(newAdminInfo != null){
+            singletonAdminInfoList.add(newAdminInfo);
+        }    
+        return newAdminInfo;
+    }
+
+    public static void nullifyStudentServices(String registrationNo) {
 
         for (StudentInfo exitingStudenInfo : singletonStudentInfoList) {
             if (exitingStudenInfo.getRegistrationNo().equals(registrationNo)) {
                 singletonStudentInfoList.remove(exitingStudenInfo);
+                break;
+            }
+        }
+    }
+    
+    public static void nullifyAdminServices(String adminNo) {
+
+        for (AdminInfo exitingAdminInfo : singletonAdminInfoList) {
+            if (exitingAdminInfo.getAdminNo().equals(adminNo)) {
+                singletonAdminInfoList.remove(exitingAdminInfo);
                 break;
             }
         }

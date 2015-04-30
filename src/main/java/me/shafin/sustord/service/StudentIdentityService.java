@@ -10,11 +10,11 @@ import me.shafin.sustord.utility.ServiceDispatcher;
  *
  * @author SHAFIN
  */
-public class IdentityService {
+public class StudentIdentityService {
     public final StudentInfo studentInfo;
 
     /* Constructor thats is private and get accesses through static helper method  */
-    public IdentityService(StudentInfo studentInfo) throws Exception {
+    public StudentIdentityService(StudentInfo studentInfo) throws Exception {
         this.studentInfo = studentInfo;
     }
 

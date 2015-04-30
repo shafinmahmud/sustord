@@ -33,7 +33,7 @@ public class LogOutServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         String regNo = (String) request.getSession().getAttribute("regNo");
-        ServiceDispatcher.nullifyServiceDispatchers(regNo);
+        ServiceDispatcher.nullifyStudentServices(regNo);
         HttpSession session = request.getSession();
         session.invalidate();
         response.sendRedirect("Login/LoginUser.jsp");

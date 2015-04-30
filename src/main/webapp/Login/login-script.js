@@ -2,7 +2,7 @@
 $(document).ready(function () {
 
     // ---------------       ERROR MESSAGES    -------------------
-    var regErrorMessage = "Invalid Registration No.<br>"
+    var idErrorMessage = "Invalid Registration No.<br>"
             + "Make sure you typed the valid Registration No. "
             + "It usually looks like YYYYDEPXXX. eg. 2011331001 ";
 
@@ -81,8 +81,8 @@ $(document).ready(function () {
                 success: function (messageString) {
                     var messageJson = $.parseJSON(messageString);
                     
-                    if (messageJson.REGISTRATION_NO_VALID .toString() === "true" && 
-                            messageJson.PASSWORD_VALID.toString() === "true") {
+                    if (messageJson.requestedIdValid.toString() === "true" && 
+                            messageJson.requestedPasswordValid.toString() === "true") {
 
                         $("#loading-anim").attr("src", successUrl)
                                 .fadeTo(9, 1,
@@ -92,17 +92,17 @@ $(document).ready(function () {
                                         }
                                 );
 
-                    } else if (messageJson.REGISTRATION_NO_VALID.toString() !== 'true') {
+                    } else if (messageJson.requestedIdValid.toString() !== 'true') {
 
                         $("#loading-anim").attr("src", emptyIconUrl);
-                        $("#messagebox").html(regErrorMessage);
+                        $("#messagebox").html(idErrorMessage);
 
-                    } else if (messageJson.PASSWORD_VALID.toString() !== 'true') {
+                    } else if (messageJson.requestedPasswordValid.toString() !== 'true') {
 
                         $("#loading-anim").attr("src", emptyIconUrl);
                         $("#messagebox").html(passErrorMessage);
 
-                    } else if (messageJson.REGISTRATION_NO_VALID.toString() === 'null') {
+                    } else if (messageJson.requestedIdValid.toString() === 'null') {
                         alert(messageJson.messageBody);
                         $("#messagebox").html(serverErrorMessage);
                         $("#loading-anim").attr("src", emptyIconUrl);

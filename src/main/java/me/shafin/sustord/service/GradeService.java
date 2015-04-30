@@ -23,11 +23,11 @@ import org.hibernate.HibernateException;
  *
  * @author SHAFIN
  */
-public class GradeService extends IdentityService {
+public class GradeService extends StudentIdentityService {
 
     public GradeService(String registrationNo) throws Exception {
-        super(IdentityService.forSingletonIdentityService(registrationNo));
-        //super(IdentityService.forProtypeIdentityService(registrationNo));
+        super(StudentIdentityService.forSingletonIdentityService(registrationNo));
+        //super(StudentIdentityService.forProtypeIdentityService(registrationNo));
     }
 
     public StudentGradePojo getStudentGradeOfSemester(Integer studentInfoId, int semester) {
