@@ -17,13 +17,11 @@
         <!-- style sheet for this page-->
         <link href="../page_files/css/login.css" rel="stylesheet">
         <!-- java script for the login -->
-        <script src="login-script.js"></script>
+        <script src="admin-login-script.js"></script>
     </head>
     <body>
 
         <!-- validating login status-->
-        
-
 
         <div class="row">
             <div class="col-md-7 col-sm-7 hidden-xs login_left_admin">
@@ -38,7 +36,7 @@
 
                 <form id = "loginform" action="" method="post" role="form"> 
                     <div class="form-group" style="display: none;">
-                        <input id="usertype" name="UserType" value="student">    
+                        <input id="usertype" name="UserType" value="batchAdmin">    
                     </div>
                     <div id="reg-no" class="form-group">
                         <label class="control-label" for="username">Admin ID</label>
