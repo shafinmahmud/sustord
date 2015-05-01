@@ -22,6 +22,17 @@
     <body>
 
         <!-- validating login status-->
+        <%
+            try {
+                if (session.getAttribute("user").equals("batchAdmin")) {
+                    if (session.getAttribute("loginStatus").equals("ok")) {
+                        response.sendRedirect("./HomeAdmin.jsp");
+                    }
+                }
+            } catch (Exception e) {
+
+            }
+        %>
 
         <div class="row">
             <div class="col-md-7 col-sm-7 hidden-xs login_left_admin">
