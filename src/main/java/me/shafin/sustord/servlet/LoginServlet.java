@@ -54,8 +54,10 @@ public class LoginServlet extends HttpServlet {
                 if (userType.equalsIgnoreCase("student")) {
                     StudentService service = LoginController.temporarySupport();
                     session.setAttribute("studentService", service);
+                    session.setAttribute("user", "student");
                     session.setAttribute("regNo", message.getRequestedId());
                 }else{
+                    session.setAttribute("user", "batchAdmin");
                     session.setAttribute("id", message.getRequestedId());
                 }
 

@@ -32,11 +32,21 @@ public class LogOutServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
+        String userType = (String)request.getSession().getAttribute("user");
         String regNo = (String) request.getSession().getAttribute("regNo");
-        ServiceDispatcher.nullifyStudentServices(regNo);
+        
         HttpSession session = request.getSession();
         session.invalidate();
-        response.sendRedirect("Login/LoginUser.jsp");
+        
+        if(userType.equalsIgnoreCase("student")){
+            ServiceDispatcher.nullifyStudentServices(regNo);
+            response.sendRedirect("Login/LoginUser.jsp");
+        }else if(userType.equalsIgnoreCase("batchAdmin")){
+            ServiceDispatcher.nullifyStudentServices(regNo);
+            response.sendRedirect("Admin/LoginAdmin.jsp");
+        }else{
+            response.sendRedirect("Login/LoginUser.jsp");
+        }   
 
     }
 

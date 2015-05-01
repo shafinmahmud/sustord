@@ -1,7 +1,4 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
  */
 package me.shafin.sustord.filter;
 
@@ -46,6 +43,7 @@ public class AccessFilter implements Filter {
 
     }
 
+    @Override
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain)
             throws IOException, ServletException {
@@ -74,12 +72,16 @@ public class AccessFilter implements Filter {
                   httmlResponse.sendRedirect("../Login/LoginUser.jsp");
             }
 
-        } catch (Throwable t) {
+        } catch (IOException t) {
             // If an exception is thrown somewhere down the filter chain,
             // we still want to execute our after processing, and then
             // rethrow the problem after that.
             problem = t;
-            t.printStackTrace();
+        } catch (ServletException t) {
+            // If an exception is thrown somewhere down the filter chain,
+            // we still want to execute our after processing, and then
+            // rethrow the problem after that.
+            problem = t;
         }
 
         doAfterProcessing(request, response);
@@ -99,6 +101,7 @@ public class AccessFilter implements Filter {
 
     /**
      * Return the filter configuration object for this filter.
+     * @return 
      */
     public FilterConfig getFilterConfig() {
         return (this.filterConfig);
@@ -116,12 +119,15 @@ public class AccessFilter implements Filter {
     /**
      * Destroy method for this filter
      */
+    @Override
     public void destroy() {
     }
 
     /**
      * Init method for this filter
+     * @param filterConfig
      */
+    @Override
     public void init(FilterConfig filterConfig) {
         this.filterConfig = filterConfig;
         if (filterConfig != null) {
@@ -139,7 +145,7 @@ public class AccessFilter implements Filter {
         if (filterConfig == null) {
             return ("AccessFilter()");
         }
-        StringBuffer sb = new StringBuffer("AccessFilter(");
+        StringBuilder sb = new StringBuilder("AccessFilter(");
         sb.append(filterConfig);
         sb.append(")");
         return (sb.toString());
