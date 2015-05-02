@@ -13,9 +13,9 @@ $(document).ready(function () {
     var successMessage = "Your profile has been updated!";
     var serverErrorMessage = "Server Error: Server isnt responding :/";
     // ---------------   ICON AND ANIMATION URLs -------------------  
-    var alertUrl = "";
-    var loaderUrl = "../page_files/icons/ajax-loader.gif";
-    var successUrl = "../page_files/icons/success-icon.png";
+    var alertIconUrl = "../page_files/icons/warning-icon.png";
+    var loaderIconUrl = "../page_files/icons/ajax-loader.gif";
+    var successIconUrl = "../page_files/icons/success-icon.png";
     var emptyIconUrl = "../page_files/icons/empty-icon.gif";
 
     $('#father').bind('input', function () {// get the current value of registration No.
@@ -29,218 +29,6 @@ $(document).ready(function () {
         }
     });
 
-//    $('#father').focus(function () {
-//        if ($('#father').val() === "*Required") {
-//
-//            $("#father").val("");
-//            $("#father").removeClass("requiredwarning");
-//            $("#father").addClass("input-sm");
-//        } else {
-//            //$('#need-id-error').html('');
-//        }
-//    });
-//
-//    $('#mother').focus(function () {
-//        if ($('#mother').val() === "*Required") {
-//
-//            $("#mother").val("");
-//            $("#mother").removeClass("requiredwarning");
-//            $("#mother").addClass("input-sm");
-//        } else {
-//            //$('#need-id-error').html('');
-//        }
-//    });
-//
-//    $('#present-street').focus(function () {
-//        if ($('#present-street').val() === "*Required") {
-//
-//            $("#present-street").val("");
-//            $("#present-street").removeClass("requiredwarning");
-//            $("#present-street").addClass("input-sm");
-//        } else {
-//            //$('#need-id-error').html('');
-//        }
-//    });
-//
-//    $('#present-area').focus(function () {
-//        if ($('#present-area').val() === "*Required") {
-//
-//            $("#present-area").val("");
-//            $("#present-area").removeClass("requiredwarning");
-//            $("#present-area").addClass("input-sm");
-//        } else {
-//            //$('#need-id-error').html('');
-//        }
-//    });
-//
-//    $('#present-thana').focus(function () {
-//        if ($('#present-thana').val() === "*Required") {
-//
-//            $("#present-thana").val("");
-//            $("#present-thana").removeClass("requiredwarning");
-//            $("#present-thana").addClass("input-sm");
-//        } else {
-//            //$('#need-id-error').html('');
-//        }
-//    });
-//
-//    $('#present-district').focus(function () {
-//        if ($('#present-district').val() === "*Required") {
-//
-//            $("#present-district").val("");
-//            $("#present-district").removeClass("requiredwarning");
-//            $("#present-district").addClass("input-sm");
-//        } else {
-//            //$('#need-id-error').html('');
-//        }
-//    });
-//
-//    $('#present-country').focus(function () {
-//        if ($('#present-country').val() === "1") {
-//
-//            $("#present-country").val("0");
-//            $("#present-country").removeClass("requiredwarning");
-//            $("#present-country").addClass("input-sm");
-//        } else {
-//            //$('#need-id-error').html('');
-//        }
-//    });
-//
-//
-//    $('#permanent-street').focus(function () {
-//        if ($('#permanent-street').val() === "*Required") {
-//
-//            $("#permanent-street").val("");
-//            $("#permanent-street").removeClass("requiredwarning");
-//            $("#permanent-street").addClass("input-sm");
-//        } else {
-//            //$('#need-id-error').html('');
-//        }
-//    });
-//
-//    $('#permanent-area').focus(function () {
-//        if ($('#permanent-area').val() === "*Required") {
-//
-//            $("#permanent-area").val("");
-//            $("#permanent-area").removeClass("requiredwarning");
-//            $("#permanent-area").addClass("input-sm");
-//        } else {
-//            //$('#need-id-error').html('');
-//        }
-//    });
-//
-//    $('#permanent-thana').focus(function () {
-//        if ($('#permanent-thana').val() === "*Required") {
-//
-//            $("#permanent-thana").val("");
-//            $("#permanent-thana").removeClass("requiredwarning");
-//            $("#permanent-thana").addClass("input-sm");
-//        } else {
-//            //$('#need-id-error').html('');
-//        }
-//    });
-//
-//    $('#permanent-district').focus(function () {
-//        if ($('#permanent-district').val() === "*Required") {
-//
-//            $("#permanent-district").val("");
-//            $("#permanent-district").removeClass("requiredwarning");
-//            $("#permanent-district").addClass("input-sm");
-//        } else {
-//            //$('#need-id-error').html('');
-//        }
-//    });
-//
-//
-//    $('#permanent-country').focus(function () {
-//        if ($('#permanent-country').val() === "1") {
-//
-//            $("#permanent-country").val("0");
-//            $("#permanent-country").removeClass("requiredwarning");
-//            $("#permanent-country").addClass("input-sm");
-//        } else {
-//            //$('#need-id-error').html('');
-//        }
-//    });
-//
-//    $('#phone').focus(function () {
-//        if ($('#phone').val() === "*Required") {
-//
-//            $("#phone").val("");
-//            $("#phone").removeClass("requiredwarning");
-//            $("#phone").addClass("input-sm");
-//        } else {
-//            //$('#need-id-error').html('');
-//        }
-//    });
-//
-//    $('#email').focus(function () {
-//        if ($('#email').val() === "*Required") {
-//
-//            $("#email").val("");
-//            $("#email").removeClass("requiredwarning");
-//            $("#email").addClass("input-sm");
-//        } else {
-//            //$('#need-id-error').html('');
-//        }
-//    });
-//
-//    $('#dob').focus(function () {
-//        if ($('#dob').val() === "*Required") {
-//
-//            $("#dob").val("");
-//            $("#dob").removeClass("requiredwarning");
-//            $("#dob").addClass("input-sm");
-//        } else {
-//            //$('#need-id-error').html('');
-//        }
-//    });
-//
-//    // $("#dob").datepicker();
-//
-//    $('#sex').focus(function () {
-//        if ($('#sex').val() === "1") {
-//
-//            $("#sex").val("0");
-//            $("#sex").removeClass("requiredwarning");
-//            $("#sex").addClass("input-sm");
-//        } else {
-//            //$('#need-id-error').html('');
-//        }
-//    });
-//
-//    $('#religion').focus(function () {
-//        if ($('#religion').val() === "1") {
-//
-//            $("#religion").val("0");
-//            $("#religion").removeClass("requiredwarning");
-//            $("#religion").addClass("input-sm");
-//        } else {
-//            //$('#need-id-error').html('');
-//        }
-//    });
-//
-//    $('#marital-status').focus(function () {
-//        if ($('#marital-status').val() === "1") {
-//
-//            $("#marital-status").val("0");
-//            $("#marital-status").removeClass("requiredwarning");
-//            $("#marital-status").addClass("input-sm");
-//        } else {
-//            //$('#need-id-error').html('');
-//        }
-//    });
-//
-//    $('#blood-group').focus(function () {
-//        if ($('#blood-group').val() === "1") {
-//
-//            $("#blood-group").val("0");
-//            $("#blood-group").removeClass("requiredwarning");
-//            $("#blood-group").addClass("input-sm");
-//        } else {
-//            //$('#need-id-error').html('');
-//        }
-//    });
 
     //following lines of code checks the all input fields and
     // if any of them is 'null' it sets them empty
@@ -258,7 +46,7 @@ $(document).ready(function () {
         changedFormData = $('#info-form').serializeArray();
 
         if (JSON.stringify(changedFormData) === JSON.stringify(initialFormData)) {
-            $("#saving-anim").attr("src", "../page_files/icons/warning-icon.png");
+            $("#saving-anim").attr("src", alertIconUrl);
             $("#messagebox").html(warningMessage);
             //highlightChangedField();
         } else {
@@ -332,7 +120,7 @@ $(document).ready(function () {
 
 
             if (continueflag) {
-                $("#saving-anim").attr("src", "../page_files/icons/ajax-saver.gif");
+                $("#saving-anim").attr("src", loaderIconUrl);
                 this.timer = setTimeout(function () {
                     var presentadd = $('#present-street').val() + ',' + $('#present-area').val() + ','
                             + $('#present-thana').val() + ',' + $('#present-district').val() + ','
@@ -360,9 +148,9 @@ $(document).ready(function () {
                         type: 'POST',
                         success: function (succ) {
                             if (succ !== 'ERROR') {
-                                $("#saving-anim").attr("src", "../page_files/icons/success-icon.png");
+                                $("#saving-anim").attr("src", successIconUrl);
                             } else {
-                                alert("error");
+                                $("#saving-anim").attr("src", alertIconUrl);
 //                            var errormsg = "";
 //                            $("#messagebox").html(errormsg);
                             }

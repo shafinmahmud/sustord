@@ -930,7 +930,6 @@ public class StudentService {
             session.beginTransaction();
             session.saveOrUpdate(personalInfo);
             session.getTransaction().commit();
-            session.close();
 
         } catch (Exception e) {
             return false;
@@ -1202,14 +1201,13 @@ public class StudentService {
             List<StudentInfo> infos = (List<StudentInfo>) query.list();
 
             session.getTransaction().commit();
-            session.close();
 
             if (!infos.isEmpty()) {
                 studentInfoObject = infos.get(0);
             }
         } catch (Exception e) {
         } finally {
-
+            session.close();
         }
 
         return studentInfoObject;
