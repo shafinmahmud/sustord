@@ -15,15 +15,15 @@ import me.shafin.sustord.model.StudentInfo;
  */
 public class ServiceDispatcher {
 
-    private static List<StudentInfo> singletonStudentInfoList = new ArrayList<StudentInfo>();
-    private static List<AdminInfo> singletonAdminInfoList = new ArrayList<AdminInfo>();
+    private static final List<StudentInfo> singletonStudentInfoList = new ArrayList<StudentInfo>();
+    private static final List<AdminInfo> singletonAdminInfoList = new ArrayList<AdminInfo>();
 
     public static StudentInfo getSingletonStudentInfo(String registrationNo) throws Exception {
 
         if (!singletonStudentInfoList.isEmpty()) {
             for (StudentInfo studentInfo : singletonStudentInfoList) {
                 if (studentInfo.getRegistrationNo().equals(registrationNo)) {
-                    //System.out.println("found studentinfo: " + studentInfo.getRegistrationNo());
+                    System.out.println("found studentinfo: " + studentInfo.getRegistrationNo());
                     return studentInfo;
                 }
             }
@@ -32,6 +32,7 @@ public class ServiceDispatcher {
         StudentInfo newStudentInfo = StudentInfoDao.getStudentInfoObject(registrationNo);
         if(newStudentInfo != null){
             singletonStudentInfoList.add(newStudentInfo);
+            System.out.println("created studentinfo: " + newStudentInfo.getRegistrationNo());
         }    
         return newStudentInfo;
     }
@@ -41,6 +42,7 @@ public class ServiceDispatcher {
         if (!singletonAdminInfoList.isEmpty()) {
             for (AdminInfo adminInfo : singletonAdminInfoList) {
                 if (adminInfo.getAdminNo().equals(adminNo)) {
+                    System.out.println("found adminInfo: " + adminInfo.getAdminNo());
                     return adminInfo;
                 }
             }
@@ -49,6 +51,7 @@ public class ServiceDispatcher {
         AdminInfo newAdminInfo = AdminInfoDao.getAdminInfoObject(adminNo);
         if(newAdminInfo != null){
             singletonAdminInfoList.add(newAdminInfo);
+            System.out.println("created adminInfo: " + newAdminInfo.getAdminNo());
         }    
         return newAdminInfo;
     }
@@ -58,6 +61,8 @@ public class ServiceDispatcher {
         for (StudentInfo exitingStudenInfo : singletonStudentInfoList) {
             if (exitingStudenInfo.getRegistrationNo().equals(registrationNo)) {
                 singletonStudentInfoList.remove(exitingStudenInfo);
+                System.out.println("set NULL to studentInfo: "+registrationNo);
+                 System.out.println("current size of singletonStudentInfoList: "+singletonStudentInfoList.size());
                 break;
             }
         }
@@ -68,6 +73,8 @@ public class ServiceDispatcher {
         for (AdminInfo exitingAdminInfo : singletonAdminInfoList) {
             if (exitingAdminInfo.getAdminNo().equals(adminNo)) {
                 singletonAdminInfoList.remove(exitingAdminInfo);
+                System.out.println("set NULL to adminInfo: "+adminNo);
+                System.out.println("current size of singletonAdminInfoList: "+singletonAdminInfoList.size());
                 break;
             }
         }
