@@ -8,8 +8,8 @@ package me.shafin.sustord.service;
  */
 public class AcademicInfoService extends StudentIdentityService{
 
-    public AcademicInfoService() throws Exception{
-         super(StudentIdentityService.forSingletonIdentityService());
+    public AcademicInfoService(String registrationNo) throws Exception{
+         super(StudentIdentityService.forSingletonIdentityService(registrationNo));
     }
 
     /* Academic Information  */

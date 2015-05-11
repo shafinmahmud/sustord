@@ -25,8 +25,8 @@ import org.hibernate.HibernateException;
  */
 public class GradeService extends StudentIdentityService {
 
-    public GradeService() throws Exception {
-        super(StudentIdentityService.forSingletonIdentityService());
+    public GradeService(String registrationNo) throws Exception {
+        super(StudentIdentityService.forSingletonIdentityService(registrationNo));
         //super(StudentIdentityService.forProtypeIdentityService(registrationNo));
     }
 

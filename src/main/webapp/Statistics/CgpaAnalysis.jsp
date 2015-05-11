@@ -4,7 +4,6 @@
     Author     : SHAFIN
 --%>
 
-<%@page import="me.shafin.sustord.controller.CgpaAnalysisController"%>
 <%@page import="me.shafin.sustord.utility.StatisticsHelper"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.HashMap"%>
@@ -25,8 +24,8 @@
             </style>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
             <meta name="viewport" content="width=device-width">
-            <%@include  file="../WEB-INF/jspf/BootstrapInclude.jspf"%>
-            <link href="../page_files/css/style.css" rel="stylesheet">
+                    <%@include  file="../WEB-INF/jspf/BootstrapInclude.jspf"%>
+        <link href="../page_files/css/style.css" rel="stylesheet">
 
             <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
             <script src="http://code.highcharts.com/highcharts.js"></script>
@@ -43,20 +42,13 @@
                 <div id="main-content" class="col-md-10 column800">
                     <div class="col-lg-12">
                         <fieldset>
-                            <%                                StudentService studentService;
+                            <%                                    
+                                StudentService studentService;
                                 studentService = (StudentService) session.getAttribute("studentService");
                                 String myRegNo = (String) request.getSession().getAttribute("regNo");
                                 List<StudentPOJO> students = studentService.getStudentRankList(myRegNo);
 
                                 Map map = StatisticsHelper.getCgpaDistibutionMap(students);
-                                
-                                
-                                
-                                ///////////////////
-                                
-                                CgpaAnalysisController controller = new CgpaAnalysisController();
-                                
-                                //////////////////
 
                             %>                               
                             <legend>CGPA Analysis</legend>

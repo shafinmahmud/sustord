@@ -12,9 +12,9 @@ public class UserHomeController {
 
     private PersonalInfoService informationService;
 
-    public UserHomeController() {
+    public UserHomeController(String registrationNo) {
         try {
-            this.informationService = new PersonalInfoService();
+            this.informationService = new PersonalInfoService(registrationNo);
         } catch (Exception ex) {
             Logger.getLogger(UserHomeController.class.getName()).log(Level.SEVERE, null, ex);
         }

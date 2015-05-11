@@ -34,7 +34,8 @@
 
                     <div class="margin5">
                         <%                            
-                            SemesterAnalysisController controller = new SemesterAnalysisController();
+                            String regNo = (String) request.getSession().getAttribute("regNo");
+                            SemesterAnalysisController controller = new SemesterAnalysisController(regNo);
                         %>
                         <fieldset>
 

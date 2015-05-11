@@ -41,7 +41,7 @@
                         <fieldset>
                             <%                                String regNo = (String) request.getSession().getAttribute("regNo");
 
-                                CurriculumController curriculumController = new CurriculumController();
+                                CurriculumController curriculumController = new CurriculumController(regNo);
                                 String deptName = curriculumController.getStudentDepartmentName();
                                 String sessionName = curriculumController.getStudentAcademicSession();
                                 String program = curriculumController.getStudentProgramName();

@@ -16,8 +16,8 @@ public class PersonalInfoService extends StudentIdentityService{
     private static final String ERROR_RESPONSE = ":/";
 
     /* Constructor thats is private and get accesses through static helper method  */
-    public PersonalInfoService() throws Exception {
-        super(StudentIdentityService.forSingletonIdentityService());
+    public PersonalInfoService(String registrationNo) throws Exception {
+        super(StudentIdentityService.forSingletonIdentityService(registrationNo));
     }
 
     

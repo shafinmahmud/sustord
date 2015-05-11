@@ -53,7 +53,7 @@
                         <legend>Personal Information</legend>
                         <%                            String regNo = (String) request.getSession().getAttribute("regNo");
 
-                            EditProfileController controller = new EditProfileController();
+                            EditProfileController controller = new EditProfileController(regNo);
                             String name = controller.getStudentName();
 
                             String fatherName = controller.getFatherName();
