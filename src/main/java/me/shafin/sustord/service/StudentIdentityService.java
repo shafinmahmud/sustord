@@ -19,13 +19,13 @@ public class StudentIdentityService {
     }
 
     /* Constructor helper for singleton AcademicInfoService  */
-    public static StudentInfo forSingletonIdentityService(String registrationNo) throws Exception {
-        return ServiceDispatcher.getSingletonStudentInfo(registrationNo);
+    public static StudentInfo forSingletonIdentityService() throws Exception {
+        return ServiceDispatcher.getSingletonStudentInfo(ServiceDispatcher.getLoggedInStudentID());
     }
 
     /* Constructor helper for prototype AcademicInfoService  */
-    public static StudentInfo forProtypeIdentityService(String registrationNo) throws Exception {
-        return StudentInfoDao.getStudentInfoObject(registrationNo);
+    public static StudentInfo forProtypeIdentityService() throws Exception {
+        return StudentInfoDao.getStudentInfoObject(ServiceDispatcher.getLoggedInStudentID());
     }
     
 }

@@ -5,7 +5,6 @@ package me.shafin.sustord.controller;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.http.HttpServlet;
 import me.shafin.sustord.pojo.StudentGradeRankedPojo;
 import me.shafin.sustord.service.AcademicInfoService;
 import me.shafin.sustord.service.GradeService;
@@ -14,15 +13,15 @@ import me.shafin.sustord.service.GradeService;
  *
  * @author SHAFIN
  */
-public class SemesterAnalysisController extends HttpServlet{
+public class SemesterAnalysisController{
 
     private AcademicInfoService academicService;
     private GradeService gradeService;
 
-    public SemesterAnalysisController(String registrationNo) {
+    public SemesterAnalysisController() {
         try {          
-            this.academicService = new AcademicInfoService(registrationNo);
-            this.gradeService = new GradeService(registrationNo);
+            this.academicService = new AcademicInfoService();
+            this.gradeService = new GradeService();
         } catch (Exception ex) {
             Logger.getLogger(CurriculumController.class.getName()).log(Level.SEVERE, null, ex);
         }

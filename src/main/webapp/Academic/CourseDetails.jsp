@@ -51,9 +51,8 @@
                                 <td>
                                     <select class="form-control pull-right" id="semester-dropdown" name="reg-semester-dropdown" style="width: 250px">
                                         <%                                            
-                                            String regNo = (String) request.getSession().getAttribute("regNo");
                                             
-                                            CourseDetailsController detailsController = new CourseDetailsController(regNo);
+                                            CourseDetailsController detailsController = new CourseDetailsController();
                                             int numofsem = detailsController.getTotalAcademicSemester();
                                             int currentSemester = 2;
 

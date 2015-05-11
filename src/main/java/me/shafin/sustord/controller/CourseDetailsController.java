@@ -14,9 +14,9 @@ public class CourseDetailsController {
 
     private AcademicInfoService academicService;
 
-    public CourseDetailsController(String registrationNo) {
+    public CourseDetailsController() {
         try {
-            this.academicService = new AcademicInfoService(registrationNo);
+            this.academicService = new AcademicInfoService();
         } catch (Exception ex) {
             Logger.getLogger(CurriculumController.class.getName()).log(Level.SEVERE, null, ex);
         }

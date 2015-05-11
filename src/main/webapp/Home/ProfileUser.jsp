@@ -41,7 +41,7 @@
                                 
                                 String regNo = (String) request.getSession().getAttribute("regNo");
                                 
-                                UserProfileController profileController = new UserProfileController(regNo);
+                                UserProfileController profileController = new UserProfileController();
                                 String name = profileController.getStudentName();
 
                                 String sessionName = profileController.getStudentAcademicSession();

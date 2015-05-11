@@ -2,8 +2,6 @@ package me.shafin.sustord.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -12,7 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import me.shafin.sustord.pojo.LoginMessage;
-import me.shafin.sustord.controller.LoginController;
+import me.shafin.sustord.service.AdminLoginService;
+import me.shafin.sustord.service.StudentLoginService;
 import me.shafin.sustord.utility.JsonConvertion;
 import me.shafin.sustord.service.StudentService;
 
@@ -38,74 +37,67 @@ public class LoginServlet extends HttpServlet {
             String password = request.getParameter("pw");
 
             LoginMessage message = new LoginMessage();
+            StudentLoginService studentLoginService;
+            try {
+                studentLoginService = new StudentLoginService(id);
 
-            if (userType.equals("student")) {
-                message = LoginController.authencateStudent(id, password);
-            } else if (userType.equals("batchAdmin")) {
-                message = LoginController.authencateBatchAdmin(id, password);
-            } else {
+                if (userType.equals("student")) {
 
-            }
+                    message = studentLoginService.authencateStudent(id, password);
 
-            if (message.isRequestedIdValid() && message.isRequestedPasswordValid()) {
+                } else if (userType.equals("batchAdmin")) {
+                    try {
+                        message = new AdminLoginService(id).authencateBatchAdmin(id, password);
+                    } catch (Exception ex) {
+                        Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else {
 
-                HttpSession session = request.getSession();
-
-                if (userType.equalsIgnoreCase("student")) {
-                    StudentService service = LoginController.temporarySupport();
-                    session.setAttribute("studentService", service);
-                    session.setAttribute("user", "student");
-                    session.setAttribute("regNo", message.getRequestedId());
-                }else{
-                    session.setAttribute("user", "batchAdmin");
-                    session.setAttribute("id", message.getRequestedId());
                 }
 
-                session.setAttribute("loginStatus", "ok");
-                
-                try {
-                    String messageJson = JsonConvertion.objectToJsonString(message);
-                    PrintWriter out = response.getWriter();
-                    out.print(messageJson);
-                    System.out.println(messageJson);
-                    out.flush();
-                } catch (IOException ex) {
-                    Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                if (message.isRequestedIdValid() && message.isRequestedPasswordValid()) {
 
-            } else {
-                try {
-                    String messageJson = JsonConvertion.objectToJsonString(message);
-                    PrintWriter out = response.getWriter();
-                    System.out.println(messageJson);
-                    out.print(messageJson);
-                    out.flush();
-                } catch (IOException ex) {
-                    Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    HttpSession session = request.getSession();
+
+                    if (userType.equalsIgnoreCase("student")) {
+                        StudentService service = studentLoginService.temporarySupport();
+                        session.setAttribute("studentService", service);
+                        session.setAttribute("user", "student");
+                        session.setAttribute("regNo", message.getRequestedId());
+                    } else {
+                        session.setAttribute("user", "batchAdmin");
+                        session.setAttribute("id", message.getRequestedId());
+                    }
+
+                    session.setAttribute("loginStatus", "ok");
+
+                    try {
+                        String messageJson = JsonConvertion.objectToJsonString(message);
+                        PrintWriter out = response.getWriter();
+                        out.print(messageJson);
+                        System.out.println(messageJson);
+                        out.flush();
+                    } catch (IOException ex) {
+                        Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                } else {
+                    try {
+                        String messageJson = JsonConvertion.objectToJsonString(message);
+                        PrintWriter out = response.getWriter();
+                        System.out.println(messageJson);
+                        out.print(messageJson);
+                        out.flush();
+                    } catch (IOException ex) {
+                        Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
+            } catch (Exception ex) {
+                Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         } catch (ExceptionInInitializerError ex) {
             Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-
-            StringWriter sw = new StringWriter();
-            PrintWriter pw = new PrintWriter(sw);
-            ex.printStackTrace(pw);
-            String errorString = sw.toString(); // stack trace as a string  
-
-            //temporary way to handle service class exception. intend to remove later
-            try {
-                PrintWriter out = response.getWriter();
-                LoginMessage message = new LoginMessage();
-                message.setMessageTitle("Sql Exception");
-                message.setMessageBody(errorString);
-                out.print(JsonConvertion.objectToJsonString(message));
-                out.flush();
-            } catch (IOException io) {
-                Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, io);
-            }
-
         }
     }
 

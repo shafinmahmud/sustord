@@ -19,8 +19,8 @@ import me.shafin.sustord.model.Syllabus;
  */
 public class CurricularInfoService extends StudentIdentityService{
     
-    public CurricularInfoService(String registrationNo) throws Exception{
-        super(StudentIdentityService.forSingletonIdentityService(registrationNo));
+    public CurricularInfoService() throws Exception{
+        super(StudentIdentityService.forSingletonIdentityService());
     }
  
     

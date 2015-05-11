@@ -47,7 +47,7 @@
                         
                         String regNo = (String) request.getSession().getAttribute("regNo");
                         
-                        UserHomeController homeController = new UserHomeController(regNo);
+                        UserHomeController homeController = new UserHomeController();
                         String name = homeController.getStudentName();
                         String url =  homeController.getStudentPhotoUrl();
 

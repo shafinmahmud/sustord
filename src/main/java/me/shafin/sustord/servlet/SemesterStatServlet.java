@@ -43,7 +43,7 @@ public class SemesterStatServlet extends HttpServlet {
         String regNo = (String) request.getSession().getAttribute("regNo");
         StatSemesterPojo stat = studentService.getSemesterStatistics(regNo, sem);
         
-        SemesterAnalysisController controller = new SemesterAnalysisController(regNo);
+        SemesterAnalysisController controller = new SemesterAnalysisController();
         stat.setStudentRankedList(controller.getSemesterRankList(sem));
         
         String statJson = JsonConvertion.objectToJsonString(stat);

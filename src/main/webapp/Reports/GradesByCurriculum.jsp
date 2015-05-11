@@ -42,7 +42,7 @@
                                 studentService = (StudentService) session.getAttribute("studentService");
                                 String regNo = (String) request.getSession().getAttribute("regNo");
                                 
-                                GradeByCurriculumController controller = new GradeByCurriculumController(regNo);
+                                GradeByCurriculumController controller = new GradeByCurriculumController();
                                 
                                 String name = controller.getStudentName();                            
                                 String sessionName = controller.getStudentAcademicSession();

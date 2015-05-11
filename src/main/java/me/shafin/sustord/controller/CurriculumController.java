@@ -19,10 +19,10 @@ public class CurriculumController {
     private AcademicInfoService academicInfoService;
     private CurricularInfoService curricularInfoService;
 
-    public CurriculumController(String registrationNo) {
+    public CurriculumController() {
         try {
-            this.academicInfoService = new AcademicInfoService(registrationNo);
-            this.curricularInfoService = new CurricularInfoService(registrationNo);
+            this.academicInfoService = new AcademicInfoService();
+            this.curricularInfoService = new CurricularInfoService();
         } catch (Exception ex) {
             Logger.getLogger(UserHomeController.class.getName()).log(Level.SEVERE, null, ex);
         }

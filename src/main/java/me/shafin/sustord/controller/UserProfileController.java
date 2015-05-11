@@ -14,10 +14,10 @@ public class UserProfileController {
     private PersonalInfoService personalInfoService;
     private AcademicInfoService academicInfoService;
 
-    public UserProfileController(String registrationNo) {
+    public UserProfileController() {
         try {
-            this.personalInfoService = new PersonalInfoService(registrationNo);
-            this.academicInfoService = new AcademicInfoService(registrationNo);
+            this.personalInfoService = new PersonalInfoService();
+            this.academicInfoService = new AcademicInfoService();
         } catch (Exception ex) {
             Logger.getLogger(UserHomeController.class.getName()).log(Level.SEVERE, null, ex);
         }

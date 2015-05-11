@@ -16,10 +16,10 @@ public class GradeByCurriculumController {
     private PersonalInfoService personalInfoService;
     private AcademicInfoService  academicInfoService;
     
-    public GradeByCurriculumController(String registrationNo) {
+    public GradeByCurriculumController() {
         try {
-            this.personalInfoService = new PersonalInfoService(registrationNo);
-            this.academicInfoService = new AcademicInfoService(registrationNo);
+            this.personalInfoService = new PersonalInfoService();
+            this.academicInfoService = new AcademicInfoService();
         } catch (Exception ex) {
             Logger.getLogger(UserHomeController.class.getName()).log(Level.SEVERE, null, ex);
         }
