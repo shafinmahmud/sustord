@@ -31,18 +31,18 @@
 
                             <form  class="form-horizontal" method="post" role="form" >
                                 <div class="form-group">
-                                    <label class="col-lg-3" style="text-align: right" for="OldPassword" >Current Password</label>
+                                    <label class="col-lg-3" style="text-align: right" >Current Password</label>
                                     <div id="old-pass-div" class="col-lg-5">
-                                        <input id="old-pass" class="form-control" name="OldPassword" type="password">
+                                        <input id="old-pass" class="form-control has-error" type="password">
                                     </div>
                                     <div class="col-lg-4">
                                         <p id="warn-old-pass"></p>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-lg-3" style="text-align: right" for="NewPassword">New Password</label>                        
+                                    <label class="col-lg-3" style="text-align: right">New Password</label>                        
                                     <div id="new-pass-div" class="col-lg-5">
-                                        <input class="form-control"data-val-length-max="100" data-val-length-min="8" data-val-regex="Please check password policy" data-val-regex-pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&amp;*-]).{8,}$" data-val-required="The New Password field is required." name="NewPassword" type="password">
+                                        <input id="new-pass" class="form-control" type="password">
                                     </div>
                                     <div class="col-lg-4">
                                         <p id="warn-new-pass"></p>
@@ -51,7 +51,7 @@
                                 <div class="form-group">
                                     <label class="col-lg-3" style="text-align: right" for="ConfirmPassword">Confirm New Password</label>
                                     <div id="new-pass-retype-div" class="col-lg-5">
-                                        <input class="form-control" name="ConfirmPassword" type="password">
+                                        <input id="new-pass-retype" class="form-control" name="ConfirmPassword" type="password">
                                     </div>
                                     <div class="col-lg-4">
                                         <p id="warn-new-pass-retype"></p>
@@ -59,7 +59,7 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-lg-offset-4 col-lg-8">
-                                        <input id="submit-change-button" type="submit" class="btn btn-danger">
+                                        <button id="submit-change-button" type="button" class="btn btn-danger">Submit</button>
                                     </div>
                                 </div>
                             </form> 
