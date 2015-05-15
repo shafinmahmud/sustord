@@ -52,6 +52,10 @@
         <servlet-name>SemesterStatServlet</servlet-name>
         <servlet-class>me.shafin.sustord.servlet.SemesterStatServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ChangePasswordServlet</servlet-name>
+        <servlet-class>me.shafin.sustord.servlet.ChangePasswordServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LogOutServlet</servlet-name>
         <url-pattern>/LogOutServlet</url-pattern>
@@ -95,5 +99,9 @@
     <servlet-mapping>
         <servlet-name>SemesterStatServlet</servlet-name>
         <url-pattern>/SemesterStatServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangePasswordServlet</servlet-name>
+        <url-pattern>/ChangePasswordServlet</url-pattern>
     </servlet-mapping>
 </web-app>

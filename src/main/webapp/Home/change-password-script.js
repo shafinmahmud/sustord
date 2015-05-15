@@ -4,7 +4,7 @@
 $(document).ready(function () {
 
 // ---------------       ERROR MESSAGES    -------------------
-    var oldPassRequired = "The Current Password field is required.";
+    var oldPassRequired = "The Current Password is required.";
     var newPassLengthError = "The New Password must be at least 8 characters long.";
     var newPassMatchError = "The new password and confirmation password do not match.";
 // ---------------   ICON AND ANIMATION URLs -----------------
@@ -13,34 +13,68 @@ $(document).ready(function () {
     var successUrl = "../page_files/icons/success-icon.png";
     var emptyIconUrl = "../page_files/icons/empty-icon.gif";
 
-    
+
     $("#submit-change-button").click(function () {
+
+        $('#warn-old-pass').html('');
+        $('#warn-new-pass').html('');
+        $('#warn-new-pass-retype').html('');
 
         validationFLag = false;
 
         //check the old password field
         oldPassword = $('#old-pass').val();
-        if(oldPassword.length === 0){
-            $("#old-pass").addClass("has-error");
-            $('#need-pass-error').html('*Password required.');
+        newPassword = $('#new-pass').val();
+        newPasswordRetype = $('#new-pass-retype').val();
+ 
+        if (oldPassword.length === 0) {
+            $('#warn-old-pass').html(oldPassRequired);
+            // $("#old-pass").addClass("has-error");   
+        } else {
+            if (newPassword.length < 8) {
+                $('#warn-new-pass').html(newPassLengthError);
+                // $("#old-pass").addClass("has-error");   
+            } else {
+                if (newPasswordRetype !== newPassword) {
+                    $('#warn-new-pass-retype').html(newPassMatchError);
+                    // $("#old-pass").addClass("has-error");   
+                } else {
+                    validationFLag = true;
+                }
+            }
         }
 
-        //check the new password field or retype password field is empty or not
-
-        //match the new password field and the retyped password field for similarity
-
         if (validationFLag) {
-
+            ajaxCall(oldPassword, newPassword);
         }
 
     });
 });
 
-function highlightChangedField() {
 
-    //changedFormData;
-    //alert(JSON.stringify(initialFormData));
+function ajaxCall(oldPassword, newPassword) {
+    //$('#need-id-error').html('');
+    //$('#need-pass-error').html('');
+
+   // $("#loading-anim").attr("src", loaderUrl); // 'loading' animation
+
+    $.ajax({
+        url: '../ChangePasswordServlet',
+        data: {
+            oldPass: oldPassword,
+            newPass: newPassword
+        },
+        type: 'POST',
+        success: function (messageString) {
+            var messageJson = $.parseJSON(messageString);
+           
+        },
+        error: function (messageString) {
+            //alert("oops");
+        }
+    });
 }
+
 
 
 

@@ -33,7 +33,7 @@
                                 <div class="form-group">
                                     <label class="col-lg-3" style="text-align: right" >Current Password</label>
                                     <div id="old-pass-div" class="col-lg-5">
-                                        <input id="old-pass" class="form-control has-error" type="password">
+                                        <input id="old-pass" class="form-control has-error" type="password" for="OldPassword">
                                     </div>
                                     <div class="col-lg-4">
                                         <p id="warn-old-pass"></p>
@@ -42,7 +42,7 @@
                                 <div class="form-group">
                                     <label class="col-lg-3" style="text-align: right">New Password</label>                        
                                     <div id="new-pass-div" class="col-lg-5">
-                                        <input id="new-pass" class="form-control" type="password">
+                                        <input id="new-pass" class="form-control" type="password" for="newPassword">
                                     </div>
                                     <div class="col-lg-4">
                                         <p id="warn-new-pass"></p>
