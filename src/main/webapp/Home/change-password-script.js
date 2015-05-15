@@ -5,7 +5,7 @@ $(document).ready(function () {
 
 // ---------------       ERROR MESSAGES    -------------------
     var oldPassRequired = "The Current Password is required.";
-    var newPassLengthError = "The New Password must be at least 8 characters long.";
+    var newPassLengthError = "The New Password must be at least 6 characters long.";
     var newPassMatchError = "The new password and confirmation password do not match.";
 // ---------------   ICON AND ANIMATION URLs -----------------
     var alertUrl = "";
@@ -31,7 +31,7 @@ $(document).ready(function () {
             $('#warn-old-pass').html(oldPassRequired);
             // $("#old-pass").addClass("has-error");   
         } else {
-            if (newPassword.length < 8) {
+            if (newPassword.length < 6) {
                 $('#warn-new-pass').html(newPassLengthError);
                 // $("#old-pass").addClass("has-error");   
             } else {
@@ -67,10 +67,10 @@ function ajaxCall(oldPassword, newPassword) {
         type: 'POST',
         success: function (messageString) {
             var messageJson = $.parseJSON(messageString);
-           
+            alert(messageString);        
         },
         error: function (messageString) {
-            //alert("oops");
+            alert("oops");
         }
     });
 }
