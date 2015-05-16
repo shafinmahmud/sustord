@@ -5,6 +5,8 @@
     var oldPassRequired = "The Current Password is required.";
     var newPassLengthError = "The New Password must be at least 6 characters long.";
     var newPassMatchError = "The new password and confirmation password do not match.";
+    var successMessage = "Your password has been changed successfully.";
+    
 // ---------------   ICON AND ANIMATION URLs -----------------
     var alertUrl = "";
     var loaderUrl = "../page_files/icons/ajax-loader.gif";
@@ -15,6 +17,7 @@
 $(document).ready(function () {
 
     $("#submit-change-button").click(function () {
+        $("#status-text").html('success');
 
         $('#warn-old-pass').html('');
         $('#warn-new-pass').html('');
@@ -55,6 +58,7 @@ $(document).ready(function () {
 function ajaxCall(oldPassword, newPassword) {
     //$('#need-id-error').html('');
     //$('#need-pass-error').html('');
+   // $("#status-text").html('');
 
     $("#status-icon").attr("src", loaderUrl); // 'loading' animation
 
@@ -67,6 +71,8 @@ function ajaxCall(oldPassword, newPassword) {
         type: 'POST',
         success: function (messageString) {
             var messageJson = $.parseJSON(messageString);
+            $("#status-text").html('success');
+           // $("#messagebox").html(passErrorMessage);
             $("#status-icon").attr("src", successUrl);       
         },
         error: function (messageString) {
