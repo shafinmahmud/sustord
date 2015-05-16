@@ -58,8 +58,12 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <div class="col-lg-offset-4 col-lg-8">
+                                    <div class="col-lg-offset-3 col-lg-8">
                                         <button id="submit-change-button" type="button" class="btn btn-danger">Submit</button>
+                                        <img  class="col-xs-offset-1" id="status-icon" src="..\page_files\icons\empty-icon.gif" height="25" alt="">
+                                    </div>
+                                    <div class="col-lg-offset-3 col-lg-4">
+                                        <p id="status-text">Successfully changes your password</p>
                                     </div>
                                 </div>
                             </form> 

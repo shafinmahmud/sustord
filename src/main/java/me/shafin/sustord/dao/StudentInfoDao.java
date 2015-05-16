@@ -16,7 +16,7 @@ import org.hibernate.Session;
  */
 public class StudentInfoDao {
 
-    public static StudentInfo getStudentInfoObject(String registrationNo) throws HibernateException, SQLException{
+    public static StudentInfo getStudentInfoObject(String registrationNo) throws HibernateException, SQLException {
         StudentInfo studentInfo = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
@@ -32,7 +32,7 @@ public class StudentInfoDao {
 
             if (!infos.isEmpty()) {
                 studentInfo = infos.get(0);
-            } 
+            }
         } catch (Exception e) {
             throw new ExceptionInInitializerError(e.getMessage());
         } finally {
@@ -41,9 +41,9 @@ public class StudentInfoDao {
 
         return studentInfo;
     }
-    
-    public static List<StudentInfo> getStudentInfoObjects(Integer studentBatch) throws HibernateException, SQLException{
-       
+
+    public static List<StudentInfo> getStudentInfoObjects(Integer studentBatch) throws HibernateException, SQLException {
+
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
 
@@ -58,13 +58,30 @@ public class StudentInfoDao {
 
             if (!infos.isEmpty()) {
                 return infos;
-            } 
+            }
         } catch (Exception e) {
             throw new ExceptionInInitializerError(e.getMessage());
         } finally {
             session.close();
         }
         return null;
+    }
+
+    public static boolean setStudentPassword(StudentInfo studentInfo, String password)
+            throws HibernateException, SQLException {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            studentInfo.setPassword(password);
+            session.saveOrUpdate(studentInfo);
+            session.getTransaction().commit();
+            return true;
+
+        } catch (Exception e) {
+            throw new ExceptionInInitializerError(e.getMessage());
+        } finally {
+            session.close();
+        }
     }
 
 }

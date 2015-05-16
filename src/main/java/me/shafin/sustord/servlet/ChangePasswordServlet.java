@@ -3,10 +3,14 @@
 package me.shafin.sustord.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import me.shafin.sustord.controller.ChangePasswordController;
+import me.shafin.sustord.pojo.Message;
+import me.shafin.sustord.utility.JsonConvertion;
 
 /**
  *
@@ -25,11 +29,19 @@ public class ChangePasswordServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         String oldPassword = request.getParameter("oldPass");
         String newPassword = request.getParameter("newPass");
-        
-        System.out.println(newPassword);
+
+        Message message;
+        message = ChangePasswordController.saveNewPassword((String) request.getSession()
+                .getAttribute("regNo"), oldPassword, newPassword);
+
+        String messageJson = JsonConvertion.objectToJsonString(message);
+        PrintWriter out = response.getWriter();
+        out.print(messageJson);
+        //System.out.println(messageJson);
+        out.flush();
         //
     }
 

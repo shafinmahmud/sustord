@@ -1,8 +1,6 @@
 /* 
  */
 
-$(document).ready(function () {
-
 // ---------------       ERROR MESSAGES    -------------------
     var oldPassRequired = "The Current Password is required.";
     var newPassLengthError = "The New Password must be at least 6 characters long.";
@@ -12,7 +10,9 @@ $(document).ready(function () {
     var loaderUrl = "../page_files/icons/ajax-loader.gif";
     var successUrl = "../page_files/icons/success-icon.png";
     var emptyIconUrl = "../page_files/icons/empty-icon.gif";
+    
 
+$(document).ready(function () {
 
     $("#submit-change-button").click(function () {
 
@@ -56,7 +56,7 @@ function ajaxCall(oldPassword, newPassword) {
     //$('#need-id-error').html('');
     //$('#need-pass-error').html('');
 
-   // $("#loading-anim").attr("src", loaderUrl); // 'loading' animation
+    $("#status-icon").attr("src", loaderUrl); // 'loading' animation
 
     $.ajax({
         url: '../ChangePasswordServlet',
@@ -67,7 +67,7 @@ function ajaxCall(oldPassword, newPassword) {
         type: 'POST',
         success: function (messageString) {
             var messageJson = $.parseJSON(messageString);
-            alert(messageString);        
+            $("#status-icon").attr("src", successUrl);       
         },
         error: function (messageString) {
             alert("oops");

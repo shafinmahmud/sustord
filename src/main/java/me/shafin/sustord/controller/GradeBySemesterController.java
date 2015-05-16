@@ -12,10 +12,10 @@ import me.shafin.sustord.service.PersonalInfoService;
  * @author SHAFIN
  */
 public class GradeBySemesterController {
-    
-     private PersonalInfoService personalInfoService;
-    private AcademicInfoService  academicInfoService;
-    
+
+    private PersonalInfoService personalInfoService;
+    private AcademicInfoService academicInfoService;
+
     public GradeBySemesterController(String registrationNo) {
         try {
             this.personalInfoService = new PersonalInfoService(registrationNo);
@@ -24,17 +24,16 @@ public class GradeBySemesterController {
             Logger.getLogger(UserHomeController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    
+
     public String getStudentName() {
-             return personalInfoService.getStudentName();   
+        return personalInfoService.getStudentName();
     }
-    
+
     /* Academic Information  */
     public String getStudentProgramName() {
         return academicInfoService.getStudentProgramName();
     }
-    
+
     public String getStudentDepartmentName() {
         return academicInfoService.getStudentDepartmentName();
     }
