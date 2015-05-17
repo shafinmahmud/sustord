@@ -23,7 +23,8 @@ public class ServiceDispatcher {
         if (!singletonStudentInfoList.isEmpty()) {
             for (StudentInfo studentInfo : singletonStudentInfoList) {
                 if (studentInfo.getRegistrationNo().equals(registrationNo)) {
-                    System.out.println("found studentinfo: " + studentInfo.getRegistrationNo());
+                    System.out.println("CONTINOUS: TIME: "++" Reg:" + studentInfo.getRegistrationNo()
+                                        +" Name: "+studentInfo.getPersonalInfo().getName());
                     return studentInfo;
                 }
             }
