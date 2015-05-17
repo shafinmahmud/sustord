@@ -23,7 +23,8 @@ public class ServiceDispatcher {
         if (!singletonStudentInfoList.isEmpty()) {
             for (StudentInfo studentInfo : singletonStudentInfoList) {
                 if (studentInfo.getRegistrationNo().equals(registrationNo)) {
-                    System.out.println("CONTINOUS: TIME: "++" Reg:" + studentInfo.getRegistrationNo()
+                    
+                    System.out.println("CONTINOUS: "+DateTime.getSytemTimeStamp()+" ID:" + studentInfo.getRegistrationNo()
                                         +" Name: "+studentInfo.getPersonalInfo().getName());
                     return studentInfo;
                 }
@@ -33,7 +34,9 @@ public class ServiceDispatcher {
         StudentInfo newStudentInfo = StudentInfoDao.getStudentInfoObject(registrationNo);
         if(newStudentInfo != null){
             singletonStudentInfoList.add(newStudentInfo);
-            System.out.println("created studentinfo: " + newStudentInfo.getRegistrationNo());
+            System.out.println("STACK-SIZE: "+singletonStudentInfoList.size());
+            System.err.println("NEW INSTANCE: "+DateTime.getSytemTimeStamp()+" ID: " + newStudentInfo.getRegistrationNo()
+                                        +" Name: "+newStudentInfo.getPersonalInfo().getName());
         }    
         return newStudentInfo;
     }
@@ -43,7 +46,7 @@ public class ServiceDispatcher {
         if (!singletonAdminInfoList.isEmpty()) {
             for (AdminInfo adminInfo : singletonAdminInfoList) {
                 if (adminInfo.getAdminNo().equals(adminNo)) {
-                    System.out.println("found adminInfo: " + adminInfo.getAdminNo());
+                    System.out.println("CONTINOUS: "+DateTime.getSytemTimeStamp()+" ID: " + adminInfo.getAdminNo());
                     return adminInfo;
                 }
             }
@@ -52,7 +55,8 @@ public class ServiceDispatcher {
         AdminInfo newAdminInfo = AdminInfoDao.getAdminInfoObject(adminNo);
         if(newAdminInfo != null){
             singletonAdminInfoList.add(newAdminInfo);
-            System.out.println("created adminInfo: " + newAdminInfo.getAdminNo());
+            System.out.println("CONTINOUS: "+DateTime.getSytemTimeStamp()+" ID: " + newAdminInfo.getAdminNo());
+                    
         }    
         return newAdminInfo;
     }
@@ -62,8 +66,8 @@ public class ServiceDispatcher {
         for (StudentInfo exitingStudenInfo : singletonStudentInfoList) {
             if (exitingStudenInfo.getRegistrationNo().equals(registrationNo)) {
                 singletonStudentInfoList.remove(exitingStudenInfo);
-                System.out.println("set NULL to studentInfo: "+registrationNo);
-                 System.out.println("current size of singletonStudentInfoList: "+singletonStudentInfoList.size());
+                System.err.println("LOGOUT-SET_NULL: "+DateTime.getSytemTimeStamp()+" ID: " + exitingStudenInfo.getRegistrationNo());
+                System.out.println("STACK-SIZE: "+singletonStudentInfoList.size());
                 break;
             }
         }
@@ -74,8 +78,8 @@ public class ServiceDispatcher {
         for (AdminInfo exitingAdminInfo : singletonAdminInfoList) {
             if (exitingAdminInfo.getAdminNo().equals(adminNo)) {
                 singletonAdminInfoList.remove(exitingAdminInfo);
-                System.out.println("set NULL to adminInfo: "+adminNo);
-                System.out.println("current size of singletonAdminInfoList: "+singletonAdminInfoList.size());
+                System.out.println("LOGOUT-SET_NULL: "+adminNo);
+                
                 break;
             }
         }

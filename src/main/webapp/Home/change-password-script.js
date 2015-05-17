@@ -71,7 +71,7 @@ function ajaxCall(oldPassword, newPassword) {
         type: 'POST',
         success: function (messageString) {
             var messageJson = $.parseJSON(messageString);
-            $("#status-text").html('success');
+           // $("#status-text").html('success');
            // $("#messagebox").html(passErrorMessage);
             $("#status-icon").attr("src", successUrl);       
         },

@@ -67,7 +67,7 @@ public class LoginServlet extends HttpServlet {
                     String messageJson = JsonConvertion.objectToJsonString(message);
                     PrintWriter out = response.getWriter();
                     out.print(messageJson);
-                    System.out.println(messageJson);
+                    
                     out.flush();
                 } catch (IOException ex) {
                     Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -77,7 +77,7 @@ public class LoginServlet extends HttpServlet {
                 try {
                     String messageJson = JsonConvertion.objectToJsonString(message);
                     PrintWriter out = response.getWriter();
-                    System.out.println(messageJson);
+                   
                     out.print(messageJson);
                     out.flush();
                 } catch (IOException ex) {

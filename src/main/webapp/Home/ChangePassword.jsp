@@ -62,15 +62,13 @@
                                         <button id="submit-change-button" type="button" class="btn btn-danger">Submit</button>                                                                      
                                     </div>
                                     <div class="col-lg-1 col-xs-offset-1 col-xs-1">
-                                        <img id="status-icon" src="..\page_files\icons\empty-icon.gif" height="25" alt="loading-icon">                                  
+                                        <img id="status-icon" src="..\page_files\icons\empty-icon.gif" height="25" alt="">                                  
                                     <div class="col-lg-8 col-md-8">                                   
                                         <p id="status-text" style="font-size: 13.5px; padding-top: 8px"></p>
                                     </div>
-
                                 </div>
                             </form> 
                         </fieldset>
-
                     </div>
 
                 </div>

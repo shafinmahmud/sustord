@@ -4,6 +4,7 @@ package me.shafin.sustord.utility;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.List;
 import me.shafin.sustord.bean.SyllabusPOJO;
 
@@ -78,6 +79,26 @@ public class CgpaCalculation {
 
         for (SyllabusPOJO spojo : list) {
             totalCredit += spojo.getCredit();
+        }
+        return totalCredit;
+    }
+    
+    public static double getTotalAttendedCredit(List<SyllabusPOJO> allCourseList) {
+        double totalCredit = 0;
+        
+        List<SyllabusPOJO> uniqueCourseList = new ArrayList<SyllabusPOJO>();
+        for (SyllabusPOJO course : allCourseList) {
+            boolean duplicateFlag = false;
+            for(SyllabusPOJO uniqueCourse: uniqueCourseList){
+                if(course.getSyllabusId() == uniqueCourse.getSyllabusId()){
+                    duplicateFlag = true;
+                }         
+            }
+            
+            if(!duplicateFlag){
+                uniqueCourseList.add(course);
+                totalCredit += course.getCredit();
+            }      
         }
         return totalCredit;
     }

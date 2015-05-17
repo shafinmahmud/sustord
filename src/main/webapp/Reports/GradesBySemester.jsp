@@ -137,7 +137,7 @@
                                             //for cummilative calculation
                                             List<SyllabusPOJO> cummilativeCourses = studentService.getStudentRegisteredCoursesAll(regNo, i + 1);
                                             double passedCreditC = CgpaCalculation.getPassedCreditOfSemester(cummilativeCourses);
-                                            double totalCreditC = CgpaCalculation.getTotalCreditOfSemester(cummilativeCourses);
+                                            double totalCreditC = CgpaCalculation.getTotalAttendedCredit(cummilativeCourses);
                                             double gradePointC = CgpaCalculation.getGradePointOfSemester(cummilativeCourses);
                                             String gradeLetterC = CgpaCalculation.getGradeLetterFromGradePoint(gradePointC);
                                             for (SyllabusPOJO s : courses) {

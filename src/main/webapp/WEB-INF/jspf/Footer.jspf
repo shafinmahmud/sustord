@@ -8,10 +8,9 @@
         <a href="../Academic/CourseDetails.jsp">Course Details</a> | 
         <a href="../Reports/GradesByCurriculum.jsp">Grade by curriculum</a> | 
         <a href="../Reports/GradesBySemester.jsp">Grade by Semester</a> | 
-        <a href="../Statistics/CourseAnalysis.jsp">Course Analysis</a> | 
-        <a href="../Statistics/Ranking.jsp">Ranking</a> |
-        <a href="../Notifications/RequestStatus.jsp">Request Status</a>
+        <a href="../Statistics/SemesterAnalysis.jsp">Semester Analysis</a> | 
+        <a href="../Statistics/CgpaAnalysis.jsp">CGPA Analysis</a> |
     </div>
-    <b>© Shahjalal University of Science &amp; Technology <!--Shahjalal University of Science & Technology--> 2014</b><br>
+    <b>© Shahjalal University of Science &amp; Technology 2015</b><br>
     Developed by <a href="http://www.facebook.com/shafin.mahmud">Shafin Mahmud</a> |  Department of CSE, SUST 
 </div>

@@ -45,7 +45,7 @@
             </div>
         </div>
         <!-- footer portion -->
-        <%@include  file="../WEB-INF/jspf/Footer.jspf"%>
+        <%@include  file="../WEB-INF/jspf/FooterAdmin.jspf"%>
 
     </body>
 </html>
