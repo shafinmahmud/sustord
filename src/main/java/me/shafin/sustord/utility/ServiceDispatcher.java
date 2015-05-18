@@ -24,7 +24,7 @@ public class ServiceDispatcher {
             for (StudentInfo studentInfo : singletonStudentInfoList) {
                 if (studentInfo.getRegistrationNo().equals(registrationNo)) {
                     
-                    System.out.println("CONTINOUS: "+DateTime.getSytemTimeStamp()+" ID:" + studentInfo.getRegistrationNo()
+                    System.out.println("CONTINOUS: "+DateTime.getLocalTimeStamp()+" ID:" + studentInfo.getRegistrationNo()
                                         +" Name: "+studentInfo.getPersonalInfo().getName());
                     return studentInfo;
                 }
@@ -35,7 +35,7 @@ public class ServiceDispatcher {
         if(newStudentInfo != null){
             singletonStudentInfoList.add(newStudentInfo);
             System.out.println("STACK-SIZE: "+singletonStudentInfoList.size());
-            System.err.println("NEW INSTANCE: "+DateTime.getSytemTimeStamp()+" ID: " + newStudentInfo.getRegistrationNo()
+            System.err.println("NEW INSTANCE: "+DateTime.getLocalTimeStamp()+" ID: " + newStudentInfo.getRegistrationNo()
                                         +" Name: "+newStudentInfo.getPersonalInfo().getName());
         }    
         return newStudentInfo;
@@ -46,7 +46,7 @@ public class ServiceDispatcher {
         if (!singletonAdminInfoList.isEmpty()) {
             for (AdminInfo adminInfo : singletonAdminInfoList) {
                 if (adminInfo.getAdminNo().equals(adminNo)) {
-                    System.out.println("CONTINOUS: "+DateTime.getSytemTimeStamp()+" ID: " + adminInfo.getAdminNo());
+                    System.out.println("CONTINOUS: "+DateTime.getLocalTimeStamp()+" ID: " + adminInfo.getAdminNo());
                     return adminInfo;
                 }
             }
@@ -55,7 +55,7 @@ public class ServiceDispatcher {
         AdminInfo newAdminInfo = AdminInfoDao.getAdminInfoObject(adminNo);
         if(newAdminInfo != null){
             singletonAdminInfoList.add(newAdminInfo);
-            System.out.println("CONTINOUS: "+DateTime.getSytemTimeStamp()+" ID: " + newAdminInfo.getAdminNo());
+            System.out.println("CONTINOUS: "+DateTime.getLocalTimeStamp()+" ID: " + newAdminInfo.getAdminNo());
                     
         }    
         return newAdminInfo;
@@ -66,7 +66,7 @@ public class ServiceDispatcher {
         for (StudentInfo exitingStudenInfo : singletonStudentInfoList) {
             if (exitingStudenInfo.getRegistrationNo().equals(registrationNo)) {
                 singletonStudentInfoList.remove(exitingStudenInfo);
-                System.err.println("LOGOUT-SET_NULL: "+DateTime.getSytemTimeStamp()+" ID: " + exitingStudenInfo.getRegistrationNo());
+                System.err.println("LOGOUT-SET_NULL: "+DateTime.getLocalTimeStamp()+" ID: " + exitingStudenInfo.getRegistrationNo());
                 System.out.println("STACK-SIZE: "+singletonStudentInfoList.size());
                 break;
             }
