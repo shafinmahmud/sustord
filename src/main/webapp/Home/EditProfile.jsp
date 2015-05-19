@@ -51,15 +51,14 @@
                     <div class="margin5">
 
                         <legend>Personal Information</legend>
-                        <%                            String regNo = (String) request.getSession().getAttribute("regNo");
+                        <%                            
+                            String regNo = (String) request.getSession().getAttribute("regNo");
 
                             EditProfileController controller = new EditProfileController(regNo);
                             String name = controller.getStudentName();
 
                             String fatherName = controller.getFatherName();
                             String motherName = controller.getMotherName();
-                            String presentAddress = controller.getPresentAddress();
-                            String permanentAddress = controller.getPermanentAddress();
                             String phone = controller.getPhone();
                             String email = controller.getEmail();
                             String sex = controller.getSex();
@@ -69,31 +68,18 @@
                             String blood = controller.getBloodGroup();
 
                             String photoUrl = controller.getStudentPhotoUrl();
+                            
+                            String presentStreet = controller.getPresentStreet();
+                            String presentArea = controller.getPresentArea();
+                            String presentThana = controller.getPresentThana();
+                            String presentDistrict = controller.getPresentDistrict();
+                            String presentCountry = controller.getPresentCountry();
 
-                            if (presentAddress == null) {
-                                presentAddress = "null,null,null,null,null";
-                            }
-
-                            if (permanentAddress == null) {
-                                permanentAddress = "null,null,null,null,null";
-                            }
-
-                            String[] parts1 = {};
-                            String[] parts2 = {};
-
-                            parts1 = presentAddress.split(",");
-                            String presentStreet = parts1[0];
-                            String presentArea = parts1[1];
-                            String presentThana = parts1[2];
-                            String presentDistrict = parts1[3];
-                            String presentCountry = parts1[4];
-
-                            parts2 = permanentAddress.split(",");
-                            String permanentStreet = parts2[0];
-                            String permanentArea = parts2[1];
-                            String permanentThana = parts2[2];
-                            String permanentDistrict = parts2[3];
-                            String permanentCountry = parts2[4];
+                            String permanentStreet = controller.getPermanentStreet();
+                            String permanentArea = controller.getPermanentArea();
+                            String permanentThana = controller.getPermanentThana();
+                            String permanentDistrict = controller.getPermanentDistrict();
+                            String permanentCountry = controller.getPermanentCountry();
                         %>
 
 

@@ -12,7 +12,7 @@ import me.shafin.sustord.dao.PersonalInfoDao;
  */
 public class PersonalInfoService extends StudentIdentityService{
 
-    private static final String NULL_RESPONSE = " - ";
+    private static final String NULL_RESPONSE = "";
     private static final String ERROR_RESPONSE = ":/";
 
     /* Constructor thats is private and get accesses through static helper method  */
