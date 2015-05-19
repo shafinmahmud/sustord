@@ -14,7 +14,7 @@
 
         <%@include  file="../WEB-INF/jspf/BootstrapInclude.jspf"%>
         <link href="../page_files/css/style.css" rel="stylesheet">
-        
+
     </head>
     <body>
         <%@include  file="../WEB-INF/jspf/AccessValidation.jspf"%>
@@ -23,23 +23,28 @@
             <div class="row">
                 <%@include  file="../WEB-INF/jspf/SideBar.jspf"%>
                 <div id="main-content" class="col-md-10 column800" style="height: 400px">
-                    
+
                     <div class="col-md-offset-4 col-xs-offset-4">                  
-                            <img src="../page_files/icons/access-denied.png" style="height: 200px;
-                                 padding-top: 50px; padding-bottom: 30px;">              
+                        <img src="../page_files/icons/access-denied.png" style="height: 200px;
+                             padding-top: 50px; padding-bottom: 30px;">              
                     </div>
                     <div class="col-md-10 col-xs-10">
                         <p style="font-size: 28px; text-align: center">Access Denied!</p>
                     </div>
-                           <div class="col-md-10 col-xs-10">
+                    <div class="col-md-10 col-xs-10">
                         <p style="font-size: 16px; text-align: center">This page is currently 
-                        revoked from user for data stability. If you feel any change or update please 
-                        contact you Admin!</p>
+                            unavailable from user to ensure data stability. If you feel there needs some
+                            changes in your data please feel free to 
+                            contact you Admin!</p>
+                        <br>
+                        <p style="font-size: 16px; text-align: center">
+                            **Hey, meanwhile why don't you edit your personal staff <a href="../Home/EditProfile.jsp">here</a> ?<br>
+                            ***And obviously you are advised to <b>change your password ASAP</b>. :)</p>
                     </div> 
 
                 </div>
             </div>
         </div>
-                <%@include  file="../WEB-INF/jspf/Footer.jspf"%>
+        <%@include  file="../WEB-INF/jspf/Footer.jspf"%>
     </body>
 </html>
