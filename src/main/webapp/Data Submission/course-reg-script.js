@@ -1,5 +1,6 @@
 var allCoursesJson;
 var regularCoursesJson;
+var optionalCoursesJson;
 var pendingCoursesJson;
 var droppedCoursesJson;
 var registeredCoursesJson;
@@ -111,12 +112,14 @@ function ajaxCallForDropDown() {
 
             allCoursesJson = [];
             regularCoursesJson = [];
+            optionalCoursesJson = [];
             pendingCoursesJson = [];
             droppedCoursesJson = [];
             registeredCoursesJson = [];
             choosedCoursesJson = [];
 
             var arr = semesterCourseNtakenCourses.split('#');
+            //alert(arr);
 
             if (arr[0] !== 'EMPTY') {
                 regularCoursesJson = $.parseJSON(arr[0]);
@@ -130,7 +133,12 @@ function ajaxCallForDropDown() {
             if (arr[3] !== 'EMPTY') {
                 registeredCoursesJson = $.parseJSON(arr[3]);
             }
-
+           // alert(arr[4]);
+            if (arr[4] !== 'EMPTY') {
+                optionalCoursesJson = $.parseJSON(arr[4]);
+            }
+          //  alert(regularCoursesJson);
+           // alert(optionalCoursesJson);
 
             $('#course-table-main tr').not(function () {
                 if ($(this).has('th').length) {
@@ -154,6 +162,23 @@ function ajaxCallForDropDown() {
             } else {
                 //if there is no regularCourse what to do ? do it here
             }
+
+            if (optionalCoursesJson.length != 0) {
+                $('#course-table-main').append('<tr >'
+                        + '<td colspan="5" style="font-size: 13px; padding-top: 10px; text-align: center">'
+                        + '<i>Optional Courses</i>'
+                        + '</td>'
+                        + '</tr>');
+               
+                populateRows(optionalCoursesJson);//poulating main table with regular courses
+                //pushing all regularCourses to allCourses
+                for (var i = 0; i < optionalCoursesJson.length; i++) {
+                    allCoursesJson.push(optionalCoursesJson[i]);
+                }
+            } else {
+                //if there is no optionalCourse what to do ? do it here
+            }
+
 
             if (pendingCoursesJson.length != 0) {
 

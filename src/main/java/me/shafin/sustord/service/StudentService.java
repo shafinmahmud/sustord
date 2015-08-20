@@ -92,7 +92,7 @@ public class StudentService {
      * @return
      */
     public List<SyllabusPOJO> getStudentSyllabusAsEntity(String regNo, int semester) {
-        List<SyllabusPOJO> courseList = new ArrayList<SyllabusPOJO>();
+        List<SyllabusPOJO> courseList = new ArrayList<>();
         StudentInfo std = getStudentInfoObjectFromRegNo(regNo);
 
         Session session = sessionFactory.openSession();
@@ -113,6 +113,7 @@ public class StudentService {
             List<SyllabusPOJO> allCourseRegistrations = getStudentRegisteredCoursesAll(regNo, getStudentTotalSemester(regNo));
 
             for (Syllabus s : syllabusList) {
+              
                 SyllabusPOJO syllabusPojo = new SyllabusPOJO();
 
                 //getting the prerequsite courses

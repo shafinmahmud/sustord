@@ -7,6 +7,7 @@ package me.shafin.sustord.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -39,24 +40,47 @@ public class SyllabusServlet extends HttpServlet {
         String regNo = (String) request.getSession().getAttribute("regNo");
         int sem = Integer.parseInt(request.getParameter("semester"));
 
-        List<SyllabusPOJO> syllabus = service.getStudentSyllabusAsEntity(regNo,sem);
-        String syllabusCoursesJson = JsonConvertion.objectListToJsonString(syllabus);
-        //System.out.println("syllabus: " + syllabusCoursesJson);
+        List<SyllabusPOJO> syllabus = service.getStudentSyllabusAsEntity(regNo, sem);
+        List<SyllabusPOJO> optionalFiltered = new ArrayList<>();
+        boolean optionalFoundFlag = false;
+        for (SyllabusPOJO spojo : syllabus) {
+            if (spojo.getCourseCode().endsWith("*")) {
+                optionalFoundFlag = true;
+            } else {
+                optionalFiltered.add(spojo);
+            }
+        }
 
-        List<SyllabusPOJO> pending = service.getStudentPendingCoursesAsEntity(regNo,sem);
+        List<SyllabusPOJO> optionalCourses = new ArrayList<>();
+
+        if (optionalFoundFlag) {
+            optionalCourses = service.getStudentSyllabusAsEntity(regNo, 0);
+        }
+
+        String syllabusCoursesJson = JsonConvertion.objectListToJsonString(optionalFiltered);
+       // System.out.println("syllabus: " + syllabusCoursesJson);
+
+        String optionalCoursesJson = JsonConvertion.objectListToJsonString(optionalCourses);
+        //System.out.println("optional: " + optionalCoursesJson);
+
+        List<SyllabusPOJO> pending = service.getStudentPendingCoursesAsEntity(regNo, sem);
         String pendingCoursesJson = JsonConvertion.objectListToJsonString(pending);
-        //System.out.println("pending: "+pendingCoursesJson);
+       // System.out.println("pending: " + pendingCoursesJson);
 
-        List<SyllabusPOJO> dropped = service.getStudentDroppedCoursesAsEntity(regNo,sem);
+        List<SyllabusPOJO> dropped = service.getStudentDroppedCoursesAsEntity(regNo, sem);
         String droppedCoursesJson = JsonConvertion.objectListToJsonString(dropped);
-       // System.out.println("dropped: "+droppedCoursesJson);
+        //System.out.println("dropped: " + droppedCoursesJson);
 
-        List<SyllabusPOJO> taken = service.getStudentRegisteredCoursesAsEntity(regNo,sem);
+        List<SyllabusPOJO> taken = service.getStudentRegisteredCoursesAsEntity(regNo, sem);
         String takenCoursesJson = JsonConvertion.objectListToJsonString(taken);
-        //System.out.println("taken: "+takenCoursesJson);
+        //System.out.println("taken: " + takenCoursesJson);
 
         if (syllabusCoursesJson.equals("[]")) {
             syllabusCoursesJson = "EMPTY";
+        }
+
+        if (optionalCoursesJson.equals("[]")) {
+            optionalCoursesJson = "EMPTY";
         }
 
         if (pendingCoursesJson.equals("[]")) {
@@ -73,7 +97,7 @@ public class SyllabusServlet extends HttpServlet {
 
         PrintWriter out = response.getWriter();
         //out.print(syllabusCoursesJson + "#" + droppedCoursesJson + "#" + takenCoursesJson);
-        out.print(syllabusCoursesJson + "#" + pendingCoursesJson+ "#" + droppedCoursesJson + "#" + takenCoursesJson);
+        out.print(syllabusCoursesJson + "#" + pendingCoursesJson + "#" + droppedCoursesJson + "#" + takenCoursesJson + "#" + optionalCoursesJson);
         out.flush();
     }
 
