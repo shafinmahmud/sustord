@@ -37,14 +37,13 @@
 
                     <div class="margin5">
                         <fieldset>
-                            <%                                
-                                StudentService studentService;
+                            <%                                StudentService studentService;
                                 studentService = (StudentService) session.getAttribute("studentService");
                                 String regNo = (String) request.getSession().getAttribute("regNo");
-                                
+
                                 GradeByCurriculumController controller = new GradeByCurriculumController(regNo);
-                                
-                                String name = controller.getStudentName();                            
+
+                                String name = controller.getStudentName();
                                 String sessionName = controller.getStudentAcademicSession();
                                 String dept = controller.getStudentDepartmentName();
                                 String program = controller.getStudentProgramName();
@@ -139,7 +138,7 @@
                                                 List<SyllabusPOJO> courses = studentService.getStudentSyllabusAsEntity(regNo, i + 1);
                                                 double totalCredit = 0;
                                                 double completedCredit = 0;
-
+                                                
                                                 for (SyllabusPOJO s : courses) {
                                                     String courseCode = s.getCourseCode();
                                                     String title = s.getTitle();
