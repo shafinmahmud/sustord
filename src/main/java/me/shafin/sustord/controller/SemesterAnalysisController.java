@@ -16,7 +16,9 @@ import me.shafin.sustord.service.GradeService;
  */
 public class SemesterAnalysisController extends HttpServlet{
 
-    private AcademicInfoService academicService;
+	private static final long serialVersionUID = 1L;
+	
+	private AcademicInfoService academicService;
     private GradeService gradeService;
 
     public SemesterAnalysisController(String registrationNo) {

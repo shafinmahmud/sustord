@@ -16,7 +16,8 @@ import org.hibernate.Session;
  */
 public class PrerequisiteDao {
     
-     public static List<Prerequisite> getPrerequisiteObjectsList(int syllabusIdFk) throws Exception {
+     @SuppressWarnings("unchecked")
+	public static List<Prerequisite> getPrerequisiteObjectsList(int syllabusIdFk) throws Exception {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();

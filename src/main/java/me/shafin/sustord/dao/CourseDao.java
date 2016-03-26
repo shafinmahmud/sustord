@@ -15,7 +15,8 @@ import org.hibernate.Session;
  */
 public class CourseDao {
 
-    public static Course getCourseObject(int courseId) throws Exception {
+    @SuppressWarnings("unchecked")
+	public static Course getCourseObject(int courseId) throws Exception {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();

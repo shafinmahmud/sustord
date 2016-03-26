@@ -15,7 +15,8 @@ import org.hibernate.Session;
  */
 public class DepartmentDao {
     
-    public static Department getDepartmentObject(int departmentId) throws Exception {
+    @SuppressWarnings("unchecked")
+	public static Department getDepartmentObject(int departmentId) throws Exception {
         Department department;
         
         Session session = HibernateUtil.getSessionFactory().openSession();

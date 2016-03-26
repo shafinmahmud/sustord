@@ -16,7 +16,8 @@ import org.hibernate.Session;
  */
 public class StudentInfoDao {
 
-    public static StudentInfo getStudentInfoObject(String registrationNo) throws HibernateException, SQLException {
+    @SuppressWarnings("unchecked")
+	public static StudentInfo getStudentInfoObject(String registrationNo) throws HibernateException, SQLException {
         StudentInfo studentInfo = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
@@ -42,7 +43,8 @@ public class StudentInfoDao {
         return studentInfo;
     }
 
-    public static List<StudentInfo> getStudentInfoObjects(Integer studentBatch) throws HibernateException, SQLException {
+    @SuppressWarnings("unchecked")
+	public static List<StudentInfo> getStudentInfoObjects(Integer studentBatch) throws HibernateException, SQLException {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {

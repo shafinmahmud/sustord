@@ -15,7 +15,8 @@ import org.hibernate.Session;
  */
 public class SyllabusDao {
 
-    public static List<Syllabus> getSyllabusObjectsOfSemester(int studentBatchIdFk, int semester) throws Exception {
+    @SuppressWarnings("unchecked")
+	public static List<Syllabus> getSyllabusObjectsOfSemester(int studentBatchIdFk, int semester) throws Exception {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();

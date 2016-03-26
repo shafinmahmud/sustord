@@ -32,7 +32,7 @@ public class SyllabusPOJO {
     private boolean theoryOrLab;
 
     //for statistics
-    private Map courseGradeDistributionMap;
+    private Map<String, Integer> courseGradeDistributionMap;
     private int noOfAttendedStudent;
 
     /**
@@ -291,7 +291,7 @@ public class SyllabusPOJO {
     /**
      * @return the gradeDistributionMap
      */
-    public Map getCourseGradeDistributionMap() {
+    public Map<String, Integer> getCourseGradeDistributionMap() {
         return courseGradeDistributionMap;
     }
 
@@ -311,7 +311,7 @@ public class SyllabusPOJO {
             int Bp, int B, int Bm,
             int Cp, int C, int Cm, int F) {
         
-        Map map = new HashMap();
+        Map<String, Integer> map = new HashMap<String, Integer>();
         
         map.put("Ap", Ap);
         map.put("A", A);

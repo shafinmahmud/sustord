@@ -14,7 +14,8 @@ import org.hibernate.Session;
  */
 public class PersonalInfoDao {
     
-    public static PersonalInfo getPersonalInfoObject(int personalInfoId) throws Exception {
+    @SuppressWarnings("unchecked")
+	public static PersonalInfo getPersonalInfoObject(int personalInfoId) throws Exception {
         PersonalInfo personalInfo;
         
         Session session = HibernateUtil.getSessionFactory().openSession();

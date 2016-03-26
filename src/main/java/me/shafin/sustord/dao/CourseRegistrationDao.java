@@ -16,7 +16,8 @@ import org.hibernate.Session;
  */
 public class CourseRegistrationDao {
 
-    public static CourseRegistration getCourseRegistrationObject(int courseRegistrationId) throws HibernateException, SQLException {
+    @SuppressWarnings("unchecked")
+	public static CourseRegistration getCourseRegistrationObject(int courseRegistrationId) throws HibernateException, SQLException {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
 
@@ -42,7 +43,8 @@ public class CourseRegistrationDao {
         }
     }
     
-    public static List<CourseRegistration> getRegisteredCourseListOfSemester(Integer studentInfoId, int semester) throws HibernateException, SQLException {
+    @SuppressWarnings("unchecked")
+	public static List<CourseRegistration> getRegisteredCourseListOfSemester(Integer studentInfoId, int semester) throws HibernateException, SQLException {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
 

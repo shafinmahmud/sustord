@@ -16,7 +16,8 @@ import org.hibernate.Session;
  */
 public class AdminInfoDao {
     
-    public static AdminInfo getAdminInfoObject(String adminNo) throws HibernateException, SQLException{
+    @SuppressWarnings("unchecked")
+	public static AdminInfo getAdminInfoObject(String adminNo) throws HibernateException, SQLException{
         AdminInfo adminInfo = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {

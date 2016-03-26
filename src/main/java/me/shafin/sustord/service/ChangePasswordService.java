@@ -10,8 +10,6 @@ import me.shafin.sustord.dao.StudentInfoDao;
  */
 public class ChangePasswordService extends StudentIdentityService {
 
-    private static final String NULL_RESPONSE = " - ";
-    private static final String ERROR_RESPONSE = ":/";
 
     public ChangePasswordService(String registrationNo) throws Exception {
         super(StudentIdentityService.forSingletonIdentityService(registrationNo));

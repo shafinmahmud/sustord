@@ -45,24 +45,35 @@ public class StudentInfo implements Serializable {
     @Basic(optional = false)
     @Column(name = "student_info_id")
     private Integer studentInfoId;
+    
     @Size(max = 20)
     @Column(name = "registration_no")
     private String registrationNo;
+    
     @Size(max = 30)
     @Column(name = "password")
     private String password;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "studentInfoIdFk")
     private Collection<AdminDashboardCourseRegistration> adminDashboardCourseRegistrationCollection;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "studentInfoIdFk")
     private Collection<CourseRegistration> courseRegistrationCollection;
+    
     @JoinColumn(name = "student_batch_id_fk", referencedColumnName = "student_batch_id")
     @ManyToOne
     private StudentBatch studentBatchIdFk;
+    
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "studentInfoIdFk")
     private PersonalInfo personalInfo;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "studentInfoIdFk")
     private Collection<AdminDashboardProfile> adminDashboardProfileCollection;
 
+    @Size(max = 45)
+    @Column(name = "role")
+    private String role;
+    
     public StudentInfo() {
     }
 
@@ -160,7 +171,16 @@ public class StudentInfo implements Serializable {
         return true;
     }
 
-    @Override
+    
+    public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	@Override
     public String toString() {
         return "me.shafin.sustord.entity.StudentInfo[ studentInfoId=" + studentInfoId + " ]";
     }
