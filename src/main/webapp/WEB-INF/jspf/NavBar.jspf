@@ -25,14 +25,14 @@
 
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="../Home/HomeUser.jsp"><span
-						class="glyphicon glyphicon-home" style="font-size: 18px"></span>&nbsp;&nbsp;Home</a>
+						class="glyphicon glyphicon-home" style="font-size: 18px; font-weight: 580;"></span>&nbsp;&nbsp;Home</a>
 				</li>
 				<li><a href="../Home/ProfileUser.jsp"><span
-						class="glyphicon glyphicon-user" style="font-size: 18px"></span>&nbsp;&nbsp;Profile</a>
+						class="glyphicon glyphicon-user" style="font-size: 18px; font-weight: bold;"></span>&nbsp;&nbsp;Profile</a>
 				</li>
 
 				<li><a href="../LogOutServlet"><span
-						class="glyphicon glyphicon-off" style="font-size: 18px"></span>&nbsp;&nbsp;Logout</a>
+						class="glyphicon glyphicon-off" style="font-size: 18px; font-weight: bold;"></span>&nbsp;&nbsp;Logout</a>
 				</li>
 			</ul>
 		</div>
