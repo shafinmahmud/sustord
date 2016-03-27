@@ -1,5 +1,13 @@
 <%-- any content can be specified here e.g.: --%>
 <%@ page pageEncoding="UTF-8"%>
+
+<style>
+ .navbar-default {
+    background-color: #0f006f;
+    border-color: #030033;
+}
+</style>
+
 <div id="dvLoading"></div>
 <div id="backOpacity"></div>
 <nav class="navbar navbar-default navbar-fixed-top topbar"

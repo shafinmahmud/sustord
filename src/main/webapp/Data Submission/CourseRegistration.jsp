@@ -1,9 +1,3 @@
-<%-- 
-    Document   : coursereg
-    Created on : Jan 15, 2015, 3:00:46 PM
-    Author     : SHAFIN
---%>
-
 <%@page import="java.util.List"%>
 <%@page import="sm.sustord.model.Syllabus"%>
 <%@page import="sm.sustord.model.StudentInfo"%>
