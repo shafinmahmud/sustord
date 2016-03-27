@@ -56,22 +56,22 @@
         <property name="hbm2ddl.auto">update</property>
         
         <!-- Names the annotated entity class -->
-        <mapping class="me.shafin.sustord.model.StudentBatch"/>
-        <mapping class="me.shafin.sustord.model.PersonalInfo"/>
-        <mapping class="me.shafin.sustord.model.AdminDashboardCourseRegistration"/>
-        <mapping class="me.shafin.sustord.model.Department"/>
-        <mapping class="me.shafin.sustord.model.ClassRoutine"/>
-        <mapping class="me.shafin.sustord.model.Syllabus"/>
-        <mapping class="me.shafin.sustord.model.Course"/>
-        <mapping class="me.shafin.sustord.model.AdminDashboardProfile"/>
-        <mapping class="me.shafin.sustord.model.TimeSlot"/>
-        <mapping class="me.shafin.sustord.model.Degree"/>
-        <mapping class="me.shafin.sustord.model.CourseRegistration"/>
-        <mapping class="me.shafin.sustord.model.Prerequisite"/>
-        <mapping class="me.shafin.sustord.model.School"/>
-        <mapping class="me.shafin.sustord.model.DegreeOffered"/>
-        <mapping class="me.shafin.sustord.model.AdminInfo"/>
-        <mapping class="me.shafin.sustord.model.StudentInfo"/>
+        <mapping class="sm.sustord.model.StudentBatch"/>
+        <mapping class="sm.sustord.model.PersonalInfo"/>
+        <mapping class="sm.sustord.model.AdminDashboardCourseRegistration"/>
+        <mapping class="sm.sustord.model.Department"/>
+        <mapping class="sm.sustord.model.ClassRoutine"/>
+        <mapping class="sm.sustord.model.Syllabus"/>
+        <mapping class="sm.sustord.model.Course"/>
+        <mapping class="sm.sustord.model.AdminDashboardProfile"/>
+        <mapping class="sm.sustord.model.TimeSlot"/>
+        <mapping class="sm.sustord.model.Degree"/>
+        <mapping class="sm.sustord.model.CourseRegistration"/>
+        <mapping class="sm.sustord.model.Prerequisite"/>
+        <mapping class="sm.sustord.model.School"/>
+        <mapping class="sm.sustord.model.DegreeOffered"/>
+        <mapping class="sm.sustord.model.AdminInfo"/>
+        <mapping class="sm.sustord.model.StudentInfo"/>
 
     </session-factory>
 

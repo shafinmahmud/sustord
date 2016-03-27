@@ -32,17 +32,17 @@
 
         <li>
             <!-- <a href="../Data Submission/CourseRegistration.jsp"><span class="glyphicon glyphicon-sort-by-attributes-alt"></span>&nbsp;Course Registration</a> -->
-            <a href="../Data Submission/AccessDenied.jsp"><span class="glyphicon glyphicon-sort-by-attributes-alt"></span>&nbsp;Course Registration</a>
+            <a href="../Data Submission/CourseRegistration.jsp"><span class="glyphicon glyphicon-sort-by-attributes-alt"></span>&nbsp;Course Registration</a>
         </li>
         <li>
             <!--  <a href="../Data Submission/ResultUpdate.jsp"><span class="glyphicon glyphicon-flash"></span>&nbsp;Result Update</a>-->
-            <a href="../Data Submission/AccessDenied.jsp"><span class="glyphicon glyphicon-flash"></span>&nbsp;Result Update</a>
+            <a href="../Data Submission/ResultUpdate.jsp"><span class="glyphicon glyphicon-flash"></span>&nbsp;Result Update</a>
         </li>
 
 
         <li class="nav-header">Options
         </li>
-        <li><a href="../Notifications/RequestStatus.jsp"><span class="glyphicon glyphicon-envelope"></span>&nbsp;Request Status</a></li>
+       <!--  <li><a href="../Notifications/RequestStatus.jsp"><span class="glyphicon glyphicon-envelope"></span>&nbsp;Request Status</a></li> -->
         <li><a href="../Home/ChangePassword.jsp"><span class="glyphicon glyphicon-asterisk"></span>&nbsp;Change Password</a></li>
     </ul>
 

@@ -1,11 +1,6 @@
-<%-- 
-    Document   : resultedit
-    Created on : Jan 15, 2015, 3:11:10 PM
-    Author     : SHAFIN
---%>
 
-<%@page import="me.shafin.sustord.utility.FormatService"%>
-<%@page import="me.shafin.sustord.service.StudentService"%>
+<%@page import="sm.sustord.utility.FormatService"%>
+<%@page import="sm.sustord.service.StudentService"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

@@ -4,13 +4,13 @@
     Author     : SHAFIN
 --%>
 
-<%@page import="me.shafin.sustord.utility.StatisticsHelper"%>
+<%@page import="sm.sustord.utility.StatisticsHelper"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.HashMap"%>
-<%@page import="me.shafin.sustord.bean.StudentPOJO"%>
+<%@page import="sm.sustord.bean.StudentPOJO"%>
 <%@page import="java.util.List"%>
-<%@page import="me.shafin.sustord.model.StudentInfo"%>
-<%@page import="me.shafin.sustord.service.StudentService"%>
+<%@page import="sm.sustord.model.StudentInfo"%>
+<%@page import="sm.sustord.service.StudentService"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

@@ -1,16 +1,10 @@
-<%-- 
-    Document   : dataform
-    Created on : Jan 9, 2015, 11:51:49 PM
-    Author     : SHAFIN
---%>
-
-<%@page import="me.shafin.sustord.controller.EditProfileController"%>
-<%@page import="me.shafin.sustord.utility.FormatService"%>
+<%@page import="sm.sustord.controller.EditProfileController"%>
+<%@page import="sm.sustord.utility.FormatService"%>
 <%@page import="java.util.Comparator"%>
 <%@page import="java.util.Collections"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
-<%@page import="me.shafin.sustord.service.StudentService"%>
+<%@page import="sm.sustord.service.StudentService"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>

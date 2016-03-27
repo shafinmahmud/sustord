@@ -5,7 +5,7 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
     <filter>
         <filter-name>AccessFilter</filter-name>
-        <filter-class>me.shafin.sustord.filter.AccessFilter</filter-class>
+        <filter-class>sm.sustord.filter.AccessFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>AccessFilter</filter-name>
@@ -13,51 +13,51 @@
     </filter-mapping>
     <servlet>
         <servlet-name>LogOutServlet</servlet-name>
-        <servlet-class>me.shafin.sustord.servlet.LogOutServlet</servlet-class>
+        <servlet-class>sm.sustord.servlet.LogOutServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>me.shafin.sustord.servlet.LoginServlet</servlet-class>
+        <servlet-class>sm.sustord.servlet.LoginServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SavePersonalInfoServlet</servlet-name>
-        <servlet-class>me.shafin.sustord.servlet.SavePersonalInfoServlet</servlet-class>
+        <servlet-class>sm.sustord.servlet.SavePersonalInfoServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SyllabusServlet</servlet-name>
-        <servlet-class>me.shafin.sustord.servlet.SyllabusServlet</servlet-class>
+        <servlet-class>sm.sustord.servlet.SyllabusServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CourseRegServlet</servlet-name>
-        <servlet-class>me.shafin.sustord.servlet.CourseRegServlet</servlet-class>
+        <servlet-class>sm.sustord.servlet.CourseRegServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ResultUpdateServlet</servlet-name>
-        <servlet-class>me.shafin.sustord.servlet.ResultUpdateServlet</servlet-class>
+        <servlet-class>sm.sustord.servlet.ResultUpdateServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SaveResultUpdateServlet</servlet-name>
-        <servlet-class>me.shafin.sustord.servlet.SaveResultUpdateServlet</servlet-class>
+        <servlet-class>sm.sustord.servlet.SaveResultUpdateServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>FileUploadHandler</servlet-name>
-        <servlet-class>me.shafin.sustord.servlet.FileUploadHandler</servlet-class>
+        <servlet-class>sm.sustord.servlet.FileUploadHandler</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CourseDetailsServlet</servlet-name>
-        <servlet-class>me.shafin.sustord.servlet.CourseDetailsServlet</servlet-class>
+        <servlet-class>sm.sustord.servlet.CourseDetailsServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>GetCurrentSemester</servlet-name>
-        <servlet-class>me.shafin.sustord.servlet.GetCurrentSemester</servlet-class>
+        <servlet-class>sm.sustord.servlet.GetCurrentSemester</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SemesterStatServlet</servlet-name>
-        <servlet-class>me.shafin.sustord.servlet.SemesterStatServlet</servlet-class>
+        <servlet-class>sm.sustord.servlet.SemesterStatServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ChangePasswordServlet</servlet-name>
-        <servlet-class>me.shafin.sustord.servlet.ChangePasswordServlet</servlet-class>
+        <servlet-class>sm.sustord.servlet.ChangePasswordServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LogOutServlet</servlet-name>

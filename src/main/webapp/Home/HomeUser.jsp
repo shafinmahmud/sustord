@@ -1,13 +1,13 @@
-<%@page import="me.shafin.sustord.controller.UserHomeController"%>
+<%@page import="sm.sustord.controller.UserHomeController"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="me.shafin.sustord.bean.ClassRoutinePOJO"%>
-<%@page import="me.shafin.sustord.bean.SyllabusPOJO"%>
+<%@page import="sm.sustord.bean.ClassRoutinePOJO"%>
+<%@page import="sm.sustord.bean.SyllabusPOJO"%>
 <%@page import="java.util.List"%>
-<%@page import="me.shafin.sustord.model.CourseRegistration"%>
-<%@page import="me.shafin.sustord.utility.FormatService"%>
-<%@page import="me.shafin.sustord.utility.CalenderService"%>
-<%@page import="me.shafin.sustord.model.StudentInfo"%>
-<%@page import="me.shafin.sustord.service.StudentService"%>
+<%@page import="sm.sustord.model.CourseRegistration"%>
+<%@page import="sm.sustord.utility.FormatService"%>
+<%@page import="sm.sustord.utility.CalenderService"%>
+<%@page import="sm.sustord.model.StudentInfo"%>
+<%@page import="sm.sustord.service.StudentService"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
@@ -204,7 +204,7 @@
 										%>
 										<tr class="danger">
 											<td colspan="4"
-												style="font-size: 13px; padding-top: 10px; text-align: center"><i>Dropped
+												style="font-size: 13px; padding-top: 10px; text-align: center"><i>Drop/ Optional
 													courses</i></td>
 										</tr>
 

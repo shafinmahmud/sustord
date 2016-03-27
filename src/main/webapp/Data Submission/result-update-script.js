@@ -67,7 +67,7 @@ $(document).ready(function () {
                 if (status == 'OK') {
                     ajaxCallForDropDown();
                     $("#saving-anim").attr("src", "../page_files/icons/success-icon.png");
-                    $("#status-message").html("Congrats! Grades Updated!");
+                    $("#status-message").html("Grades have been changed as you submitted.");
                 } else {
                     $("#saving-anim").attr("src", "../page_files/icons/failure-icon.png");
                     $("#status-message").html("OOPS! You tried something BAD!");

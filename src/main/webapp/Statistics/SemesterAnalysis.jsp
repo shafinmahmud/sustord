@@ -5,10 +5,10 @@
 --%>
 
 <%@page import="java.util.List"%>
-<%@page import="me.shafin.sustord.pojo.StudentGradeRankedPojo"%>
-<%@page import="me.shafin.sustord.controller.SemesterAnalysisController"%>
-<%@page import="me.shafin.sustord.utility.FormatService"%>
-<%@page import="me.shafin.sustord.service.StudentService"%>
+<%@page import="sm.sustord.pojo.StudentGradeRankedPojo"%>
+<%@page import="sm.sustord.controller.SemesterAnalysisController"%>
+<%@page import="sm.sustord.utility.FormatService"%>
+<%@page import="sm.sustord.service.StudentService"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

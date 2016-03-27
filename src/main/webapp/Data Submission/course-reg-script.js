@@ -69,7 +69,7 @@ $(document).ready(function () {
 
                 if (status === 'OK') {
                     $("#saving-anim").attr("src", "../page_files/icons/success-icon.png");
-                    $("#status-message").html("Done!!");
+                    $("#status-message").html("Your registration for the submitted courses have been performed.");
                 } else {
                     $("#saving-anim").attr("src", "../page_files/icons/failure-icon.png");
                     $("#status-message").html("OOPS! Duplicate Entry!");

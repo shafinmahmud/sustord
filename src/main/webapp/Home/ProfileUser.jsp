@@ -1,12 +1,6 @@
-<%-- 
-    Document   : userprofile
-    Created on : Jan 7, 2015, 4:33:43 AM
-    Author     : SHAFIN
---%>
-
-<%@page import="me.shafin.sustord.controller.UserProfileController"%>
-<%@page import="me.shafin.sustord.model.StudentInfo"%>
-<%@page import="me.shafin.sustord.service.StudentService"%>
+<%@page import="sm.sustord.controller.UserProfileController"%>
+<%@page import="sm.sustord.model.StudentInfo"%>
+<%@page import="sm.sustord.service.StudentService"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
