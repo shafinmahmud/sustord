@@ -1,12 +1,12 @@
 <%-- any content can be specified here e.g.: --%>
 <%@ page pageEncoding="UTF-8"%>
 
-<style>
+<!--  <style>
  .navbar-default {
     background-color: #0f006f;
     border-color: #030033;
 }
-</style>
+</style>-->
 
 <div id="dvLoading"></div>
 <div id="backOpacity"></div>
@@ -33,14 +33,14 @@
 
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="../Home/HomeUser.jsp"><span
-						class="glyphicon glyphicon-home" style="font-size: 18px; font-weight: 580;"></span>&nbsp;&nbsp;Home</a>
+						style="font-size: 20px; font-weight: 580;"><i class="material-icons">home</i></span>&nbsp;&nbsp;</a>
 				</li>
 				<li><a href="../Home/ProfileUser.jsp"><span
-						class="glyphicon glyphicon-user" style="font-size: 18px; font-weight: bold;"></span>&nbsp;&nbsp;Profile</a>
+						style="font-size: 18px; font-weight: bold;"><i class="material-icons">person</i></span>&nbsp;&nbsp;</a>
 				</li>
 
 				<li><a href="../LogOutServlet"><span
-						class="glyphicon glyphicon-off" style="font-size: 18px; font-weight: bold;"></span>&nbsp;&nbsp;Logout</a>
+						style="font-size: 18px; font-weight: bold;"><i class="material-icons">power_settings_new</i></span>&nbsp;&nbsp;</a>
 				</li>
 			</ul>
 		</div>

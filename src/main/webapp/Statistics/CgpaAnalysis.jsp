@@ -95,6 +95,7 @@ ng\:form {
 															text : 'No. of students'
 														}
 													},
+													colors : ['#F44336'],
 													legend : {
 														enabled : false
 													},
@@ -131,9 +132,8 @@ ng\:form {
 																[ 'C-',
 						<%=map.get("Cm")%>
 							],
-																[ 'F',
-						<%=map.get("F")%>
-							], ],
+																[ 'F', <%=map.get("F")%>],
+															],
 														dataLabels : {
 															enabled : true,
 															rotation : -90,
@@ -188,11 +188,11 @@ ng\:form {
 								} else {
 							%>
 							<tr>
-								<td class="text-center">#<%=students.indexOf(s) + 1%></td>
+								<td class="text-center"><b>#<%=students.indexOf(s) + 1%></b></td>
 								<td><%=name%></td>
-								<td class="text-center"><%=reg%></td>
-								<td class="text-center"><%=completedCredit%></td>
-								<td class="text-center"><%=cgpa%></td>
+								<td class="text-center"><b><%=reg%></b></td>
+								<td class="text-center"><b><%=completedCredit%></b></td>
+								<td class="text-center"><b><%=cgpa%></b></td>
 							</tr>
 							<%
 								}

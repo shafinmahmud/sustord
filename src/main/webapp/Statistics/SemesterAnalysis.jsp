@@ -39,7 +39,7 @@
                         %>
                         <fieldset>
 
-                            <table class="table">
+                             <table class="table"> 
                                 <tbody>
                                     <tr style="background-color: #D8E2F3;">
                                         <td>

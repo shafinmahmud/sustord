@@ -229,7 +229,7 @@ function printPieChart(courseObject) {
         },
         title: {
             text: '',
-            style: {"color": "#333333", "fontSize": "14px"}
+            style: {"color": "red", "fontSize": "14px"}
         },
         tooltip: {
             pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
