@@ -43,7 +43,7 @@ public class StudentInfoDao implements BasicCRUD<StudentInfo> {
 		}
 	}
 
-	public StudentInfo findOneByRegistrationNo(int registrationNo) {
+	public StudentInfo findOneByRegistrationNo(String registrationNo) {
 		Session session = null;
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();

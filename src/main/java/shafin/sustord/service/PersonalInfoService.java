@@ -11,14 +11,14 @@ import shafin.sustord.dao.PersonalInfoDao;
  *
  * @author SHAFIN
  */
-public class PersonalInfoService extends StudentIdentityService{
+public class PersonalInfoService extends StudentServicea{
 
     private static final String NULL_RESPONSE = "";
     private static final String ERROR_RESPONSE = ":/";
 
     /* Constructor thats is private and get accesses through static helper method  */
     public PersonalInfoService(String registrationNo) throws Exception {
-        super(StudentIdentityService.forSingletonIdentityService(registrationNo));
+        super(StudentServicea.forSingletonIdentityService(registrationNo));
     }
 
     

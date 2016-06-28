@@ -6,10 +6,10 @@ package shafin.sustord.service;
  *
  * @author SHAFIN
  */
-public class AcademicInfoService extends StudentIdentityService{
+public class AcademicInfoService extends StudentServicea{
 
     public AcademicInfoService(String registrationNo) throws Exception{
-         super(StudentIdentityService.forSingletonIdentityService(registrationNo));
+         super(registrationNo);
     }
 
     /* Academic Information  */

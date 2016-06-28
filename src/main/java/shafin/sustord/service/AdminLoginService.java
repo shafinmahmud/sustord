@@ -2,24 +2,34 @@
  */
 package shafin.sustord.service;
 
+import shafin.sustord.exeptions.InvalidRegistrationException;
+
 /**
  *
  * @author SHAFIN
  */
-public class AdminLoginService extends AdminIdentityService{
+public class AdminLoginService extends AdminService{
     
     
      public AdminLoginService(String adminNo) throws Exception {
-        super(AdminIdentityService.forSingletonIdentityService(adminNo));
+        super(adminNo);
     }
 
-    public boolean verifyRegistrationNo() throws Exception {
-        return adminInfo != null;
-    }
+     private boolean isExistsRegistrationNo(){
+ 		return adminInfo != null;
+ 	}
 
-    public boolean verifyPassword(String password) throws Exception {
-        String existingPassword = adminInfo.getPassword();
-        return password.equals(existingPassword);
-    }
+ 	private boolean isMatchPassword(String password){
+ 		String existingPassword = adminInfo.getPassword();
+ 		return password.equals(existingPassword);
+ 	}
+ 	
+ 	public boolean authenticateLogin(String password){
+ 		if(isExistsRegistrationNo()){
+ 			return isMatchPassword(password);
+ 		}else{
+ 			throw new InvalidRegistrationException(this.adminNo+" is an Invalid Admin ID.");
+ 		}
+ 	}
     
 }

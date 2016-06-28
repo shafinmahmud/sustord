@@ -25,10 +25,10 @@ import shafin.sustord.util.GradeConvertion;
  *
  * @author SHAFIN
  */
-public class GradeService extends StudentIdentityService {
+public class GradeService extends StudentServicea {
 
     public GradeService(String registrationNo) throws Exception {
-        super(StudentIdentityService.forSingletonIdentityService(registrationNo));
+        super(StudentServicea.forSingletonIdentityService(registrationNo));
         //super(StudentIdentityService.forProtypeIdentityService(registrationNo));
     }
 
