@@ -1,6 +1,6 @@
 /*
  */
-package shafin.sustord.bean;
+package shafin.sustord.dto;
 
 /**
  *

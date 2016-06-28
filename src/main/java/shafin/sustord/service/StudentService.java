@@ -6,9 +6,9 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
-import shafin.sustord.bean.ClassRoutinePOJO;
-import shafin.sustord.bean.StudentPOJO;
-import shafin.sustord.bean.SyllabusPOJO;
+import shafin.sustord.dto.ClassRoutinePOJO;
+import shafin.sustord.dto.StudentPOJO;
+import shafin.sustord.dto.SyllabusPOJO;
 import shafin.sustord.model.ClassRoutine;
 import shafin.sustord.model.Course;
 import shafin.sustord.model.CourseRegistration;

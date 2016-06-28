@@ -7,7 +7,7 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
-import shafin.sustord.bean.SyllabusPOJO;
+import shafin.sustord.dto.SyllabusPOJO;
 
 /**
  *

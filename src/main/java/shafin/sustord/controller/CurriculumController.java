@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import shafin.sustord.bean.OptionalCoursePojo;
-import shafin.sustord.bean.SyllabusCoursePojo;
+import shafin.sustord.dto.OptionalCoursePojo;
+import shafin.sustord.dto.SyllabusCoursePojo;
 import shafin.sustord.service.AcademicInfoService;
 import shafin.sustord.service.CurricularInfoService;
 

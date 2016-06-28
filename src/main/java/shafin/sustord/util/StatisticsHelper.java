@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import shafin.sustord.bean.StudentPOJO;
+import shafin.sustord.dto.StudentPOJO;
 
 /**
  *
