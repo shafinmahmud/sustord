@@ -3,89 +3,125 @@
 package shafin.sustord.dao;
 
 import java.sql.SQLException;
+import java.util.Collection;
 import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import shafin.sustord.model.StudentInfo;
+import shafin.sustord.entity.StudentInfo;
 import shafin.sustord.util.HibernateUtil;
 
 /**
  *
  * @author SHAFIN
  */
-public class StudentInfoDao {
+public class StudentInfoDao implements BasicCRUD<StudentInfo> {
 
-    @SuppressWarnings("unchecked")
-	public static StudentInfo getStudentInfoObject(String registrationNo) throws HibernateException, SQLException {
-        StudentInfo studentInfo = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        try {
+	@Override
+	public StudentInfo findOne(int id) {
+		Session session = null;
+		try {
+			session = HibernateUtil.getSessionFactory().openSession();
+			session.beginTransaction();
+			String hql = "from StudentInfo where StudentInfoId = :id";
+			Query query = session.createQuery(hql);
+			query.setParameter("reg", id);
 
-            session.beginTransaction();
-            String hql = "from StudentInfo where registrationNo = :reg";
-            Query query = session.createQuery(hql);
-            query.setParameter("reg", registrationNo);
+			@SuppressWarnings("unchecked")
+			List<StudentInfo> infos = (List<StudentInfo>) query.list();
+			session.getTransaction().commit();
 
-            List<StudentInfo> infos = (List<StudentInfo>) query.list();
+			return infos.isEmpty() ? null : infos.get(0);
 
-            session.getTransaction().commit();
+		} catch (HibernateException | SQLException e) {
+			throw new ExceptionInInitializerError(e.getMessage());
+		} finally {
+			if (session != null)
+				session.close();
+		}
+	}
 
-            if (!infos.isEmpty()) {
-                studentInfo = infos.get(0);
-            }
-        } catch (Exception e) {
-            throw new ExceptionInInitializerError(e.getMessage());
-        } finally {
-            session.close();
-        }
+	public StudentInfo findOneByRegistrationNo(int registrationNo) {
+		Session session = null;
+		try {
+			session = HibernateUtil.getSessionFactory().openSession();
+			session.beginTransaction();
+			String hql = "from StudentInfo where registrationNo = :reg";
+			Query query = session.createQuery(hql);
+			query.setParameter("reg", registrationNo);
 
-        return studentInfo;
-    }
+			@SuppressWarnings("unchecked")
+			List<StudentInfo> infos = (List<StudentInfo>) query.list();
+			session.getTransaction().commit();
 
-    @SuppressWarnings("unchecked")
-	public static List<StudentInfo> getStudentInfoObjects(Integer studentBatch) throws HibernateException, SQLException {
+			return infos.isEmpty() ? null : infos.get(0);
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        try {
+		} catch (HibernateException | SQLException e) {
+			throw new ExceptionInInitializerError(e.getMessage());
+		} finally {
+			if (session != null)
+				session.close();
+		}
+	}
 
-            session.beginTransaction();
-            String hql = "from StudentInfo where studentBatchIdFk = :batchId";
-            Query query = session.createQuery(hql);
-            query.setInteger("batchId", studentBatch);
+	public List<StudentInfo> findByBatchId(int batchId) {
+		Session session = null;
+		try {
+			session = HibernateUtil.getSessionFactory().openSession();
+			session.beginTransaction();
+			String hql = "from StudentInfo where studentBatchIdFk = :batchId";
+			Query query = session.createQuery(hql);
+			query.setInteger("batchId", batchId);
 
-            List<StudentInfo> infos = (List<StudentInfo>) query.list();
+			@SuppressWarnings("unchecked")
+			List<StudentInfo> infos = (List<StudentInfo>) query.list();
+			session.getTransaction().commit();
 
-            session.getTransaction().commit();
+			return infos;
 
-            if (!infos.isEmpty()) {
-                return infos;
-            }
-        } catch (Exception e) {
-            throw new ExceptionInInitializerError(e.getMessage());
-        } finally {
-            session.close();
-        }
-        return null;
-    }
+		} catch (HibernateException | SQLException e) {
+			throw new ExceptionInInitializerError(e.getMessage());
+		} finally {
+			if (session != null)
+				session.close();
+		}
+	}
 
-    public static boolean setStudentPassword(StudentInfo studentInfo, String password)
-            throws HibernateException, SQLException {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        try {
-            session.beginTransaction();
-            studentInfo.setPassword(password);
-            session.saveOrUpdate(studentInfo);
-            session.getTransaction().commit();
-            return true;
+	@Override
+	public Collection<StudentInfo> findAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-        } catch (Exception e) {
-            throw new ExceptionInInitializerError(e.getMessage());
-        } finally {
-            session.close();
-        }
-    }
+	@Override
+	public boolean insertOne(StudentInfo object) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean updateOne(StudentInfo studentInfo) {
+		Session session = null;
+		try {
+			session = HibernateUtil.getSessionFactory().openSession();
+			session.beginTransaction();
+			session.saveOrUpdate(studentInfo);
+			session.getTransaction().commit();
+			return true;
+		} catch (Exception e) {
+			throw new ExceptionInInitializerError(e.getMessage());
+		} finally {
+			if (session != null)
+				session.close();
+		}
+	}
+
+	@Override
+	public boolean deleteOne(StudentInfo object) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }

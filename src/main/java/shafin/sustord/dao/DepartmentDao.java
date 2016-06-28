@@ -2,49 +2,70 @@
  */
 package shafin.sustord.dao;
 
+import java.sql.SQLException;
+import java.util.Collection;
 import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import shafin.sustord.model.Department;
+import shafin.sustord.entity.Department;
 import shafin.sustord.util.HibernateUtil;
 
 /**
  *
  * @author SHAFIN
  */
-public class DepartmentDao {
-    
-    @SuppressWarnings("unchecked")
-	public static Department getDepartmentObject(int departmentId) throws Exception {
-        Department department;
-        
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-        
-        try {
-            String hql = "from Department where departmentId = :id";
-            Query query = session.createQuery(hql);
-            query.setInteger("id", departmentId);
+public class DepartmentDao implements BasicCRUD<Department> {
 
-            List<Department> depts = (List<Department>) query.list();
+	@Override
+	public Department findOne(int id) {
+		Session session = null;
+		try {
+			session = HibernateUtil.getSessionFactory().openSession();
+			session.beginTransaction();
 
-            session.getTransaction().commit();
+			String hql = "from Department where departmentId = :id";
+			Query query = session.createQuery(hql);
+			query.setInteger("id", id);
 
-            if (!depts.isEmpty()) {
-                department = depts.get(0);
-            }else{
-                department = null;
-            }
-        } catch (Exception e) {
-            session.getTransaction().rollback();
-            throw new HibernateException(e.getMessage());
-        } finally{
-            session.close();
-        }
+			@SuppressWarnings("unchecked")
+			List<Department> depts = (List<Department>) query.list();
+			
+			session.getTransaction().commit();
 
-        return department;
-    }
+			return depts.isEmpty() ? null : depts.get(0);
+
+		} catch (HibernateException | SQLException e) {
+			throw new ExceptionInInitializerError(e.getMessage());
+		} finally {
+			if (session != null)
+				session.close();
+		}
+	}
+
+	@Override
+	public Collection<Department> findAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean insertOne(Department object) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean updateOne(Department object) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean deleteOne(Department object) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

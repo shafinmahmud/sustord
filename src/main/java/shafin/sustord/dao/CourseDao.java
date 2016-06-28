@@ -2,46 +2,93 @@
  */
 package shafin.sustord.dao;
 
+import java.sql.SQLException;
+import java.util.Collection;
 import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import shafin.sustord.model.Course;
+import shafin.sustord.entity.Course;
 import shafin.sustord.util.HibernateUtil;
 
 /**
  *
  * @author SHAFIN
  */
-public class CourseDao {
+public class CourseDao implements BasicCRUD<Course>{
 
-    @SuppressWarnings("unchecked")
-	public static Course getCourseObject(int courseId) throws Exception {
+	@Override
+	public Course findOne(int id) {
+		Session session = null;
+		try {
+			session = HibernateUtil.getSessionFactory().openSession();
+			session.beginTransaction();
+			 String hql = "from Course where courseId = :id";
+	            Query query = session.createQuery(hql);
+	            query.setInteger("id", id);
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
+	            @SuppressWarnings("unchecked")
+				List<Course> course = (List<Course>) query.list();
+			session.getTransaction().commit();
 
-        try {
-            String hql = "from Course where courseId = :id";
-            Query query = session.createQuery(hql);
-            query.setInteger("id", courseId);
+			return course.isEmpty() ? null : course.get(0);
+			
+		} catch (HibernateException | SQLException e) {
+				throw new ExceptionInInitializerError(e.getMessage());
+		} finally {
+			if(session != null)
+				session.close();
+		}
+	}
+	
+	public Course findOneByCourseCode(int code) {
+		Session session = null;
+		try {
+			session = HibernateUtil.getSessionFactory().openSession();
+			session.beginTransaction();
+			 String hql = "from Course where courseCode = :code";
+	            Query query = session.createQuery(hql);
+	            query.setInteger("courseCode", code);
 
-            List<Course> course = (List<Course>) query.list();
+	            @SuppressWarnings("unchecked")
+				List<Course> course = (List<Course>) query.list();
+			session.getTransaction().commit();
 
-            session.getTransaction().commit();
+			return course.isEmpty() ? null : course.get(0);
+			
+		} catch (HibernateException | SQLException e) {
+				throw new ExceptionInInitializerError(e.getMessage());
+		} finally {
+			if(session != null)
+				session.close();
+		}
+	}
 
-            if (!course.isEmpty()) {
-                return course.get(0);
-            } else {
-                return null;
-            }
-        } catch (Exception e) {
-            session.getTransaction().rollback();
-            throw new HibernateException(e.getMessage());
-        } finally {
-            session.close();
-        }
-    }
+	@Override
+	public Collection<Course> findAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean insertOne(Course object) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean updateOne(Course object) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean deleteOne(Course object) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	
 }

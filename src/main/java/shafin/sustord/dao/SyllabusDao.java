@@ -2,49 +2,93 @@
  */
 package shafin.sustord.dao;
 
+import java.sql.SQLException;
+import java.util.Collection;
 import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import shafin.sustord.model.Syllabus;
+import shafin.sustord.entity.Syllabus;
 import shafin.sustord.util.HibernateUtil;
 
 /**
  *
  * @author SHAFIN
  */
-public class SyllabusDao {
+public class SyllabusDao implements BasicCRUD<Syllabus> {
 
-    @SuppressWarnings("unchecked")
-	public static List<Syllabus> getSyllabusObjectsOfSemester(int studentBatchIdFk, int semester) throws Exception {
+	@Override
+	public Syllabus findOne(int id) {
+		Session session = null;
+		try {
+			session = HibernateUtil.getSessionFactory().openSession();
+			session.beginTransaction();
+			String hql = "from Syllabus where syllabusId = :id";
+			Query query = session.createQuery(hql);
+			query.setParameter("id", id);
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
+			@SuppressWarnings("unchecked")
+			List<Syllabus> syllabus = (List<Syllabus>) query.list();
+			session.getTransaction().commit();
 
-        try {
-            String hql = "from Syllabus where studentBatchIdFk = :batchId and semester = :sem";
-            Query query = session.createQuery(hql);
-            query.setInteger("batchId", studentBatchIdFk);
-            query.setInteger("sem", semester);
+			return syllabus.isEmpty() ? null : syllabus.get(0);
 
-            List<Syllabus> syllabusList = (List<Syllabus>) query.list();
+		} catch (HibernateException | SQLException e) {
+			throw new ExceptionInInitializerError(e.getMessage());
+		} finally {
+			if (session != null)
+				session.close();
+		}
+	}
 
-            session.getTransaction().commit();
+	public List<Syllabus> findSyllabusByBatchIdandSemester(int batchId, int semester) {
+		Session session = null;
+		try {
+			session = HibernateUtil.getSessionFactory().openSession();
+			session.beginTransaction();
+			String hql = "from Syllabus where studentBatchIdFk = :batchId and semester = :sem";
+			Query query = session.createQuery(hql);
+			query.setInteger("batchId", batchId);
+			query.setInteger("sem", semester);
 
-            if (!syllabusList.isEmpty()) {
-                return syllabusList;
-            } else {
-                return null;
-            }
-        } catch (Exception e) {
-            session.getTransaction().rollback();
-            throw new HibernateException(e.getMessage());
-        } finally {
-            session.close();
-        }
-    }
+			@SuppressWarnings("unchecked")
+			List<Syllabus> syllabus = (List<Syllabus>) query.list();
+			session.getTransaction().commit();
 
-    
+			return syllabus;
+
+		} catch (HibernateException | SQLException e) {
+			throw new ExceptionInInitializerError(e.getMessage());
+		} finally {
+			if (session != null)
+				session.close();
+		}
+	}
+
+	@Override
+	public Collection<Syllabus> findAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean insertOne(Syllabus object) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean updateOne(Syllabus object) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean deleteOne(Syllabus object) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
