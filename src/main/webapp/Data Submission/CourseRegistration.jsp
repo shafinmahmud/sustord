@@ -2,7 +2,7 @@
 <%@page import="sm.sustord.model.Syllabus"%>
 <%@page import="sm.sustord.model.StudentInfo"%>
 <%@page import="sm.sustord.service.StudentService"%>
-<%@page import="sm.sustord.utility.FormatService"%>
+<%@page import="sm.sustord.util.FormatService"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

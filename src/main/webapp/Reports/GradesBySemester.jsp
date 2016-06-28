@@ -1,9 +1,9 @@
 <%@page import="sm.sustord.controller.GradeBySemesterController"%>
-<%@page import="sm.sustord.utility.CgpaCalculation"%>
+<%@page import="sm.sustord.util.CgpaCalculation"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="sm.sustord.bean.SyllabusPOJO"%>
 <%@page import="java.util.List"%>
-<%@page import="sm.sustord.utility.FormatService"%>
+<%@page import="sm.sustord.util.FormatService"%>
 <%@page import="sm.sustord.model.StudentInfo"%>
 <%@page import="sm.sustord.service.StudentService"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

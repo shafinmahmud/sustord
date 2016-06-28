@@ -1,5 +1,5 @@
 
-<%@page import="sm.sustord.utility.FormatService"%>
+<%@page import="sm.sustord.util.FormatService"%>
 <%@page import="sm.sustord.service.StudentService"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

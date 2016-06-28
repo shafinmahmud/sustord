@@ -1,5 +1,5 @@
 <%@page import="sm.sustord.controller.EditProfileController"%>
-<%@page import="sm.sustord.utility.FormatService"%>
+<%@page import="sm.sustord.util.FormatService"%>
 <%@page import="java.util.Comparator"%>
 <%@page import="java.util.Collections"%>
 <%@page import="java.util.ArrayList"%>

@@ -1,52 +1,70 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>sustord</groupId>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
     <artifactId>sustord</artifactId>
     <packaging>war</packaging>
-    <version>1.0</version>
+    <version>3.0 Alpha</version>
     <name>sustord</name>
-    <repositories>
-        <repository>
-            <id>eap</id>
-            <url>http://maven.repository.redhat.com/techpreview/all</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>unknown-jars-temp-repo</id>
-            <name>A temporary repository created by NetBeans for libraries and jars it could not identify. Please replace the dependencies in this repository with correct ones and delete this repository.</name>
-            <url>file:${project.basedir}/lib</url>
-        </repository>
-    </repositories>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>eap</id>
-            <url>http://maven.repository.redhat.com/techpreview/all</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </pluginRepository>
-    </pluginRepositories>
+   
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.7</maven.compiler.source>
+        
+		<!-- Generic properties -->
+		<java.version>1.7</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
-    </properties>
-    <dependencies>
-		
+
+		<!-- Web -->
+		<jsp.version>2.2</jsp.version>
+		<jstl.version>1.2</jstl.version>
+		<servlet.version>2.5</servlet.version>
+
+		<!-- Hibernate -->
+		<mysql-connector.version>5.1.39</mysql-connector.version>
+		<hibernate-framework.version>4.3.6.Final</hibernate-framework.version>
+		<hibernate-entity.version>4.3.6.Final</hibernate-entity.version>
+
+		<!-- Rest -->
+		<jackson.version>2.4.0</jackson.version>
+		<jaxb-api.version>2.2.11</jaxb-api.version>
+
+		<!-- Validator -->
+		<hibernate.validator.version>5.1.2.Final</hibernate.validator.version>
+		<javax.validation.version>1.1.0.Final</javax.validation.version>
+
+		<!-- Logging -->
+		<logback.version>1.0.13</logback.version>
+		<slf4j.version>1.7.5</slf4j.version>
+	</properties>
+	
+    <dependencies>	
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.25</version>
         </dependency>     
+         <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>4.3.1.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>4.3.9.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-c3p0</artifactId>
+            <version>4.3.9.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>unknown.binary</groupId>
+            <artifactId>hibernate-jpa-2.1-api-1.0.0.Final</artifactId>
+            <version>SNAPSHOT</version>
+        </dependency>
+        
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
@@ -54,21 +72,12 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
-            <version>4.3.1.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>unknown.binary</groupId>
-            <artifactId>hibernate-jpa-2.1-api-1.0.0.Final</artifactId>
-            <version>SNAPSHOT</version>
-        </dependency>
-        <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
             <version>1.0.0.GA</version>
             <type>jar</type>
         </dependency>
+        
         <dependency>
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-core-asl</artifactId>
@@ -91,40 +100,7 @@
             <artifactId>commons-io</artifactId>
             <version>2.4</version>
         </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <version>4.3.9.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-c3p0</artifactId>
-            <version>4.3.9.Final</version>
-        </dependency>
     </dependencies>
-    <profiles>
-        <profile>
-            <!-- When built in OpenShift the 'openshift' profile will be used when 
-            invoking mvn. -->
-            <!-- Use this profile for any OpenShift specific customization your app 
-            will need. -->
-            <!-- By default that is to put the resulting archive into the 'webapps' 
-            folder. -->
-            <!-- http://maven.apache.org/guides/mini/guide-building-for-different-environments.html -->
-            <id>openshift</id>
-            <build>
-                <finalName>sustord</finalName>
-                <plugins>
-                    <plugin>
-                        <artifactId>maven-war-plugin</artifactId>
-                        <version>2.1.1</version>
-                        <configuration>
-                            <outputDirectory>webapps</outputDirectory>
-                            <warName>ROOT</warName>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
+   
+    <groupId>shafin</groupId>
 </project>

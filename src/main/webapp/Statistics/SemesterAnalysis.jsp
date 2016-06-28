@@ -7,7 +7,7 @@
 <%@page import="java.util.List"%>
 <%@page import="sm.sustord.pojo.StudentGradeRankedPojo"%>
 <%@page import="sm.sustord.controller.SemesterAnalysisController"%>
-<%@page import="sm.sustord.utility.FormatService"%>
+<%@page import="sm.sustord.util.FormatService"%>
 <%@page import="sm.sustord.service.StudentService"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
