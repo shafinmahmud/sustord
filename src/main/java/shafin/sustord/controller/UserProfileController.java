@@ -1,8 +1,5 @@
 package shafin.sustord.controller;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import shafin.sustord.service.AcademicInfoService;
 import shafin.sustord.service.PersonalInfoService;
 
@@ -27,12 +24,12 @@ public class UserProfileController {
     String permanentDistrict;
     String permanentCountry;
 
-    public UserProfileController(String registrationNo) {
+   /* public UserProfileController(String registrationNo) {
         try {
             this.personalInfoService = new PersonalInfoService(registrationNo);
             this.academicInfoService = new AcademicInfoService(registrationNo);
 
-            String presentAddress = getPresentAddress();
+           // String presentAddress = getPresentAddress();
 
             if (!presentAddress.isEmpty()) {
 
@@ -133,7 +130,7 @@ public class UserProfileController {
         return getPersonalInfoService().getStudentPhotoUrl();
     }
 
-    /* Academic Information  */
+     Academic Information  
     public String getStudentProgramName() {
         return getAcademicInfoService().getStudentProgramName();
     }
@@ -150,87 +147,87 @@ public class UserProfileController {
         return getAcademicInfoService().getStudentAcademicSession();
     }
 
-    /**
+    *//**
      * @return the personalInfoService
-     */
+     *//*
     public PersonalInfoService getPersonalInfoService() {
         return personalInfoService;
     }
 
-    /**
+    *//**
      * @return the academicInfoService
-     */
+     *//*
     public AcademicInfoService getAcademicInfoService() {
         return academicInfoService;
     }
 
-    /**
+    *//**
      * @return the presentStreet
-     */
+     *//*
     public String getPresentStreet() {
         return presentStreet;
     }
 
-    /**
+    *//**
      * @return the presentArea
-     */
+     *//*
     public String getPresentArea() {
         return presentArea;
     }
 
-    /**
+    *//**
      * @return the presentThana
-     */
+     *//*
     public String getPresentThana() {
         return presentThana;
     }
 
-    /**
+    *//**
      * @return the presentDistrict
-     */
+     *//*
     public String getPresentDistrict() {
         return presentDistrict;
     }
 
-    /**
+    *//**
      * @return the presentCountry
-     */
+     *//*
     public String getPresentCountry() {
         return presentCountry;
     }
 
-    /**
+    *//**
      * @return the permanentStreet
-     */
+     *//*
     public String getPermanentStreet() {
         return permanentStreet;
     }
 
-    /**
+    *//**
      * @return the permanentArea
-     */
+     *//*
     public String getPermanentArea() {
         return permanentArea;
     }
 
-    /**
+    *//**
      * @return the permanentThana
-     */
+     *//*
     public String getPermanentThana() {
         return permanentThana;
     }
 
-    /**
+    *//**
      * @return the permanentDistrict
-     */
+     *//*
     public String getPermanentDistrict() {
         return permanentDistrict;
     }
 
-    /**
+    *//**
      * @return the permanentCountry
-     */
+     *//*
     public String getPermanentCountry() {
         return permanentCountry;
-    }
+    }*/
 }

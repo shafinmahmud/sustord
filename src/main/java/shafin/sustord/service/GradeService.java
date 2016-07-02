@@ -2,38 +2,24 @@
  */
 package shafin.sustord.service;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-import org.hibernate.HibernateException;
-
-import shafin.sustord.dao.CourseRegistrationDao;
-import shafin.sustord.dao.StudentInfoDao;
-import shafin.sustord.model.CourseRegistration;
-import shafin.sustord.model.StudentInfo;
-import shafin.sustord.pojo.CourseGradePojo;
 import shafin.sustord.pojo.StudentGradePojo;
 import shafin.sustord.pojo.StudentGradeRankedPojo;
-import shafin.sustord.util.GpaCalculator;
-import shafin.sustord.util.GradeConvertion;
 
 /**
  *
  * @author SHAFIN
  */
-public class GradeService extends StudentServicea {
+public class GradeService{
 
     public GradeService(String registrationNo) throws Exception {
-        super(StudentServicea.forSingletonIdentityService(registrationNo));
+       // super(StudentServicea.forSingletonIdentityService(registrationNo));
         //super(StudentIdentityService.forProtypeIdentityService(registrationNo));
     }
 
     public StudentGradePojo getStudentGradeOfSemester(Integer studentInfoId, int semester) {
-        StudentGradePojo studentGrade = new StudentGradePojo();
+        /*StudentGradePojo studentGrade = new StudentGradePojo();
         try {
             //get the attended courses of that semester
             List<CourseRegistration> registeredCourses;
@@ -69,12 +55,13 @@ public class GradeService extends StudentServicea {
             Logger.getLogger(GradeService.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return studentGrade;
+        return studentGrade;*/
+    	return null;
     }
 
     public List<StudentGradeRankedPojo> getSemesterRankList(int semester) {
 
-        List<StudentGradeRankedPojo> rankedList = new ArrayList<StudentGradeRankedPojo>();
+       /* List<StudentGradeRankedPojo> rankedList = new ArrayList<StudentGradeRankedPojo>();
         try {
             //get the student list of the batch
             List<StudentInfo> studentInfos;
@@ -99,7 +86,8 @@ public class GradeService extends StudentServicea {
         } catch (SQLException ex) {
             Logger.getLogger(GradeService.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return rankedList;
+        return rankedList;*/
+    	return null;
     }
 
 }

@@ -21,11 +21,11 @@ public class UserHomeController {
         }
     }
 
-    public String getStudentName() {
+    /*public String getStudentName() {
         return informationService.getStudentName();
     }
 
     public String getStudentPhotoUrl() {
         return informationService.getStudentPhotoUrl();
-    }
+    }*/
 }

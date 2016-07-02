@@ -26,12 +26,12 @@ public class GradeByCurriculumController {
         }
     }
     
-    
+   /* 
     public String getStudentName() {
              return personalInfoService.getStudentName();   
     }
     
-    /* Academic Information  */
+     Academic Information  
     public String getStudentProgramName() {
         return academicInfoService.getStudentProgramName();
     }
@@ -46,5 +46,5 @@ public class GradeByCurriculumController {
 
     public String getStudentAcademicSession() {
         return academicInfoService.getStudentAcademicSession();
-    }
+    }*/
 }

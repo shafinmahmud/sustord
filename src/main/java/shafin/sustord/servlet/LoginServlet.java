@@ -27,7 +27,7 @@ public class LoginServlet extends HttpServlet {
 
 
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response) {
-        try {
+        /*try {
             response.setContentType("text/html;charset=UTF-8");
 
             String userType = request.getParameter("ut");
@@ -103,7 +103,7 @@ public class LoginServlet extends HttpServlet {
                 Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, io);
             }
 
-        }
+        }*/
     }
 
 

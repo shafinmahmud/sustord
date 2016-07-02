@@ -1,9 +1,9 @@
-<%@page import="sm.sustord.controller.CourseDetailsController"%>
-<%@page import="sm.sustord.bean.SyllabusPOJO"%>
+<%@page import="shafin.sustord.controller.CourseDetailsController"%>
+<%@page import="shafin.sustord.dto.SyllabusPOJO"%>
 <%@page import="java.util.List"%>
-<%@page import="sm.sustord.model.StudentInfo"%>
-<%@page import="sm.sustord.util.FormatService"%>
-<%@page import="sm.sustord.service.StudentService"%>
+<%@page import="shafin.sustord.model.StudentInfo"%>
+<%@page import="shafin.sustord.util.FormatService"%>
+<%@page import="shafin.sustord.service.StudentService"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

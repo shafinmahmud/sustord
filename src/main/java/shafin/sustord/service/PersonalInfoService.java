@@ -2,29 +2,24 @@
  */
 package shafin.sustord.service;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import shafin.sustord.dao.PersonalInfoDao;
-
 /**
  *
  * @author SHAFIN
  */
-public class PersonalInfoService extends StudentServicea{
+public class PersonalInfoService{
 
     private static final String NULL_RESPONSE = "";
     private static final String ERROR_RESPONSE = ":/";
 
     /* Constructor thats is private and get accesses through static helper method  */
     public PersonalInfoService(String registrationNo) throws Exception {
-        super(StudentServicea.forSingletonIdentityService(registrationNo));
+       // super(StudentServicea.forSingletonIdentityService(registrationNo));
     }
 
     
 
     /* Personal Information  */
-    public String getStudentName() {
+  /*  public String getStudentName() {
         try {
             String string = PersonalInfoDao.getPersonalInfoObject(studentInfo.getStudentInfoId()).getName();
             if (string == null) {
@@ -218,6 +213,6 @@ public class PersonalInfoService extends StudentServicea{
             Logger.getLogger(PersonalInfoService.class.getName()).log(Level.SEVERE, null, ex);
             return ERROR_RESPONSE;
         }
-    }
+    }*/
 
 }

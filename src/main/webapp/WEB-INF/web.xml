@@ -3,7 +3,7 @@
          xmlns="http://java.sun.com/xml/ns/javaee" 
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
-    <filter>
+   <!--  <filter>
         <filter-name>AccessFilter</filter-name>
         <filter-class>sm.sustord.filter.AccessFilter</filter-class>
     </filter>
@@ -106,5 +106,5 @@
     <servlet-mapping>
         <servlet-name>ChangePasswordServlet</servlet-name>
         <url-pattern>/ChangePasswordServlet</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping> -->
 </web-app>

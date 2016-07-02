@@ -26,7 +26,7 @@ public class CurricularInfoService extends StudentServicea{
  
     
      public List<SyllabusCoursePojo> getAcademicCoursesOfSemester(int semester) {
-        try {
+       /* try {
             List<SyllabusCoursePojo> syllabusCoursePojoList = new ArrayList<SyllabusCoursePojo>();
             List<Syllabus> syllabusList = SyllabusDao.getSyllabusObjectsOfSemester(studentInfo.getStudentBatchIdFk()
                     .getStudentBatchId(), semester);
@@ -65,11 +65,12 @@ public class CurricularInfoService extends StudentServicea{
         } catch (Exception ex) {
             Logger.getLogger(AcademicInfoService.class.getName()).log(Level.SEVERE, null, ex);
             return null;
-        }
+        }*/
+    	 return null;
     }
     
     public List<OptionalCoursePojo> getOptionalCoursesOfSyllabus(){
-        try {
+       /* try {
             List<OptionalCoursePojo> optionalPojoList = new ArrayList<OptionalCoursePojo>();
             List<Syllabus> syllabusList = SyllabusDao.getSyllabusObjectsOfSemester(studentInfo.getStudentBatchIdFk()
                     .getStudentBatchId(), 0);//CAUSE optional courses are stored in the syllabus table with semester value 0
@@ -108,6 +109,7 @@ public class CurricularInfoService extends StudentServicea{
         } catch (Exception ex) {
             Logger.getLogger(AcademicInfoService.class.getName()).log(Level.SEVERE, null, ex);
             return new ArrayList<OptionalCoursePojo>();
-        }
+        }*/
+    	return null;
     }
 }

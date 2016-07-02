@@ -1,8 +1,8 @@
 <%@page import="java.util.List"%>
-<%@page import="sm.sustord.model.Syllabus"%>
-<%@page import="sm.sustord.model.StudentInfo"%>
-<%@page import="sm.sustord.service.StudentService"%>
-<%@page import="sm.sustord.util.FormatService"%>
+<%@page import="shafin.sustord.model.Syllabus"%>
+<%@page import="shafin.sustord.model.StudentInfo"%>
+<%@page import="shafin.sustord.service.StudentService"%>
+<%@page import="shafin.sustord.util.FormatService"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

@@ -19,7 +19,7 @@ public class ChangePasswordController {
         Message message = new Message();
         try {
 
-            ChangePasswordService changePasswordService = new ChangePasswordService(registrationNo);
+            /*ChangePasswordService changePasswordService = new ChangePasswordService(registrationNo);
 
             if (changePasswordService.verifyCurrentPassword(oldPassword)) {
                 if (changePasswordService.saveNewPassword(newPassword)) {
@@ -36,7 +36,7 @@ public class ChangePasswordController {
                 message.setMessageTitle("Current Password wrong!");
                 message.setMessageBody("The requesting password is wrong.");
                 return message;
-            }
+            }*/
         } catch (Exception ex) {
             Logger.getLogger(ChangePasswordController.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -17,7 +17,7 @@ import shafin.sustord.service.StudentService;
  */
 public class LoginController {
 
-    public static LoginMessage authencateStudent(String registrationNo, String password) {
+   /* public static LoginMessage authencateStudent(String registrationNo, String password) {
         LoginMessage message = new LoginMessage();
         try {
             StudentLoginService loginService = new StudentLoginService(registrationNo);
@@ -108,5 +108,5 @@ public class LoginController {
         StudentService service = new StudentService();
         return service;
 
-    }
+    }*/
 }

@@ -1,10 +1,10 @@
-<%@page import="sm.sustord.controller.EditProfileController"%>
-<%@page import="sm.sustord.util.FormatService"%>
+<%@page import="shafin.sustord.controller.EditProfileController"%>
+<%@page import="shafin.sustord.util.FormatService"%>
 <%@page import="java.util.Comparator"%>
 <%@page import="java.util.Collections"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
-<%@page import="sm.sustord.service.StudentService"%>
+<%@page import="shafin.sustord.service.StudentService"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>

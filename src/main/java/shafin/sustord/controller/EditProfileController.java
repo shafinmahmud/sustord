@@ -1,9 +1,9 @@
 package shafin.sustord.controller;
 
-public class EditProfileController extends UserProfileController {
+public class EditProfileController{
 
     public EditProfileController(String registrationNo) {
-        super(registrationNo);
+       // super(registrationNo);
     }
 
 }
