@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8"></meta>
+<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+
+<title>SUST-ORD</title>
+
+<link rel="stylesheet"
+	href="../resources/lib/bootstrap/css/bootstrap.min.css"
+	th:href="@{/resources/lib/bootstrap/css/bootstrap.min.css}" />
+<link rel="stylesheet"
+	href="../resources/lib/bootstrap/font-awesome.min.css"
+	th:href="@{/resources/lib/bootstrap/font-awesome.min.css}" />
+
+<!-- style sheet for this page-->
+<link rel="stylesheet" href="../resources/css/login.css"
+	th:href="@{/resources/css/login.css}" />
+
+</head>
+<body>
+
+	<div class="row">
+		<div class="col-md-7 col-sm-7 hidden-xs login_left"></div>
+		<div class="col-sm-12 login_panel">
+
+			<div>
+				<div th:replace="fragments/brand-logo :: [id='brandlogo']"
+					th:remove="tag">Brand Logo</div>
+			</div>
+
+
+			<div id="before-form" class="login_header">Sign in with your
+				Registration Number.</div>
+			<div>
+				<p id="messagebox" class="requiredwarning small"></p>
+			</div>
+
+			<form id="loginform" action="" method="post" role="form">
+				<div class="form-group" style="display: none;">
+					<input id="usertype" name="UserType" value="student"></input>
+				</div>
+				<div id="reg-no" class="form-group">
+					<label class="control-label" for="username">Registration No</label>
+					<input id="username" autocomplete="off" class="form-control valid"
+						name="UserName" type="text" value=""></input>
+					<p id="need-id-error" class="requiredwarning small"></p>
+				</div>
+				<div id="pass" class="form-group">
+					<label class="control-label" for="password">Password</label>
+					<input id="password" autocomplete="off" class="form-control valid"
+						name="Password" type="password"></input>
+					<p id="need-pass-error" class="requiredwarning small"></p>
+				</div>
+				<div class="form-group">
+					<div>
+						<div>
+							<button type="submit" class="btn btn-primary" id="login">Sign
+								In</button>
+							<img class="col-xs-offset-1" id="loading-anim"
+								src="../resources/icons/empty-icon.gif" 
+								th:src="@{/resources/icons/empty-icon.gif}" height="25" alt="">
+							</img>
+						</div>
+					</div>
+				</div>
+			</form>
+
+			<div class="login_forgotpassword">
+				<a href="">Can’t access your account?</a> <br></br> <a
+					href="../Admin/LoginAdmin.jsp">I'm Admin</a>
+			</div>
+		</div>
+	</div>
+
+	<script src="../resources/lib/jquery-2.1.4.min.js"
+		th:src="@{/resources/lib/jquery-2.1.4.min.js}" type="text/javascript">
+		
+	</script>
+	<script src="../resources/lib/bootstrap/js/bootstrap.min.js"
+		th:src="@{/resources/lib/bootstrap/js/bootstrap.min.js}"
+		type="text/javascript">
+		
+	</script>
+	<script src="../resources/js/login-script.js"
+		th:src="@{/resources/js/login-script.js}" type="text/javascript">
+		
+	</script>
+</body>
+</html>

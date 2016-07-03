@@ -1,23 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
-
 <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" 
 "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 
 <hibernate-configuration>
     
-    <session-factory>
-        <!-- Database connection settings      
-        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://127.3.214.2:3306/shafin_sustord</property>
-        <property name="hibernate.connection.username">adminA1k8pBf</property>
-        <property name="hibernate.connection.password">qZvnWqvPuV6E</property> -->
-        
-        <!-- Database connection settings  FOR Openshift MySQL forwarded Connection in Localhost
-        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3307/shafin_sustord</property>
-        <property name="hibernate.connection.username">adminA1k8pBf</property>
-        <property name="hibernate.connection.password">qZvnWqvPuV6E</property>   -->
-        
+    <session-factory>    
         <!-- Database connection -->
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="hibernate.connection.url">jdbc:mysql://localhost/shafin_sustord0</property>
@@ -55,23 +42,9 @@
         <!-- Drop and re-create the database schema on startup -->
         <property name="hbm2ddl.auto">update</property>
         
-        <!-- Names the annotated entity class -->
-        <mapping class="sm.sustord.model.StudentBatch"/>
-        <mapping class="sm.sustord.model.PersonalInfo"/>
-        <mapping class="sm.sustord.model.AdminDashboardCourseRegistration"/>
-        <mapping class="sm.sustord.model.Department"/>
-        <mapping class="sm.sustord.model.ClassRoutine"/>
-        <mapping class="sm.sustord.model.Syllabus"/>
-        <mapping class="sm.sustord.model.Course"/>
-        <mapping class="sm.sustord.model.AdminDashboardProfile"/>
-        <mapping class="sm.sustord.model.TimeSlot"/>
-        <mapping class="sm.sustord.model.Degree"/>
-        <mapping class="sm.sustord.model.CourseRegistration"/>
-        <mapping class="sm.sustord.model.Prerequisite"/>
-        <mapping class="sm.sustord.model.School"/>
-        <mapping class="sm.sustord.model.DegreeOffered"/>
-        <mapping class="sm.sustord.model.AdminInfo"/>
-        <mapping class="sm.sustord.model.StudentInfo"/>
+        <!-- Names the annotated entity class 
+        <mapping class="sm.sustord.model.StudentBatch"/>-->
+
 
     </session-factory>
 

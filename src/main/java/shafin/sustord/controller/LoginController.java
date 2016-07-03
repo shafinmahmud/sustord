@@ -1,22 +1,17 @@
 package shafin.sustord.controller;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.sql.SQLException;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-import org.hibernate.HibernateException;
-
-import shafin.sustord.pojo.LoginMessage;
-import shafin.sustord.service.AdminLoginService;
-import shafin.sustord.service.StudentLoginService;
-import shafin.sustord.service.StudentService;
-
-/**
- *
- * @author SHAFIN
- */
+@Controller
 public class LoginController {
-
+	
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String home(Model model) {
+		return "login";		
+	}
    /* public static LoginMessage authencateStudent(String registrationNo, String password) {
         LoginMessage message = new LoginMessage();
         try {

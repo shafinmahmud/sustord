@@ -1,64 +1,32 @@
 
 package shafin.sustord.service;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
-
-import shafin.sustord.dto.ClassRoutinePOJO;
-import shafin.sustord.dto.StudentPOJO;
-import shafin.sustord.dto.SyllabusPOJO;
-import shafin.sustord.model.ClassRoutine;
-import shafin.sustord.model.Course;
-import shafin.sustord.model.CourseRegistration;
-import shafin.sustord.model.PersonalInfo;
-import shafin.sustord.model.Prerequisite;
-import shafin.sustord.model.StudentInfo;
-import shafin.sustord.model.Syllabus;
-import shafin.sustord.model.TimeSlot;
-import shafin.sustord.pojo.StatSemesterPojo;
-import shafin.sustord.util.CgpaCalculation;
-import shafin.sustord.util.FormatService;
-import shafin.sustord.util.HibernateUtil;
-import shafin.sustord.util.JsonConvertion;
-
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import org.hibernate.HibernateException;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-
 /**
  *
  * @author SHAFIN
  */
 public class StudentService {
 
-	private final SessionFactory sessionFactory;
+	/*private final SessionFactory sessionFactory;
 
 	public StudentService() throws ExceptionInInitializerError, SQLException {
 		this.sessionFactory = HibernateUtil.getSessionFactory();
 	}
 
-	/**
+	*//**
 	 * *************************************************************************
 	 * **************************** *************** AUTHENTICATION
 	 * ******************************
 	 * *************************************************************************
 	 * ****************************
-	 */
-	/**
+	 *//*
+	*//**
 	 *
 	 * @param registration
 	 * @param passWord
 	 * @return
-	 */
-	/**
+	 *//*
+	*//**
 	 * *************************************************************************
 	 * **************************** *************** GET COURSES FROM SYLLABUS
 	 * AND REGISTRATION TABLE
@@ -67,19 +35,19 @@ public class StudentService {
 	 * 
 	 * @param regNo
 	 * @return
-	 */
+	 *//*
 	public boolean isStudentSyllabusHasOptionalCourses(String regNo) {
 		List<SyllabusPOJO> studentSyllabusList = getStudentSyllabusAsEntity(regNo, 0);
 
 		return !studentSyllabusList.isEmpty();
 	}
 
-	/**
+	*//**
 	 *
 	 * @param regNo
 	 * @param semester
 	 * @return
-	 */
+	 *//*
 	public String getStudentSyllabus(String regNo, int semester) {
 
 		List<SyllabusPOJO> courseList;
@@ -89,12 +57,12 @@ public class StudentService {
 		return jsoListString;
 	}
 
-	/**
+	*//**
 	 *
 	 * @param regNo
 	 * @param semester
 	 * @return
-	 */
+	 *//*
 	public List<SyllabusPOJO> getStudentSyllabusAsEntity(String regNo, int semester) {
 		List<SyllabusPOJO> courseList = new ArrayList<>();
 		StudentInfo std = getStudentInfoObjectFromRegNo(regNo);
@@ -188,12 +156,12 @@ public class StudentService {
 
 	}
 
-	/**
+	*//**
 	 *
 	 * @param regNo
 	 * @param uptoSemester
 	 * @return
-	 */
+	 *//*
 	@SuppressWarnings("unchecked")
 	public List<SyllabusPOJO> getStudentSyllabusAll(String regNo, int uptoSemester) {
 
@@ -286,11 +254,11 @@ public class StudentService {
 		return courseList;
 	}
 
-	/**
+	*//**
 	 *
 	 * @param courseCode
 	 * @return
-	 */
+	 *//*
 	@SuppressWarnings("unchecked")
 	public String getStudentCourseDetails(String courseCode) {
 		String details = "";
@@ -316,12 +284,12 @@ public class StudentService {
 		return details;
 	}
 
-	/**
+	*//**
 	 *
 	 * @param regNo
 	 * @param semester
 	 * @return
-	 */
+	 *//*
 	public String getStudentRegisteredCourses(String regNo, int semester) {
 
 		List<SyllabusPOJO> takenCourses = getStudentRegisteredCoursesAsEntity(regNo, semester);
@@ -331,12 +299,12 @@ public class StudentService {
 		return jsoListString;
 	}
 
-	/**
+	*//**
 	 *
 	 * @param regNo
 	 * @param semester
 	 * @return
-	 */
+	 *//*
 	@SuppressWarnings("unchecked")
 	public List<SyllabusPOJO> getStudentRegisteredCoursesAsEntity(String regNo, int semester) {
 
@@ -402,12 +370,12 @@ public class StudentService {
 		return takenCourses;
 	}
 
-	/**
+	*//**
 	 *
 	 * @param regNo
 	 * @param uptoSemester
 	 * @return
-	 */
+	 *//*
 	@SuppressWarnings("unchecked")
 	public List<SyllabusPOJO> getStudentRegisteredCoursesAll(String regNo, int uptoSemester) {
 
@@ -475,12 +443,12 @@ public class StudentService {
 		return allTakenCoursesPojo;
 	}
 
-	/**
+	*//**
 	 *
 	 * @param regNo
 	 * @param uptoSemester
 	 * @return
-	 */
+	 *//*
 	public List<SyllabusPOJO> getStudentDroppedCoursesAsEntity(String regNo, int uptoSemester) {
 
 		List<SyllabusPOJO> finalFilter = new ArrayList<SyllabusPOJO>();
@@ -535,12 +503,12 @@ public class StudentService {
 		return finalFilter;
 	}
 
-	/**
+	*//**
 	 *
 	 * @param regNo
 	 * @param uptoSemester
 	 * @return
-	 */
+	 *//*
 	public String getStudentDroppedCourses(String regNo, int uptoSemester) {
 		List<SyllabusPOJO> courses = getStudentDroppedCoursesAsEntity(regNo, uptoSemester);
 
@@ -590,12 +558,12 @@ public class StudentService {
 		return pendingCourses;
 	}
 
-	/**
+	*//**
 	 *
 	 * @param regNo
 	 * @param day
 	 * @return
-	 */
+	 *//*
 	@SuppressWarnings("unchecked")
 	public List<ClassRoutinePOJO> getStudentRoutine(String regNo, String day) {
 
@@ -672,11 +640,11 @@ public class StudentService {
 		return myRoutines;
 	}
 
-	/**
+	*//**
 	 *
 	 * @param regNo
 	 * @return
-	 */
+	 *//*
 	public double getCGPA(String regNo) {
 		List<SyllabusPOJO> cummilativeCourses = getStudentRegisteredCoursesAll(regNo, getStudentTotalSemester(regNo));
 
@@ -685,11 +653,11 @@ public class StudentService {
 		return cgpa;
 	}
 
-	/**
+	*//**
 	 *
 	 * @param regNo
 	 * @return
-	 */
+	 *//*
 	public double getTotalCredits(String regNo) {
 		double totalCredit;
 		totalCredit = CgpaCalculation
@@ -770,7 +738,7 @@ public class StudentService {
 		return students;
 	}
 
-	/**
+	*//**
 	 * *************************************************************************
 	 * **************************** *************** STATISTICS METHODS
 	 * *************************************************************************
@@ -779,7 +747,7 @@ public class StudentService {
 	 * @param regNo
 	 * @param semester
 	 * @return
-	 */
+	 *//*
 	@SuppressWarnings("unchecked")
 	public StatSemesterPojo getSemesterStatistics(String regNo, int semester) {
 
@@ -867,7 +835,7 @@ public class StudentService {
 		return stat;
 	}
 
-	/**
+	*//**
 	 * ************************************************************************
 	 * STATISTICS HELPER METHODS
 	 * ************************************************************************
@@ -876,7 +844,7 @@ public class StudentService {
 	 * @param batchId
 	 * @param semester
 	 * @return
-	 */
+	 *//*
 	public int getStatOfTotalCourseAttend(SyllabusPOJO s, int batchId, int semester) {
 
 		Long attendedStudent = new Long("0");
@@ -934,18 +902,18 @@ public class StudentService {
 		return gradeCount.intValue();
 	}
 
-	/**
+	*//**
 	 * *************************************************************************
 	 * **************************** *************** SAVE AND MODIFICATION
 	 * OPERATIONS ************************
 	 * *************************************************************************
 	 * ****************************
-	 */
-	/**
+	 *//*
+	*//**
 	 *
 	 * @param personalInfo
 	 * @return
-	 */
+	 *//*
 	public boolean savePersonalInfo(PersonalInfo personalInfo) {
 
 		Session session = sessionFactory.openSession();
@@ -963,13 +931,13 @@ public class StudentService {
 		return true;
 	}
 
-	/**
+	*//**
 	 * @param regNo
 	 *
 	 * @param jsonString
 	 * @param semester
 	 * @return
-	 */
+	 *//*
 	public boolean doStudentCourseRegistration(String regNo, String jsonString, int semester) {
 
 		StudentInfo std = getStudentInfoObjectFromRegNo(regNo);
@@ -1104,13 +1072,13 @@ public class StudentService {
 		return true;
 	}
 
-	/**
+	*//**
 	 *
 	 * @param regNo
 	 * @param jsonString
 	 * @param semester
 	 * @return
-	 */
+	 *//*
 	public boolean doStudentResultUpdate(String regNo, String jsonString, int semester) {
 
 		boolean status = false;
@@ -1165,11 +1133,11 @@ public class StudentService {
 
 	}
 
-	/**
+	*//**
 	 *
 	 * @param regNo
 	 * @return
-	 */
+	 *//*
 	@SuppressWarnings("unchecked")
 	public int getStudentCurrentSemester(String regNo) {
 
@@ -1246,18 +1214,18 @@ public class StudentService {
 		return studentInfoObject;
 	}
 
-	/**
+	*//**
 	 * *************************************************************************
 	 * **************************** *************** SETTER & GETTER
 	 * ************************
 	 * *************************************************************************
 	 * ****************************
-	 */
-	/**
+	 *//*
+	*//**
 	 * @return the sessionFactory
-	 */
+	 *//*
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}
-
+*/
 }

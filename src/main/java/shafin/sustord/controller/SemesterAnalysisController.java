@@ -5,7 +5,6 @@ package shafin.sustord.controller;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.http.HttpServlet;
 
 import shafin.sustord.pojo.StudentGradeRankedPojo;
 import shafin.sustord.service.AcademicInfoService;
@@ -15,9 +14,7 @@ import shafin.sustord.service.GradeService;
  *
  * @author SHAFIN
  */
-public class SemesterAnalysisController extends HttpServlet{
-
-	private static final long serialVersionUID = 1L;
+public class SemesterAnalysisController{
 	
 	private AcademicInfoService academicService;
     private GradeService gradeService;
