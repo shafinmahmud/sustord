@@ -5,13 +5,65 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import shafin.sustord.dto.LoginModel;
+
 @Controller
 public class LoginController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Model model) {
-		return "login";		
+	public String home() {
+		return "redirect:/login";		
 	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String login() {
+		return "redirect:/login/user";		
+	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public void loginAuth() {
+			
+	}
+	
+	@RequestMapping(value = "/login/user", method = RequestMethod.GET)
+	public String user(Model model){		
+		LoginModel login = getUserLoginModel();
+		model.addAttribute("login", login);
+		return "login";
+	}
+	
+	@RequestMapping(value = "/login/admin", method = RequestMethod.GET)
+	public String admin(Model model){
+		LoginModel login = getAdminLoginModel();
+		model.addAttribute("login", login);
+		return "login";
+	}
+	
+	
+	private LoginModel getUserLoginModel(){
+		LoginModel login = new LoginModel();
+		login.setUserRole("student");
+		login.setFormHeaderText("Sign in with your Registration Number.");
+		login.setLeftPanelImage("/resources/images/collage.jpg");
+		login.setUserNameText("Registration No");
+		login.setAlterUserText("I'm an Admin");
+		login.setAlterUserURL("/login/admin");
+		login.setLoginHelpURL("");
+		return login;
+	}
+	
+	private LoginModel getAdminLoginModel(){
+		LoginModel login = new LoginModel();
+		login.setUserRole("student");
+		login.setFormHeaderText("Sign in with your Admin ID.");
+		login.setLeftPanelImage("/resources/images/image14.jpg");
+		login.setUserNameText("Admin ID");
+		login.setAlterUserText("I'm a Student");
+		login.setAlterUserURL("/login/user");
+		login.setLoginHelpURL("");
+		return login;
+	}
+	
    /* public static LoginMessage authencateStudent(String registrationNo, String password) {
         LoginMessage message = new LoginMessage();
         try {
