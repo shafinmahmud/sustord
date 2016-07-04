@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8"></meta>
+<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+
+<title>HOME</title>
+
+<link rel="stylesheet"
+	href="../resources/lib/bootstrap/css/bootstrap.min.css"
+	th:href="@{../resources/lib/bootstrap/css/bootstrap.min.css}" />
+<link rel="stylesheet"
+	href="../resources/lib/bootstrap/font-awesome.min.css"
+	th:href="@{../resources/lib/bootstrap/font-awesome.min.css}" />
+
+<!-- style sheet for this page-->
+<link rel="stylesheet" href="../resources/css/home.css"
+	th:href="@{/resources/css/home.css}" />
+
+<style type="text/css">
+.scheduleTable {
+	width: 100%;
+}
+
+.scheduleTable td {
+	padding: 2px;
+	border-top: 1px solid #f5f1f1;
+	font-size: 12px;
+}
+
+.scheduleTable tr:first-child>td {
+	border-top: none;
+}
+</style>
+
+</head>
+<body>
+	
+	<!-- nav bar portion -->
+	<%@include file="../WEB-INF/jspf/NavBar.jspf"%>
+
+	<div class="portal-body">
+		<div class="row">
+
+			<!-- Side bar portion -->
+			<%@include file="../WEB-INF/jspf/SideBar.jspf"%>
+
+			<div id="main-content" class="col-md-10 column800">
+				
+				<div class="row">
+					<div class="col-sm-12 col-xs-12 col-md-3 column200-quick ">
+						<br>
+						<div class="text-center home-profile-title">
+							<a href="../Home/ProfileUser.jsp"> <img
+								src="../page_files/images/profilepic/<%=url%>"
+								class="img-circle" height="92" alt="User Image" />
+							</a> <br> <br> <a href="../Home/ProfileUser.jsp">
+								<div>Name</div>
+								<div style="font-size: 14px">Registration no</div>
+							</a>
+							<hr>
+							<br>
+						</div>
+					</div>
+					<div class="col-sm-12 col-xs-12 col-md-9 column600">
+
+
+						<fieldset>
+							<legend>Class Schedule</legend>
+							<table class="table table-striped">
+
+								<tbody>
+									
+									<tr>
+										<td>
+											<p style="font-size: 12px">
+												<b>day</b><br>
+											</p>
+											<p>03 July 2016</p>
+										</td>
+										<td>
+											
+											<div>
+												<i><small>Time: <label>Start
+															- End</label></small></i>
+											</div>
+											<div>
+												<p style="font-size: 13px">Course Code Title</p>
+											</div> 
+											<div>
+												<p style="font-size: 13px">
+													<i>No Classes on this day</i>
+												</p>
+											</div> 
+
+										</td>
+									</tr>
+					
+								</tbody>
+							</table>
+
+						</fieldset>
+						<br> <br>
+						<fieldset>
+							<legend>1st Year 1st Semester</legend>
+							<div id="divCourseList">
+								<table class="table table-condensed">
+									<thead>
+										<tr>
+											<th>Course Code</th>
+											<th>Title</th>
+											<th>Credit</th>
+											<th>Hours/Week</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>CSE 433</td>
+											<td>Machine Learning Theroy</td>
+											<td>3.0</td>
+											<td>
+												<div>
+													<p>6</p>
+												</div>
+											</td>
+										</tr>
+										<%
+											}
+											if (droppedList.size() != 0) {
+										%>
+										<tr class="danger">
+											<td colspan="4"
+												style="font-size: 13px; padding-top: 10px; text-align: center"><i>Drop/ Optional
+													courses</i></td>
+										</tr>
+
+										<%
+											for (SyllabusPOJO s : droppedList) {
+
+													String courseCode = s.getCourseCode();
+													String title = s.getTitle();
+													double credit = s.getCredit();
+													double hour = s.getHrsWeek();
+
+													String hrsWeekString = "";
+													if (s.isTheoryOrLab()) {
+														hrsWeekString = String.valueOf(hour) + " + 0";
+													} else {
+														hrsWeekString = "0 + " + String.valueOf(hour);
+													}
+										%>
+										<tr>
+											<td><%=courseCode%></td>
+											<td><%=title%></td>
+											<td><%=credit%></td>
+											<td>
+												<div>
+													<p><%=hrsWeekString%></p>
+												</div>
+											</td>
+										</tr>
+										<%
+											}
+											}
+										%>
+									
+									<tfoot>
+										<tr>
+											<th colspan="2" style="text-align: center"><b>Total
+													credit</b></th>
+											<th style="text-align: left; font-size: 14px"
+												id="total_credit" colspan="2"><b><%=totalCredit%></b></th>
+										</tr>
+									</tfoot>
+									</tbody>
+								</table>
+							</div>
+
+						</fieldset>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- footer portion -->
+	<%@include file="../WEB-INF/jspf/Footer.jspf"%>
+
+</body>
+</html>
