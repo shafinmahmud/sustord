@@ -8,19 +8,4 @@ JSP, Servlet, JQuery, AJAX<br>
 MySQL for Database and Hibernate for the ORM<br>
 Tomcat for server
 
-<h4>Interested to be a developer for the SUST-ORD?<h4>
-
-Any contribution is always welcomed, especially if you are from SUST. Here is your guide line: <br>
-<i>guildline for the developer is coming...</i>
-
-
-
-
-
-
-
-
-
-
-SUST-ORD is released under 'No Copyright'
 
