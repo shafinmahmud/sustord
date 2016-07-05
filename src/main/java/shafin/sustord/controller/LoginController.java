@@ -26,23 +26,23 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String loginAuth(@Valid @ModelAttribute("dto") LoginDto dto, BindingResult result, Model model) {
-			
-		System.out.println(dto.getUserRole()+" : "+dto.getUserName().length() + " : " + dto.getPassword().length());
-		
+	public String loginAuth(@Valid @ModelAttribute("dto") LoginDto dto, 
+			BindingResult result, Model model) {
+
 		if (result.hasErrors()) {
-			System.out.println("yes error has!");
-	        return "redirect:/login/user";
-	    }
-	
-		return "login";
+			LoginModel login = getUserLoginModel();
+			model.addAttribute("login", login);
+			return "login";
+		}
+
+		return "home";
 	}
 
 	@RequestMapping(value = "/login/user", method = RequestMethod.GET)
 	public String user(Model model) {
 		LoginModel login = getUserLoginModel();
 		LoginDto dto = new LoginDto();
-		
+
 		model.addAttribute("dto", dto);
 		model.addAttribute("login", login);
 		return "login";
@@ -51,6 +51,9 @@ public class LoginController {
 	@RequestMapping(value = "/login/admin", method = RequestMethod.GET)
 	public String admin(Model model) {
 		LoginModel login = getAdminLoginModel();
+		LoginDto dto = new LoginDto();
+
+		model.addAttribute("dto", dto);
 		model.addAttribute("login", login);
 		return "login";
 	}

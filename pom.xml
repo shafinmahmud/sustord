@@ -24,7 +24,7 @@
 
 		<!-- Hibernate -->
 		<mysql-connector.version>5.1.39</mysql-connector.version>
-		<hibernate.version>5.2.1.Final</hibernate.version>
+		<hibernate.version>4.3.11.Final</hibernate.version>
 
 
 		<!-- Rest -->
@@ -32,7 +32,7 @@
 		<jaxb-api.version>2.2.11</jaxb-api.version>
 
 		<!-- Validator -->
-		<hibernate.validator.version>5.2.4.Final</hibernate.validator.version>
+		<hibernate.validator.version>5.2.1.Final</hibernate.validator.version>
 		<javax.validation.version>1.1.0.Final</javax.validation.version>
 
 		<!-- Logging -->
@@ -102,16 +102,16 @@
 
 
 		<!-- validator -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>javax.validation</groupId>
 			<artifactId>validation-api</artifactId>
 			<version>${javax.validation.version}</version>
-		</dependency>
-		<!-- <dependency>
+		</dependency> -->
+		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
 			<version>${hibernate.validator.version}</version>
-		</dependency> -->
+		</dependency>
 
 
 		<!-- Logging with SLF4J & LogBack -->
@@ -152,11 +152,11 @@
 			<artifactId>commons-io</artifactId>
 			<version>2.4</version>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.javassist</groupId>
 			<artifactId>javassist</artifactId>
 			<version>3.20.0-GA</version>
-		</dependency>
+		</dependency> -->
 	</dependencies>
 	<build>
 		<plugins>

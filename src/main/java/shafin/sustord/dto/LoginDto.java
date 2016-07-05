@@ -1,22 +1,18 @@
 package shafin.sustord.dto;
 
-import java.io.Serializable;
 
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.NotEmpty;
 
-public class LoginDto implements Serializable{
-	
-	private static final long serialVersionUID = 1L;
+public class LoginDto{
 	
 	private String userRole;
 	
-	@NotNull(message="Your ID must not be Empty!")
-	@Size(min=10, max=10, message="Your ID should be 10 Char long!")
+	@Size(min=10, max=10, message="Your ID must be 10 Character long!")
 	private String userName;
 	
-	@Size(min=1,  message="Your password must not be Empty!")
+	@NotEmpty( message="Your password must not be Empty!")
 	private String password;
 	
 	public LoginDto() {
