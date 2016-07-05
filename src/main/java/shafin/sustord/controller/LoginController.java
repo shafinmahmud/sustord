@@ -26,16 +26,29 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String loginAuth(@Valid @ModelAttribute("dto") LoginDto dto, 
-			BindingResult result, Model model) {
+	public String login(@Valid @ModelAttribute("dto") LoginDto dto, BindingResult result, Model model) {
 
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if (result.hasErrors()) {
 			LoginModel login = getUserLoginModel();
 			model.addAttribute("login", login);
 			return "login";
 		}
 
-		return "home";
+		String loginAuth = loginAuth(dto.getUserName(), dto.getPassword());
+		if (loginAuth.equals("success")) {
+			return "home";
+		}
+
+		LoginModel login = getUserLoginModel();
+		login.setValidationMessage(loginAuth);
+		model.addAttribute("login", login);
+		return "login";
 	}
 
 	@RequestMapping(value = "/login/user", method = RequestMethod.GET)
@@ -56,6 +69,14 @@ public class LoginController {
 		model.addAttribute("dto", dto);
 		model.addAttribute("login", login);
 		return "login";
+	}
+
+	private String loginAuth(String id, String pass) {
+		if (id.equals("2011331001") && pass.equals("12345")) {
+			return "success";
+		} else {
+			return "blablabla ... blablabla...";
+		}
 	}
 
 	private LoginModel getUserLoginModel() {

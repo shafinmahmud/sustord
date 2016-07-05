@@ -1,18 +1,17 @@
 package shafin.sustord.dto;
 
 public class LoginModel {
-	
+
 	private String userRole;
 	private String leftPanelImage;
 	private String formHeaderText;
 	private String userNameText;
 	private String userNamePlaceHolder;
-	private String userName;
-	private String password;
+	private String validationMessage;
 	private String alterUserText;
 	private String alterUserURL;
 	private String loginHelpURL;
-	
+
 	public LoginModel() {
 	}
 
@@ -56,20 +55,12 @@ public class LoginModel {
 		this.userNamePlaceHolder = userNamePlaceHolder;
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getValidationMessage() {
+		return validationMessage;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
+	public void setValidationMessage(String validationMessage) {
+		this.validationMessage = validationMessage;
 	}
 
 	public String getAlterUserText() {
@@ -95,5 +86,5 @@ public class LoginModel {
 	public void setLoginHelpURL(String loginHelpURL) {
 		this.loginHelpURL = loginHelpURL;
 	}
-	
+
 }
