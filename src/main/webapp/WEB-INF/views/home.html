@@ -5,7 +5,7 @@
 <meta charset="UTF-8"></meta>
 <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
 
-<title>HOME</title>
+<title>SUSTORD-HOME</title>
 
 <link rel="stylesheet"
 	href="../resources/lib/bootstrap/css/bootstrap.min.css"
@@ -36,72 +36,67 @@
 
 </head>
 <body>
-	
+
 	<!-- nav bar portion -->
-	<%@include file="../WEB-INF/jspf/NavBar.jspf"%>
+	<div th:replace="fragments/navbar :: [id='navbar']" th:remove="tag">Nav
+		Bar</div>
 
 	<div class="portal-body">
 		<div class="row">
 
 			<!-- Side bar portion -->
-			<%@include file="../WEB-INF/jspf/SideBar.jspf"%>
+			<div th:replace="fragments/sidebar :: [id='sidebar']" th:remove="tag">Side
+				Bar</div>
 
 			<div id="main-content" class="col-md-10 column800">
-				
+
 				<div class="row">
 					<div class="col-sm-12 col-xs-12 col-md-3 column200-quick ">
-						<br>
+						<br></br>
 						<div class="text-center home-profile-title">
 							<a href="../Home/ProfileUser.jsp"> <img
-								src="../page_files/images/profilepic/<%=url%>"
+								src="../page_files/images/profilepic/2011331001"
 								class="img-circle" height="92" alt="User Image" />
-							</a> <br> <br> <a href="../Home/ProfileUser.jsp">
-								<div>Name</div>
+							</a> <br></br> <br></br> <a href="../Home/ProfileUser.jsp">
+								<div>SHEIKH SHAFIN MAHMUD</div>
 								<div style="font-size: 14px">Registration no</div>
 							</a>
 							<hr>
-							<br>
+							<br></br>
 						</div>
 					</div>
 					<div class="col-sm-12 col-xs-12 col-md-9 column600">
-
-
 						<fieldset>
 							<legend>Class Schedule</legend>
 							<table class="table table-striped">
 
 								<tbody>
-									
 									<tr>
 										<td>
 											<p style="font-size: 12px">
-												<b>day</b><br>
+												<b>day</b><br></br>
 											</p>
 											<p>03 July 2016</p>
 										</td>
 										<td>
-											
 											<div>
-												<i><small>Time: <label>Start
-															- End</label></small></i>
+												<i><small>Time: <label>Start - End</label></small></i>
 											</div>
 											<div>
 												<p style="font-size: 13px">Course Code Title</p>
-											</div> 
+											</div>
 											<div>
 												<p style="font-size: 13px">
 													<i>No Classes on this day</i>
 												</p>
-											</div> 
-
+											</div>
 										</td>
 									</tr>
-					
 								</tbody>
 							</table>
 
 						</fieldset>
-						<br> <br>
+						<br></br> <br></br>
 						<fieldset>
 							<legend>1st Year 1st Semester</legend>
 							<div id="divCourseList">
@@ -125,52 +120,30 @@
 												</div>
 											</td>
 										</tr>
-										<%
-											}
-											if (droppedList.size() != 0) {
-										%>
+
 										<tr class="danger">
 											<td colspan="4"
-												style="font-size: 13px; padding-top: 10px; text-align: center"><i>Drop/ Optional
-													courses</i></td>
+												style="font-size: 13px; padding-top: 10px; text-align: center">
+												<i>Drop/Optional courses</i>
+											</td>
 										</tr>
 
-										<%
-											for (SyllabusPOJO s : droppedList) {
-
-													String courseCode = s.getCourseCode();
-													String title = s.getTitle();
-													double credit = s.getCredit();
-													double hour = s.getHrsWeek();
-
-													String hrsWeekString = "";
-													if (s.isTheoryOrLab()) {
-														hrsWeekString = String.valueOf(hour) + " + 0";
-													} else {
-														hrsWeekString = "0 + " + String.valueOf(hour);
-													}
-										%>
 										<tr>
-											<td><%=courseCode%></td>
-											<td><%=title%></td>
-											<td><%=credit%></td>
+											<td>CSE 433</td>
+											<td>Machine Learning Theroy</td>
+											<td>3.0</td>
 											<td>
 												<div>
-													<p><%=hrsWeekString%></p>
+													<p>6</p>
 												</div>
 											</td>
 										</tr>
-										<%
-											}
-											}
-										%>
-									
 									<tfoot>
 										<tr>
 											<th colspan="2" style="text-align: center"><b>Total
 													credit</b></th>
 											<th style="text-align: left; font-size: 14px"
-												id="total_credit" colspan="2"><b><%=totalCredit%></b></th>
+												id="total_credit" colspan="2"><b>22.0</b></th>
 										</tr>
 									</tfoot>
 									</tbody>
@@ -185,7 +158,17 @@
 	</div>
 
 	<!-- footer portion -->
-	<%@include file="../WEB-INF/jspf/Footer.jspf"%>
+	<div th:replace="fragments/footer :: [id='footer']" th:remove="tag">FOOTER</div>
 
+
+	<script src="../resources/lib/jquery-2.1.4.min.js"
+		th:src="@{/resources/lib/jquery-2.1.4.min.js}" type="text/javascript">
+		
+	</script>
+	<script src="../resources/lib/bootstrap/js/bootstrap.min.js"
+		th:src="@{/resources/lib/bootstrap/js/bootstrap.min.js}"
+		type="text/javascript">
+		
+	</script>
 </body>
 </html>
