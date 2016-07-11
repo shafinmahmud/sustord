@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import shafin.sustord.dto.OptionalCoursePojo;
-import shafin.sustord.dto.SyllabusCoursePojo;
 import shafin.sustord.service.AcademicInfoService;
 import shafin.sustord.service.CurricularInfoService;
 
@@ -49,11 +47,4 @@ public class CurriculumController {
         return academicInfoService.getTotalAcadmicSemester();
     }
     
-    public List<SyllabusCoursePojo> getAcademicSyllabus(int semester) {
-        return curricularInfoService.getAcademicCoursesOfSemester(semester);
-    }
-    
-    public List<OptionalCoursePojo> getOptionalCourses(){
-        return curricularInfoService.getOptionalCoursesOfSyllabus();
-    }
 }

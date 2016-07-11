@@ -2,6 +2,8 @@ package shafin.sustord.controller;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,12 +13,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import shafin.sustord.dto.LoginDto;
 import shafin.sustord.dto.LoginModel;
+import shafin.sustord.exeptions.InvalidRegistrationException;
+import shafin.sustord.exeptions.UnmatchedPasswordException;
+import shafin.sustord.service.AdminLoginService;
 
 @Controller
+@Scope("request")
 public class LoginController {
-
+	
+	@Autowired
+    LoginSession loginSession;
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home() {
+	public String welcome() {
 		return "redirect:/login";
 	}
 
@@ -25,32 +34,7 @@ public class LoginController {
 		return "redirect:/login/user";
 	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(@Valid @ModelAttribute("dto") LoginDto dto, BindingResult result, Model model) {
-
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if (result.hasErrors()) {
-			LoginModel login = getUserLoginModel();
-			model.addAttribute("login", login);
-			return "login";
-		}
-
-		String loginAuth = loginAuth(dto.getUserName(), dto.getPassword());
-		if (loginAuth.equals("success")) {
-			return "home";
-		}
-
-		LoginModel login = getUserLoginModel();
-		login.setValidationMessage(loginAuth);
-		model.addAttribute("login", login);
-		return "login";
-	}
-
+	
 	@RequestMapping(value = "/login/user", method = RequestMethod.GET)
 	public String user(Model model) {
 		LoginModel login = getUserLoginModel();
@@ -71,12 +55,75 @@ public class LoginController {
 		return "login";
 	}
 
-	private String loginAuth(String id, String pass) {
-		if (id.equals("2011331001") && pass.equals("12345")) {
-			return "success";
-		} else {
-			return "blablabla ... blablabla...";
+	@RequestMapping(value = "/login/user", method = RequestMethod.POST)
+	public String loginUser(@Valid @ModelAttribute("dto") LoginDto dto, BindingResult result, Model model) {
+
+		if (result.hasErrors()) {
+			LoginModel login = getUserLoginModel();
+			model.addAttribute("login", login);
+			return "login";
 		}
+
+		String auth = userLoginAuth(dto.getUserName(), dto.getPassword());
+		if (auth.equals("success")) {
+			// set session for specific user
+			this.loginSession.setId(dto.getUserName());
+			this.loginSession.setRole(dto.getUserRole());
+			return "redirect:/home/user";
+		} else {
+			LoginModel login = getUserLoginModel();
+			login.setValidationMessage(auth);
+			model.addAttribute("login", login);
+			return "login";
+		}
+	}
+	
+	@RequestMapping(value = "/login/admin", method = RequestMethod.POST)
+	public String loginAdmin(@Valid @ModelAttribute("dto") LoginDto dto, BindingResult result, Model model) {
+
+		if (result.hasErrors()) {
+			LoginModel login = getAdminLoginModel();
+			model.addAttribute("login", login);
+			return "login";
+		}
+
+		String auth = adminLoginAuth(dto.getUserName(), dto.getPassword());
+		if (auth.equals("success")) {
+			// set session for specific user
+			this.loginSession.setId(dto.getUserName());
+			this.loginSession.setRole(dto.getUserRole());
+			return "redirect:/home/user";
+		} else {
+			LoginModel login = getAdminLoginModel();
+			login.setValidationMessage(auth);
+			model.addAttribute("login", login);
+			return "login";
+		}
+	}
+
+	private String userLoginAuth(String id, String pass) {
+		return "success";
+		/*try {
+			StudentLoginService service = new StudentLoginService(id);
+			service.authenticateLogin(pass);
+		} catch (InvalidRegistrationException e) {
+			return e.getMessage();
+		} catch (UnmatchedPasswordException e) {
+			return e.getMessage();
+		}
+		return "success";*/
+	}
+
+	private String adminLoginAuth(String id, String pass) {
+		try {
+			AdminLoginService service = new AdminLoginService(id);
+			service.authenticateLogin(pass);
+		} catch (InvalidRegistrationException e) {
+			return e.getMessage();
+		} catch (UnmatchedPasswordException e) {
+			return e.getMessage();
+		}
+		return "success";
 	}
 
 	private LoginModel getUserLoginModel() {
@@ -88,6 +135,7 @@ public class LoginController {
 		login.setUserNamePlaceHolder("eg. 2011331001");
 		login.setAlterUserText("I'm an Admin");
 		login.setAlterUserURL("/login/admin");
+		login.setFormSubmitURL("/login/user");
 		login.setLoginHelpURL("");
 		return login;
 	}
@@ -101,80 +149,9 @@ public class LoginController {
 		login.setUserNamePlaceHolder("eg. 2011331AB");
 		login.setAlterUserText("I'm a Student");
 		login.setAlterUserURL("/login/user");
+		login.setFormSubmitURL("/login/admin");
 		login.setLoginHelpURL("");
 		return login;
 	}
 
-	/*
-	 * public static LoginMessage authencateStudent(String registrationNo,
-	 * String password) { LoginMessage message = new LoginMessage(); try {
-	 * StudentLoginService loginService = new
-	 * StudentLoginService(registrationNo); if
-	 * (loginService.verifyRegistrationNo()) {
-	 * message.setRequestedIdValid(true); if
-	 * (loginService.verifyPassword(password)) {
-	 * message.setRequestedPasswordValid(true);
-	 * message.setMessageTitle("Verified"); message.setMessageBody(
-	 * "Login information is correct. Verification successful.");
-	 * message.setRequestedId(registrationNo); } else {
-	 * message.setRequestedPasswordValid(false);
-	 * message.setMessageTitle("Access denied");
-	 * message.setMessageBody("Provided password is wrong."); } } else {
-	 * message.setRequestedIdValid(false);
-	 * message.setMessageTitle("Unknown ID");
-	 * message.setMessageBody("Provided Registration No is invalid."); }
-	 * 
-	 * } catch (HibernateException ex) { StringWriter sw = new StringWriter();
-	 * PrintWriter pw = new PrintWriter(sw); ex.printStackTrace(pw); String
-	 * errorString = sw.toString(); // stack trace as a string
-	 * 
-	 * message.setMessageTitle("Hibernate Exception");
-	 * message.setMessageBody(errorString); } catch (Exception e) { StringWriter
-	 * sw = new StringWriter(); PrintWriter pw = new PrintWriter(sw);
-	 * e.printStackTrace(pw); String errorString = sw.toString(); // stack trace
-	 * as a string
-	 * 
-	 * message.setMessageTitle("Server Exception");
-	 * message.setMessageBody(errorString); }
-	 * 
-	 * return message; }
-	 * 
-	 * public static LoginMessage authencateBatchAdmin(String adminId, String
-	 * password) { LoginMessage message = new LoginMessage(); try {
-	 * AdminLoginService loginService = new AdminLoginService(adminId); if
-	 * (loginService.verifyRegistrationNo()) {
-	 * message.setRequestedIdValid(true); if
-	 * (loginService.verifyPassword(password)) {
-	 * message.setRequestedPasswordValid(true);
-	 * message.setMessageTitle("Verified"); message.setMessageBody(
-	 * "Login information is correct. Verification successful.");
-	 * message.setRequestedId(adminId); } else {
-	 * message.setRequestedPasswordValid(false);
-	 * message.setMessageTitle("Access denied");
-	 * message.setMessageBody("Provided password is wrong."); } } else {
-	 * message.setRequestedIdValid(false);
-	 * message.setMessageTitle("Unknown ID");
-	 * message.setMessageBody("Provided Registration No is invalid."); }
-	 * 
-	 * } catch (HibernateException ex) { StringWriter sw = new StringWriter();
-	 * PrintWriter pw = new PrintWriter(sw); ex.printStackTrace(pw); String
-	 * errorString = sw.toString(); // stack trace as a string
-	 * 
-	 * message.setMessageTitle("Hibernate Exception");
-	 * message.setMessageBody(errorString); } catch (Exception e) { StringWriter
-	 * sw = new StringWriter(); PrintWriter pw = new PrintWriter(sw);
-	 * e.printStackTrace(pw); String errorString = sw.toString(); // stack trace
-	 * as a string
-	 * 
-	 * message.setMessageTitle("Server Exception");
-	 * message.setMessageBody(errorString); }
-	 * 
-	 * return message; }
-	 * 
-	 * public static StudentService temporarySupport() throws SQLException {
-	 * 
-	 * StudentService service = new StudentService(); return service;
-	 * 
-	 * }
-	 */
 }

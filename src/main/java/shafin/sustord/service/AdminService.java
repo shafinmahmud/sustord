@@ -11,12 +11,12 @@ import shafin.sustord.util.ServiceDispatcher;
  */
 public class AdminService {
 	
-	protected final String adminNo;
+	protected final String adminID;
     protected final AdminInfo adminInfo;
 
     /* Constructor thats is private and get accesses through static helper method  */
-    public AdminService(String adminNo) throws Exception {
-    	this.adminNo = adminNo;
-        this.adminInfo = ServiceDispatcher.getSingletonAdminInfo(adminNo);
+    public AdminService(String adminId){
+    	this.adminID = adminId;
+        this.adminInfo = ServiceDispatcher.getSingletonAdminInfo(adminId);
     }
 }

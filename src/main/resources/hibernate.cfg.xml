@@ -14,12 +14,16 @@
         <!-- configuration pool via c3p0-->  
         <property name="connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property> 
         <property name="hibernate.c3p0.acquire_increment">1</property> 
+        
         <!-- Minimum number of JDBC connections in the pool. Hibernate default: 1 -->  
         <property name="hibernate.c3p0.min_size">1</property>   
+        
         <!-- Maximum number of JDBC connections in the pool. Hibernate default: 100 -->
         <property name="hibernate.c3p0.max_size">100</property>  
+        
         <!-- Number of prepared statements will be cached. Increase performance. Hibernate default: 0 , caching is disable. --> 
         <property name="hibernate.c3p0.max_statements">10</property>   
+        
         <!--  When an idle connection is removed from the pool (in second). Hibernate default: 0, never expire.--> 
         <property name="hibernate.c3p0.timeout">60</property> <!-- seconds -->  
         
@@ -42,9 +46,21 @@
         <!-- Drop and re-create the database schema on startup -->
         <property name="hbm2ddl.auto">update</property>
         
-        <!-- Names the annotated entity class 
-        <mapping class="sm.sustord.model.StudentBatch"/>-->
-
+        <!-- Names the annotated entity class -->
+        <mapping class="shafin.sustord.entity.AdminInfo"/>
+        <mapping class="shafin.sustord.entity.ClassRoutine"/>
+        <mapping class="shafin.sustord.entity.Course"/>
+        <mapping class="shafin.sustord.entity.CourseRegistration"/>
+        <mapping class="shafin.sustord.entity.Degree"/>
+        <mapping class="shafin.sustord.entity.DegreeOffered"/>
+        <mapping class="shafin.sustord.entity.Department"/>
+        <mapping class="shafin.sustord.entity.PersonalInfo"/>
+        <mapping class="shafin.sustord.entity.Prerequisite"/>
+        <mapping class="shafin.sustord.entity.School"/>
+		<mapping class="shafin.sustord.entity.StudentBatch"/>
+		<mapping class="shafin.sustord.entity.StudentInfo"/>
+		<mapping class="shafin.sustord.entity.Syllabus"/>
+		<mapping class="shafin.sustord.entity.TimeSlot"/>
 
     </session-factory>
 

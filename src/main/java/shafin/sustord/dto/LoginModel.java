@@ -10,6 +10,7 @@ public class LoginModel {
 	private String validationMessage;
 	private String alterUserText;
 	private String alterUserURL;
+	private String formSubmitURL;
 	private String loginHelpURL;
 
 	public LoginModel() {
@@ -77,6 +78,14 @@ public class LoginModel {
 
 	public void setAlterUserURL(String alterUserURL) {
 		this.alterUserURL = alterUserURL;
+	}
+
+	public String getFormSubmitURL() {
+		return formSubmitURL;
+	}
+
+	public void setFormSubmitURL(String formSubmitURL) {
+		this.formSubmitURL = formSubmitURL;
 	}
 
 	public String getLoginHelpURL() {

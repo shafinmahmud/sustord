@@ -7,6 +7,7 @@
 
 <title>SUSTORD</title>
 
+<!-- Bootstrap 3.3.6 -->
 <link rel="stylesheet"
 	href="../resources/lib/bootstrap/css/bootstrap.min.css"
 	th:href="@{/resources/lib/bootstrap/css/bootstrap.min.css}" />
@@ -39,7 +40,7 @@
 				<p class="requiredwarning small" th:text="${login.validationMessage}"></p>
 			</div>
 
-			<form id="login-form"  action="#" th:action="@{/login}" th:object="${dto}" method="post">
+			<form id="login-form"  action="#" th:action="@{${login.formSubmitURL}}" th:object="${dto}" method="post">
 				
 				<input  type="hidden" name="userRole" th:field="${login.userRole}"></input>
 						
@@ -71,7 +72,7 @@
 			</form>
 
 			<div class="login_forgotpassword">
-				<a href="">Can’t access your account?</a> <br></br> 
+				<a href="" th:href="@{/}">Can’t access your account?</a> <br></br> 
 				<a th:text="${login.alterUserText}" href="/login.html" 
 				   th:href="@{${login.alterUserURL}}">I'm Admin</a>
 			</div>

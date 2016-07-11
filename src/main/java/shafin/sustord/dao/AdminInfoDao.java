@@ -49,7 +49,7 @@ public class AdminInfoDao implements BasicCRUD<AdminInfo> {
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
 			session.beginTransaction();
-			String hql = "from AdminInfo where adminInNo = :adminNo";
+			String hql = "from AdminInfo where adminNo = :adminNo";
 			Query query = session.createQuery(hql);
 			query.setParameter("adminNo", adminNo);
 

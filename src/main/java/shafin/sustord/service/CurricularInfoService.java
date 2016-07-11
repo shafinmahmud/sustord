@@ -2,10 +2,6 @@
  */
 package shafin.sustord.service;
 
-import java.util.List;
-
-import shafin.sustord.dto.OptionalCoursePojo;
-import shafin.sustord.dto.SyllabusCoursePojo;
 
 /**
  *
@@ -18,7 +14,7 @@ public class CurricularInfoService extends StudentServicea{
     }
  
     
-     public List<SyllabusCoursePojo> getAcademicCoursesOfSemester(int semester) {
+     //public List<SyllabusCoursePojo> getAcademicCoursesOfSemester(int semester) {
        /* try {
             List<SyllabusCoursePojo> syllabusCoursePojoList = new ArrayList<SyllabusCoursePojo>();
             List<Syllabus> syllabusList = SyllabusDao.getSyllabusObjectsOfSemester(studentInfo.getStudentBatchIdFk()
@@ -59,10 +55,10 @@ public class CurricularInfoService extends StudentServicea{
             Logger.getLogger(AcademicInfoService.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }*/
-    	 return null;
-    }
+    	// return null;
+   // }
     
-    public List<OptionalCoursePojo> getOptionalCoursesOfSyllabus(){
+   // public List<OptionalCoursePojo> getOptionalCoursesOfSyllabus(){
        /* try {
             List<OptionalCoursePojo> optionalPojoList = new ArrayList<OptionalCoursePojo>();
             List<Syllabus> syllabusList = SyllabusDao.getSyllabusObjectsOfSemester(studentInfo.getStudentBatchIdFk()
@@ -103,6 +99,6 @@ public class CurricularInfoService extends StudentServicea{
             Logger.getLogger(AcademicInfoService.class.getName()).log(Level.SEVERE, null, ex);
             return new ArrayList<OptionalCoursePojo>();
         }*/
-    	return null;
-    }
+    //	return null;
+   // }
 }

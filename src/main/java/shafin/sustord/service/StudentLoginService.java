@@ -1,14 +1,11 @@
 package shafin.sustord.service;
 
 import shafin.sustord.exeptions.InvalidRegistrationException;
+import shafin.sustord.exeptions.UnmatchedPasswordException;
 
-/**
- *
- * @author SHAFIN
- */
 public class StudentLoginService extends StudentServicea {
 
-	public static final String ID_ERROR = "Invalid Registration No."
+	public static final String ID_ERROR = " is an Invalid Registration No."
 			+ "Make sure you typed the valid Registration No. It usually looks like YYYYDEPXXX. eg. 2011331001 ";
 
 	public static final String PASS_ERROR = "Wrong password. Have you changed your password? "
@@ -29,9 +26,12 @@ public class StudentLoginService extends StudentServicea {
 
 	public boolean authenticateLogin(String password) {
 		if (isExistsRegistrationNo()) {
-			return isMatchPassword(password);
+			if(isMatchPassword(password))
+				return true;
+			else
+				throw new UnmatchedPasswordException(PASS_ERROR);
 		} else {
-			throw new InvalidRegistrationException(this.registrationNo + " is an Invalid Registration No.");
+			throw new InvalidRegistrationException(this.registrationNo + ID_ERROR);
 		}
 	}
 }

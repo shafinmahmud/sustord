@@ -7,6 +7,7 @@
 
 <title>SUSTORD-HOME</title>
 
+<!-- Bootstrap 3.3.6 -->
 <link rel="stylesheet"
 	href="../resources/lib/bootstrap/css/bootstrap.min.css"
 	th:href="@{../resources/lib/bootstrap/css/bootstrap.min.css}" />
@@ -17,6 +18,8 @@
 <!-- style sheet for this page-->
 <link rel="stylesheet" href="../resources/css/home.css"
 	th:href="@{/resources/css/home.css}" />
+<link rel="stylesheet" href="../resources/lib/material-icons.css"
+	th:href="@{/resources/lib/material-icons.css}">
 
 <style type="text/css">
 .scheduleTable {
@@ -54,12 +57,12 @@
 					<div class="col-sm-12 col-xs-12 col-md-3 column200-quick ">
 						<br></br>
 						<div class="text-center home-profile-title">
-							<a href="../Home/ProfileUser.jsp"> <img
-								src="../page_files/images/profilepic/2011331001"
-								class="img-circle" height="92" alt="User Image" />
-							</a> <br></br> <br></br> <a href="../Home/ProfileUser.jsp">
-								<div>SHEIKH SHAFIN MAHMUD</div>
-								<div style="font-size: 14px">Registration no</div>
+							<a href="/profile" th:href="@{/profile}"> <img
+								class="img-circle" height="92" alt="User Image"
+								src="../resources/images/profilepic/2011331001"
+								th:attr="src=@{/}" /> <br></br> <br></br>
+								<p th:text="${}">SHEIKH SHAFIN MAHMUD</p>
+								<p style="font-size: 14px" th:text="${}">Registration no</p>
 							</a>
 							<hr>
 							<br></br>
