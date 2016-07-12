@@ -10,16 +10,16 @@
 <!-- Bootstrap 3.3.6 -->
 <link rel="stylesheet"
 	href="../resources/lib/bootstrap/css/bootstrap.min.css"
-	th:href="@{../resources/lib/bootstrap/css/bootstrap.min.css}" />
+	th:href="@{/resources/lib/bootstrap/css/bootstrap.min.css}" />
 <link rel="stylesheet"
 	href="../resources/lib/bootstrap/font-awesome.min.css"
-	th:href="@{../resources/lib/bootstrap/font-awesome.min.css}" />
+	th:href="@{/resources/lib/bootstrap/font-awesome.min.css}" />
 
 <!-- style sheet for this page-->
 <link rel="stylesheet" href="../resources/css/home.css"
 	th:href="@{/resources/css/home.css}" />
-<link rel="stylesheet" href="../resources/lib/material-icons.css"
-	th:href="@{/resources/lib/material-icons.css}">
+<link rel="stylesheet" href="../resources/lib/material-icon.css"
+	th:href="@{/resources/lib/material-icon.css}">
 
 <style type="text/css">
 .scheduleTable {
@@ -60,9 +60,10 @@
 							<a href="/profile" th:href="@{/profile}"> <img
 								class="img-circle" height="92" alt="User Image"
 								src="../resources/images/profilepic/2011331001"
-								th:attr="src=@{/}" /> <br></br> <br></br>
-								<p th:text="${}">SHEIKH SHAFIN MAHMUD</p>
-								<p style="font-size: 14px" th:text="${}">Registration no</p>
+								th:attr="src=@{${'/resources/images/profilepic/'+home.ppURL}}"
+								 /> <br></br> <br></br>
+								<p th:text="${home.studentName}">SHEIKH SHAFIN MAHMUD</p>
+								<p style="font-size: 14px" th:text="${home.registrationNo}">Registration no</p>
 							</a>
 							<hr>
 							<br></br>

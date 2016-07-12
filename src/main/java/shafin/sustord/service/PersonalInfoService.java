@@ -2,14 +2,9 @@
  */
 package shafin.sustord.service;
 
-/**
- *
- * @author SHAFIN
- */
+
 public class PersonalInfoService{
 
-    private static final String NULL_RESPONSE = "";
-    private static final String ERROR_RESPONSE = ":/";
 
     /* Constructor thats is private and get accesses through static helper method  */
     public PersonalInfoService(String registrationNo) throws Exception {

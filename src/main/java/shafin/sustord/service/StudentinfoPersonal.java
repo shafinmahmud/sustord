@@ -18,6 +18,11 @@ public class StudentinfoPersonal extends StudentServicea {
 		String studentName = dao.findOne(this.studentInfo.getStudentInfoId()).getName();
 		return studentName != null ? studentName : "";
 	}
+	
+	public String getStudentPhotoURL(){
+		String url = dao.findOne(this.studentInfo.getStudentInfoId()).getPhotoUrl();
+		return url != null ? url : "";
+	}
 
 	public StudentPersonalinfoDTO getStudentPersonalInfo() {
 		PersonalInfo info = dao.findOne(this.studentInfo.getStudentInfoId());

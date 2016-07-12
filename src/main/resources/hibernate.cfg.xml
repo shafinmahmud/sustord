@@ -54,6 +54,7 @@
         <mapping class="shafin.sustord.entity.Degree"/>
         <mapping class="shafin.sustord.entity.DegreeOffered"/>
         <mapping class="shafin.sustord.entity.Department"/>
+        <mapping class="shafin.sustord.entity.OptionalCourse"/>
         <mapping class="shafin.sustord.entity.PersonalInfo"/>
         <mapping class="shafin.sustord.entity.Prerequisite"/>
         <mapping class="shafin.sustord.entity.School"/>

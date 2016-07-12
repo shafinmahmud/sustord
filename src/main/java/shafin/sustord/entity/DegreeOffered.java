@@ -1,4 +1,8 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package shafin.sustord.entity;
 
 import java.io.Serializable;
@@ -26,94 +30,89 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "degree_offered")
 @XmlRootElement
-@NamedQueries({ @NamedQuery(name = "DegreeOffered.findAll", query = "SELECT d FROM DegreeOffered d"),
-		@NamedQuery(name = "DegreeOffered.findByDegreeOfferedId", query = "SELECT d FROM DegreeOffered d WHERE d.degreeOfferedId = :degreeOfferedId") })
+@NamedQueries({
+    @NamedQuery(name = "DegreeOffered.findAll", query = "SELECT d FROM DegreeOffered d"),
+    @NamedQuery(name = "DegreeOffered.findByDegreeOfferedId", query = "SELECT d FROM DegreeOffered d WHERE d.degreeOfferedId = :degreeOfferedId")})
 public class DegreeOffered implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Basic(optional = false)
-	@Column(name = "degree_offered_id")
-	private Integer degreeOfferedId;
-	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "degreeOfferedIdFk")
-	private Collection<StudentBatch> studentBatchCollection;
-	
-	@JoinColumn(name = "dept_id_fk", referencedColumnName = "dept_id")
-	@ManyToOne(optional = false)
-	private Department deptIdFk;
-	
-	@JoinColumn(name = "degree_id_fk", referencedColumnName = "degree_id")
-	@ManyToOne(optional = false)
-	private Degree degreeIdFk;
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "degree_offered_id")
+    private Integer degreeOfferedId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "degreeOfferedIdFk")
+    private Collection<StudentBatch> studentBatchCollection;
+    @JoinColumn(name = "dept_id_fk", referencedColumnName = "dept_id")
+    @ManyToOne(optional = false)
+    private Department deptIdFk;
+    @JoinColumn(name = "degree_id_fk", referencedColumnName = "degree_id")
+    @ManyToOne(optional = false)
+    private Degree degreeIdFk;
 
-	public DegreeOffered() {
-	}
+    public DegreeOffered() {
+    }
 
-	public DegreeOffered(Integer degreeOfferedId) {
-		this.degreeOfferedId = degreeOfferedId;
-	}
+    public DegreeOffered(Integer degreeOfferedId) {
+        this.degreeOfferedId = degreeOfferedId;
+    }
 
-	public Integer getDegreeOfferedId() {
-		return degreeOfferedId;
-	}
+    public Integer getDegreeOfferedId() {
+        return degreeOfferedId;
+    }
 
-	public void setDegreeOfferedId(Integer degreeOfferedId) {
-		this.degreeOfferedId = degreeOfferedId;
-	}
+    public void setDegreeOfferedId(Integer degreeOfferedId) {
+        this.degreeOfferedId = degreeOfferedId;
+    }
 
-	@XmlTransient
-	public Collection<StudentBatch> getStudentBatchCollection() {
-		return studentBatchCollection;
-	}
+    @XmlTransient
+    public Collection<StudentBatch> getStudentBatchCollection() {
+        return studentBatchCollection;
+    }
 
-	public void setStudentBatchCollection(Collection<StudentBatch> studentBatchCollection) {
-		this.studentBatchCollection = studentBatchCollection;
-	}
+    public void setStudentBatchCollection(Collection<StudentBatch> studentBatchCollection) {
+        this.studentBatchCollection = studentBatchCollection;
+    }
 
-	public Department getDeptIdFk() {
-		return deptIdFk;
-	}
+    public Department getDeptIdFk() {
+        return deptIdFk;
+    }
 
-	public void setDeptIdFk(Department deptIdFk) {
-		this.deptIdFk = deptIdFk;
-	}
+    public void setDeptIdFk(Department deptIdFk) {
+        this.deptIdFk = deptIdFk;
+    }
 
-	public Degree getDegreeIdFk() {
-		return degreeIdFk;
-	}
+    public Degree getDegreeIdFk() {
+        return degreeIdFk;
+    }
 
-	public void setDegreeIdFk(Degree degreeIdFk) {
-		this.degreeIdFk = degreeIdFk;
-	}
+    public void setDegreeIdFk(Degree degreeIdFk) {
+        this.degreeIdFk = degreeIdFk;
+    }
 
-	@Override
-	public int hashCode() {
-		int hash = 0;
-		hash += (degreeOfferedId != null ? degreeOfferedId.hashCode() : 0);
-		return hash;
-	}
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (degreeOfferedId != null ? degreeOfferedId.hashCode() : 0);
+        return hash;
+    }
 
-	@Override
-	public boolean equals(Object object) {
-		// TODO: Warning - this method won't work in the case the id fields are
-		// not set
-		if (!(object instanceof DegreeOffered)) {
-			return false;
-		}
-		DegreeOffered other = (DegreeOffered) object;
-		if ((this.degreeOfferedId == null && other.degreeOfferedId != null)
-				|| (this.degreeOfferedId != null && !this.degreeOfferedId.equals(other.degreeOfferedId))) {
-			return false;
-		}
-		return true;
-	}
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof DegreeOffered)) {
+            return false;
+        }
+        DegreeOffered other = (DegreeOffered) object;
+        if ((this.degreeOfferedId == null && other.degreeOfferedId != null) || (this.degreeOfferedId != null && !this.degreeOfferedId.equals(other.degreeOfferedId))) {
+            return false;
+        }
+        return true;
+    }
 
-	@Override
-	public String toString() {
-		return "shafin.sustord.DegreeOffered[ degreeOfferedId=" + degreeOfferedId + " ]";
-	}
-
+    @Override
+    public String toString() {
+        return "shafin.mavenproject1.DegreeOffered[ degreeOfferedId=" + degreeOfferedId + " ]";
+    }
+    
 }

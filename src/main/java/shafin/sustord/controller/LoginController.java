@@ -16,6 +16,7 @@ import shafin.sustord.dto.LoginModel;
 import shafin.sustord.exeptions.InvalidRegistrationException;
 import shafin.sustord.exeptions.UnmatchedPasswordException;
 import shafin.sustord.service.AdminLoginService;
+import shafin.sustord.service.StudentLoginService;
 
 @Controller
 @Scope("request")
@@ -101,9 +102,8 @@ public class LoginController {
 		}
 	}
 
-	private String userLoginAuth(String id, String pass) {
-		return "success";
-		/*try {
+	private String userLoginAuth(String id, String pass) {	
+		try {
 			StudentLoginService service = new StudentLoginService(id);
 			service.authenticateLogin(pass);
 		} catch (InvalidRegistrationException e) {
@@ -111,7 +111,7 @@ public class LoginController {
 		} catch (UnmatchedPasswordException e) {
 			return e.getMessage();
 		}
-		return "success";*/
+		return "success";
 	}
 
 	private String adminLoginAuth(String id, String pass) {

@@ -1,4 +1,8 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package shafin.sustord.entity;
 
 import java.io.Serializable;
@@ -16,6 +20,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -26,148 +32,153 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "student_batch")
 @XmlRootElement
-@NamedQueries({ @NamedQuery(name = "StudentBatch.findAll", query = "SELECT s FROM StudentBatch s"),
-		@NamedQuery(name = "StudentBatch.findByStudentBatchId", query = "SELECT s FROM StudentBatch s WHERE s.studentBatchId = :studentBatchId"),
-		@NamedQuery(name = "StudentBatch.findBySession", query = "SELECT s FROM StudentBatch s WHERE s.session = :session"),
-		@NamedQuery(name = "StudentBatch.findByMaxSemester", query = "SELECT s FROM StudentBatch s WHERE s.maxSemester = :maxSemester"),
-		@NamedQuery(name = "StudentBatch.findByBatchTag", query = "SELECT s FROM StudentBatch s WHERE s.batchTag = :batchTag") })
+@NamedQueries({
+    @NamedQuery(name = "StudentBatch.findAll", query = "SELECT s FROM StudentBatch s"),
+    @NamedQuery(name = "StudentBatch.findByStudentBatchId", query = "SELECT s FROM StudentBatch s WHERE s.studentBatchId = :studentBatchId"),
+    @NamedQuery(name = "StudentBatch.findBySession", query = "SELECT s FROM StudentBatch s WHERE s.session = :session"),
+    @NamedQuery(name = "StudentBatch.findByMaxSemester", query = "SELECT s FROM StudentBatch s WHERE s.maxSemester = :maxSemester"),
+    @NamedQuery(name = "StudentBatch.findByBatchTag", query = "SELECT s FROM StudentBatch s WHERE s.batchTag = :batchTag")})
 public class StudentBatch implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Basic(optional = false)
-	@Column(name = "student_batch_id")
-	private Integer studentBatchId;
-	
-	@Basic(optional = false)
-	@Column(name = "session")
-	private String session;
-	
-	@Column(name = "max_semester")
-	private Integer maxSemester;
-	
-	@Column(name = "batch_tag")
-	private String batchTag;
-	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "studentBatchIdFk")
-	private Collection<AdminInfo> adminInfoCollection;
-	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "studentBatchIdFk")
-	private Collection<Syllabus> syllabusCollection;
-	
-	@JoinColumn(name = "degree_offered_id_fk", referencedColumnName = "degree_offered_id")
-	@ManyToOne(optional = false)
-	private DegreeOffered degreeOfferedIdFk;
-	
-	@OneToMany(mappedBy = "studentBatchIdFk")
-	private Collection<StudentInfo> studentInfoCollection;
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "student_batch_id")
+    private Integer studentBatchId;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 10)
+    @Column(name = "session")
+    private String session;
+    @Column(name = "max_semester")
+    private Integer maxSemester;
+    @Size(max = 45)
+    @Column(name = "batch_tag")
+    private String batchTag;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "studentBatchIdFk")
+    private Collection<AdminInfo> adminInfoCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "studentBatchIdFk")
+    private Collection<Syllabus> syllabusCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "studentBatchIdFk")
+    private Collection<OptionalCourse> optionalCourseCollection;
+    @JoinColumn(name = "degree_offered_id_fk", referencedColumnName = "degree_offered_id")
+    @ManyToOne(optional = false)
+    private DegreeOffered degreeOfferedIdFk;
+    @OneToMany(mappedBy = "studentBatchIdFk")
+    private Collection<StudentInfo> studentInfoCollection;
 
-	public StudentBatch() {
-	}
+    public StudentBatch() {
+    }
 
-	public StudentBatch(Integer studentBatchId) {
-		this.studentBatchId = studentBatchId;
-	}
+    public StudentBatch(Integer studentBatchId) {
+        this.studentBatchId = studentBatchId;
+    }
 
-	public StudentBatch(Integer studentBatchId, String session) {
-		this.studentBatchId = studentBatchId;
-		this.session = session;
-	}
+    public StudentBatch(Integer studentBatchId, String session) {
+        this.studentBatchId = studentBatchId;
+        this.session = session;
+    }
 
-	public Integer getStudentBatchId() {
-		return studentBatchId;
-	}
+    public Integer getStudentBatchId() {
+        return studentBatchId;
+    }
 
-	public void setStudentBatchId(Integer studentBatchId) {
-		this.studentBatchId = studentBatchId;
-	}
+    public void setStudentBatchId(Integer studentBatchId) {
+        this.studentBatchId = studentBatchId;
+    }
 
-	public String getSession() {
-		return session;
-	}
+    public String getSession() {
+        return session;
+    }
 
-	public void setSession(String session) {
-		this.session = session;
-	}
+    public void setSession(String session) {
+        this.session = session;
+    }
 
-	public Integer getMaxSemester() {
-		return maxSemester;
-	}
+    public Integer getMaxSemester() {
+        return maxSemester;
+    }
 
-	public void setMaxSemester(Integer maxSemester) {
-		this.maxSemester = maxSemester;
-	}
+    public void setMaxSemester(Integer maxSemester) {
+        this.maxSemester = maxSemester;
+    }
 
-	public String getBatchTag() {
-		return batchTag;
-	}
+    public String getBatchTag() {
+        return batchTag;
+    }
 
-	public void setBatchTag(String batchTag) {
-		this.batchTag = batchTag;
-	}
+    public void setBatchTag(String batchTag) {
+        this.batchTag = batchTag;
+    }
 
-	@XmlTransient
-	public Collection<AdminInfo> getAdminInfoCollection() {
-		return adminInfoCollection;
-	}
+    @XmlTransient
+    public Collection<AdminInfo> getAdminInfoCollection() {
+        return adminInfoCollection;
+    }
 
-	public void setAdminInfoCollection(Collection<AdminInfo> adminInfoCollection) {
-		this.adminInfoCollection = adminInfoCollection;
-	}
+    public void setAdminInfoCollection(Collection<AdminInfo> adminInfoCollection) {
+        this.adminInfoCollection = adminInfoCollection;
+    }
 
-	@XmlTransient
-	public Collection<Syllabus> getSyllabusCollection() {
-		return syllabusCollection;
-	}
+    @XmlTransient
+    public Collection<Syllabus> getSyllabusCollection() {
+        return syllabusCollection;
+    }
 
-	public void setSyllabusCollection(Collection<Syllabus> syllabusCollection) {
-		this.syllabusCollection = syllabusCollection;
-	}
+    public void setSyllabusCollection(Collection<Syllabus> syllabusCollection) {
+        this.syllabusCollection = syllabusCollection;
+    }
 
-	public DegreeOffered getDegreeOfferedIdFk() {
-		return degreeOfferedIdFk;
-	}
+    @XmlTransient
+    public Collection<OptionalCourse> getOptionalCourseCollection() {
+        return optionalCourseCollection;
+    }
 
-	public void setDegreeOfferedIdFk(DegreeOffered degreeOfferedIdFk) {
-		this.degreeOfferedIdFk = degreeOfferedIdFk;
-	}
+    public void setOptionalCourseCollection(Collection<OptionalCourse> optionalCourseCollection) {
+        this.optionalCourseCollection = optionalCourseCollection;
+    }
 
-	@XmlTransient
-	public Collection<StudentInfo> getStudentInfoCollection() {
-		return studentInfoCollection;
-	}
+    public DegreeOffered getDegreeOfferedIdFk() {
+        return degreeOfferedIdFk;
+    }
 
-	public void setStudentInfoCollection(Collection<StudentInfo> studentInfoCollection) {
-		this.studentInfoCollection = studentInfoCollection;
-	}
+    public void setDegreeOfferedIdFk(DegreeOffered degreeOfferedIdFk) {
+        this.degreeOfferedIdFk = degreeOfferedIdFk;
+    }
 
-	@Override
-	public int hashCode() {
-		int hash = 0;
-		hash += (studentBatchId != null ? studentBatchId.hashCode() : 0);
-		return hash;
-	}
+    @XmlTransient
+    public Collection<StudentInfo> getStudentInfoCollection() {
+        return studentInfoCollection;
+    }
 
-	@Override
-	public boolean equals(Object object) {
-		// TODO: Warning - this method won't work in the case the id fields are
-		// not set
-		if (!(object instanceof StudentBatch)) {
-			return false;
-		}
-		StudentBatch other = (StudentBatch) object;
-		if ((this.studentBatchId == null && other.studentBatchId != null)
-				|| (this.studentBatchId != null && !this.studentBatchId.equals(other.studentBatchId))) {
-			return false;
-		}
-		return true;
-	}
+    public void setStudentInfoCollection(Collection<StudentInfo> studentInfoCollection) {
+        this.studentInfoCollection = studentInfoCollection;
+    }
 
-	@Override
-	public String toString() {
-		return "shafin.sustord.StudentBatch[ studentBatchId=" + studentBatchId + " ]";
-	}
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (studentBatchId != null ? studentBatchId.hashCode() : 0);
+        return hash;
+    }
 
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof StudentBatch)) {
+            return false;
+        }
+        StudentBatch other = (StudentBatch) object;
+        if ((this.studentBatchId == null && other.studentBatchId != null) || (this.studentBatchId != null && !this.studentBatchId.equals(other.studentBatchId))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "shafin.mavenproject1.StudentBatch[ studentBatchId=" + studentBatchId + " ]";
+    }
+    
 }

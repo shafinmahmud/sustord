@@ -7,6 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import shafin.sustord.dto.UserHomeDto;
+import shafin.sustord.service.StudentinfoPersonal;
+
 @Controller
 @Scope("request")
 public class UserHomeController {
@@ -19,7 +22,7 @@ public class UserHomeController {
 		if (loginSession.getId() == null || !loginSession.getRole().equals("student"))
 			return "redirect:/login/user";
 
-		System.out.println(loginSession.getId() + " : " + loginSession.getRole());
+		model.addAttribute("home", getHomeDTO());
 		return "home";
 	}
 	
@@ -30,5 +33,17 @@ public class UserHomeController {
 
 		return "home";
 	}
+	
+	private UserHomeDto getHomeDTO(){
+		String registrationNo = loginSession.getId();
+		StudentinfoPersonal personalService = new StudentinfoPersonal(registrationNo);
+		
+		UserHomeDto dto = new UserHomeDto();
+		dto.setStudentName(personalService.getStudentName());
+		dto.setRegistrationNo(registrationNo);
+		dto.setPpURL(personalService.getStudentPhotoURL());
+		return dto;
+	}
+	
 
 }
