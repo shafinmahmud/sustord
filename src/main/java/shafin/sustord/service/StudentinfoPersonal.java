@@ -1,8 +1,8 @@
 package shafin.sustord.service;
 
 import shafin.sustord.dao.PersonalInfoDao;
-import shafin.sustord.dto.StudentPersonalinfoDTO;
 import shafin.sustord.entity.PersonalInfo;
+import shafin.sustord.pojo.PersonalInfoPojo;
 
 public class StudentinfoPersonal extends StudentServicea {
 
@@ -24,54 +24,52 @@ public class StudentinfoPersonal extends StudentServicea {
 		return url != null ? url : "";
 	}
 
-	public StudentPersonalinfoDTO getStudentPersonalInfo() {
+	public PersonalInfoPojo getStudentPersonalInfo() {
 		PersonalInfo info = dao.findOne(this.studentInfo.getStudentInfoId());
-		return wrapEntityToDTO(info);
+		return wrapEntityToPojo(info);
 	}
 	
-	public boolean saveStudentPersonalInfo(StudentPersonalinfoDTO dto){
-		PersonalInfo personalInfo = wrapDTOToEntity(dto);
+	public boolean saveStudentPersonalInfo(PersonalInfoPojo pojo){
+		PersonalInfo personalInfo = wrapPojoToEntity(pojo);
 		personalInfo.setStudentInfoIdFk(this.studentInfo);
 		return dao.updateOne(personalInfo);
 	}
 
-	private static StudentPersonalinfoDTO wrapEntityToDTO(PersonalInfo info) {
-		StudentPersonalinfoDTO dto = new StudentPersonalinfoDTO();
-		dto.setName(info.getName());
-		dto.setFathersName(dto.getFathersName());
-		dto.setMothersName(info.getMothersName());
-		dto.setBloodGroup(info.getBloodGroup());
-		dto.setContact(dto.getContact());
-		dto.setDateOfBirth(dto.getDateOfBirth());
-		dto.setEmail(info.getEmail());
-		dto.setIsApproved(info.getIsApproved());
-		dto.setMaritalStatus(info.getMaritalStatus());
-		dto.setNationality(info.getNationality());
-		dto.setPermanentAddress(info.getPermanentAddress());
-		dto.setPhotoUrl(info.getPhotoUrl());
-		dto.setPresentAddress(info.getPresentAddress());
-		dto.setReligion(info.getReligion());
-		dto.setSex(info.getSex());
-		return dto;
+	private static PersonalInfoPojo wrapEntityToPojo(PersonalInfo info) {
+		PersonalInfoPojo pojo = new PersonalInfoPojo();
+		pojo.setName(info.getName());
+		pojo.setFathersName(info.getFathersName());
+		pojo.setMothersName(info.getMothersName());
+		pojo.setBloodGroup(info.getBloodGroup());
+		pojo.setPhone(info.getContact());
+		pojo.setDateOfBirth(info.getDateOfBirth());
+		pojo.setEmail(info.getEmail());
+		pojo.setMaritalStatus(info.getMaritalStatus());
+		pojo.setNationality(info.getNationality());
+		pojo.setPermanentAddress(info.getPermanentAddress());
+		pojo.setPhotoUrl(info.getPhotoUrl());
+		pojo.setPresentAddress(info.getPresentAddress());
+		pojo.setReligion(info.getReligion());
+		pojo.setSex(info.getSex());
+		return pojo;
 	}
 	
-	private static PersonalInfo wrapDTOToEntity(StudentPersonalinfoDTO dto) {
+	private static PersonalInfo wrapPojoToEntity(PersonalInfoPojo pojo) {
 		PersonalInfo info = new PersonalInfo();
-		info.setName(dto.getName());
-		info.setFathersName(dto.getFathersName());
-		info.setMothersName(dto.getMothersName());
-		info.setBloodGroup(dto.getBloodGroup());
-		info.setContact(dto.getContact());
-		info.setDateOfBirth(dto.getDateOfBirth());
-		info.setEmail(dto.getEmail());
-		info.setIsApproved(dto.getIsApproved());
-		info.setMaritalStatus(dto.getMaritalStatus());
-		info.setNationality(dto.getNationality());
-		info.setPermanentAddress(dto.getPermanentAddress());
-		info.setPhotoUrl(dto.getPhotoUrl());
-		info.setPresentAddress(dto.getPresentAddress());
-		info.setReligion(dto.getReligion());
-		info.setSex(dto.getSex());
+		info.setName(pojo.getName());
+		info.setFathersName(pojo.getFathersName());
+		info.setMothersName(pojo.getMothersName());
+		info.setBloodGroup(pojo.getBloodGroup());
+		info.setContact(pojo.getPhone());
+		info.setDateOfBirth(pojo.getDateOfBirth());
+		info.setEmail(pojo.getEmail());
+		info.setMaritalStatus(pojo.getMaritalStatus());
+		info.setNationality(pojo.getNationality());
+		info.setPermanentAddress(pojo.getPermanentAddress());
+		info.setPhotoUrl(pojo.getPhotoUrl());
+		info.setPresentAddress(pojo.getPresentAddress());
+		info.setReligion(pojo.getReligion());
+		info.setSex(pojo.getSex());
 		return info;
 	}
 }

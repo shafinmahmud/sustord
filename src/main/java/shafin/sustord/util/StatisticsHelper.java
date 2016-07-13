@@ -2,19 +2,13 @@
  */
 package shafin.sustord.util;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import shafin.sustord.dto.StudentPOJO;
-
 /**
  *
  * @author SHAFIN
  */
 public class StatisticsHelper {
 
-	public static Map<String, Integer> getCgpaDistibutionMap(List<StudentPOJO> students) {
+	/*public static Map<String, Integer> getCgpaDistibutionMap(List<StudentPOJO> students) {
 		Map<String, Integer> map = new HashMap<String, Integer>();
 
 		int Ap, A, Am, Bp, B, Bm, Cp, C, Cm, F;
@@ -61,5 +55,5 @@ public class StatisticsHelper {
 		map.put("F", F);
 
 		return map;
-	}
+	}*/
 }

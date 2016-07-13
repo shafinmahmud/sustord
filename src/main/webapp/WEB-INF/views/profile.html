@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8"></meta>
+<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+
+<title>SUSTORD-HOME</title>
+
+<!-- Bootstrap 3.3.6 -->
+<link rel="stylesheet"
+	href="../resources/lib/bootstrap/css/bootstrap.min.css"
+	th:href="@{/resources/lib/bootstrap/css/bootstrap.min.css}" />
+<link rel="stylesheet"
+	href="../resources/lib/bootstrap/font-awesome.min.css"
+	th:href="@{/resources/lib/bootstrap/font-awesome.min.css}" />
+
+<!-- style sheet for this page-->
+<link rel="stylesheet" href="../resources/css/home.css"
+	th:href="@{/resources/css/home.css}" />
+<link rel="stylesheet" href="../resources/lib/material-icon.css"
+	th:href="@{/resources/lib/material-icon.css}">
+
+</head>
+<body>
+
+	<!-- nav bar portion -->
+	<div th:replace="fragments/navbar :: [id='navbar']" th:remove="tag">Nav
+		Bar</div>
+
+	<div class="portal-body">
+		<div class="row">
+
+			<!-- Side bar portion -->
+			<div th:replace="fragments/sidebar :: [id='sidebar']" th:remove="tag">Side
+				Bar</div>
+
+			<div id="main-content" class="col-md-10 column800">
+				<div class="margin5">
+					<fieldset>
+
+						<legend style="font-size: 22px">
+							SHEIKH SHAFIN MAHMUD 
+							<a class="btn btn-danger btn-xs pull-right" href="EditProfile.jsp" type="submit">Edit</a>
+						</legend>
+
+						<div class="col-md-8">
+							<table class="table ">
+								<tbody>
+
+									<tr>
+										<td style="text-align: right; width: 30%">Registration no:</td>
+										<td style="text-align: left; width: 70%">2011331001</td>
+									</tr>
+									<tr>
+										<td style="text-align: right">CGPA :</td>
+										<td style="text-align: left">3.28</td>
+									</tr>
+									<tr>
+										<td style="text-align: right">Credit(s) completed :</td>
+										<td style="text-align: left">140(out of 160)</td>
+									</tr>
+									<tr>
+										<td style="text-align: right">Session :</td>
+										<td style="text-align: left">2011-12</td>
+									</tr>
+									<tr>
+										<td style="text-align: right">Program :</td>
+										<td style="text-align: left">BSc. Honors</td>
+									</tr>
+									<tr>
+										<td style="text-align: right">Department :</td>
+										<td style="text-align: left">CSE</td>
+									</tr>
+
+									<tr>
+										<td style="text-align: right">School :</td>
+										<td style="text-align: left">Applied Science and Engineering</td>
+									</tr>
+
+								</tbody>
+							</table>
+						</div>
+						<div class="col-md-4">
+							<img class="img-responsive"
+								src="../resources/images/profilepic/2011331001.jpg" alt="pic">
+						</div>
+
+
+						<div class="col-md-8">
+							<table class="table">
+								<tbody>
+									<tr>
+										<td style="text-align: right; width: 30%">Father's name:</td>
+										<td style="text-align: left">Md. Salahuddin Ahmed</td>
+									</tr>
+									<tr>
+										<td style="text-align: right">Mother's name:</td>
+										<td style="text-align: left">Sufia Ahmed</td>
+									</tr>
+									<tr>
+										<td style="text-align: right">Present address:</td>
+										<td style="text-align: left">E-2, 8B, Khuliapara, Sylhet 3114</td>
+									</tr>
+									<tr>
+										<td style="text-align: right">Permanent Address:</td>
+										<td style="text-align: left">House 10/1, Ward 8, Laxmipur, Faridpur 7800</td>
+									</tr>
+									<tr>
+										<td style="text-align: right">Phone:</td>
+										<td style="text-align: left">01717 364467</td>
+									</tr>
+									<tr>
+										<td style="text-align: right">Email:</td>
+										<td style="text-align: left">shafin.mahmud@gmail.com</td>
+									</tr>
+
+									<tr>
+										<td style="text-align: right">Date of Birth:</td>
+										<td style="text-align: left">28 December 1993</td>
+									</tr>
+									<tr>
+										<td style="text-align: right">Sex:</td>
+										<td style="text-align: left">Male</td>
+									</tr>
+									<tr>
+										<td style="text-align: right">Religion:</td>
+										<td style="text-align: left">Islam</td>
+									</tr>
+									<tr>
+										<td style="text-align: right">Nationality:</td>
+										<td style="text-align: left">Bangladeshi</td>
+									</tr>
+									<tr>
+										<td style="text-align: right">Marital Status:</td>
+										<td style="text-align: left">Single</td>
+									</tr>
+									<tr>
+										<td style="text-align: right">Blood Group:</td>
+										<td style="text-align: left">B +ve</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</fieldset>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- footer portion -->
+	<div th:replace="fragments/footer :: [id='footer']" th:remove="tag">FOOTER</div>
+
+
+	<script src="../resources/lib/jquery-2.1.4.min.js"
+		th:src="@{/resources/lib/jquery-2.1.4.min.js}" type="text/javascript">
+		
+	</script>
+	<script src="../resources/lib/bootstrap/js/bootstrap.min.js"
+		th:src="@{/resources/lib/bootstrap/js/bootstrap.min.js}"
+		type="text/javascript">
+		
+	</script>
+</body>
+</html>

@@ -57,12 +57,12 @@
 					<div class="col-sm-12 col-xs-12 col-md-3 column200-quick ">
 						<br></br>
 						<div class="text-center home-profile-title">
-							<a href="/profile" th:href="@{/profile}"> <img
+							<a href="/profile" th:href="@{/profile/user}"> <img
 								class="img-circle" height="92" alt="User Image"
-								src="../resources/images/profilepic/2011331001"
+								src="../resources/images/profilepic/2011331001.jpg"
 								th:attr="src=@{${'/resources/images/profilepic/'+home.ppURL}}"
-								 /> <br></br> <br></br>
-								<p th:text="${home.studentName}">SHEIKH SHAFIN MAHMUD</p>
+								 /> <br></br>
+								<p style="font-size: 14px" th:text="${home.studentName}">SHEIKH SHAFIN MAHMUD</p>
 								<p style="font-size: 14px" th:text="${home.registrationNo}">Registration no</p>
 							</a>
 							<hr>
