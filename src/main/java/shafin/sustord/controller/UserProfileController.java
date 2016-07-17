@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import shafin.sustord.dto.UserProfileDto;
+import shafin.sustord.pojo.AcademicInfoPojo;
 import shafin.sustord.pojo.PersonalInfoPojo;
-import shafin.sustord.service.StudentinfoPersonal;
+import shafin.sustord.service.StudentinfoServiceAcademic;
+import shafin.sustord.service.StudentinfoServicePersonal;
 
 @Controller
 @Scope("request")
@@ -27,28 +29,50 @@ public class UserProfileController {
 		return "profile";
 	}
 	
-	private UserProfileDto getProfileDTO(){
-		StudentinfoPersonal personalService = new StudentinfoPersonal(loginSession.getId());
-		PersonalInfoPojo pojo = personalService.getStudentPersonalInfo();
-		return wrapPersonalInfoPojoIntoUserProfileDto(pojo);
+	@RequestMapping(value = "/profile/user/edit", method = RequestMethod.GET)
+	public String profileEdit(Model model){
+		if (loginSession.getId() == null || !loginSession.getRole().equals("student"))
+			return "redirect:/login/user";
+		
+		model.addAttribute("profile", getProfileDTO());
+		return "profile";
 	}
 	
-	public static UserProfileDto wrapPersonalInfoPojoIntoUserProfileDto(PersonalInfoPojo pojo){
+	private UserProfileDto getProfileDTO(){
+		StudentinfoServicePersonal personalService = new StudentinfoServicePersonal(loginSession.getId());
+		StudentinfoServiceAcademic academicService = new StudentinfoServiceAcademic(loginSession.getId());
+		
+		AcademicInfoPojo academicPojo = academicService.getStudentAcademicInfo();
+		PersonalInfoPojo personalPojo = personalService.getStudentPersonalInfo();
+		return wrapPojoIntoUserProfileDto(academicPojo,personalPojo);
+	}
+	
+	private static UserProfileDto wrapPojoIntoUserProfileDto(AcademicInfoPojo academicPojo, PersonalInfoPojo personalPojo){
 		UserProfileDto dto = new UserProfileDto();
-		dto.setName(pojo.getName());
-		dto.setFathersName(pojo.getFathersName());
-		dto.setMothersName(pojo.getMothersName());
-		dto.setBloodGroup(pojo.getBloodGroup());
-		dto.setPhone(pojo.getPhone());
-		dto.setDateOfBirth(pojo.getDateOfBirth());
-		dto.setEmail(pojo.getEmail());
-		dto.setMaritalStatus(pojo.getMaritalStatus());
-		dto.setNationality(pojo.getNationality());
-		dto.setPermanentAddress(pojo.getPermanentAddress());
-		dto.setPhotoUrl(pojo.getPhotoUrl());
-		dto.setPresentAddress(pojo.getPresentAddress());
-		dto.setReligion(pojo.getReligion());
-		dto.setSex(pojo.getSex());
+		
+		dto.setRegistrationNo(academicPojo.getRegistrationNo());
+		dto.setSchool(academicPojo.getSchool());
+		dto.setDepartment(academicPojo.getDepartment());
+		dto.setProgram(academicPojo.getProgram());
+		dto.setSession(academicPojo.getSession());
+		dto.setCreditsCompleted(academicPojo.getCreditsCompleted());
+		dto.setTotalCredit(academicPojo.getTotalCredit());
+		dto.setCgpa(academicPojo.getCgpa());
+		
+		dto.setName(personalPojo.getName());
+		dto.setFathersName(personalPojo.getFathersName());
+		dto.setMothersName(personalPojo.getMothersName());
+		dto.setBloodGroup(personalPojo.getBloodGroup());
+		dto.setPhone(personalPojo.getPhone());
+		dto.setDateOfBirth(personalPojo.getDateOfBirth());
+		dto.setEmail(personalPojo.getEmail());
+		dto.setMaritalStatus(personalPojo.getMaritalStatus());
+		dto.setNationality(personalPojo.getNationality());
+		dto.setPermanentAddress(personalPojo.getPermanentAddress());
+		dto.setPhotoUrl(personalPojo.getPhotoUrl());
+		dto.setPresentAddress(personalPojo.getPresentAddress());
+		dto.setReligion(personalPojo.getReligion());
+		dto.setSex(personalPojo.getSex());
 		return dto;
 	}
 	

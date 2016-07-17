@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import shafin.sustord.dto.UserHomeDto;
-import shafin.sustord.service.StudentinfoPersonal;
+import shafin.sustord.service.StudentinfoServicePersonal;
 
 @Controller
 @Scope("request")
@@ -36,7 +36,7 @@ public class UserHomeController {
 	
 	private UserHomeDto getHomeDTO(){
 		String registrationNo = loginSession.getId();
-		StudentinfoPersonal personalService = new StudentinfoPersonal(registrationNo);
+		StudentinfoServicePersonal personalService = new StudentinfoServicePersonal(registrationNo);
 		
 		UserHomeDto dto = new UserHomeDto();
 		dto.setStudentName(personalService.getStudentName());

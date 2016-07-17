@@ -39,9 +39,10 @@
 				<div class="margin5">
 					<fieldset>
 
-						<legend style="font-size: 22px" th:value="${profile.name}">
-							SHEIKH SHAFIN MAHMUD 
-							<a class="btn btn-danger btn-xs pull-right" href="EditProfile.jsp" type="submit">Edit</a>
+						<legend style="font-size: 22px" >
+							<b th:text="${profile.name}">x.SHEIKH SHAFIN MAHMUD.x </b>
+							<a class="btn btn-danger btn-xs pull-right"
+								href="" th:href="@{}" type="submit">Edit</a>
 						</legend>
 
 						<div class="col-md-8">
@@ -49,33 +50,38 @@
 								<tbody>
 
 									<tr>
-										<td style="text-align: right; width: 30%">Registration no:</td>
-										<td style="text-align: left; width: 70%" th:value="${profile.registrationNo}">2011331001</td>
+										<td style="text-align: right; width: 30%">Registration
+											no:</td>
+										<td style="text-align: left; width: 70%"
+											th:text="${profile.registrationNo}">2011331XXX</td>
 									</tr>
 									<tr>
 										<td style="text-align: right">CGPA :</td>
-										<td style="text-align: left">3.28</td>
+										<td style="text-align: left" th:text="${profile.cgpa}">x3.28</td>
 									</tr>
 									<tr>
 										<td style="text-align: right">Credit(s) completed :</td>
-										<td style="text-align: left">140(out of 160)</td>
+										<td style="text-align: left"
+											th:text="${profile.creditsCompleted + '(out of ' + profile.totalCredit+')'}">
+											x140(out of 160)x</td>
 									</tr>
 									<tr>
 										<td style="text-align: right">Session :</td>
-										<td style="text-align: left">2011-12</td>
+										<td style="text-align: left" th:text="${profile.session}">x2011-12x</td>
 									</tr>
 									<tr>
 										<td style="text-align: right">Program :</td>
-										<td style="text-align: left">BSc. Honors</td>
+										<td style="text-align: left" th:text="${profile.program}">xBSc. Honorsx</td>
 									</tr>
 									<tr>
 										<td style="text-align: right">Department :</td>
-										<td style="text-align: left">CSE</td>
+										<td style="text-align: left" th:text="${profile.department}">xCSEx</td>
 									</tr>
 
 									<tr>
 										<td style="text-align: right">School :</td>
-										<td style="text-align: left">Applied Science and Engineering</td>
+										<td style="text-align: left" th:text="${profile.school}">xApplied Science and
+											Engineeringx</td>
 									</tr>
 
 								</tbody>
@@ -83,7 +89,8 @@
 						</div>
 						<div class="col-md-4">
 							<img class="img-responsive"
-								src="../resources/images/profilepic/2011331001.jpg" alt="pic">
+								src="../resources/images/profilepic/empty.gif" alt="pic"
+								th:attr="src=@{${'/resources/images/profilepic/'+profile.photoUrl}}">
 						</div>
 
 
@@ -92,52 +99,54 @@
 								<tbody>
 									<tr>
 										<td style="text-align: right; width: 30%">Father's name:</td>
-										<td style="text-align: left">Md. Salahuddin Ahmed</td>
+										<td style="text-align: left"  th:text="${profile.fathersName}">xMd. Salahuddin Ahmed</td>
 									</tr>
 									<tr>
 										<td style="text-align: right">Mother's name:</td>
-										<td style="text-align: left">Sufia Ahmed</td>
+										<td style="text-align: left" th:text="${profile.mothersName}">xSufia Ahmed</td>
 									</tr>
 									<tr>
 										<td style="text-align: right">Present address:</td>
-										<td style="text-align: left">E-2, 8B, Khuliapara, Sylhet 3114</td>
+										<td style="text-align: left" th:text="${profile.presentAddress}">xE-2, 8B, Khuliapara, Sylhet
+											3114</td>
 									</tr>
 									<tr>
 										<td style="text-align: right">Permanent Address:</td>
-										<td style="text-align: left">House 10/1, Ward 8, Laxmipur, Faridpur 7800</td>
+										<td style="text-align: left" th:text="${profile.permanentAddress}">xHouse 10/1, Ward 8,
+											Laxmipur, Faridpur 7800</td>
 									</tr>
 									<tr>
 										<td style="text-align: right">Phone:</td>
-										<td style="text-align: left">01717 364467</td>
+										<td style="text-align: left" th:text="${profile.phone}">x01717 364467</td>
 									</tr>
 									<tr>
 										<td style="text-align: right">Email:</td>
-										<td style="text-align: left">shafin.mahmud@gmail.com</td>
+										<td style="text-align: left" th:text="${profile.email}">xshafin.mahmud@gmail.com</td>
 									</tr>
 
 									<tr>
 										<td style="text-align: right">Date of Birth:</td>
-										<td style="text-align: left">28 December 1993</td>
+										<td style="text-align: left" th:text="${profile.dateOfBirth}">x28 December 1993</td>
 									</tr>
 									<tr>
 										<td style="text-align: right">Sex:</td>
-										<td style="text-align: left">Male</td>
+										<td style="text-align: left" th:text="${profile.sex}">xMale</td>
 									</tr>
 									<tr>
 										<td style="text-align: right">Religion:</td>
-										<td style="text-align: left">Islam</td>
+										<td style="text-align: left" th:text="${profile.religion}">.Islam</td>
 									</tr>
 									<tr>
 										<td style="text-align: right">Nationality:</td>
-										<td style="text-align: left">Bangladeshi</td>
+										<td style="text-align: left" th:text="${profile.nationality}">xBangladeshi</td>
 									</tr>
 									<tr>
 										<td style="text-align: right">Marital Status:</td>
-										<td style="text-align: left">Single</td>
+										<td style="text-align: left" th:text="${profile.maritalStatus}">xSingle</td>
 									</tr>
 									<tr>
 										<td style="text-align: right">Blood Group:</td>
-										<td style="text-align: left">B +ve</td>
+										<td style="text-align: left" th:text="${profile.bloodGroup}">xB +ve</td>
 									</tr>
 								</tbody>
 							</table>

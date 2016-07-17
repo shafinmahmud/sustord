@@ -43,6 +43,29 @@ public class SyllabusDao implements BasicCRUD<Syllabus> {
 		}
 	}
 
+	public List<Syllabus> findSyllabusByBatchId(int batchId) {
+		Session session = null;
+		try {
+			session = HibernateUtil.getSessionFactory().openSession();
+			session.beginTransaction();
+			String hql = "from Syllabus where studentBatchIdFk = :batchId";
+			Query query = session.createQuery(hql);
+			query.setInteger("batchId", batchId);
+
+			@SuppressWarnings("unchecked")
+			List<Syllabus> syllabus = (List<Syllabus>) query.list();
+			session.getTransaction().commit();
+
+			return syllabus;
+
+		} catch (HibernateException | SQLException e) {
+			throw new ExceptionInInitializerError(e.getMessage());
+		} finally {
+			if (session != null)
+				session.close();
+		}
+	}
+	
 	public List<Syllabus> findSyllabusByBatchIdandSemester(int batchId, int semester) {
 		Session session = null;
 		try {

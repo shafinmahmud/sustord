@@ -3,7 +3,7 @@ package shafin.sustord.service;
 import shafin.sustord.exeptions.InvalidRegistrationException;
 import shafin.sustord.exeptions.UnmatchedPasswordException;
 
-public class StudentLoginService extends StudentServicea {
+public class StudentLoginService extends StudentService {
 
 	public static final String ID_ERROR = " is an Invalid Registration No."
 			+ "Make sure you typed the valid Registration No. It usually looks like YYYYDEPXXX. eg. 2011331001 ";

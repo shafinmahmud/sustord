@@ -9,7 +9,7 @@ import shafin.sustord.exeptions.UnmatchedPasswordException;
  *
  * @author SHAFIN
  */
-public class ChangePasswordService extends StudentServicea {
+public class ChangePasswordService extends StudentService {
 
     public ChangePasswordService(String registrationNo) throws Exception {
         super(registrationNo);

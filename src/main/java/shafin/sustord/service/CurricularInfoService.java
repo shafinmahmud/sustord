@@ -7,7 +7,7 @@ package shafin.sustord.service;
  *
  * @author SHAFIN
  */
-public class CurricularInfoService extends StudentServicea{
+public class CurricularInfoService extends StudentService{
     
     public CurricularInfoService(String registrationNo) throws Exception{
         super(registrationNo);

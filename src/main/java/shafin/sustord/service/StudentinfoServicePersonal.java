@@ -4,11 +4,11 @@ import shafin.sustord.dao.PersonalInfoDao;
 import shafin.sustord.entity.PersonalInfo;
 import shafin.sustord.pojo.PersonalInfoPojo;
 
-public class StudentinfoPersonal extends StudentServicea {
+public class StudentinfoServicePersonal extends StudentService {
 
 	private final PersonalInfoDao dao;
 
-	public StudentinfoPersonal(String registrationNo) {
+	public StudentinfoServicePersonal(String registrationNo) {
 		super(registrationNo);
 		this.dao = new PersonalInfoDao();
 	}

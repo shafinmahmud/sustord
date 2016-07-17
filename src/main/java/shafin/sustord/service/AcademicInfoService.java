@@ -6,7 +6,7 @@ package shafin.sustord.service;
  *
  * @author SHAFIN
  */
-public class AcademicInfoService extends StudentServicea{
+public class AcademicInfoService extends StudentService{
 
     public AcademicInfoService(String registrationNo) throws Exception{
          super(registrationNo);
