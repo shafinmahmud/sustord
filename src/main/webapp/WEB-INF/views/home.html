@@ -41,14 +41,14 @@
 <body>
 
 	<!-- nav bar portion -->
-	<div th:replace="fragments/navbar :: [id='navbar']" th:remove="tag">Nav
+	<div th:replace="fragments/navbar :: navbar" th:remove="tag">Nav
 		Bar</div>
 
 	<div class="portal-body">
 		<div class="row">
 
 			<!-- Side bar portion -->
-			<div th:replace="fragments/sidebar :: [id='sidebar']" th:remove="tag">Side
+			<div th:replace="fragments/sidebar :: sidebar" th:remove="tag">Side
 				Bar</div>
 
 			<div id="main-content" class="col-md-10 column800">
@@ -162,7 +162,7 @@
 	</div>
 
 	<!-- footer portion -->
-	<div th:replace="fragments/footer :: [id='footer']" th:remove="tag">FOOTER</div>
+	<div th:replace="fragments/footer :: footer" th:remove="tag">FOOTER</div>
 
 
 	<script src="../resources/lib/jquery-2.1.4.min.js"

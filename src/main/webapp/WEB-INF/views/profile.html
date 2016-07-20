@@ -25,14 +25,14 @@
 <body>
 
 	<!-- nav bar portion -->
-	<div th:replace="fragments/navbar :: [id='navbar']" th:remove="tag">Nav
+	<div th:replace="fragments/navbar :: navbar">Nav
 		Bar</div>
 
 	<div class="portal-body">
 		<div class="row">
 
 			<!-- Side bar portion -->
-			<div th:replace="fragments/sidebar :: [id='sidebar']" th:remove="tag">Side
+			<div th:replace="fragments/sidebar :: sidebar">Side
 				Bar</div>
 
 			<div id="main-content" class="col-md-10 column800">
@@ -42,7 +42,7 @@
 						<legend style="font-size: 22px" >
 							<b th:text="${profile.name}">x.SHEIKH SHAFIN MAHMUD.x </b>
 							<a class="btn btn-danger btn-xs pull-right"
-								href="" th:href="@{}" type="submit">Edit</a>
+								href="" th:href="@{/}" type="submit">Edit</a>
 						</legend>
 
 						<div class="col-md-8">
@@ -158,8 +158,7 @@
 	</div>
 
 	<!-- footer portion -->
-	<div th:replace="fragments/footer :: [id='footer']" th:remove="tag">FOOTER</div>
-
+	<div th:replace="fragments/footer :: footer">FOOTER</div>
 
 	<script src="../resources/lib/jquery-2.1.4.min.js"
 		th:src="@{/resources/lib/jquery-2.1.4.min.js}" type="text/javascript">
