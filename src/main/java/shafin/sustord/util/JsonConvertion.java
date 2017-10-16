@@ -1,5 +1,3 @@
-/*
- */
 package shafin.sustord.util;
 
 import com.google.gson.Gson;
